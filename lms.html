@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
@@ -58,6 +59,41 @@
         @keyframes fadeInUp {
             from { transform: translateY(50px); opacity: 0; }
             to { transform: translateY(0); opacity: 1; }
+        }
+        
+        @keyframes expandWidth {
+            from { width: 0; opacity: 0; }
+            to { width: 100%; opacity: 1; }
+        }
+        
+        .animate-fade-in-up {
+            animation: fadeInUp 0.8s ease-out forwards;
+            opacity: 0;
+        }
+        
+        .animate-expand-width {
+            animation: expandWidth 1s ease-out forwards;
+            width: 0;
+        }
+        
+        @keyframes bounceInScale {
+            0% { 
+                transform: scale(0); 
+                opacity: 0; 
+            }
+            50% { 
+                transform: scale(1.2); 
+                opacity: 0.8; 
+            }
+            100% { 
+                transform: scale(1); 
+                opacity: 1; 
+            }
+        }
+        
+        .animate-bounce-in {
+            animation: bounceInScale 0.6s ease-out forwards;
+            opacity: 0;
         }
         
         @keyframes bounceIn {
@@ -782,66 +818,66 @@
                 
                 <!-- Desktop Navigation -->
                 <div class="hidden lg:flex items-center slide-in-right">
-                    <div class="nav-container bg-white/5 backdrop-blur-xl rounded-2xl p-1 shadow-2xl border border-white/10">
+                    <div class="nav-container bg-white/10 backdrop-blur-2xl rounded-full px-2 py-2 shadow-2xl border border-white/20 hover:bg-white/15 transition-all duration-700">
                         <div class="flex space-x-1">
-                            <a href="#beranda" class="nav-item group relative px-5 py-2.5 rounded-xl transition-all duration-500 hover:bg-white/10 hover:shadow-lg transform hover:scale-105">
+                            <a href="#beranda" class="nav-item group relative px-4 py-2 rounded-full transition-all duration-500 hover:bg-white/20 transform hover:scale-110 hover:-translate-y-1">
                                 <div class="flex items-center space-x-2">
-                                    <div class="nav-icon bg-gradient-to-br from-amber-400 to-orange-500 p-1.5 rounded-lg group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                                    <div class="nav-icon w-8 h-8 bg-gradient-to-br from-amber-400 to-orange-500 rounded-full flex items-center justify-center group-hover:scale-125 group-hover:rotate-12 transition-all duration-500 shadow-lg">
                                         <i class="fas fa-home text-white text-xs"></i>
                                     </div>
-                                    <span class="font-semibold text-sm">Beranda</span>
+                                    <span class="font-semibold text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300">Beranda</span>
                                 </div>
-                                <div class="nav-indicator absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-amber-400 to-orange-500 rounded-full transition-all duration-500 group-hover:w-full"></div>
+                                <div class="nav-indicator absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-0 h-1 bg-gradient-to-r from-amber-400 to-orange-500 rounded-full transition-all duration-500 group-hover:w-8"></div>
                             </a>
                             
-                            <a href="#ruang-rapat" class="nav-item group relative px-5 py-2.5 rounded-xl transition-all duration-500 hover:bg-white/10 hover:shadow-lg transform hover:scale-105">
+                            <a href="#ruang-rapat" class="nav-item group relative px-4 py-2 rounded-full transition-all duration-500 hover:bg-white/20 transform hover:scale-110 hover:-translate-y-1">
                                 <div class="flex items-center space-x-2">
-                                    <div class="nav-icon bg-gradient-to-br from-blue-400 to-blue-600 p-1.5 rounded-lg group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                                    <div class="nav-icon w-8 h-8 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full flex items-center justify-center group-hover:scale-125 group-hover:rotate-12 transition-all duration-500 shadow-lg">
                                         <i class="fas fa-users text-white text-xs"></i>
                                     </div>
-                                    <span class="font-semibold text-sm">Ruang Rapat</span>
+                                    <span class="font-semibold text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300">Ruang Rapat</span>
                                 </div>
-                                <div class="nav-indicator absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-blue-600 rounded-full transition-all duration-500 group-hover:w-full"></div>
+                                <div class="nav-indicator absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-0 h-1 bg-gradient-to-r from-blue-400 to-blue-600 rounded-full transition-all duration-500 group-hover:w-8"></div>
                             </a>
                             
-                            <a href="#hotel" class="nav-item group relative px-5 py-2.5 rounded-xl transition-all duration-500 hover:bg-white/10 hover:shadow-lg transform hover:scale-105">
+                            <a href="#hotel" class="nav-item group relative px-4 py-2 rounded-full transition-all duration-500 hover:bg-white/20 transform hover:scale-110 hover:-translate-y-1">
                                 <div class="flex items-center space-x-2">
-                                    <div class="nav-icon bg-gradient-to-br from-emerald-400 to-emerald-600 p-1.5 rounded-lg group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                                    <div class="nav-icon w-8 h-8 bg-gradient-to-br from-emerald-400 to-emerald-600 rounded-full flex items-center justify-center group-hover:scale-125 group-hover:rotate-12 transition-all duration-500 shadow-lg">
                                         <i class="fas fa-hotel text-white text-xs"></i>
                                     </div>
-                                    <span class="font-semibold text-sm">Hotel</span>
+                                    <span class="font-semibold text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300">Hotel</span>
                                 </div>
-                                <div class="nav-indicator absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-emerald-400 to-emerald-600 rounded-full transition-all duration-500 group-hover:w-full"></div>
+                                <div class="nav-indicator absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-0 h-1 bg-gradient-to-r from-emerald-400 to-emerald-600 rounded-full transition-all duration-500 group-hover:w-8"></div>
                             </a>
                             
-                            <a href="#logistik" class="nav-item group relative px-5 py-2.5 rounded-xl transition-all duration-500 hover:bg-white/10 hover:shadow-lg transform hover:scale-105">
+                            <a href="#logistik" class="nav-item group relative px-4 py-2 rounded-full transition-all duration-500 hover:bg-white/20 transform hover:scale-110 hover:-translate-y-1">
                                 <div class="flex items-center space-x-2">
-                                    <div class="nav-icon bg-gradient-to-br from-purple-400 to-purple-600 p-1.5 rounded-lg group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                                    <div class="nav-icon w-8 h-8 bg-gradient-to-br from-purple-400 to-purple-600 rounded-full flex items-center justify-center group-hover:scale-125 group-hover:rotate-12 transition-all duration-500 shadow-lg">
                                         <i class="fas fa-concierge-bell text-white text-xs"></i>
                                     </div>
-                                    <span class="font-semibold text-sm">Layanan</span>
+                                    <span class="font-semibold text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300">Layanan</span>
                                 </div>
-                                <div class="nav-indicator absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-purple-400 to-purple-600 rounded-full transition-all duration-500 group-hover:w-full"></div>
+                                <div class="nav-indicator absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-0 h-1 bg-gradient-to-r from-purple-400 to-purple-600 rounded-full transition-all duration-500 group-hover:w-8"></div>
                             </a>
                             
-                            <a href="#kalender" class="nav-item group relative px-5 py-2.5 rounded-xl transition-all duration-500 hover:bg-white/10 hover:shadow-lg transform hover:scale-105">
+                            <a href="#kalender" class="nav-item group relative px-4 py-2 rounded-full transition-all duration-500 hover:bg-white/20 transform hover:scale-110 hover:-translate-y-1">
                                 <div class="flex items-center space-x-2">
-                                    <div class="nav-icon bg-gradient-to-br from-pink-400 to-pink-600 p-1.5 rounded-lg group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                                    <div class="nav-icon w-8 h-8 bg-gradient-to-br from-pink-400 to-pink-600 rounded-full flex items-center justify-center group-hover:scale-125 group-hover:rotate-12 transition-all duration-500 shadow-lg">
                                         <i class="fas fa-calendar text-white text-xs"></i>
                                     </div>
-                                    <span class="font-semibold text-sm">Kalender</span>
+                                    <span class="font-semibold text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300">Kalender</span>
                                 </div>
-                                <div class="nav-indicator absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-pink-400 to-pink-600 rounded-full transition-all duration-500 group-hover:w-full"></div>
+                                <div class="nav-indicator absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-0 h-1 bg-gradient-to-r from-pink-400 to-pink-600 rounded-full transition-all duration-500 group-hover:w-8"></div>
                             </a>
                             
-                            <a href="#kontak" class="nav-item group relative px-5 py-2.5 rounded-xl transition-all duration-500 hover:bg-white/10 hover:shadow-lg transform hover:scale-105">
+                            <a href="#kontak" class="nav-item group relative px-4 py-2 rounded-full transition-all duration-500 hover:bg-white/20 transform hover:scale-110 hover:-translate-y-1">
                                 <div class="flex items-center space-x-2">
-                                    <div class="nav-icon bg-gradient-to-br from-teal-400 to-teal-600 p-1.5 rounded-lg group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                                    <div class="nav-icon w-8 h-8 bg-gradient-to-br from-teal-400 to-teal-600 rounded-full flex items-center justify-center group-hover:scale-125 group-hover:rotate-12 transition-all duration-500 shadow-lg">
                                         <i class="fas fa-envelope text-white text-xs"></i>
                                     </div>
-                                    <span class="font-semibold text-sm">Kontak</span>
+                                    <span class="font-semibold text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300">Kontak</span>
                                 </div>
-                                <div class="nav-indicator absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-teal-400 to-teal-600 rounded-full transition-all duration-500 group-hover:w-full"></div>
+                                <div class="nav-indicator absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-0 h-1 bg-gradient-to-r from-teal-400 to-teal-600 rounded-full transition-all duration-500 group-hover:w-8"></div>
                             </a>
                         </div>
                     </div>
@@ -902,124 +938,278 @@
     </nav>
 
     <!-- Hero Section -->
-    <section id="beranda" class="text-white min-h-screen flex items-center relative overflow-hidden">
-        <!-- Elegant Minimalist Background -->
-        <div class="absolute inset-0 bg-gradient-to-br from-slate-900 via-red-900 to-slate-800"></div>
+    <section id="beranda" class="min-h-screen flex items-center relative overflow-hidden bg-white">
+        <!-- Clean Background -->
+        <div class="absolute inset-0 bg-white"></div>
         
-        <!-- Animated Gradient Overlay -->
-        <div class="absolute inset-0 bg-gradient-to-r from-red-600/20 via-transparent to-blue-600/10 animate-gradient-shift"></div>
-        
-        <!-- Geometric Background Elements -->
-        <div class="absolute inset-0 overflow-hidden">
-            <!-- Large Floating Orbs -->
-            <div class="absolute -top-40 -right-40 w-96 h-96 bg-gradient-to-br from-red-500/10 to-orange-500/5 rounded-full blur-3xl animate-float-slow"></div>
-            <div class="absolute -bottom-40 -left-40 w-80 h-80 bg-gradient-to-tr from-blue-500/8 to-purple-500/5 rounded-full blur-3xl animate-float-reverse"></div>
-            <div class="absolute top-1/3 right-1/4 w-64 h-64 bg-gradient-to-bl from-yellow-500/6 to-red-500/4 rounded-full blur-2xl animate-pulse-slow"></div>
-            
-            <!-- Minimalist Grid Pattern -->
-            <div class="absolute inset-0 opacity-5">
-                <div class="grid-pattern"></div>
-            </div>
-            
-            <!-- Elegant Geometric Shapes -->
-            <div class="absolute top-20 right-20 w-32 h-32 border border-white/10 rounded-2xl rotate-12 animate-rotate-slow"></div>
-            <div class="absolute bottom-32 left-16 w-24 h-24 border border-red-300/15 rounded-full animate-pulse-gentle"></div>
-            <div class="absolute top-1/2 left-1/4 w-16 h-16 bg-gradient-to-br from-white/5 to-transparent rounded-lg rotate-45 animate-float-gentle"></div>
-            
-            <!-- Subtle Line Elements -->
-            <div class="absolute top-0 left-0 w-full h-full">
-                <svg class="w-full h-full opacity-10" viewBox="0 0 1000 1000">
-                    <defs>
-                        <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" style="stop-color:#ffffff;stop-opacity:0.1"/>
-                            <stop offset="50%" style="stop-color:#ef4444;stop-opacity:0.2"/>
-                            <stop offset="100%" style="stop-color:#ffffff;stop-opacity:0.1"/>
-                        </linearGradient>
-                    </defs>
-                    <path d="M0,200 Q500,100 1000,200" stroke="url(#lineGradient)" stroke-width="1" fill="none">
-                        <animate attributeName="d" dur="15s" repeatCount="indefinite" 
-                                values="M0,200 Q500,100 1000,200;M0,250 Q500,150 1000,250;M0,200 Q500,100 1000,200"/>
-                    </path>
-                    <path d="M0,800 Q500,700 1000,800" stroke="url(#lineGradient)" stroke-width="1" fill="none">
-                        <animate attributeName="d" dur="20s" repeatCount="indefinite" 
-                                values="M0,800 Q500,700 1000,800;M0,750 Q500,650 1000,750;M0,800 Q500,700 1000,800"/>
-                    </path>
-                </svg>
-            </div>
-            
-            <!-- Floating Particles -->
-            <div class="particles-elegant">
-                <div class="particle-elegant particle-1"></div>
-                <div class="particle-elegant particle-2"></div>
-                <div class="particle-elegant particle-3"></div>
-                <div class="particle-elegant particle-4"></div>
-                <div class="particle-elegant particle-5"></div>
-            </div>
-        </div>
-        
-        <div class="max-w-full xl:max-w-[1400px] 2xl:max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-16 py-32 relative z-10">
-            <div class="grid lg:grid-cols-2 gap-12 items-center">
-                <div class="text-center lg:text-left">
-                    <div class="bounce-in">
-                        <h1 class="text-6xl lg:text-7xl font-bold mb-6 text-shadow leading-tight">
-                            Layanan
-                            <span class="block text-yellow-300">Manajemen</span>
-                            <span class="block">Strategis</span>
+        <div class="max-w-full xl:max-w-[1400px] 2xl:max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-16 py-20 relative z-10">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <!-- Content Side -->
+                <div class="text-center lg:text-left space-y-8">
+                    <!-- Clean Badge -->
+                    <div class="flex justify-center lg:justify-start mb-8">
+                        <div class="text-center lg:text-left">
+                            <div class="bg-red-600 text-white px-6 py-2 rounded-full text-sm font-semibold mb-3 inline-block">
+                                Otoritas Jasa Keuangan
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-800">Daerah Istimewa Yogyakarta</h3>
+                        </div>
+                    </div>
+                    
+                    <!-- Main Heading -->
+                    <div class="space-y-6">
+                        <h1 class="text-5xl lg:text-7xl font-bold text-gray-900 leading-tight">
+                            <span class="inline-block animate-fade-in-up" style="animation-delay: 0.2s;">Layanan</span>
+                            <span class="block text-red-600 animate-fade-in-up" style="animation-delay: 0.4s;">Manajemen</span>
+                            <span class="block text-gray-800 animate-fade-in-up" style="animation-delay: 0.6s;">Strategis</span>
                         </h1>
+                        
+                        <div class="w-32 h-1.5 bg-gradient-to-r from-red-600 via-red-500 to-red-400 mx-auto lg:mx-0 rounded-full animate-expand-width" style="animation-delay: 0.8s;"></div>
                     </div>
                     
-                    <div class="slide-in-left">
-                        <h2 class="text-4xl lg:text-5xl font-semibold mb-8 text-red-200">
-                            OJK DIY
-                        </h2>
-                    </div>
+                    <!-- Description -->
+                    <p class="text-xl text-gray-600 leading-relaxed max-w-2xl animate-fade-in-up" style="animation-delay: 1s;">
+                        Platform terintegrasi untuk mengelola <span class="font-semibold text-gray-800 hover:text-red-600 transition-colors duration-300">ruang rapat</span>, 
+                        <span class="font-semibold text-gray-800 hover:text-red-600 transition-colors duration-300">keprotokolan</span>, dan 
+                        <span class="font-semibold text-gray-800 hover:text-red-600 transition-colors duration-300">layanan strategis</span> dengan standar profesional terbaik
+                    </p>
                     
-                    <div class="fade-in-up">
-                        <p class="text-xl lg:text-2xl mb-12 leading-relaxed opacity-90">
-                            Platform terpadu untuk <span class="text-yellow-300 font-semibold">ruang rapat</span>, 
-                            <span class="text-yellow-300 font-semibold">akomodasi hotel</span>, dan 
-                            <span class="text-yellow-300 font-semibold">manajemen strategis</span> yang profesional
-                        </p>
-                    </div>
-                    
-                    <div class="flex flex-col sm:flex-row gap-6 slide-in-left">
-                        <button onclick="scrollToSection('ruang-rapat')" class="pulse-glow bg-yellow-400 text-red-800 px-8 py-4 rounded-full font-bold text-lg hover:bg-yellow-300 transition-all duration-300 transform hover:scale-105 shadow-2xl">
-                            <i class="fas fa-rocket mr-3"></i>
-                            Mulai Sekarang
+                    <!-- Action Buttons -->
+                    <div class="flex flex-col sm:flex-row gap-4 pt-6 animate-fade-in-up" style="animation-delay: 1.2s;">
+                        <button onclick="scrollToSection('ruang-rapat')" class="group bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white px-8 py-4 rounded-2xl font-semibold text-lg transition-all duration-500 transform hover:scale-110 hover:-translate-y-2 shadow-lg hover:shadow-2xl relative overflow-hidden">
+                            <div class="absolute inset-0 bg-white opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
+                            <div class="relative flex items-center justify-center">
+                                <i class="fas fa-calendar-plus mr-3 group-hover:rotate-12 transition-transform duration-300"></i>
+                                Pesan Ruangan
+                            </div>
                         </button>
-                        <button onclick="scrollToSection('hotel')" class="glass-effect border-2 border-white text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-white hover:text-red-600 transition-all duration-300 transform hover:scale-105">
-                            <i class="fas fa-play mr-3"></i>
-                            Jelajahi Layanan
+                        <button onclick="scrollToSection('hotel')" class="group border-2 border-gray-300 hover:border-red-600 text-gray-700 hover:text-white px-8 py-4 rounded-2xl font-semibold text-lg transition-all duration-500 transform hover:scale-110 hover:-translate-y-2 bg-white hover:bg-gradient-to-r hover:from-red-600 hover:to-red-700 shadow-lg hover:shadow-2xl relative overflow-hidden">
+                            <div class="absolute inset-0 bg-gradient-to-r from-red-600 to-red-700 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
+                            <div class="relative flex items-center justify-center">
+                                <i class="fas fa-building mr-3 group-hover:rotate-12 transition-transform duration-300"></i>
+                                Lihat Hotel
+                            </div>
                         </button>
+                    </div>
+                    
+                    <!-- Quick Stats -->
+                    <div class="grid grid-cols-3 gap-6 pt-8 border-t border-gray-200 animate-fade-in-up" style="animation-delay: 1.4s;">
+                        <div class="text-center group hover:transform hover:scale-110 transition-all duration-300 cursor-pointer">
+                            <div class="text-3xl font-bold text-red-600 group-hover:text-red-700 transition-colors duration-300 animate-bounce-in" style="animation-delay: 1.6s;">9+</div>
+                            <div class="text-sm text-gray-600 group-hover:text-gray-800 transition-colors duration-300">Ruang Fasilitas</div>
+                        </div>
+                        <div class="text-center group hover:transform hover:scale-110 transition-all duration-300 cursor-pointer">
+                            <div class="text-3xl font-bold text-red-600 group-hover:text-red-700 transition-colors duration-300 animate-bounce-in" style="animation-delay: 1.8s;">14+</div>
+                            <div class="text-sm text-gray-600 group-hover:text-gray-800 transition-colors duration-300">Hotel Partner</div>
+                        </div>
+                        <div class="text-center group hover:transform hover:scale-110 transition-all duration-300 cursor-pointer">
+                            <div class="text-3xl font-bold text-red-600 group-hover:text-red-700 transition-colors duration-300 animate-bounce-in" style="animation-delay: 2s;">24/7</div>
+                            <div class="text-sm text-gray-600 group-hover:text-gray-800 transition-colors duration-300">Support System</div>
+                        </div>
                     </div>
                 </div>
                 
-                <div class="hidden lg:block slide-in-right">
+                <!-- Visual Side -->
+                <div class="hidden lg:block">
                     <div class="relative">
-                        <div class="floating bg-white bg-opacity-10 rounded-3xl p-8 backdrop-blur-lg">
-                            <div class="grid grid-cols-2 gap-6">
-                                <div class="bg-white bg-opacity-20 rounded-2xl p-6 text-center">
-                                    <i class="fas fa-users text-4xl mb-4 text-yellow-300"></i>
-                                    <h3 class="font-semibold text-lg">Ruang Rapat</h3>
-                                    <p class="text-sm opacity-80">Fasilitas Modern</p>
+                        <!-- Main Card -->
+                        <div class="bg-white rounded-3xl shadow-2xl p-8 relative overflow-hidden">
+                            <!-- Background Pattern -->
+                            <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-red-100 to-red-200 rounded-full -translate-y-16 translate-x-16 opacity-60"></div>
+                            
+                            <!-- Service Grid -->
+                            <div class="grid grid-cols-2 gap-6 relative z-10">
+                                <div class="bg-gradient-to-br from-red-50 to-red-100 rounded-2xl p-6 text-center group hover:shadow-lg transition-all duration-300">
+                                    <div class="w-12 h-12 bg-red-600 rounded-xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+                                        <i class="fas fa-users text-white text-xl"></i>
+                                    </div>
+                                    <h3 class="font-bold text-gray-900 mb-2">Ruang Rapat</h3>
+                                    <p class="text-sm text-gray-600">9 Fasilitas Modern</p>
                                 </div>
-                                <div class="bg-white bg-opacity-20 rounded-2xl p-6 text-center">
-                                    <i class="fas fa-hotel text-4xl mb-4 text-yellow-300"></i>
-                                    <h3 class="font-semibold text-lg">Hotel Partner</h3>
-                                    <p class="text-sm opacity-80">Akomodasi Terbaik</p>
+                                
+                                <div class="bg-gradient-to-br from-blue-50 to-blue-100 rounded-2xl p-6 text-center group hover:shadow-lg transition-all duration-300">
+                                    <div class="w-12 h-12 bg-blue-600 rounded-xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+                                        <i class="fas fa-hotel text-white text-xl"></i>
+                                    </div>
+                                    <h3 class="font-bold text-gray-900 mb-2">Hotel Partner</h3>
+                                    <p class="text-sm text-gray-600">14+ Pilihan Terbaik</p>
                                 </div>
-                                <div class="bg-white bg-opacity-20 rounded-2xl p-6 text-center">
-                                    <i class="fas fa-calendar-check text-4xl mb-4 text-yellow-300"></i>
-                                    <h3 class="font-semibold text-lg">Jadwal Real-time</h3>
-                                    <p class="text-sm opacity-80">Sistem Terintegrasi</p>
+                                
+                                <div class="bg-gradient-to-br from-green-50 to-green-100 rounded-2xl p-6 text-center group hover:shadow-lg transition-all duration-300">
+                                    <div class="w-12 h-12 bg-green-600 rounded-xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+                                        <i class="fas fa-calendar-check text-white text-xl"></i>
+                                    </div>
+                                    <h3 class="font-bold text-gray-900 mb-2">Sistem Real-time</h3>
+                                    <p class="text-sm text-gray-600">Terintegrasi Penuh</p>
                                 </div>
-                                <div class="bg-white bg-opacity-20 rounded-2xl p-6 text-center">
-                                    <i class="fas fa-headset text-4xl mb-4 text-yellow-300"></i>
-                                    <h3 class="font-semibold text-lg">Support 24/7</h3>
-                                    <p class="text-sm opacity-80">Layanan Prima</p>
+                                
+                                <div class="bg-gradient-to-br from-purple-50 to-purple-100 rounded-2xl p-6 text-center group hover:shadow-lg transition-all duration-300">
+                                    <div class="w-12 h-12 bg-purple-600 rounded-xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+                                        <i class="fas fa-headset text-white text-xl"></i>
+                                    </div>
+                                    <h3 class="font-bold text-gray-900 mb-2">Support 24/7</h3>
+                                    <p class="text-sm text-gray-600">Layanan Prima</p>
+                                </div>
+                            </div>
+                            
+                            <!-- Bottom Badge -->
+                            <div class="mt-8 pt-6 border-t border-gray-100 text-center">
+                                <div class="inline-flex items-center bg-gradient-to-r from-red-600 to-red-700 text-white px-6 py-3 rounded-full text-sm font-semibold">
+                                    <i class="fas fa-shield-alt mr-2"></i>
+                                    Standar ISO
                                 </div>
                             </div>
                         </div>
+                        
+                        <!-- Floating Elements -->
+                        <div class="absolute -top-4 -right-4 w-8 h-8 bg-red-200 rounded-full opacity-60"></div>
+                        <div class="absolute -bottom-6 -left-6 w-12 h-12 bg-blue-200 rounded-full opacity-40"></div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </section>
+
+    <!-- Calendar & Agenda Section -->
+    <section id="kalender" class="py-24 bg-gradient-to-br from-blue-50 to-indigo-50 relative overflow-hidden">
+        <!-- Background Elements -->
+        <div class="absolute inset-0">
+            <div class="absolute top-10 right-10 w-32 h-32 bg-blue-100 rounded-full opacity-20 animate-pulse-slow"></div>
+            <div class="absolute bottom-20 left-20 w-24 h-24 bg-indigo-100 rounded-full opacity-30 animate-float-gentle"></div>
+        </div>
+        
+        <div class="max-w-full xl:max-w-[1400px] 2xl:max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-16 relative z-10">
+            <div class="text-center mb-16">
+                <div class="inline-flex items-center bg-gradient-to-r from-blue-600 to-indigo-700 text-white px-8 py-4 rounded-2xl shadow-lg mb-6">
+                    <i class="fas fa-calendar-alt text-2xl mr-3"></i>
+                    <h2 class="text-3xl font-bold">Kalender & Agenda</h2>
+                </div>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Jadwal kegiatan dan agenda terkini OJK DIY yang terintegrasi dengan sistem manajemen strategis
+                </p>
+            </div>
+            
+            <div class="grid lg:grid-cols-2 gap-12">
+                <!-- Google Calendar Embed -->
+                <div class="bg-white rounded-3xl shadow-2xl overflow-hidden">
+                    <div class="bg-gradient-to-r from-blue-600 to-indigo-700 text-white p-6">
+                        <div class="flex items-center">
+                            <div class="bg-white bg-opacity-20 p-3 rounded-xl mr-4">
+                                <i class="fas fa-calendar text-2xl"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-2xl font-bold mb-2">Kalender Kegiatan</h3>
+                                <p class="text-blue-100">Jadwal lengkap acara dan rapat OJK DIY</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="p-6">
+                        <div class="bg-gray-50 rounded-2xl p-6 shadow-inner relative">
+                            <!-- Loading Animation -->
+                            <div id="calendar-loading" class="loading-container absolute inset-6 z-10 rounded-xl">
+                                <div class="loading-spinner"></div>
+                                <h4 class="text-xl font-semibold text-gray-700 mb-2">Memuat Kalender</h4>
+                                <p class="text-gray-600 text-center max-w-md">Mohon tunggu sebentar, kalender sedang dimuat...</p>
+                                <div class="loading-dots">
+                                    <div class="loading-dot"></div>
+                                    <div class="loading-dot"></div>
+                                    <div class="loading-dot"></div>
+                                </div>
+                                <div class="mt-4 text-sm text-gray-500">
+                                    <i class="fas fa-sync-alt mr-2"></i>
+                                    Sinkronisasi dengan Google Calendar
+                                </div>
+                            </div>
+                            
+                            <iframe 
+                                id="google-calendar"
+                                src="https://calendar.google.com/calendar/embed?src=logistikojkdiy%40gmail.com&ctz=Asia%2FJakarta" 
+                                width="100%" 
+                                height="400" 
+                                frameborder="0" 
+                                scrolling="no"
+                                class="rounded-xl shadow-lg transition-opacity duration-500"
+                                style="opacity: 0;"
+                                onload="setTimeout(() => { hideCalendarLoading(); document.getElementById('google-calendar').style.opacity = '1'; }, 1500)">
+                            </iframe>
+                        </div>
+                        
+                        <!-- Calendar Footer -->
+                        <div class="mt-4 bg-blue-50 px-4 py-3 rounded-xl border border-blue-200">
+                            <div class="flex items-center justify-between text-sm">
+                                <div class="flex items-center">
+                                    <div class="w-3 h-3 bg-blue-500 rounded-full mr-2 animate-pulse"></div>
+                                    <span class="text-blue-800 font-medium">Live Update dari Google Calendar</span>
+                                </div>
+                                <div class="text-blue-700">
+                                    <i class="fas fa-sync-alt mr-1"></i>
+                                    Auto-sync
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Agenda List -->
+                <div class="bg-white rounded-3xl shadow-2xl overflow-hidden">
+                    <div class="bg-gradient-to-r from-indigo-600 to-purple-700 text-white p-6">
+                        <div class="flex items-center">
+                            <div class="bg-white bg-opacity-20 p-3 rounded-xl mr-4">
+                                <i class="fas fa-list-alt text-2xl"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-2xl font-bold mb-2">Agenda Terkini</h3>
+                                <p class="text-indigo-100">Daftar kegiatan dan acara mendatang</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="p-6">
+                        <div id="agenda-list" class="space-y-4">
+                            <!-- Agenda items will be loaded here -->
+                            <div class="text-center py-8">
+                                <div class="loading-spinner mx-auto mb-4"></div>
+                                <p class="text-gray-600">Memuat agenda dari database...</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Agenda Footer -->
+                        <div class="mt-6 bg-indigo-50 px-4 py-3 rounded-xl border border-indigo-200">
+                            <div class="flex items-center justify-between text-sm">
+                                <div class="flex items-center">
+                                    <div class="w-3 h-3 bg-indigo-500 rounded-full mr-2 animate-pulse"></div>
+                                    <span class="text-indigo-800 font-medium">Data dari SI OJK DIY Terintegrasi</span>
+                                </div>
+                                <div class="text-indigo-700">
+                                    <i class="fas fa-database mr-1"></i>
+                                    Real-time
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Quick Actions -->
+            <div class="mt-12 text-center">
+                <div class="bg-white rounded-2xl p-8 shadow-xl">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-6">Aksi Cepat</h3>
+                    <div class="flex flex-wrap justify-center gap-4">
+                        <button onclick="scrollToSection('ruang-rapat')" class="bg-gradient-to-r from-blue-600 to-blue-700 text-white px-6 py-3 rounded-xl font-semibold hover:from-blue-700 hover:to-blue-800 transition-all duration-300 transform hover:scale-105 shadow-lg">
+                            <i class="fas fa-calendar-plus mr-2"></i>
+                            Pesan Ruangan
+                        </button>
+                        <button onclick="scrollToSection('hotel')" class="bg-gradient-to-r from-indigo-600 to-purple-700 text-white px-6 py-3 rounded-xl font-semibold hover:from-indigo-700 hover:to-purple-800 transition-all duration-300 transform hover:scale-105 shadow-lg">
+                            <i class="fas fa-hotel mr-2"></i>
+                            Cari Hotel
+                        </button>
+                        <button onclick="scrollToSection('logistik')" class="bg-gradient-to-r from-purple-600 to-pink-700 text-white px-6 py-3 rounded-xl font-semibold hover:from-purple-700 hover:to-pink-800 transition-all duration-300 transform hover:scale-105 shadow-lg">
+                            <i class="fas fa-concierge-bell mr-2"></i>
+                            Layanan Lainnya
+                        </button>
                     </div>
                 </div>
             </div>
@@ -1059,6 +1249,8 @@
                     <p class="text-gray-600 font-medium">Standar Kualitas</p>
                 </div>
             </div>
+
+
         </div>
     </section>
 
@@ -1087,7 +1279,7 @@
                 <div class="card-3d bg-white rounded-2xl shadow-lg overflow-hidden group hover:shadow-2xl transition-all duration-500 transform hover:scale-105">
                     <div class="relative h-48 overflow-hidden">
                         <!-- ===== GANTI URL FOTO 1 DI SINI ===== -->
-                        <img src="https://ik.imagekit.io/logojkdiy/3.%20Peringatan%20Kemerdekaan%20RI%20ke%2080.PNG?updatedAt=1755492968629" alt="Rapat Koordinasi Strategis Q4 2024" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <img src="https://ik.imagekit.io/logojkdiy/3.%20Peringatan%20Kemerdekaan%20RI%20ke%2080.PNG?updatedAt=1755492968629" alt="Peringatan HUT RI ke 80" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                         <!-- ===== AKHIR PENGGANTIAN FOTO 1 ===== -->
                         
                         <div class="absolute inset-0 bg-black bg-opacity-20 group-hover:bg-opacity-10 transition-all duration-300"></div>
@@ -1096,7 +1288,7 @@
                         </div>
                     </div>
                     <div class="p-4">
-                        <h3 class="font-bold text-gray-900 text-sm mb-2 line-clamp-2">Peringatan Hari Kemerdekaan RI ke 80</h3>
+                        <h3 class="font-bold text-gray-900 text-sm mb-2 line-clamp-2">Peringatan HUT RI ke 80</h3>
                         <p class="text-xs text-gray-600 mb-3">Agustus 2025</p>
                         <div class="flex items-center text-xs text-gray-500">
                             <i class="fas fa-map-marker-alt mr-1"></i>
@@ -1109,7 +1301,7 @@
                 <div class="card-3d bg-white rounded-2xl shadow-lg overflow-hidden group hover:shadow-2xl transition-all duration-500 transform hover:scale-105">
                     <div class="relative h-48 overflow-hidden">
                         <!-- ===== GANTI URL FOTO 2 DI SINI ===== -->
-                        <img src="https://ik.imagekit.io/logojkdiy/1.%20Kolaborasi%20OJK%20dan%20Beacukai.PNG?updatedAt=1755491487881" alt="Kolaborasi OJK DIY dan Direktorat Jenderal Bea dan Cukai" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <img src="https://ik.imagekit.io/logojkdiy/1.%20Kolaborasi%20OJK%20dan%20Beacukai.PNG?updatedAt=1755491487881" alt="Kunjungan Kerjasama OJK dan Bea Cukai" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                         <!-- ===== AKHIR PENGGANTIAN FOTO 2 ===== -->
                         
                         <div class="absolute inset-0 bg-black bg-opacity-20 group-hover:bg-opacity-10 transition-all duration-300"></div>
@@ -1118,7 +1310,7 @@
                         </div>
                     </div>
                     <div class="p-4">
-                        <h3 class="font-bold text-gray-900 text-sm mb-2 line-clamp-2">Kolaborasi OJK DIY dan Direktorat Jenderal Bea dan Cukai</h3>
+                        <h3 class="font-bold text-gray-900 text-sm mb-2 line-clamp-2">Kunjungan Kerjasama OJK dan Bea Cukai</h3>
                         <p class="text-xs text-gray-600 mb-3">Agustus 2025</p>
                         <div class="flex items-center text-xs text-gray-500">
                             <i class="fas fa-map-marker-alt mr-1"></i>
@@ -1131,7 +1323,7 @@
                 <div class="card-3d bg-white rounded-2xl shadow-lg overflow-hidden group hover:shadow-2xl transition-all duration-500 transform hover:scale-105">
                     <div class="relative h-48 overflow-hidden">
                         <!-- ===== GANTI URL FOTO 3 DI SINI ===== -->
-                        <img src="https://ik.imagekit.io/logojkdiy/2.%20Kunjungan%20%20ke%20Lembaga%20Jasa%20Keuangan.PNG?updatedAt=1755492968143" alt="Kunjungan ke Lembaga Jasa Keuangan" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <img src="https://ik.imagekit.io/logojkdiy/2.%20Kunjungan%20%20ke%20Lembaga%20Jasa%20Keuangan.PNG?updatedAt=1755492968143" alt="OJK Jateng dan OJK DIY, Lakukan Kunjungan ke Lembaga Jasa Keuangan" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                         <!-- ===== AKHIR PENGGANTIAN FOTO 3 ===== -->
                         
                         <div class="absolute inset-0 bg-black bg-opacity-20 group-hover:bg-opacity-10 transition-all duration-300"></div>
@@ -1140,7 +1332,7 @@
                         </div>
                     </div>
                     <div class="p-4">
-                        <h3 class="font-bold text-gray-900 text-sm mb-2 line-clamp-2">Kunjungan ke Lembaga Jasa Keuangan</h3>
+                        <h3 class="font-bold text-gray-900 text-sm mb-2 line-clamp-2">OJK Jateng dan OJK DIY, Lakukan Kunjungan ke Lembaga Jasa Keuangan</h3>
                         <p class="text-xs text-gray-600 mb-3">Agustus 2025</p>
                         <div class="flex items-center text-xs text-gray-500">
                             <i class="fas fa-map-marker-alt mr-1"></i>
@@ -1153,20 +1345,20 @@
                 <div class="card-3d bg-white rounded-2xl shadow-lg overflow-hidden group hover:shadow-2xl transition-all duration-500 transform hover:scale-105">
                     <div class="relative h-48 overflow-hidden">
                         <!-- ===== GANTI URL FOTO 4 DI SINI ===== -->
-                        <img src="GANTI_DENGAN_URL_FOTO_4" alt="Penyerahan Penghargaan Inovasi Pelayanan" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <img src="https://ik.imagekit.io/logojkdiy/4.%20Hibah%20BMO.PNG?updatedAt=1755576192203" alt="Hibah BMO oleh OJK DIY" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                         <!-- ===== AKHIR PENGGANTIAN FOTO 4 ===== -->
                         
                         <div class="absolute inset-0 bg-black bg-opacity-20 group-hover:bg-opacity-10 transition-all duration-300"></div>
                         <div class="absolute top-3 right-3 bg-purple-600 text-white px-2 py-1 rounded-full text-xs font-semibold">
-                            Penghargaan
+                            Kolaborasi
                         </div>
                     </div>
                     <div class="p-4">
-                        <h3 class="font-bold text-gray-900 text-sm mb-2 line-clamp-2">Penyerahan Penghargaan Inovasi Pelayanan</h3>
-                        <p class="text-xs text-gray-600 mb-3">8 Desember 2024</p>
+                        <h3 class="font-bold text-gray-900 text-sm mb-2 line-clamp-2">Hibah BMO oleh OJK DIY</h3>
+                        <p class="text-xs text-gray-600 mb-3">Agustus 2025</p>
                         <div class="flex items-center text-xs text-gray-500">
                             <i class="fas fa-map-marker-alt mr-1"></i>
-                            <span>Ruang Kreasi</span>
+                            <span>Ballroom Indraprasta</span>
                         </div>
                     </div>
                 </div>
@@ -1175,20 +1367,20 @@
                 <div class="card-3d bg-white rounded-2xl shadow-lg overflow-hidden group hover:shadow-2xl transition-all duration-500 transform hover:scale-105">
                     <div class="relative h-48 overflow-hidden">
                         <!-- ===== GANTI URL FOTO 5 DI SINI ===== -->
-                        <img src="GANTI_DENGAN_URL_FOTO_5" alt="Evaluasi Kinerja Semester II 2024" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <img src="https://ik.imagekit.io/logojkdiy/5.%20Simolek%20Edutaimen.PNG" alt="OJK DIY bersama SiMOLEK Edutainment hadir dalam kegiatan edukasi keuangan kepada Pelaku UMKM." class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                         <!-- ===== AKHIR PENGGANTIAN FOTO 5 ===== -->
                         
                         <div class="absolute inset-0 bg-black bg-opacity-20 group-hover:bg-opacity-10 transition-all duration-300"></div>
                         <div class="absolute top-3 right-3 bg-orange-600 text-white px-2 py-1 rounded-full text-xs font-semibold">
-                            Monitoring
+                            Kolaborasi
                         </div>
                     </div>
                     <div class="p-4">
-                        <h3 class="font-bold text-gray-900 text-sm mb-2 line-clamp-2">Evaluasi Kinerja Semester II 2024</h3>
-                        <p class="text-xs text-gray-600 mb-3">5 Desember 2024</p>
+                        <h3 class="font-bold text-gray-900 text-sm mb-2 line-clamp-2">OJK DIY bersama SiMOLEK Edutainment hadir dalam kegiatan edukasi keuangan kepada Pelaku UMKM.</h3>
+                        <p class="text-xs text-gray-600 mb-3">Juli 2025</p>
                         <div class="flex items-center text-xs text-gray-500">
                             <i class="fas fa-map-marker-alt mr-1"></i>
-                            <span>Ruang Arjuna</span>
+                            <span>Yogyakarta</span>
                         </div>
                     </div>
                 </div>
@@ -1201,6 +1393,8 @@
                     Lihat Semua Kegiatan
                 </button>
             </div>
+
+
         </div>
     </section>
 
@@ -1221,7 +1415,7 @@
         <div class="gradient-orb orb-2"></div>
         <div class="max-w-full xl:max-w-[1400px] 2xl:max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-16">
             <div class="text-center mb-20">
-                <h2 class="text-5xl font-bold text-gray-900 mb-6">Ruang Rapat Premium</h2>
+                <h2 class="text-5xl font-bold text-gray-900 mb-6">Ruang Rapat</h2>
                 <p class="text-xl text-gray-600 max-w-3xl mx-auto">Fasilitas ruang rapat modern dengan teknologi terdepan untuk mendukung produktivitas dan kolaborasi tim Anda</p>
             </div>
             
@@ -1240,7 +1434,7 @@
                 <div class="bg-gradient-to-br from-green-500 to-green-700 text-white p-8 rounded-3xl text-center">
                     <i class="fas fa-book text-6xl mb-4"></i>
                     <h3 class="text-2xl font-bold mb-2">Fasilitas Khusus</h3>
-                    <p class="opacity-90">Perpustakaan & rekreasi</p>
+                    <p class="opacity-90">Perpustakaan & Rekreasi</p>
                 </div>
             </div>
 
@@ -1318,15 +1512,15 @@
                             </div>
                             <div class="flex items-center text-gray-700">
                                 <i class="fas fa-table text-purple-600 w-5 mr-3"></i>
-                                <span>96 orang (Round Table)</span>
+                                <span>Kapasitas 96 orang (Round Table)</span>
                             </div>
                             <div class="flex items-center text-gray-700">
                                 <i class="fas fa-shapes text-purple-600 w-5 mr-3"></i>
-                                <span>75 orang (U-Shape)</span>
+                                <span>Kapasitas 75 orang (U-Shape)</span>
                             </div>
                             <div class="flex items-center text-gray-700">
                                 <i class="fas fa-cogs text-purple-600 w-5 mr-3"></i>
-                                <span>Tata Letak Fleksibel</span>
+                                <span>Kapasitas 140 orang (Theater)</span>
                             </div>
                         </div>
                         
@@ -1595,10 +1789,10 @@
                     </div>
                 </div>
 
-                <!-- Ruang Kreasi -->
+                <!-- Ruang Rekreasi -->
                 <div class="card-3d bg-white rounded-3xl shadow-2xl overflow-hidden group hover:shadow-3xl transition-all duration-500 flex flex-col min-h-[600px]">
                     <div class="h-56 relative overflow-hidden">
-                        <img src="https://ik.imagekit.io/logojkdiy/KATALOG%20RUANGAN%20OJK%20DIY/OJK%20DIY%20-%20KATALOG%20RUANGAN%20III/RUANG%20REKREASI%201.png?updatedAt=" alt="Ruang Kreasi" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <img src="https://ik.imagekit.io/logojkdiy/KATALOG%20RUANGAN%20OJK%20DIY/OJK%20DIY%20-%20KATALOG%20RUANGAN%20III/RUANG%20REKREASI%201.png?updatedAt=1753409646757" alt="Ruang Rekreasi" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                         <div class="absolute inset-0 bg-black bg-opacity-20"></div>
                         <div class="absolute top-4 right-4 bg-green-500 text-white px-3 py-1 rounded-full text-sm font-semibold">
                             Tersedia
@@ -1608,7 +1802,7 @@
                         </div>
                     </div>
                     <div class="p-6 flex flex-col flex-grow">
-                        <h3 class="text-2xl font-bold mb-3 text-gray-900">Ruang Kreasi</h3>
+                        <h3 class="text-2xl font-bold mb-3 text-gray-900">Ruang Rekreasi</h3>
                         <p class="text-gray-600 mb-6 leading-relaxed">Dirancang untuk sesi brainstorming, lokakarya, dan pertemuan kreatif. Memiliki tempat duduk berundak yang unik dan suasana santai</p>
                         
                         <div class="space-y-3 mb-8 flex-grow">
@@ -1637,7 +1831,7 @@
                             </div>
                         </div>
                         
-                        <button onclick="bookRoom('Ruang Kreasi')" class="w-full bg-gradient-to-r from-pink-600 to-pink-700 text-white py-4 rounded-2xl font-bold text-lg hover:from-pink-700 hover:to-pink-800 transition-all duration-300 transform hover:scale-105 shadow-lg mt-auto">
+                        <button onclick="bookRoom('Ruang Rekreasi')" class="w-full bg-gradient-to-r from-pink-600 to-pink-700 text-white py-4 rounded-2xl font-bold text-lg hover:from-pink-700 hover:to-pink-800 transition-all duration-300 transform hover:scale-105 shadow-lg mt-auto">
                             <i class="fas fa-calendar-plus mr-2"></i>
                             Pesan Sekarang
                         </button>
@@ -1693,6 +1887,8 @@
                     </div>
                 </div>
             </div>
+
+
         </div>
     </section>
 
@@ -1716,12 +1912,74 @@
         <div class="max-w-full xl:max-w-[1400px] 2xl:max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-16">
             <div class="text-center mb-20">
                 <h2 class="text-5xl font-bold text-gray-900 mb-6">Hotel Partner Terpilih</h2>
-                <p class="text-xl text-gray-600 max-w-3xl mx-auto">Koleksi hotel premium dengan standar pelayanan terbaik untuk akomodasi tamu dan peserta kegiatan strategis</p>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto mb-8">Hotel premium dengan standar pelayanan terbaik untuk akomodasi tamu dan peserta kegiatan strategis</p>
+                
+
+                
+                <!-- Booking Apps Section -->
+                <div class="bg-blue-50 rounded-2xl p-6">
+                    <h3 class="text-lg font-bold text-gray-900 mb-4">Platform Booking Terpercaya</h3>
+                    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+                        <!-- Traveloka -->
+                        <a href="https://www.traveloka.com/id-id/hotel" target="_blank" class="bg-white rounded-xl p-4 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 text-center group">
+                            <div class="bg-gradient-to-br from-blue-500 to-blue-600 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform duration-300">
+                                <i class="fas fa-plane text-white text-lg"></i>
+                            </div>
+                            <h4 class="font-bold text-sm text-gray-900 mb-1">Traveloka</h4>
+                            <p class="text-xs text-gray-600">Hotel & Travel</p>
+                        </a>
+
+                        <!-- Tiket.com -->
+                        <a href="https://www.tiket.com/hotel" target="_blank" class="bg-white rounded-xl p-4 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 text-center group">
+                            <div class="bg-gradient-to-br from-orange-500 to-red-600 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform duration-300">
+                                <i class="fas fa-ticket-alt text-white text-lg"></i>
+                            </div>
+                            <h4 class="font-bold text-sm text-gray-900 mb-1">Tiket.com</h4>
+                            <p class="text-xs text-gray-600">Hotel & Event</p>
+                        </a>
+
+                        <!-- Pegipegi -->
+                        <a href="https://www.pegipegi.com/hotel/" target="_blank" class="bg-white rounded-xl p-4 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 text-center group">
+                            <div class="bg-gradient-to-br from-green-500 to-emerald-600 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform duration-300">
+                                <i class="fas fa-suitcase-rolling text-white text-lg"></i>
+                            </div>
+                            <h4 class="font-bold text-sm text-gray-900 mb-1">Pegipegi</h4>
+                            <p class="text-xs text-gray-600">Hotel & Flight</p>
+                        </a>
+
+                        <!-- Agoda -->
+                        <a href="https://www.agoda.com/id-id/" target="_blank" class="bg-white rounded-xl p-4 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 text-center group">
+                            <div class="bg-gradient-to-br from-purple-500 to-pink-600 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform duration-300">
+                                <i class="fas fa-bed text-white text-lg"></i>
+                            </div>
+                            <h4 class="font-bold text-sm text-gray-900 mb-1">Agoda</h4>
+                            <p class="text-xs text-gray-600">Hotel Booking</p>
+                        </a>
+
+                        <!-- Booking.com -->
+                        <a href="https://www.booking.com/index.id.html" target="_blank" class="bg-white rounded-xl p-4 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 text-center group">
+                            <div class="bg-gradient-to-br from-blue-600 to-indigo-700 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform duration-300">
+                                <i class="fas fa-hotel text-white text-lg"></i>
+                            </div>
+                            <h4 class="font-bold text-sm text-gray-900 mb-1">Booking.com</h4>
+                            <p class="text-xs text-gray-600">Accommodation</p>
+                        </a>
+
+                        <!-- RedDoorz -->
+                        <a href="https://www.reddoorz.com/id-id" target="_blank" class="bg-white rounded-xl p-4 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 text-center group">
+                            <div class="bg-gradient-to-br from-red-500 to-red-600 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform duration-300">
+                                <i class="fas fa-door-open text-white text-lg"></i>
+                            </div>
+                            <h4 class="font-bold text-sm text-gray-900 mb-1">RedDoorz</h4>
+                            <p class="text-xs text-gray-600">Budget Hotel</p>
+                        </a>
+                    </div>
+                </div>
             </div>
             
-            <div class="hotel-grid">
+            <div class="hotel-grid" id="hotel-grid">
                 <!-- Hotel Tentrem Yogyakarta -->
-                <div class="card-3d bg-white rounded-2xl shadow-xl overflow-hidden group flex flex-col h-full">
+                <div class="hotel-card card-3d bg-white rounded-2xl shadow-xl overflow-hidden group flex flex-col h-full">
                     <div class="h-40 bg-gradient-to-br from-amber-400 to-orange-600 relative overflow-hidden">
                         <div class="absolute inset-0 bg-black bg-opacity-30"></div>
                         <div class="absolute inset-0 flex items-center justify-center">
@@ -1763,7 +2021,7 @@
                 </div>
                 
                 <!-- Royal Ambarrukmo -->
-                <div class="card-3d bg-white rounded-2xl shadow-xl overflow-hidden group flex flex-col h-full">
+                <div class="hotel-card card-3d bg-white rounded-2xl shadow-xl overflow-hidden group flex flex-col h-full">
                     <div class="h-40 bg-gradient-to-br from-emerald-400 to-teal-600 relative overflow-hidden">
                         <div class="absolute inset-0 bg-black bg-opacity-30"></div>
                         <div class="absolute inset-0 flex items-center justify-center">
@@ -2303,38 +2561,12 @@
                     </div>
                 </div>
             </div>
+
+
         </div>
     </section>
 
-    <!-- Calendar Section -->
-    <section id="kalender" class="py-24 bg-gradient-to-br from-gray-50 to-blue-50 bg-animated relative">
-        <!-- Floating Shapes Background -->
-        <div class="floating-shapes">
-            <div class="shape w-14 h-14 bg-blue-200 rounded-lg"></div>
-            <div class="shape w-10 h-10 bg-indigo-200 rounded-full"></div>
-            <div class="shape w-18 h-18 bg-cyan-200 rounded-full"></div>
-        </div>
-        <div class="max-w-full xl:max-w-[1400px] 2xl:max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-16">
-            <div class="text-center mb-20">
-                <h2 class="text-5xl font-bold text-gray-900 mb-6">Kalender Kegiatan</h2>
-                <p class="text-xl text-gray-600 max-w-3xl mx-auto">Pantau jadwal kegiatan, rapat, dan acara strategis OJK DIY secara real-time</p>
-            </div>
-            
-            <!-- Google Calendar -->
-            <div class="bg-white rounded-3xl shadow-2xl p-8">
-                <iframe 
-                    id="google-calendar-iframe"
-                    src="https://calendar.google.com/calendar/embed?src=logistikojkdiy%40gmail.com&ctz=Asia%2FJakarta" 
-                    style="border:0" 
-                    width="100%" 
-                    height="600" 
-                    frameborder="0" 
-                    scrolling="no"
-                    class="rounded-xl">
-                </iframe>
-            </div>
-        </div>
-    </section>
+
 
     <!-- Services Section -->
     <section id="logistik" class="py-24 bg-gradient-to-br from-blue-50 to-indigo-100 bg-animated relative">
@@ -2501,7 +2733,7 @@
                             <i class="fas fa-handshake text-4xl"></i>
                         </div>
                         <h4 class="text-2xl font-bold mb-2">Profesional</h4>
-                        <p class="opacity-90">Tim berpengalaman dan terlatih</p>
+                        <p class="opacity-90">Tim berpengalaman</p>
                     </div>
                     
                     <div class="text-center">
@@ -2513,6 +2745,8 @@
                     </div>
                 </div>
             </div>
+
+
         </div>
     </section>
 
@@ -2532,7 +2766,7 @@
         <div class="max-w-full xl:max-w-[1400px] 2xl:max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-16">
             <div class="text-center mb-20">
                 <h2 class="text-5xl font-bold text-gray-900 mb-6">Hubungi Kami</h2>
-                <p class="text-xl text-gray-600 max-w-3xl mx-auto">Tim profesional kami siap membantu kebutuhan layanan manajemen strategis Anda 24/7</p>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">Tim LMS siap membantu kebutuhan Anda 24/7</p>
             </div>
             
             <div class="grid lg:grid-cols-2 gap-16">
@@ -2555,9 +2789,7 @@
                         </div>
                         <div>
                             <h4 class="font-bold text-lg text-gray-900 mb-2">Telepon & WhatsApp</h4>
-                            <p class="text-gray-600">(0274) 513408</p>
-                            <p class="text-gray-600">(0274) 513409</p>
-                            <p class="text-gray-600">Fax: (0274) 513407</p>
+                            <p class="text-gray-600">(0274) 460 5790</p>
                             <div class="mt-3">
                                 <a href="https://wa.me/6281234567890" target="_blank" class="inline-flex items-center bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg text-sm font-semibold transition-colors">
                                     <i class="fab fa-whatsapp mr-2"></i>
@@ -2573,8 +2805,8 @@
                         </div>
                         <div>
                             <h4 class="font-bold text-lg text-gray-900 mb-2">Email</h4>
-                            <p class="text-gray-600">kontak@ojk.go.id</p>
-                            <p class="text-gray-600">yogyakarta@ojk.go.id</p>
+                            <p class="text-gray-600">ojk.go.id</p>
+                            <p class="text-gray-600"></p>
                         </div>
                     </div>
                     
@@ -2591,7 +2823,7 @@
                 </div>
                 
                 <div class="bg-gradient-to-br from-red-50 to-red-100 p-8 rounded-3xl">
-                    <h3 class="text-3xl font-bold text-gray-900 mb-8">Kirim Pesan</h3>
+                    <h3 class="text-3xl font-bold text-gray-900 mb-8">Kirim Pesan (Coming Soon)</h3>
                     <form class="space-y-6" onsubmit="submitContactForm(event)">
                         <div class="grid md:grid-cols-2 gap-6">
                             <div>
@@ -2621,6 +2853,8 @@
                     </form>
                 </div>
             </div>
+
+
         </div>
     </section>
 
@@ -2656,7 +2890,7 @@
                 </div>
                 
                 <div class="border-t border-white border-opacity-20 pt-8">
-                    <p class="text-lg opacity-75">© 2024 Otoritas Jasa Keuangan DIY. Semua hak dilindungi undang-undang.</p>
+                    <p class="text-lg opacity-75">© 2025 Otoritas Jasa Keuangan DIY. Semua hak dilindungi undang-undang - Tim SI LMS.</p>
                 </div>
             </div>
         </div>
@@ -2706,7 +2940,7 @@
                         </div>
                         <div>
                             <h3 class="text-3xl font-bold mb-2">Katalog Vendor Catering & Snack Box</h3>
-                            <p class="text-xl text-green-100">8 Vendor Terkurasi untuk Kebutuhan Acara OJK DIY</p>
+                            <p class="text-xl text-green-100">13 Vendor Terkurasi untuk Kebutuhan Acara OJK DIY</p>
                         </div>
                     </div>
                     <button onclick="closeCateringModal()" class="bg-white bg-opacity-20 hover:bg-opacity-30 p-3 rounded-2xl transition-all duration-300 transform hover:scale-110">
@@ -3452,7 +3686,7 @@
                             <div class="bg-gradient-to-br from-blue-500 to-indigo-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-3">
                                 <i class="fas fa-laptop-code text-white text-2xl"></i>
                             </div>
-                            <h5 class="text-xl font-bold text-gray-900 mb-2">Teknisi 1</h5>
+                            <h5 class="text-xl font-bold text-gray-900 mb-2">Zulham Fendi</h5>
                             <span class="bg-blue-200 text-blue-800 px-3 py-1 rounded-full text-sm font-semibold">IT Support Specialist</span>
                         </div>
                         <div class="flex-grow mb-6">
@@ -3480,10 +3714,10 @@
                         </div>
                         <div class="text-center mb-4">
                             <div class="bg-blue-100 px-4 py-2 rounded-xl">
-                                <span class="text-sm font-semibold text-blue-800">Response: 15 menit</span>
+                                <span class="text-sm font-semibold text-blue-800">Response: 10 menit</span>
                             </div>
                         </div>
-                        <button onclick="contactTechnician('Teknisi 1 - IT Support', '6281234567811')" class="w-full bg-gradient-to-r from-blue-500 to-indigo-600 text-white py-3 rounded-xl font-bold text-sm hover:from-blue-600 hover:to-indigo-700 transition-all duration-300">
+                        <button onclick="contactTechnician('Teknisi 1 - IT Support', '62856-2933-037')" class="w-full bg-gradient-to-r from-blue-500 to-indigo-600 text-white py-3 rounded-xl font-bold text-sm hover:from-blue-600 hover:to-indigo-700 transition-all duration-300">
                             <i class="fab fa-whatsapp mr-2"></i>Hubungi via WhatsApp
                         </button>
                     </div>
@@ -3494,7 +3728,7 @@
                             <div class="bg-gradient-to-br from-purple-500 to-violet-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-3">
                                 <i class="fas fa-video text-white text-2xl"></i>
                             </div>
-                            <h5 class="text-xl font-bold text-gray-900 mb-2">Teknisi 2</h5>
+                            <h5 class="text-xl font-bold text-gray-900 mb-2">Seto Aji</h5>
                             <span class="bg-purple-200 text-purple-800 px-3 py-1 rounded-full text-sm font-semibold">Audio Visual Expert</span>
                         </div>
                         <div class="flex-grow mb-6">
@@ -3522,7 +3756,7 @@
                         </div>
                         <div class="text-center mb-4">
                             <div class="bg-purple-100 px-4 py-2 rounded-xl">
-                                <span class="text-sm font-semibold text-purple-800">Response: 20 menit</span>
+                                <span class="text-sm font-semibold text-purple-800">Response: 10 menit</span>
                             </div>
                         </div>
                         <button onclick="contactTechnician('Teknisi 2 - Audio Visual', '6281234567812')" class="w-full bg-gradient-to-r from-purple-500 to-violet-600 text-white py-3 rounded-xl font-bold text-sm hover:from-purple-600 hover:to-violet-700 transition-all duration-300">
@@ -3536,7 +3770,7 @@
                             <div class="bg-gradient-to-br from-emerald-500 to-teal-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-3">
                                 <i class="fas fa-camera text-white text-2xl"></i>
                             </div>
-                            <h5 class="text-xl font-bold text-gray-900 mb-2">Teknisi 3</h5>
+                            <h5 class="text-xl font-bold text-gray-900 mb-2">Dimas Gilang</h5>
                             <span class="bg-emerald-200 text-emerald-800 px-3 py-1 rounded-full text-sm font-semibold">Dokumentasi Specialist</span>
                         </div>
                         <div class="flex-grow mb-6">
@@ -3564,10 +3798,10 @@
                         </div>
                         <div class="text-center mb-4">
                             <div class="bg-emerald-100 px-4 py-2 rounded-xl">
-                                <span class="text-sm font-semibold text-emerald-800">Response: 30 menit</span>
+                                <span class="text-sm font-semibold text-emerald-800">Response: 10 menit</span>
                             </div>
                         </div>
-                        <button onclick="contactTechnician('Teknisi 3 - Dokumentasi', '6281234567813')" class="w-full bg-gradient-to-r from-emerald-500 to-teal-600 text-white py-3 rounded-xl font-bold text-sm hover:from-emerald-600 hover:to-teal-700 transition-all duration-300">
+                        <button onclick="contactTechnician('Teknisi 3 - Dokumentasi', '6281392413337')" class="w-full bg-gradient-to-r from-emerald-500 to-teal-600 text-white py-3 rounded-xl font-bold text-sm hover:from-emerald-600 hover:to-teal-700 transition-all duration-300">
                             <i class="fab fa-whatsapp mr-2"></i>Hubungi via WhatsApp
                         </button>
                     </div>
@@ -3741,6 +3975,17 @@
         // Hide vehicle iframe loading animation
         function hideVehicleIframeLoading() {
             const loadingElement = document.getElementById('vehicle-iframe-loading');
+            if (loadingElement) {
+                loadingElement.style.opacity = '0';
+                setTimeout(() => {
+                    loadingElement.style.display = 'none';
+                }, 300);
+            }
+        }
+
+        // Hide calendar loading animation
+        function hideCalendarLoading() {
+            const loadingElement = document.getElementById('calendar-loading');
             if (loadingElement) {
                 loadingElement.style.opacity = '0';
                 setTimeout(() => {
@@ -4342,6 +4587,11 @@
             // Initialize OJK animations
             initOJKAnimations();
             
+            // Load agenda with delay to ensure DOM is ready
+            setTimeout(() => {
+                loadAgendaFromCSV();
+            }, 500);
+            
             // Show initial connection notification
             showNotification('🏛️ Selamat datang di Layanan Manajemen Strategis OJK DIY! Sistem terintegrasi siap melayani kebutuhan Anda.', 'info');
             
@@ -4414,6 +4664,157 @@
             }
         }
 
+
+
+        // Fungsi sederhana untuk memuat agenda dari CSV
+        async function loadAgendaFromCSV() {
+            const container = document.getElementById('agenda-list');
+            
+            // Show loading
+            container.innerHTML = `
+                <div class="text-center py-8">
+                    <div class="loading-spinner mx-auto mb-4"></div>
+                    <p class="text-gray-600">Memuat agenda dari CSV...</p>
+                </div>
+            `;
+
+            try {
+                const csvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSVXkU63oXf5hL-9p_tqZfcNuj2YcxqtgVe_S3MEUvs-pju4R1MHCfJMMpCWazENZb7CjBZnV5wViVq/pub?gid=1711685001&single=true&output=csv';
+                
+                const response = await fetch(csvUrl);
+                const csvText = await response.text();
+                
+                console.log('CSV Data:', csvText);
+                
+                // Parse CSV sederhana
+                const lines = csvText.split('\n').filter(line => line.trim());
+                const agendaItems = [];
+                
+                // Skip header dan proses data
+                for (let i = 1; i < lines.length && i <= 6; i++) { // Maksimal 5 agenda
+                    const line = lines[i].trim();
+                    if (line) {
+                        const columns = line.split(',').map(col => col.replace(/"/g, '').trim());
+                        
+                        if (columns.length >= 2 && columns[0] && columns[1]) {
+                            agendaItems.push({
+                                title: columns[0],
+                                date: columns[1],
+                                location: columns[2] || 'Lokasi TBD',
+                                time: columns[3] || '',
+                                description: columns[4] || ''
+                            });
+                        }
+                    }
+                }
+                
+                if (agendaItems.length > 0) {
+                    displayAgenda(agendaItems);
+                    showNotification(`✅ Berhasil memuat ${agendaItems.length} agenda dari CSV!`, 'success');
+                } else {
+                    displayDefaultAgenda();
+                    showNotification('📅 Tidak ada data agenda. Menampilkan contoh.', 'info');
+                }
+                
+            } catch (error) {
+                console.error('Error loading CSV:', error);
+                displayDefaultAgenda();
+                showNotification('❌ Gagal memuat CSV. Menampilkan agenda contoh.', 'error');
+            }
+        }
+
+        // Tampilkan agenda default jika CSV gagal
+        function displayDefaultAgenda() {
+            const defaultAgenda = [
+                {
+                    title: 'Rapat Koordinasi Strategis Q4 2024',
+                    date: '25/12/2024',
+                    location: 'Ballroom Indraprasta',
+                    time: '09:00-12:00',
+                    description: 'Evaluasi bulanan dan perencanaan strategis'
+                },
+                {
+                    title: 'Workshop Literasi Keuangan Digital',
+                    date: '28/12/2024',
+                    location: 'Bale Astama',
+                    time: '13:00-17:00',
+                    description: 'Pelatihan literasi keuangan untuk UMKM'
+                },
+                {
+                    title: 'Kunjungan Stakeholder Perbankan',
+                    date: '30/12/2024',
+                    location: 'Ruang Bima',
+                    time: '10:00-15:00',
+                    description: 'Koordinasi dengan perwakilan bank regional'
+                }
+            ];
+            
+            displayAgenda(defaultAgenda);
+        }
+        
+        // Tampilkan daftar agenda
+        function displayAgenda(agendaItems) {
+            const container = document.getElementById('agenda-list');
+            
+            if (agendaItems.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-8">
+                        <div class="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-calendar-check text-blue-600 text-2xl"></i>
+                        </div>
+                        <h4 class="text-lg font-bold text-gray-900 mb-2">Tidak Ada Agenda</h4>
+                        <p class="text-gray-600">Saat ini tidak ada agenda yang terjadwal.</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            const colors = ['blue', 'green', 'purple', 'orange', 'teal'];
+            
+            const agendaHtml = agendaItems.map((item, index) => {
+                const color = colors[index % colors.length];
+                
+                return `
+                    <div class="bg-gradient-to-r from-${color}-50 to-${color}-100 rounded-2xl p-6 border-l-4 border-${color}-600 hover:shadow-lg transition-all duration-300">
+                        <div class="flex items-start justify-between">
+                            <div class="flex-grow">
+                                <div class="flex items-center mb-3">
+                                    <div class="bg-${color}-600 text-white w-10 h-10 rounded-full flex items-center justify-center mr-4">
+                                        <i class="fas fa-calendar text-sm"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="text-lg font-bold text-gray-900">${item.title}</h4>
+                                        ${item.description ? `<p class="text-sm text-gray-600">${item.description}</p>` : ''}
+                                    </div>
+                                </div>
+                                
+                                <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-sm text-gray-700">
+                                    <div class="flex items-center">
+                                        <i class="fas fa-calendar text-${color}-600 mr-2"></i>
+                                        <span>${item.date}</span>
+                                    </div>
+                                    
+                                    ${item.time ? `
+                                    <div class="flex items-center">
+                                        <i class="fas fa-clock text-${color}-600 mr-2"></i>
+                                        <span>${item.time}</span>
+                                    </div>
+                                    ` : '<div></div>'}
+                                    
+                                    <div class="flex items-center">
+                                        <i class="fas fa-map-marker-alt text-${color}-600 mr-2"></i>
+                                        <span>${item.location}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+            
+            container.innerHTML = agendaHtml;
+        }
+
         // Enhanced navbar background change on scroll
         window.addEventListener('scroll', function() {
             const nav = document.querySelector('nav');
@@ -4436,7 +4837,7 @@
                     rgba(127, 29, 29, 0.90) 75%, 
                     rgba(15, 23, 42, 0.85) 100%)`;
                 nav.style.boxShadow = '0 8px 32px rgba(0, 0, 0, 0.3)';
-                nav.style.borderBottom = '1px solid rgba(255, 255, 255, 0.1)';
+                nav.style.borderBottom = '1px solid rgba(255, 255, 1, 0.1)';
             }
         });
     </script>
