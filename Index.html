@@ -9,75 +9,97 @@
     <link rel="icon" type="image/x-icon" href="https://ik.imagekit.io/logojkdiy/LOGO%20LMS(1).png?updatedAt=1755437240050">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
+        /* =================================================================== */
+        /* CSS Styles */
+        /* This section contains all the custom CSS styles for the website. */
+        /* =================================================================== */
+
+        /* Import Google Fonts */
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
         
+        /* Global font style */
         * {
             font-family: 'Poppins', sans-serif;
         }
         
+        /* Hero section gradient background */
         .hero-gradient {
             background: linear-gradient(135deg, #dc2626 0%, #b91c1c 25%, #991b1b 50%, #7f1d1d 100%);
         }
         
+        /* Animation for floating elements */
         .floating {
             animation: floating 3s ease-in-out infinite;
         }
         
+        /* Animation for elements sliding in from the left */
         .slide-in-left {
             animation: slideInLeft 1s ease-out;
         }
         
+        /* Animation for elements sliding in from the right */
         .slide-in-right {
             animation: slideInRight 1s ease-out;
         }
         
+        /* Animation for elements fading in from the bottom */
         .fade-in-up {
             animation: fadeInUp 0.8s ease-out;
         }
         
+        /* Animation for elements bouncing in */
         .bounce-in {
             animation: bounceIn 1.2s ease-out;
         }
         
+        /* Animation for a glowing pulse effect */
         .pulse-glow {
             animation: pulseGlow 2s ease-in-out infinite;
         }
         
+        /* Keyframes for the floating animation */
         @keyframes floating {
             0%, 100% { transform: translateY(0px); }
             50% { transform: translateY(-20px); }
         }
         
+        /* Keyframes for the slide in from left animation */
         @keyframes slideInLeft {
             from { transform: translateX(-100px); opacity: 0; }
             to { transform: translateX(0); opacity: 1; }
         }
         
+        /* Keyframes for the slide in from right animation */
         @keyframes slideInRight {
             from { transform: translateX(100px); opacity: 0; }
             to { transform: translateX(0); opacity: 1; }
         }
         
+        /* Keyframes for the fade in from bottom animation */
         @keyframes fadeInUp {
             from { transform: translateY(50px); opacity: 0; }
             to { transform: translateY(0); opacity: 1; }
         }
         
+        /* Keyframes for expanding width animation */
         @keyframes expandWidth {
             from { width: 0; opacity: 0; }
             to { width: 100%; opacity: 1; }
         }
         
+        /* Class to apply the fade in up animation */
         .animate-fade-in-up {
             animation: fadeInUp 0.8s ease-out forwards;
             opacity: 0;
         }
         
+        /* Class to apply the expand width animation */
         .animate-expand-width {
             animation: expandWidth 1s ease-out forwards;
             width: 0;
         }
         
+        /* Keyframes for a bouncing and scaling animation */
         @keyframes bounceInScale {
             0% { 
                 transform: scale(0); 
@@ -93,11 +115,13 @@
             }
         }
         
+        /* Class to apply the bounce and scale animation */
         .animate-bounce-in {
             animation: bounceInScale 0.6s ease-out forwards;
             opacity: 0;
         }
         
+        /* Keyframes for a simple bounce animation */
         @keyframes bounceIn {
             0% { transform: scale(0.3); opacity: 0; }
             50% { transform: scale(1.1); }
@@ -105,26 +129,31 @@
             100% { transform: scale(1); opacity: 1; }
         }
         
+        /* Keyframes for the glowing pulse animation */
         @keyframes pulseGlow {
             0%, 100% { box-shadow: 0 0 20px rgba(220, 38, 38, 0.3); }
             50% { box-shadow: 0 0 40px rgba(220, 38, 38, 0.6); }
         }
         
+        /* Glassmorphism effect */
         .glass-effect {
             background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.2);
         }
         
+        /* 3D card effect */
         .card-3d {
             transform-style: preserve-3d;
             transition: all 0.5s ease;
         }
         
+        /* 3D card hover effect */
         .card-3d:hover {
             transform: rotateY(5deg) rotateX(5deg) translateZ(20px);
         }
         
+        /* Text shadow effect */
         .text-shadow {
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
         }
@@ -142,11 +171,13 @@
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
         }
         
+        /* Navigation container for hover effect */
         .nav-container {
             position: relative;
             overflow: hidden;
         }
         
+        /* Shimmer effect for navigation container */
         .nav-container::before {
             content: '';
             position: absolute;
@@ -161,15 +192,18 @@
             transition: left 0.8s ease;
         }
         
+        /* Shimmer effect on hover */
         .nav-container:hover::before {
             left: 100%;
         }
         
+        /* Navigation item for hover effect */
         .nav-item {
             position: relative;
             overflow: hidden;
         }
         
+        /* Shimmer effect for navigation item */
         .nav-item::before {
             content: '';
             position: absolute;
@@ -184,15 +218,18 @@
             transition: left 0.6s ease;
         }
         
+        /* Shimmer effect on hover for navigation item */
         .nav-item:hover::before {
             left: 100%;
         }
         
+        /* Navigation icon container */
         .nav-icon {
             position: relative;
             overflow: hidden;
         }
         
+        /* Pulse effect for navigation icon */
         .nav-icon::after {
             content: '';
             position: absolute;
@@ -206,37 +243,45 @@
             transition: all 0.3s ease;
         }
         
+        /* Pulse effect on hover for navigation icon */
         .nav-item:hover .nav-icon::after {
             width: 100%;
             height: 100%;
         }
         
+        /* Navigation indicator style */
         .nav-indicator {
             box-shadow: 0 0 10px currentColor;
         }
         
+        /* Calendar cell transition */
         .calendar-cell {
             transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
         }
         
+        /* Calendar cell hover effect */
         .calendar-cell:hover {
             transform: scale(1.05);
         }
         
+        /* Style for available calendar cells */
         .available {
             background: linear-gradient(135deg, #dcfce7, #bbf7d0);
             color: #166534;
         }
         
+        /* Style for booked calendar cells */
         .booked {
             background: linear-gradient(135deg, #fee2e2, #fecaca);
             color: #991b1b;
         }
         
+        /* Modal enter animation */
         .modal-enter {
             animation: modalEnter 0.4s ease-out;
         }
         
+        /* Keyframes for modal enter animation */
         @keyframes modalEnter {
             from { 
                 opacity: 0; 
@@ -248,6 +293,7 @@
             }
         }
         
+        /* Typing animation for text */
         .typing-animation {
             overflow: hidden;
             border-right: 3px solid #dc2626;
@@ -255,16 +301,19 @@
             animation: typing 3s steps(40, end), blink-caret 0.75s step-end infinite;
         }
         
+        /* Keyframes for typing animation */
         @keyframes typing {
             from { width: 0; }
             to { width: 100%; }
         }
         
+        /* Keyframes for blinking caret in typing animation */
         @keyframes blink-caret {
             from, to { border-color: transparent; }
             50% { border-color: #dc2626; }
         }
         
+        /* Parallax background effect */
         .parallax {
             background-attachment: fixed;
             background-position: center;
@@ -278,6 +327,7 @@
             overflow: hidden;
         }
         
+        /* Shimmer effect for animated background */
         .bg-animated::before {
             content: '';
             position: absolute;
@@ -290,11 +340,13 @@
             pointer-events: none;
         }
         
+        /* Keyframes for shimmer animation */
         @keyframes shimmer {
             0%, 100% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
             50% { transform: translateX(100%) translateY(100%) rotate(45deg); }
         }
         
+        /* Container for floating shapes background */
         .floating-shapes {
             position: absolute;
             width: 100%;
@@ -303,12 +355,14 @@
             pointer-events: none;
         }
         
+        /* Style for individual floating shapes */
         .shape {
             position: absolute;
             opacity: 0.1;
             animation: float-shapes 20s linear infinite;
         }
         
+        /* Animation delay and duration for different shapes */
         .shape:nth-child(1) {
             left: 10%;
             animation-delay: 0s;
@@ -333,6 +387,7 @@
             animation-duration: 28s;
         }
         
+        /* Keyframes for floating shapes animation */
         @keyframes float-shapes {
             0% {
                 transform: translateY(100vh) rotate(0deg);
@@ -350,6 +405,7 @@
             }
         }
         
+        /* Gradient orb background elements */
         .gradient-orb {
             position: absolute;
             border-radius: 50%;
@@ -358,6 +414,7 @@
             pointer-events: none;
         }
         
+        /* Styles for different gradient orbs */
         .orb-1 {
             width: 300px;
             height: 300px;
@@ -385,6 +442,7 @@
             animation-delay: 10s;
         }
         
+        /* Keyframes for gradient orb floating animation */
         @keyframes orb-float {
             0%, 100% {
                 transform: translate(0, 0) scale(1);
@@ -397,7 +455,7 @@
             }
         }
         
-        /* Loading Animation */
+        /* Loading Animation Styles */
         .loading-container {
             display: flex;
             flex-direction: column;
@@ -408,6 +466,7 @@
             border-radius: 1rem;
         }
         
+        /* Loading spinner style */
         .loading-spinner {
             width: 60px;
             height: 60px;
@@ -418,17 +477,20 @@
             margin-bottom: 1rem;
         }
         
+        /* Keyframes for spinner rotation */
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
         
+        /* Loading dots container */
         .loading-dots {
             display: flex;
             gap: 0.5rem;
             margin-top: 1rem;
         }
         
+        /* Individual loading dot style */
         .loading-dot {
             width: 8px;
             height: 8px;
@@ -437,10 +499,12 @@
             animation: loading-bounce 1.4s ease-in-out infinite both;
         }
         
+        /* Animation delay for loading dots */
         .loading-dot:nth-child(1) { animation-delay: -0.32s; }
         .loading-dot:nth-child(2) { animation-delay: -0.16s; }
         .loading-dot:nth-child(3) { animation-delay: 0s; }
         
+        /* Keyframes for loading dots bounce animation */
         @keyframes loading-bounce {
             0%, 80%, 100% {
                 transform: scale(0);
@@ -450,6 +514,7 @@
             }
         }
         
+        /* Particles background container */
         .particles {
             position: absolute;
             width: 100%;
@@ -458,6 +523,7 @@
             pointer-events: none;
         }
         
+        /* Individual particle style */
         .particle {
             position: absolute;
             width: 4px;
@@ -467,6 +533,7 @@
             animation: particle-float 12s linear infinite;
         }
         
+        /* Keyframes for particle floating animation */
         @keyframes particle-float {
             0% {
                 transform: translateY(100vh) translateX(0);
@@ -497,6 +564,7 @@
             animation: pattern-move 20s linear infinite;
         }
         
+        /* Keyframes for OJK pattern movement */
         @keyframes pattern-move {
             0% { background-position: 0 0; }
             100% { background-position: 60px 60px; }
@@ -508,6 +576,7 @@
             animation: cultural-glow 4s ease-in-out infinite alternate;
         }
         
+        /* Keyframes for cultural glow animation */
         @keyframes cultural-glow {
             0% {
                 filter: drop-shadow(0 0 10px rgba(252, 211, 77, 0.2));
@@ -529,6 +598,7 @@
             }
         }
         
+        /* Keyframes for slow floating animation */
         @keyframes float-slow {
             0%, 100% { 
                 transform: translateY(0px) translateX(0px) rotate(0deg); 
@@ -541,6 +611,7 @@
             }
         }
         
+        /* Keyframes for reverse floating animation */
         @keyframes float-reverse {
             0%, 100% { 
                 transform: translateY(0px) translateX(0px) rotate(0deg); 
@@ -553,6 +624,7 @@
             }
         }
         
+        /* Keyframes for gentle floating animation */
         @keyframes float-gentle {
             0%, 100% { 
                 transform: translateY(0px) rotate(45deg); 
@@ -562,6 +634,7 @@
             }
         }
         
+        /* Keyframes for slow pulse animation */
         @keyframes pulse-slow {
             0%, 100% { 
                 opacity: 0.6; 
@@ -573,6 +646,7 @@
             }
         }
         
+        /* Keyframes for gentle pulse animation */
         @keyframes pulse-gentle {
             0%, 100% { 
                 opacity: 0.15; 
@@ -584,6 +658,7 @@
             }
         }
         
+        /* Keyframes for slow rotation animation */
         @keyframes rotate-slow {
             0% { 
                 transform: rotate(12deg); 
@@ -593,6 +668,7 @@
             }
         }
         
+        /* Classes to apply elegant background animations */
         .animate-gradient-shift {
             background-size: 200% 200%;
             animation: gradient-shift 8s ease infinite;
@@ -622,7 +698,7 @@
             animation: rotate-slow 30s linear infinite;
         }
         
-        /* Grid Pattern */
+        /* Grid Pattern Background */
         .grid-pattern {
             background-image: 
                 linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
@@ -632,7 +708,7 @@
             height: 100%;
         }
         
-        /* Elegant Particles */
+        /* Elegant Particles Background */
         .particles-elegant {
             position: absolute;
             width: 100%;
@@ -640,6 +716,7 @@
             overflow: hidden;
         }
         
+        /* Individual elegant particle style */
         .particle-elegant {
             position: absolute;
             width: 4px;
@@ -649,6 +726,7 @@
             animation: particle-float-elegant 20s linear infinite;
         }
         
+        /* Animation delay and duration for elegant particles */
         .particle-1 {
             left: 10%;
             animation-delay: 0s;
@@ -679,6 +757,7 @@
             animation-duration: 35s;
         }
         
+        /* Keyframes for elegant particle floating animation */
         @keyframes particle-float-elegant {
             0% {
                 transform: translateY(100vh) translateX(0) scale(0);
@@ -716,6 +795,7 @@
             animation: cultural-floating 6s ease-in-out infinite;
         }
         
+        /* Keyframes for cultural floating animation */
         @keyframes cultural-floating {
             0%, 100% { 
                 transform: translateY(0px) rotate(0deg); 
@@ -742,6 +822,7 @@
             gap: 1.5rem;
         }
         
+        /* Responsive grid for rooms */
         @media (min-width: 768px) {
             .room-grid {
                 grid-template-columns: repeat(2, 1fr);
@@ -768,12 +849,14 @@
             }
         }
         
+        /* Grid for hotels */
         .hotel-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 1.5rem;
         }
         
+        /* Responsive grid for hotels */
         @media (min-width: 1024px) {
             .hotel-grid {
                 grid-template-columns: repeat(4, 1fr);
@@ -800,7 +883,11 @@
     </style>
 </head>
 <body class="bg-gray-50 overflow-x-hidden">
-    <!-- Navigation -->
+    <!-- =================================================================== -->
+    <!-- Navigation Section -->
+    <!-- This section contains the main navigation bar for the website. -->
+    <!-- It includes the logo, desktop navigation links, and a mobile menu button. -->
+    <!-- =================================================================== -->
     <nav class="nav-elegant text-white fixed w-full top-0 z-50 transition-all duration-700">
         <div class="max-w-full xl:max-w-[1400px] 2xl:max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-16">
             <div class="flex justify-between items-center h-20">
@@ -939,7 +1026,11 @@
         </div>
     </nav>
 
+    <!-- =================================================================== -->
     <!-- Hero Section -->
+    <!-- This is the main landing section of the page, featuring the title, -->
+    <!-- a brief description, and call-to-action buttons. -->
+    <!-- =================================================================== -->
     <section id="beranda" class="min-h-screen flex items-center relative overflow-hidden bg-white">
         <!-- Clean Background -->
         <div class="absolute inset-0 bg-white"></div>
@@ -1074,7 +1165,10 @@
         </div>
     </section>
 
+    <!-- =================================================================== -->
     <!-- Calendar & Agenda Section -->
+    <!-- This section displays the Google Calendar and a list of upcoming agendas. -->
+    <!-- =================================================================== -->
     <section id="kalender" class="py-24 bg-gradient-to-br from-blue-50 to-indigo-50 relative overflow-hidden">
         <!-- Background Elements -->
         <div class="absolute inset-0">
@@ -1218,7 +1312,10 @@
         </div>
     </section>
 
+    <!-- =================================================================== -->
     <!-- Stats Section -->
+    <!-- This section displays key statistics about the services offered. -->
+    <!-- =================================================================== -->
     <section class="py-20 bg-white relative">
         <div class="max-w-full xl:max-w-[1400px] 2xl:max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-16">
             <div class="grid md:grid-cols-4 gap-8 text-center">
@@ -1256,7 +1353,10 @@
         </div>
     </section>
 
+    <!-- =================================================================== -->
     <!-- Latest Activities Section -->
+    <!-- This section showcases the latest activities and events with a photo gallery. -->
+    <!-- =================================================================== -->
     <section class="py-20 bg-gradient-to-br from-gray-50 to-blue-50 relative overflow-hidden">
         <!-- Background Elements -->
         <div class="absolute inset-0">
@@ -1402,7 +1502,10 @@
 
 
 
+    <!-- =================================================================== -->
     <!-- Room Booking Section -->
+    <!-- This section displays the available meeting rooms and facilities for booking. -->
+    <!-- =================================================================== -->
     <section id="ruang-rapat" class="py-24 bg-gradient-to-br from-gray-50 to-gray-100 bg-animated relative">
         <!-- Floating Shapes Background -->
         <div class="floating-shapes">
@@ -1894,7 +1997,10 @@
         </div>
     </section>
 
+    <!-- =================================================================== -->
     <!-- Hotel Section -->
+    <!-- This section lists the partner hotels with details and booking links. -->
+    <!-- =================================================================== -->
     <section id="hotel" class="py-24 bg-white bg-animated relative">
         <!-- Particles Background -->
         <div class="particles">
@@ -2570,7 +2676,11 @@
 
 
 
+    <!-- =================================================================== -->
     <!-- Services Section -->
+    <!-- This section details the various services offered, such as technical support, -->
+    <!-- catering, and protocol services. -->
+    <!-- =================================================================== -->
     <section id="logistik" class="py-24 bg-gradient-to-br from-blue-50 to-indigo-100 bg-animated relative">
         <!-- Particles Background -->
         <div class="particles">
@@ -2754,7 +2864,10 @@
 
 
 
+    <!-- =================================================================== -->
     <!-- Contact Section -->
+    <!-- This section provides contact information and a contact form. -->
+    <!-- =================================================================== -->
     <section id="kontak" class="py-24 bg-white bg-animated relative">
         <!-- Floating Shapes Background -->
         <div class="floating-shapes">
@@ -2860,7 +2973,11 @@
         </div>
     </section>
 
-    <!-- Footer -->
+    <!-- =================================================================== -->
+    <!-- Footer Section -->
+    <!-- This section contains the footer of the website, including the logo, -->
+    <!-- social media links, and copyright information. -->
+    <!-- =================================================================== -->
     <footer class="hero-gradient text-white py-16">
         <div class="max-w-full xl:max-w-[1400px] 2xl:max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-16">
             <div class="text-center">
@@ -2903,6 +3020,13 @@
 
 
 
+
+    <!-- =================================================================== -->
+    <!-- Modals Section -->
+    <!-- This section contains all the modals used in the application, -->
+    <!-- such as the hotel details, catering, protocol, technical support, -->
+    <!-- and room booking modals. -->
+    <!-- =================================================================== -->
 
     <!-- Hotel Modal -->
     <div id="hotel-modal" class="fixed inset-0 bg-black bg-opacity-60 hidden items-center justify-center z-50 p-4">
@@ -3933,13 +4057,18 @@
     </div>
 
     <script>
-        // Mobile menu functionality
+        /**
+         * Toggles the visibility of the mobile menu.
+         */
         document.getElementById('mobile-menu-btn').addEventListener('click', function() {
             const mobileMenu = document.getElementById('mobile-menu');
             mobileMenu.classList.toggle('hidden');
         });
 
-        // Smooth scrolling function
+        /**
+         * Scrolls the page to the specified section.
+         * @param {string} sectionId - The ID of the section to scroll to.
+         */
         function scrollToSection(sectionId) {
             document.getElementById(sectionId).scrollIntoView({
                 behavior: 'smooth',
@@ -3947,7 +4076,9 @@
             });
         }
 
-        // Navigation smooth scrolling
+        /**
+         * Adds smooth scrolling to all anchor links that point to a section on the page.
+         */
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -3963,7 +4094,9 @@
             });
         });
 
-        // Hide iframe loading animation
+        /**
+         * Hides the loading animation for the booking iframe.
+         */
         function hideIframeLoading() {
             const loadingElement = document.getElementById('iframe-loading');
             if (loadingElement) {
@@ -3974,7 +4107,9 @@
             }
         }
 
-        // Hide vehicle iframe loading animation
+        /**
+         * Hides the loading animation for the vehicle iframe.
+         */
         function hideVehicleIframeLoading() {
             const loadingElement = document.getElementById('vehicle-iframe-loading');
             if (loadingElement) {
@@ -3985,7 +4120,9 @@
             }
         }
 
-        // Hide calendar loading animation
+        /**
+         * Hides the loading animation for the calendar.
+         */
         function hideCalendarLoading() {
             const loadingElement = document.getElementById('calendar-loading');
             if (loadingElement) {
@@ -3996,7 +4133,10 @@
             }
         }
 
-        // Room booking functionality - Updated for popup modal
+        /**
+         * Opens the booking modal for a specific room.
+         * @param {string} roomName - The name of the room to book.
+         */
         function bookRoom(roomName) {
             // Update the selected room name in the modal
             document.getElementById('selected-room-name').textContent = `Formulir untuk: ${roomName}`;
@@ -4024,13 +4164,18 @@
             showNotification(`📝 Formulir peminjaman untuk "${roomName}" telah dibuka. Jangan lupa sebutkan nama ruang di formulir!`, 'success');
         }
 
-        // Close booking modal
+        /**
+         * Closes the booking modal.
+         */
         function closeBookingModal() {
             document.getElementById('booking-modal').classList.add('hidden');
             document.getElementById('booking-modal').classList.remove('flex');
         }
 
-        // Hotel data and functionality
+        /**
+         * An object containing data for all partner hotels.
+         * @type {Object.<string, {description: string, facilities: string[], contact: string, email: string, address: string, rating: string, rooms: string}>}
+         */
         const hotelData = {
             'Hotel Tentrem': {
                 description: 'Hotel mewah bintang 5 dengan arsitektur modern yang memadukan kemewahan kontemporer dengan sentuhan budaya Jawa. Terletak strategis di pusat kota Yogyakarta.',
@@ -4286,6 +4431,10 @@
             }
         };
 
+        /**
+         * Displays the details of a specific hotel in a modal.
+         * @param {string} hotelName - The name of the hotel to display.
+         */
         function viewHotel(hotelName) {
             const hotel = hotelData[hotelName];
             document.getElementById('hotel-name').textContent = hotelName;
@@ -4346,6 +4495,9 @@
             document.getElementById('hotel-modal').classList.add('flex');
         }
 
+        /**
+         * Closes the hotel details modal.
+         */
         function closeHotelModal() {
             document.getElementById('hotel-modal').classList.add('hidden');
             document.getElementById('hotel-modal').classList.remove('flex');
@@ -4353,7 +4505,11 @@
 
 
 
-        // Function to show notifications
+        /**
+         * Displays a notification message on the screen.
+         * @param {string} message - The message to display.
+         * @param {string} [type='info'] - The type of notification ('info', 'success', 'error').
+         */
         function showNotification(message, type = 'info') {
             const notification = document.createElement('div');
             notification.className = `fixed top-24 right-4 z-50 p-4 rounded-lg shadow-lg transform transition-all duration-300 translate-x-full ${
@@ -4392,25 +4548,38 @@
 
 
 
-        // Contact form submission
+        /**
+         * Handles the submission of the contact form.
+         * @param {Event} event - The form submission event.
+         */
         function submitContactForm(event) {
             event.preventDefault();
             alert('📧 Terima kasih! Pesan Anda telah berhasil dikirim. Tim customer service kami akan menghubungi Anda dalam waktu 2x24 jam.');
             event.target.reset();
         }
 
-        // Catering modal functions
+        /**
+         * Opens the catering modal.
+         */
         function showCateringModal() {
             document.getElementById('catering-modal').classList.remove('hidden');
             document.getElementById('catering-modal').classList.add('flex');
             showNotification('🍽️ Katalog vendor catering telah dibuka! Pilih vendor sesuai kebutuhan acara Anda.', 'success');
         }
 
+        /**
+         * Closes the catering modal.
+         */
         function closeCateringModal() {
             document.getElementById('catering-modal').classList.add('hidden');
             document.getElementById('catering-modal').classList.remove('flex');
         }
 
+        /**
+         * Opens a WhatsApp chat to contact a specific vendor.
+         * @param {string} vendorName - The name of the vendor to contact.
+         * @param {string} phoneNumber - The phone number of the vendor.
+         */
         function contactVendor(vendorName, phoneNumber) {
             const vendorMessages = {
                 'Sono Kembang': 'Halo! Saya tertarik dengan layanan catering dari Sono Kembang untuk acara di OJK DIY. Mohon informasi menu masakan Jawa klasik seperti nasi langgi, tengkleng, dan rolade untuk acara keluarga besar.',
@@ -4439,7 +4608,9 @@
             }
         }
 
-        // Protocol modal functions
+        /**
+         * Opens the protocol modal.
+         */
         function showProtocolModal() {
             document.getElementById('protocol-modal').classList.remove('hidden');
             document.getElementById('protocol-modal').classList.add('flex');
@@ -4462,6 +4633,9 @@
             showNotification('🏛️ Layanan Keprotokolan OJK DIY telah dibuka! Hubungi protokoler atau ajukan peminjaman mobil dinas.', 'success');
         }
 
+        /**
+         * Closes the protocol modal.
+         */
         function closeProtocolModal() {
             document.getElementById('protocol-modal').classList.add('hidden');
             document.getElementById('protocol-modal').classList.remove('flex');
@@ -4469,7 +4643,11 @@
 
 
 
-        // Contact protocol function
+        /**
+         * Opens a WhatsApp chat to contact a specific protocol officer.
+         * @param {string} protocolName - The name of the protocol officer to contact.
+         * @param {string} phoneNumber - The phone number of the protocol officer.
+         */
         function contactProtocol(protocolName, phoneNumber) {
             const protocolMessages = {
                 'Protokol 1': 'Halo! Saya memerlukan bantuan koordinasi acara resmi dan kunjungan VIP di OJK DIY. Mohon informasi terkait:\n\n• Protokol acara resmi\n• Koordinasi kunjungan VIP\n• Tata cara penerimaan tamu\n• Susunan acara dan rundown\n\nTerima kasih atas bantuannya.',
@@ -4488,19 +4666,28 @@
             }
         }
 
-        // Technical Support Modal Functions
+        /**
+         * Opens the technical support modal.
+         */
         function showTechnicalSupportModal() {
             document.getElementById('technical-support-modal').classList.remove('hidden');
             document.getElementById('technical-support-modal').classList.add('flex');
             showNotification('🔧 Tim Support Teknis OJK DIY siap membantu! Pilih teknisi sesuai kebutuhan Anda.', 'success');
         }
 
+        /**
+         * Closes the technical support modal.
+         */
         function closeTechnicalSupportModal() {
             document.getElementById('technical-support-modal').classList.add('hidden');
             document.getElementById('technical-support-modal').classList.remove('flex');
         }
 
-        // Contact Technician Function
+        /**
+         * Opens a WhatsApp chat to contact a specific technician.
+         * @param {string} technicianName - The name of the technician to contact.
+         * @param {string} phoneNumber - The phone number of the technician.
+         */
         function contactTechnician(technicianName, phoneNumber) {
             const technicianMessages = {
                 'Teknisi 1 - IT Support': 'Halo! Saya memerlukan bantuan IT Support dari OJK DIY. Mohon bantuan untuk:\n\n🔧 Kebutuhan yang saya alami:\n• [ ] Troubleshooting Hardware/Software\n• [ ] Setup Jaringan & WiFi\n• [ ] Maintenance Sistem Komputer\n• [ ] Support Aplikasi Office\n• [ ] Lainnya: ___________\n\n📍 Lokasi: ___________\n⏰ Waktu yang dibutuhkan: ___________\n📝 Deskripsi masalah: ___________\n\nTerima kasih atas bantuan cepatnya!',
@@ -4521,7 +4708,9 @@
             }
         }
 
-        // Emergency Support Function
+        /**
+         * Opens a WhatsApp chat to contact emergency support.
+         */
         function contactEmergencySupport() {
             const emergencyMessage = 'DARURAT - Bantuan Teknis OJK DIY\n\n🚨 Saya memerlukan bantuan teknis darurat:\n\n📍 Lokasi: ___________\n⏰ Waktu kejadian: ___________\n🔥 Tingkat urgensi: [ ] Tinggi [ ] Sedang [ ] Rendah\n\n📝 Deskripsi masalah:\n___________\n\n📞 Kontak yang bisa dihubungi:\nNama: ___________\nHP: ___________\n\nMohon bantuan segera. Terima kasih!';
             const encodedMessage = encodeURIComponent(emergencyMessage);
@@ -4534,7 +4723,10 @@
             }
         }
 
-        // Service contact function (legacy - kept for compatibility)
+        /**
+         * Handles the click event for the "Support Teknis" service.
+         * @param {string} serviceName - The name of the service.
+         */
         function contactService(serviceName) {
             // Redirect to new technical support modal
             if (serviceName === 'Support Teknis') {
@@ -4549,7 +4741,10 @@
             }
         }
 
-        // Customizable service function
+        /**
+         * Shows a notification that a service can be customized.
+         * @param {string} serviceName - The name of the service.
+         */
         function customizeService(serviceName) {
             const customMessages = {
                 'Keamanan': '🛡️ Layanan Keamanan - Dapat Dikustomisasi\n\n✅ Paket yang tersedia:\n• Security 24/7\n• Access Control System\n• CCTV Monitoring\n• Emergency Response\n• VIP Protection\n\n📝 Dapat disesuaikan dengan:\n• Jumlah personel\n• Jam operasional\n• Area coverage\n• Protokol khusus\n\n💬 Hubungi kami untuk konsultasi gratis!',
@@ -4573,7 +4768,9 @@
 
 
 
-        // OJK Branding Animation
+        /**
+         * Initializes the OJK branding animations.
+         */
         function initOJKAnimations() {
             // Add subtle floating animation to decorative elements
             const decorativeElements = document.querySelectorAll('.absolute.opacity-10, .absolute.opacity-8');
@@ -4584,7 +4781,9 @@
             });
         }
 
-        // Initialize page when loaded
+        /**
+         * Initializes the page when the DOM is fully loaded.
+         */
         document.addEventListener('DOMContentLoaded', function() {
             // Initialize OJK animations
             initOJKAnimations();
@@ -4652,7 +4851,9 @@
             });
         });
 
-        // View More Activities function
+        /**
+         * Shows a notification that the full gallery of activities is coming soon.
+         */
         function viewMoreActivities() {
             showNotification('📸 Fitur galeri kegiatan lengkap akan segera hadir! Saat ini menampilkan 5 kegiatan terbaru.', 'info');
             
@@ -4668,7 +4869,9 @@
 
 
 
-        // Fungsi sederhana untuk memuat agenda dari CSV
+        /**
+         * Loads agenda data from a Google Sheet CSV and displays it on the page.
+         */
         async function loadAgendaFromCSV() {
             const container = document.getElementById('agenda-list');
             
@@ -4725,7 +4928,9 @@
             }
         }
 
-        // Tampilkan agenda default jika CSV gagal
+        /**
+         * Displays a default agenda if loading from the CSV fails.
+         */
         function displayDefaultAgenda() {
             const defaultAgenda = [
                 {
@@ -4754,7 +4959,10 @@
             displayAgenda(defaultAgenda);
         }
         
-        // Tampilkan daftar agenda
+        /**
+         * Displays the agenda items on the page.
+         * @param {Object[]} agendaItems - An array of agenda item objects.
+         */
         function displayAgenda(agendaItems) {
             const container = document.getElementById('agenda-list');
             
@@ -4817,7 +5025,9 @@
             container.innerHTML = agendaHtml;
         }
 
-        // Enhanced navbar background change on scroll
+        /**
+         * Changes the background of the navigation bar when the user scrolls.
+         */
         window.addEventListener('scroll', function() {
             const nav = document.querySelector('nav');
             const scrolled = window.scrollY > 50;
