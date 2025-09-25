@@ -12,14 +12,24 @@
     :root{
       --primary:#8B1E24;
       --primary-900:#6F171C;
-      --secondary:#F9E8E8;
-      --accent:#C0A16B;
-      --text:#111827;
-      --muted:#6B7280;
+      --secondary:#FFE5EC; /* pink */
+      --accent:#22D3EE;   /* cyan */
+      --accent-2:#F59E0B; /* amber */
+      --accent-3:#A78BFA; /* violet */
+      --accent-4:#34D399; /* emerald */
+      --accent-5:#10B981; /* green */
+      --accent-6:#0EA5E9; /* blue */
+      --accent-7:#8B5E3C; /* brown */
+      --brand-blue:#1E40AF; /* matte blue */
+      --brand-blue-hover:#1C3D99; /* darker matte blue */
+      --text:#0B1222;
+      --muted:#475569;
       --bg:#FFFFFF;
-      --bg-soft:#F7F7F9;
-      --event:#C0A16B;
+      --bg-soft:#FFF7F0;
+      --event:#F59E0B;
     }
+    /* Dark mode variables toggled by .theme-dark on html */
+    html.theme-dark{ --text:#F3F4F6; --muted:#CBD5E1; --bg:#0B1222; --bg-soft:#0F172A; }
     body{font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,'Noto Sans','Helvetica Neue',Arial; color:var(--text); background:var(--bg);}
     .font-heading{font-family:'Poppins',ui-sans-serif,system-ui;}
 
@@ -35,15 +45,15 @@
     .nav-link.active:after{width:100%;}
 
     /* Buttons and cards */
-    .btn-primary{background:var(--primary); color:#fff; border-radius:9999px; padding:.8rem 1.15rem; font-weight:600; box-shadow:0 10px 20px rgba(139,30,36,.18); transition:transform .15s ease, box-shadow .2s ease, background .2s ease;}
-    .btn-primary:hover{transform:translateY(-2px); background:var(--primary-900); box-shadow:0 14px 24px rgba(139,30,36,.22);}
+    .btn-primary{background:var(--brand-blue); color:#fff; border-radius:9999px; padding:.8rem 1.15rem; font-weight:600; box-shadow:0 10px 20px rgba(30,64,175,.25); transition:transform .15s ease, box-shadow .2s ease, filter .2s ease;}
+    .btn-primary:hover{transform:translateY(-2px); filter:saturate(1.0); box-shadow:0 14px 28px rgba(30,64,175,.35); background:var(--brand-blue-hover);}
     .btn-ghost{border:2px solid var(--primary); color:var(--primary); border-radius:9999px; padding:.7rem 1.05rem; font-weight:600; transition:all .2s ease;}
     .btn-ghost:hover{background:var(--primary); color:#fff; transform:translateY(-2px);}
     .btn-circle{width:44px;height:44px;border-radius:9999px;background:var(--primary);color:#fff; display:grid;place-items:center;box-shadow:0 10px 20px rgba(139,30,36,.18); transition:transform .2s ease, box-shadow .2s ease;}
     .btn-circle:hover{transform:translateY(-2px); box-shadow:0 14px 24px rgba(139,30,36,.22);}
 
-    .card{background:#fff; border-radius:18px; box-shadow:0 10px 25px rgba(16,24,40,.06); transition:transform .2s ease, box-shadow .2s ease;}
-    .card:hover{transform:translateY(-3px); box-shadow:0 16px 32px rgba(16,24,40,.10);}
+    .card{background:linear-gradient(180deg,var(--bg) 0%,#FAFDFF 100%); border-radius:18px; box-shadow:0 10px 25px rgba(16,24,40,.06); transition:transform .2s ease, box-shadow .2s ease, filter .2s ease; border:1px solid #E6F4F1;}
+    .card:hover{transform:translateY(-3px); box-shadow:0 16px 32px rgba(16,24,40,.10); filter:saturate(1.05);}
 
     /* Reveal */
     .reveal{opacity:0; transform:translateY(16px); transition:opacity .6s ease, transform .6s ease;}
@@ -61,7 +71,7 @@
     .carousel-track{transition: transform .5s cubic-bezier(.2,.8,.2,1); will-change: transform;}
     .dot{width:12px;height:12px;border-radius:9999px;background:rgba(139,30,36,.3);transition:transform .2s ease, background .2s ease;}
     .dot.active{background:var(--primary); transform:scale(1.15);}
-    .hotel-badge{font-size:.75rem; background:#FFF0F0; color:var(--primary); border:1px solid #F2C8C8; padding:.2rem .55rem; border-radius:9999px;}
+    .hotel-badge{font-size:.75rem; background:#E8EEF8; color:#0B1222; border:1px solid #C9D7F2; padding:.25rem .65rem; border-radius:9999px; box-shadow:0 6px 14px rgba(30,64,175,.08);}
 
     /* Mobile menu sheet */
     .sheet{position:fixed; inset:0 0 0 auto; width:min(88vw,420px); background:#fff; box-shadow:-20px 0 40px rgba(2,6,23,.15); transform:translateX(100%); transition:transform .25s ease;}
@@ -72,17 +82,20 @@
     .cal-head{display:grid; grid-template-columns: repeat(7, minmax(0,1fr)); gap:.5rem; text-align:center; font-weight:600; color:var(--muted);}
     .cal-day{background:#fff; border:1px solid #EEF2F7; border-radius:14px; min-height:110px; padding:.6rem; display:flex; flex-direction:column; gap:.3rem;}
     .cal-day .date{font-weight:600; color:#475569;}
-    .cal-day .badge{display:inline-block; max-width:100%; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; padding:.15rem .5rem; border-radius:9999px; background:#FFF6E6; color:#92400E; border:1px solid #FDECC8; font-size:.72rem;}
+    .cal-day .badge{display:inline-block; max-width:100%; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; padding:.15rem .5rem; border-radius:9999px; background:linear-gradient(135deg,#FFF6E6,#E0FBFC); color:#92400E; border:1px solid #FDECC8; font-size:.72rem;}
     .cal-day.out{background:#FAFAFA;}
     .cal-day.today{outline:2px solid var(--primary); outline-offset:2px;}
-    /* Lebarkan konten global */
-    .max-w-7xl{max-width:1400px;}
+    /* Lebar konten (1280–1440), tetap responsif */
+    .max-w-7xl{max-width:1440px;}
+    @media (min-width:1920px){
+      body{max-width:1920px;margin:0 auto;}
+    }
   </style>
 </head>
 <body class="antialiased">
 
   <!-- Header with enhanced navigation -->
-  <header id="siteHeader" class="fixed top-0 left-0 right-0 z-50 glass border-b border-white/60">
+  <header id="siteHeader" class="fixed top-0 left-0 right-0 z-50 glass border-b border-white/60" style="background:rgba(255,255,255,.9);">
     <div class="max-w-7xl mx-auto px-6">
       <div class="h-16 flex items-center justify-between">
         <a href="#hero" class="flex items-center gap-3 group">
@@ -101,7 +114,16 @@
           <a href="#cta" class="nav-link px-4 py-2 rounded-full hover:bg-white/70">Kontak</a>
         </nav>
 
-        <div class="hidden lg:flex items-center gap-3"></div>
+        <div class="hidden lg:flex items-center gap-3">
+          <!-- Mode controls -->
+          <div class="hidden md:flex items-center gap-2 bg-white/60 rounded-full px-2 py-1 border border-white/70">
+            <label for="modeSelect" class="text-xs text-[var(--muted)] ml-1">Mode</label>
+            <select id="modeSelect" class="text-xs rounded-full border border-gray-300 px-3 py-1 bg-white text-[var(--text)] focus:outline-none">
+              <option value="light">Terang</option>
+              <option value="dark">Gelap</option>
+            </select>
+          </div>
+        </div>
 
         <!-- Mobile -->
         <button class="lg:hidden btn-circle" id="openMenuBtn" aria-label="Buka menu">
@@ -125,16 +147,20 @@
         <a href="#hotel-partner" class="block py-3 nav-link" onclick="closeSheet()">Hotel Partner</a>
         <a href="#bantuan-teknis" class="block py-3 nav-link" onclick="closeSheet()">Bantuan Teknis</a>
         <a href="#cta" class="block py-3 nav-link" onclick="closeSheet()">Kontak</a>
-        <div class="pt-4 flex gap-3"></div>
+        <div class="pt-4 grid grid-cols-2 gap-2">
+          <button id="mModeLight" class="hotel-badge text-xs">Terang</button>
+          <button id="mModeDark" class="hotel-badge text-xs">Gelap</button>
+        </div>
       </nav>
     </div>
   </header>
 
   <!-- Hero -->
-  <section id="hero" class="relative overflow-hidden pt-24">
+  <section id="hero" class="relative overflow-hidden pt-24 bg-white">
+
     <div class="pointer-events-none absolute inset-0">
-      <div class="absolute -top-16 -left-20 w-96 h-96 rounded-full bg-[var(--secondary)] opacity-60 blur-2xl animate-pulse"></div>
-      <div class="absolute -bottom-24 -right-24 w-[28rem] h-[28rem] rounded-full" style="background: radial-gradient(closest-side, rgba(192,161,107,.22), transparent 70%);"></div>
+      <div class="absolute -top-16 -left-20 w-96 h-96 rounded-full opacity-60 blur-2xl animate-pulse" style="background: radial-gradient(circle at 30% 30%, #FFE5EC, transparent 60%), radial-gradient(circle at 70% 40%, #E0FBFC, transparent 55%), radial-gradient(circle at 40% 80%, #FFF7F0, transparent 55%);"></div>
+      <div class="absolute -bottom-24 -right-24 w-[28rem] h-[28rem] rounded-full" style="background: radial-gradient(closest-side, rgba(107,197,192,.25), transparent 70%);"></div>
     </div>
     <div class="relative max-w-7xl mx-auto px-6 py-16 md:py-24">
       <div class="grid md:grid-cols-2 gap-12 items-center">
@@ -206,7 +232,7 @@
             </div>
           </div>
           <div class="mt-3 cal-head">
-            <div>Sen</div><div>Sel</div><div>Rab</div><div>Kam</div><div>Jum</div><div>Sab</div><div>Min</div>
+            <div class="text-[var(--primary)]">Sen</div><div class="text-[var(--primary)]">Sel</div><div class="text-[var(--primary)]">Rab</div><div class="text-[var(--primary)]">Kam</div><div class="text-[var(--primary)]">Jum</div><div class="text-[var(--primary)]">Sab</div><div class="text-[var(--primary)]">Min</div>
           </div>
           <div class="mt-2 cal-grid" id="calGrid" aria-label="Kalender Bulanan"></div>
           <div class="mt-4">
@@ -390,17 +416,7 @@
           <div class="absolute -top-6 -left-6 w-24 h-24 bg-[var(--secondary)] rounded-full opacity-70 blur-xl"></div>
           <div class="absolute -bottom-6 -right-10 w-28 h-28 bg-[#FFEFD8] rounded-full opacity-70 blur-xl"></div>
           <div class="card p-6 relative">
-            <svg class="w-full h-64" viewBox="0 0 640 280" fill="none">
-              <rect x="20" y="180" width="600" height="12" rx="6" fill="#F3D6D6"/>
-              <rect x="60" y="110" width="520" height="70" rx="20" fill="#8B1E24"/>
-              <rect x="90" y="125" width="120" height="35" rx="8" fill="#F9E8E8"/>
-              <rect x="230" y="125" width="120" height="35" rx="8" fill="#F9E8E8"/>
-              <rect x="370" y="125" width="120" height="35" rx="8" fill="#F9E8E8"/>
-              <circle cx="150" cy="190" r="24" fill="#0F172A"/>
-              <circle cx="490" cy="190" r="24" fill="#0F172A"/>
-              <circle cx="150" cy="190" r="14" fill="#94A3B8"/>
-              <circle cx="490" cy="190" r="14" fill="#94A3B8"/>
-            </svg>
+            <div class="w-full h-64 rounded-xl bg-[var(--bg-soft)]"></div>
           </div>
         </div>
       </div>
@@ -421,9 +437,9 @@
       <!-- Filter and quick nav -->
       <div class="mt-8 flex flex-col md:flex-row md:items-center gap-3">
         <div class="flex items-center gap-2">
-          <button class="hotel-badge" onclick="filterHotels('all')">Semua</button>
-          <button class="hotel-badge" onclick="filterHotels('5')">⭐️⭐️⭐️⭐️⭐️</button>
-          <button class="hotel-badge" onclick="filterHotels('4')">⭐️⭐️⭐️⭐️</button>
+          <button class="hotel-badge blue" onclick="filterHotels('all')">Semua</button>
+          <button class="hotel-badge green" onclick="filterHotels('5')">⭐️⭐️⭐️⭐️⭐️</button>
+          <button class="hotel-badge brown" onclick="filterHotels('4')">⭐️⭐️⭐️⭐️</button>
         </div>
         <div class="md:ml-auto">
           <input id="hotelSearch" type="text" placeholder="Cari hotel atau area..." class="w-full md:w-80 rounded-full border px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[var(--primary)]"/>
@@ -434,6 +450,7 @@
       <div class="mt-8">
         <div class="overflow-hidden">
           <div id="hotelTrack" class="carousel-track grid grid-flow-col auto-cols-[85%] md:auto-cols-[45%] lg:auto-cols-[30%] gap-6"></div>
+          <p class="mt-3 text-xs text-[var(--muted)]">Kartu hotel kini menampilkan foto. Klik “Tambah Foto” untuk menambah galeri khusus di detail.</p>
         </div>
         <div class="mt-6 flex items-center justify-center gap-4">
           <button aria-label="Sebelumnya" class="btn-circle" onclick="slideHotels(-1)">
@@ -449,6 +466,7 @@
     <svg class="wave-bottom w-full" viewBox="0 0 1440 90" preserveAspectRatio="none">
       <path fill="#FFFFFF" d="M0,64L48,53.3C96,43,192,21,288,21.3C384,21,480,43,576,53.3C672,64,768,64,864,69.3C960,75,1056,85,1152,80C1248,75,1344,53,1392,42.7L1440,32L1440,0L0,0Z"></path>
     </svg>
+      </div>
   </section>
 
   <!-- Bantuan Teknis -->
@@ -516,6 +534,7 @@
     <svg class="wave-bottom w-full" viewBox="0 0 1440 90" preserveAspectRatio="none">
       <path fill="#FFFFFF" d="M0,64L48,53.3C96,43,192,21,288,21.3C384,21,480,43,576,53.3C672,64,768,64,864,69.3C960,75,1056,85,1152,80C1248,75,1344,53,1392,42.7L1440,32L1440,0L0,0Z"></path>
     </svg>
+      </div>
   </section>
 
   <!-- CTA -->
@@ -671,6 +690,9 @@
           </div>
         </div>
       </div>
+      <div class="mt-4">
+        <div id="hotelGallery" class="grid grid-cols-2 md:grid-cols-3 gap-3"></div>
+      </div>
     </div>
   </div>
 
@@ -709,6 +731,31 @@
   <script>
     // Tahun berjalan
     document.getElementById('y').textContent = new Date().getFullYear();
+
+    // THEME: Soft vs Vivid + Light vs Dark + Batik pattern
+    const htmlEl = document.documentElement;
+
+    function setMode(mode){
+      htmlEl.classList.toggle('theme-dark', mode==='dark');
+      localStorage.setItem('themeMode', mode);
+      document.body.style.background = getComputedStyle(htmlEl).getPropertyValue('--bg');
+    }
+
+    // Restore saved
+    const savedMode = localStorage.getItem('themeMode') || 'light';
+    setMode(savedMode);
+
+    // Header controls
+    // Desktop dropdown control
+    const modeSelect = document.getElementById('modeSelect');
+    if(modeSelect){
+      modeSelect.value = savedMode;
+      modeSelect.addEventListener('change', (e)=> setMode(e.target.value));
+    }
+
+    // Mobile controls
+    document.getElementById('mModeLight')?.addEventListener('click', ()=> { setMode('light'); closeSheet(); });
+    document.getElementById('mModeDark')?.addEventListener('click', ()=> { setMode('dark'); closeSheet(); });
 
     // Welcome popup muncul 5 detik lalu hilang
     const wp = document.getElementById('welcomePopup');
@@ -897,6 +944,22 @@
       {id:'harper', name:'Harper Malioboro Yogyakarta', stars:4, rating:4.4, area:'Malioboro Area', address:'Jl. Mangkubumi No.52, Yogyakarta', phone:'+62 274 2920000', distance:'±5 menit ke Malioboro', amenities:['Kolam','Restoran','Meeting'], notes:'Dekat ikon wisata', link:'https://www.harperhotels.com'}
     ];
 
+    const HOTEL_IMAGES = {
+      marriott: 'https://ik.imagekit.io/logojkdiy/HOTEL%20JW%20MARRIOTT.png?updatedAt=.',
+      royalambarrukmo: 'https://ik.imagekit.io/logojkdiy/HOTEL%20ROYAL%20AMBARRUKMO.png?updatedAt=.',
+      melia: 'https://ik.imagekit.io/logojkdiy/HOTEL%20MELIA.png?updatedAt=.',
+      sheraton: 'https://ik.imagekit.io/logojkdiy/HOTEL%20MUSTIKA.png?updatedAt=.',
+      tentrem: 'https://ik.imagekit.io/logojkdiy/HOTEL%20TENTREM.png?updatedAt=.',
+      swissbel: 'https://ik.imagekit.io/logojkdiy/HOTEL%20SWISSBELL.png?updatedAt=.',
+      eastparc: 'https://ik.imagekit.io/logojkdiy/HOTEL%20EASTPARC.png?updatedAt=.',
+      grandmercure: 'https://ik.imagekit.io/logojkdiy/HOTEL%20GRAND%20MERCURE.png?updatedAt=.',
+      eastplaza: 'https://ik.imagekit.io/logojkdiy/HOTEL%20ROHAN.png?updatedAt=.',
+      phoenix: 'https://ik.imagekit.io/logojkdiy/HOTEL%20PHOENIX.png?updatedAt=.',
+      hyatt: 'https://ik.imagekit.io/logojkdiy/HOTEL%20HYATT.png?updatedAt=.',
+      harper: 'https://ik.imagekit.io/logojkdiy/HOTEL%20HARPER.png?updatedAt=.',
+      alana: 'https://ik.imagekit.io/logojkdiy/HOTEL%20THE%20ALANA.png?updatedAt=.'
+    };
+
     const hotelTrack = document.getElementById('hotelTrack');
     const dotsWrap = document.getElementById('dotsWrap');
     let filtered = [...hotels];
@@ -906,8 +969,12 @@
       filtered.forEach(h=>{
         const card = document.createElement('article');
         card.className = 'card p-5';
+        const imgUrl = HOTEL_IMAGES[h.id];
         card.innerHTML = `
-          <div class="flex items-center gap-4">
+          <div class="rounded-xl overflow-hidden aspect-[16/9] bg-white/70">
+            ${imgUrl ? `<img src="${imgUrl}" alt="Foto ${h.name}" class="w-full h-full object-cover" onerror="this.src=''; this.alt='Image failed to load'; this.style.display='none';">` : `<div class='w-full h-full grid place-items-center text-[var(--muted)]'>Belum ada foto</div>`}
+          </div>
+          <div class="flex items-center gap-4 mt-4">
             <div class="w-14 h-14 rounded-2xl bg-[var(--secondary)] grid place-items-center font-heading text-[var(--primary)]">${h.name.split(' ').map(w=>w[0]).slice(0,2).join('')}</div>
             <div>
               <h3 class="font-heading text-lg text-[var(--primary)]">${h.name}</h3>
@@ -918,7 +985,9 @@
           <div class="mt-3 flex flex-wrap gap-2">
             ${h.amenities.slice(0,3).map(a=>`<span class="hotel-badge">${a}</span>`).join('')}
           </div>
-          <button class="btn-ghost mt-4 text-sm w-full" onclick="openHotelDetail('${h.id}')">Lihat Detail</button>
+          <div class="mt-4">
+            <button class="btn-ghost text-sm" onclick="openHotelDetail('${h.id}')">Lihat Detail</button>
+          </div>
         `;
         hotelTrack.appendChild(card);
       });
@@ -997,9 +1066,41 @@
         <div>Website: <a class="underline" href="${h.link}" target="_blank" rel="noopener noreferrer">${h.link.replace('https://','')}</a></div>
       `;
       document.getElementById('hotelNotes').textContent = h.notes || '-';
+
+      // Render galeri foto hotel (jika sudah ada)
+      const wrap = document.getElementById('hotelGallery');
+      wrap.innerHTML = '';
+      const photos = (window.hotelPhotos?.[id]||[]);
+      if(photos.length){
+        photos.forEach(url=>{
+          const a = document.createElement('a');
+          a.href = url; a.target = '_blank'; a.rel='noopener noreferrer';
+          a.className = 'block aspect-[4/3] rounded-xl overflow-hidden bg-white/70';
+          const img = document.createElement('img');
+          img.src = url;
+          img.alt = 'Foto Hotel';
+          img.className = 'w-full h-full object-cover';
+          img.onerror = function(){ this.src=''; this.alt='Image failed to load'; this.style.display='none'; };
+          a.appendChild(img);
+          wrap.appendChild(a);
+        });
+      }else{
+        wrap.innerHTML = '<div class="p-3 rounded-xl border bg-white text-xs text-[var(--muted)]">Belum ada foto.</div>';
+      }
+
       const modal = document.getElementById('hotelModal');
       modal.classList.remove('hidden'); modal.classList.add('flex');
       requestAnimationFrame(()=>modal.querySelector('.modal-enter').classList.add('in'));
+    }
+
+    // Simpan foto hotel di memori
+    window.hotelPhotos = window.hotelPhotos || {};
+    function promptAddPhoto(id){
+      const url = prompt('Tempel tautan gambar (https://...) untuk hotel ini');
+      if(!url) return;
+      if(!/^https:\/\//i.test(url)) { alert('Pastikan URL diawali https://'); return; }
+      (window.hotelPhotos[id] ||= []).push(url.trim());
+      showToast('Foto ditambahkan! Buka detail hotel untuk melihat.');
     }
     function closeHotelModal(){
       const modal = document.getElementById('hotelModal');
@@ -1452,5 +1553,5 @@
     // Load CSV on start
     loadCSV();
   </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'983ee90f410df853',t:'MTc1ODY4MTU1Ni4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9846b224c16c44a1',t:'MTc1ODc2MzE5My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
