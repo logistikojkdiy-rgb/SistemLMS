@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Login - Platform terintegrasi LMSt-OJK D.I.Y</title>
+  <link rel="icon" type="image/png" href="https://ik.imagekit.io/logojkdiy/Layanan%20Terintegrasi%20-%20OJK%20DIY.png?updatedAt=." />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    :root{
+      --primary:#8B1E24;
+      --primary-900:#6F171C;
+      --secondary:#FFE5EC; /* pink */
+      --brand-blue:#1E40AF; /* matte blue */
+      --brand-blue-hover:#1C3D99; /* darker matte blue */
+      --text:#0B1222;
+      --muted:#475569;
+      --bg:#FFFFFF;
+      --bg-soft:#FFF7F0;
+    }
+    body{font-family:'Inter',system-ui; color:var(--text); background:var(--bg);}
+    .font-heading{font-family:'Poppins',ui-sans-serif,system-ui;}
+    .btn-primary{background:var(--brand-blue); color:#fff; border-radius:9999px; padding:.8rem 1.15rem; font-weight:600; box-shadow:0 10px 20px rgba(30,64,175,.25); transition:transform .15s ease, box-shadow .2s ease, filter .2s ease;}
+    .btn-primary:hover{transform:translateY(-2px); filter:saturate(1.0); box-shadow:0 14px 28px rgba(30,64,175,.35); background:var(--brand-blue-hover);}
+    .card{background:linear-gradient(180deg,var(--bg) 0%,#FAFDFF 100%); border-radius:18px; box-shadow:0 10px 25px rgba(16,24,40,.06); border:1px solid #E6F4F1;}
+  </style>
+</head>
+<body class="antialiased bg-[#F7F7F9]">
+
+  <div class="pointer-events-none absolute inset-0">
+    <div class="absolute -top-16 -left-20 w-96 h-96 rounded-full opacity-60 blur-2xl" style="background: radial-gradient(circle at 30% 30%, #FFE5EC, transparent 60%), radial-gradient(circle at 70% 40%, #E0FBFC, transparent 55%);"></div>
+    <div class="absolute -bottom-24 -right-24 w-[28rem] h-[28rem] rounded-full" style="background: radial-gradient(closest-side, rgba(30,64,175,.15), transparent 70%);"></div>
+  </div>
+
+  <div class="relative min-h-screen flex flex-col items-center justify-center px-4">
+    
+    <div class="text-center mb-5">
+      <img src="https://ik.imagekit.io/logojkdiy/Layanan%20Terintegrasi%20-%20OJK%20DIY.png?updatedAt=." alt="Logo OJK DIY" class="w-20 h-20 mx-auto mb-3">
+      <h1 class="font-heading text-3xl text-[var(--primary)]">Platform Terintegrasi</h1>
+      <p class="text-[var(--muted)]">Layanan Mandiri Internal OJK D.I.Yogyakarta</p>
+    </div>
+
+    <div class="card w-full max-w-md p-8">
+      <form id="loginForm" class="space-y-5">
+        
+        <div>
+          <label for="username" class="block text-sm font-medium text-[var(--muted)] mb-1">Username</label>
+          <input 
+            type="text" 
+            id="username" 
+            placeholder="Masukkan username Anda"
+            class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[var(--primary)] text-sm"
+            required>
+        </div>
+
+        <div>
+          <label for="password" class="block text-sm font-medium text-[var(--muted)] mb-1">Password</label>
+          <input 
+            type="password" 
+            id="password" 
+            placeholder="Masukkan password Anda"
+            class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[var(--primary)] text-sm"
+            required>
+        </div>
+
+        <div id="errorMessage" class="hidden p-3 rounded-lg bg-red-100 text-red-800 text-sm font-medium">
+          Username atau Password salah. Silakan coba lagi.
+        </div>
+
+        <button type="submit" class="btn-primary w-full !mt-6 !py-3">
+          Login
+        </button>
+
+      </form>
+    </div>
+
+    <p class="text-xs text-gray-400 mt-6">© 2025 OJK D.I.Y. Hubungi Bantuan Teknis jika mengalami kendala.</p>
+  </div>
+
+
+  <script>
+    // --- PERINGATAN KEAMANAN ---
+    // Kode login di bawah ini TIDAK AMAN untuk produksi.
+    // Username dan Password bisa dilihat oleh siapa saja.
+    // Ini hanya untuk SIMULASI alur login.
+    //
+    // Untuk sistem "profesional" sungguhan, pengecekan 
+    // `if (user === ...)` HARUS dilakukan di SISI SERVER (Backend),
+    // bukan di JavaScript (Frontend) seperti ini.
+    // --------------------------------
+
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+      // Mencegah form terkirim
+      e.preventDefault(); 
+      
+      const userEl = document.getElementById('username');
+      const passEl = document.getElementById('password');
+      const errorEl = document.getElementById('errorMessage');
+
+      const user = userEl.value;
+      const pass = passEl.value;
+
+      // Pengecekan username dan password (SANGAT TIDAK AMAN)
+      if (user === 'LMSt' && pass === 'LMS1234') {
+        // SUKSES
+        errorEl.classList.add('hidden');
+        
+        // Simpan status login di browser
+        // Ini adalah cara sederhana untuk 'mengingat' bahwa pengguna sudah login
+        localStorage.setItem('isLoggedInLMSt', 'true');
+        
+        // Arahkan ke halaman dashboard utama Anda
+        // Pastikan nama file utama Anda adalah 'index.html'
+        window.location.href = 'Index.html'; 
+        
+      } else {
+        // GAGAL
+        errorEl.classList.remove('hidden');
+        userEl.focus();
+      }
+    });
+  </script>
+
+</body>
+</html>
