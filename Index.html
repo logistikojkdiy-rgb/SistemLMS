@@ -93,7 +93,19 @@
   </style>
 </head>
 <body class="antialiased">
+<script>
+    if (localStorage.getItem('isLoggedInLMSt') !== 'true') {
+      // Jika belum login, tendang ke login.html
+      // Ganti 'NAMA-REPOSITORI-ANDA' dengan nama repo Anda
+      // Contoh: '/platform-ojk/'
+      // Jika ini halaman utama (username.github.io), cukup '/login.html'
 
+      // Cara aman: Gunakan path relatif
+      window.location.href = 'login.html'; 
+    }
+  </script>
+  <header id="siteHeader" ...>
+    
   <!-- Header with enhanced navigation -->
   <header id="siteHeader" class="fixed top-0 left-0 right-0 z-50 glass border-b border-white/60" style="background:rgba(255,255,255,.9);">
     <div class="max-w-7xl mx-auto px-6">
