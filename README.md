@@ -8,7 +8,7 @@ Ini adalah repositori untuk *frontend* statis dari Platform Layanan Terintegrasi
 
 Anda dapat mengakses platform ini secara langsung melalui tautan GitHub Pages di bawah ini:
 
-**[https://logistikojkdiy-rgb.github.io/SistemLMS/](https://logistikojkdiy-rgb.github.io/SistemLMS/Index)**
+**[https://logistikojkdiy-rgb.github.io/SistemLMS/Index](https://logistikojkdiy-rgb.github.io/SistemLMS/Index)**
 
 
 
