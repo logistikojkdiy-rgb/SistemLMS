@@ -170,45 +170,51 @@
   <!-- Hero -->
   <section id="hero" class="relative overflow-hidden pt-24 bg-white">
 
-    <div class="pointer-events-none absolute inset-0">
-      <div class="absolute -top-16 -left-20 w-96 h-96 rounded-full opacity-60 blur-2xl animate-pulse" style="background: radial-gradient(circle at 30% 30%, #FFE5EC, transparent 60%), radial-gradient(circle at 70% 40%, #E0FBFC, transparent 55%), radial-gradient(circle at 40% 80%, #FFF7F0, transparent 55%);"></div>
-      <div class="absolute -bottom-24 -right-24 w-[28rem] h-[28rem] rounded-full" style="background: radial-gradient(closest-side, rgba(107,197,192,.25), transparent 70%);"></div>
-    </div>
-    <div class="relative max-w-7xl mx-auto px-6 py-16 md:py-24">
-      <div class="grid md:grid-cols-2 gap-12 items-center">
-        <div class="reveal">
-          <h1 class="font-heading text-4xl md:text-5xl text-[var(--primary)] leading-tight">Platform Terintegrasi</h1>
-          <p class="mt-4 text-[var(--muted)] text-lg">
-            Selamat datang di Platform terintegrasi LMSt-OJK D.I.Y. Selamat menggunakan website ini.
-          </p>
-          <p class="mt-3 text-[var(--muted)]">
-            Platform untuk meminjam ruang rapat, peminjaman kendaraan dinas, dan referensi hotel partner terpercaya di Yogyakarta.
-          </p>
-          <div class="mt-8 flex flex-wrap gap-3">
-            <a href="#ruang-rapat" class="btn-primary">Jelajahi Ruang Rapat</a>
-            <button class="btn-ghost" onclick="openFormModal('ruang')">Isi Formulir Ruang</button>
-          </div>
-        </div>
-        <div class="reveal">
-          <div class="card p-5">
-            <svg class="w-full h-72" viewBox="0 0 640 320" fill="none">
-              <rect x="0" y="0" width="640" height="320" rx="18" fill="#FFF4F4"/>
-              <rect x="40" y="40" width="260" height="170" rx="14" fill="#FFFFFF" stroke="#8B1E24" stroke-opacity=".12"/>
-              <rect x="330" y="60" width="270" height="120" rx="14" fill="#FFFFFF" stroke="#8B1E24" stroke-opacity=".12"/>
-              <rect x="60" y="230" width="540" height="50" rx="12" fill="#F9E8E8"/>
-              <circle cx="540" cy="240" r="34" fill="#C0A16B" fill-opacity=".7"/>
-              <path d="M90 100h160M90 130h120M90 160h140" stroke="#8B1E24" stroke-opacity=".28" stroke-width="6" stroke-linecap="round"/>
-              <path d="M360 90h220M360 120h180" stroke="#8B1E24" stroke-opacity=".28" stroke-width="6" stroke-linecap="round"/>
-            </svg>
-          </div>
+  <div class="pointer-events-none absolute inset-0">
+    <div class="absolute -top-16 -left-20 w-96 h-96 rounded-full opacity-60 blur-2xl animate-pulse" style="background: radial-gradient(circle at 30% 30%, #FFE5EC, transparent 60%), radial-gradient(circle at 70% 40%, #E0FBFC, transparent 55%), radial-gradient(circle at 40% 80%, #FFF7F0, transparent 55%);"></div>
+    <div class="absolute -bottom-24 -right-24 w-[28rem] h-[28rem] rounded-full" style="background: radial-gradient(closest-side, rgba(107,197,192,.25), transparent 70%);"></div>
+  </div>
+
+  <div class="relative max-w-7xl mx-auto px-6 py-16 md:py-24">
+    <div class="grid md:grid-cols-2 gap-12 items-center">
+      
+      <div class="reveal">
+        <h1 class="font-heading text-4xl md:text-5xl text-[var(--primary)] leading-tight">Platform Terintegrasi</h1>
+        <p class="mt-4 text-[var(--muted)] text-lg">
+          Selamat datang di Platform terintegrasi LMSt-OJK D.I.Y. Selamat menggunakan website ini.
+        </p>
+        <p class="mt-3 text-[var(--muted)]">
+          Platform untuk meminjam ruang rapat, peminjaman kendaraan dinas, dan referensi hotel partner terpercaya di Yogyakarta.
+        </p>
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a href="#ruang-rapat" class="btn-primary">Jelajahi Ruang Rapat</a>
+          <button class="btn-ghost" onclick="openFormModal('ruang')">Isi Formulir Ruang</button>
         </div>
       </div>
-    </div>
-    <svg class="wave-bottom w-full text-white" viewBox="0 0 1440 90" preserveAspectRatio="none">
-      <path fill="#FFFFFF" d="M0,64L48,53.3C96,43,192,21,288,21.3C384,21,480,43,576,53.3C672,64,768,64,864,69.3C960,75,1056,85,1152,80C1248,75,1344,53,1392,42.7L1440,32L1440,0L0,0Z"></path>
-    </svg>
-  </section>
+      
+      <div class="reveal">
+        <div class="card p-5 overflow-hidden">
+          
+          <video 
+            src="https://ik.imagekit.io/logojkdiy/Record%20-%20LMSt.mp4?updatedAt=1762149251307" 
+            autoplay 
+            loop 
+            muted 
+            playsinline 
+            class="w-full h-72 object-cover rounded-lg"
+          >
+            Browser Anda tidak mendukung tag video.
+          </video>
 
+        </div>
+      </div>
+      </div>
+  </div>
+
+  <svg class="wave-bottom w-full text-white" viewBox="0 0 1440 90" preserveAspectRatio="none">
+    <path fill="#FFFFFF" d="M0,64L48,53.3C96,43,192,21,288,21.3C384,21,480,43,576,53.3C672,64,768,64,864,69.3C960,75,1056,85,1152,80C1248,75,1344,53,1392,42.7L1440,32L1440,0L0,0Z"></path>
+  </svg>
+</section>
   <!-- Kalender Kegiatan (di atas Pinjam Ruangan, tidak di navigasi) -->
   <section id="kalender-kegiatan" class="bg-white">
     <div class="max-w-7xl mx-auto px-6 pt-6 pb-6">
