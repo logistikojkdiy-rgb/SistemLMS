@@ -9,6 +9,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   
   <style>
+    /* Variabel Warna CSS */
     :root {
       --primary: #8B1E24; /* Merah OJK utama */
       --primary-900: #6F171C; /* Merah OJK lebih gelap */
@@ -18,17 +19,19 @@
       --bg-white: #FFFFFF;
     }
     
+    /* Style Dasar Body */
     body {
       font-family: 'Inter', system-ui; 
       color: var(--text); 
       background: var(--bg-soft);
     }
     
+    /* Font Khusus Heading */
     .font-heading {
       font-family: 'Poppins', ui-sans-serif, system-ui;
     }
 
-    /* Input field modern (Desain yang "lebih baik") */
+    /* Style Input Field Modern */
     .input-field {
       background: #F3F4F6; /* bg-gray-100 */
       border: 1px solid transparent;
@@ -39,6 +42,7 @@
       transition: all .2s ease;
     }
 
+    /* Efek ':focus' pada Input Field */
     .input-field:focus {
       outline: none;
       background: var(--bg-white);
@@ -46,7 +50,7 @@
       box-shadow: 0 0 0 3px rgba(139, 30, 36, 0.2); /* Ring focus merah OJK */
     }
     
-    /* Tombol utama (Desain yang "lebih baik" - pakai warna brand) */
+    /* Style Tombol Utama */
     .btn-primary {
       background: var(--primary);
       color: #fff;
@@ -58,34 +62,65 @@
       transition: all .2s ease;
     }
     
+    /* Efek ':hover' pada Tombol */
     .btn-primary:hover {
       transform: translateY(-2px);
       background: var(--primary-900);
       box-shadow: 0 8px 20px rgba(139, 30, 36, .4);
     }
+    
+    /* Style untuk Panel Video (Agar Video Pas) */
+    .video-panel {
+      position: relative;
+      overflow: hidden; /* Sembunyikan bagian video yang 'over' */
+    }
+    .video-panel video {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      min-width: 100%;
+      min-height: 100%;
+      width: auto;
+      height: auto;
+      transform: translate(-50%, -50%);
+    }
+
+    /* Style Link Bawah (Footer Links) */
+    .footer-links {
+      color: #9CA3AF; /* text-gray-400 */
+      transition: color .2s ease;
+    }
+    .footer-links:hover {
+      color: var(--primary); /* Berubah jadi merah saat di-hover */
+      text-decoration: underline;
+    }
   </style>
 </head>
-<body class="antialiased">
+<body class="antiasaed">
 
   <div class="min-h-screen flex items-center justify-center p-4">
     
     <div class="flex w-full max-w-6xl rounded-2xl overflow-hidden shadow-2xl bg-white">
       
-      <div class="hidden lg:flex lg:w-1/2">
-        <img 
-          src="https://ik.imagekit.io/logojkdiy/Record%20-%20LMSt.mp4?updatedAt=1762149251307" 
-          alt="Ilustrasi Platform OJK" 
+      <div class="hidden lg:flex lg:w-1/2 video-panel">
+        <video 
+          src="https://ik.imagekit.io/logojkdiy/LMST%20-%20SPLASH%20(1).mp4?updatedAt=1762150402635" 
+          autoplay 
+          loop 
+          muted 
+          playsinline
           class="w-full h-full object-cover"
         >
+          Browser Anda tidak mendukung tag video.
+        </video>
       </div>
-
-      <div class="w-full lg:w-1/2 flex items-center justify-center p-8 sm:p-12">
-        <div class="w-full max-w-md">
+      <div class="w-full lg:w-1/2 flex flex-col justify-center p-8 sm:p-12">
+        <div class="w-full max-w-md mx-auto">
           
           <div class="text-left mb-8">
             <img src="https://ik.imagekit.io/logojkdiy/Layanan%20Terintegrasi%20-%20OJK%20DIY.png?updatedAt=." alt="Logo OJK DIY" class="w-20 h-20 mb-4">
             <h1 class="font-heading text-3xl font-bold text-gray-900">Selamat Datang!</h1>
-            <p class="text-base text-[var(--muted)] mt-1">Silakan masuk ke akun Anda.</p>
+            <p class="text-base text-[var(--muted)] mt-1">Silakan masuk ke Platform Terintegrasi LMSt - OJK DIY.</p>
           </div>
 
           <form id="loginForm" class="space-y-5">
@@ -119,24 +154,28 @@
             </button>
           </form>
           
-          <div class="text-sm text-center text-gray-500 mt-8 space-x-4">
-            <a href="#" class="hover:underline">Kebijakan Privasi</a>
-            <span>&bull;</span>
-            <a href="#" class="hover:underline">Hubungi Bantuan</a>
-            <span>&bull;</span>
-            <a href="#" class="hover:underline">Panduan</a>
+          <div class="text-sm text-center text-gray-500 mt-8 space-y-2">
+            <div class="space-x-4">
+              <a href="#" class="hover:underline">Kebijakan Privasi</a>
+              <span>&bull;</span>
+              <a href="#" class="hover:underline">Hubungi Bantuan</a>
+            </div>
+            <div>
+              <a href="https://tr.ee/IcAJhdxjdx" target="_blank" rel="noopener noreferrer" class="hover:underline">Daftar Fintech P2P Lending</a>
+              <span>&bull;</span>
+              <a href="https://www.instagram.com/ojk_jogja/" target="_blank" rel="noopener noreferrer" class="hover:underline">Instagram OJK Jogja</a>
+            </div>
           </div>
 
         </div>
       </div>
-
+      </div>
     </div>
-  </div>
-
   <script>
     // --- PERINGATAN KEAMANAN (Script Anda tetap sama) ---
     // Kode login di bawah ini TIDAK AMAN untuk produksi.
-    // ... (Script lengkap Anda ada di sini) ...
+    // Pengecekan `if (user === ...)` HARUS dilakukan di SISI SERVER (Backend),
+    // bukan di JavaScript (Frontend) seperti ini.
     // --------------------------------
 
     document.getElementById('loginForm').addEventListener('submit', function(e) {
@@ -150,7 +189,7 @@
       const user = userEl.value;
       const pass = passEl.value;
 
-      // Pengecekan username dan password (SANGAT TIDAK AMAN)
+      // Pengecekan username dan password (HANYA SIMULASI)
       if (user === 'LMSt' && pass === 'LMS1234') {
         // SUKSES
         errorEl.classList.add('hidden');
@@ -168,6 +207,5 @@
       }
     });
   </script>
-
-</body>
+  </body>
 </html>
