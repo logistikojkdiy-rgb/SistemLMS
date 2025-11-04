@@ -786,34 +786,54 @@
   </div>
 
   <!-- Form Modal (pratinjau; tanpa URL tampil) -->
-  <div id="formModal" class="fixed inset-0 hidden items-center justify-center modal-backdrop">
-    <div class="absolute inset-0" onclick="closeFormModal()"></div>
-    <div class="relative z-10 w-[92%] max-w-3xl card p-6 modal-enter">
-      <h3 id="formTitle" class="font-heading text-xl text-[var(--primary)]">Pratinjau Formulir</h3>
-      <p class="mt-2 text-sm text-[var(--muted)]">Formulir ditampilkan langsung di area bawah. Jika tidak muncul, kemungkinan dibatasi oleh sumber eksternal.</p>
-      <div class="mt-4 p-4 rounded-xl border border-red-100 bg-[#FFF7F7] text-sm text-[var(--muted)]">
-        <p class="mb-2 font-semibold text-[var(--primary)]">Panduan singkat pengisian:</p>
-        <ul class="list-disc pl-5 space-y-1">
-          <li>Isi data identitas dan unit kerja dengan benar.</li>
-          <li>Pilih tanggal, waktu, dan kebutuhan fasilitas secara lengkap.</li>
-          <li>Pastikan nomor kontak aktif untuk konfirmasi.</li>
-          <li>Periksa kembali sebelum menekan tombol Kirim pada formulir.</li>
-        </ul>
-      </div>
-      <div class="mt-4 relative">
-        <div id="formLoading" class="absolute inset-0 z-10 flex items-center justify-center bg-white/80 rounded-xl border border-red-100">
-          <div class="flex items-center gap-3">
-            <span class="inline-block w-3 h-3 rounded-full bg-[var(--primary)] animate-ping"></span>
-            <span class="text-sm text-[var(--muted)]">Memuat pratinjau formulir…</span>
-          </div>
-        </div>
-        <iframe id="form-iframe" title="Pratinjau Formulir" src="" width="100%" height="600" frameborder="0" marginheight="0" marginwidth="0" class="rounded-xl shadow-lg transition-opacity duration-500 opacity-0 bg-white"></iframe>
-      </div>
-      <div class="mt-5 flex flex-wrap items-center justify-end gap-2">
-        <button class="btn-primary" onclick="closeFormModal()">Tutup Form</button>
-      </div>
-    </div>
-  </div>
+   <div id="formModal" class="fixed inset-0 hidden items-center justify-center modal-backdrop z-50">
+    <div class="absolute inset-0" onclick="closeFormModal()"></div>
+    
+    <!-- Konten Modal: Dibuat 90% Lebar (90vw) -->
+    <div class="relative z-10 w-[90vw] max-w-none card p-0 modal-enter">
+      
+      <!-- Header Terpisah (Judul Kiri, Panduan Kanan) -->
+      <div class="flex items-start justify-between p-6 border-b border-gray-200">
+        <div class="flex-1">
+          <h3 id="formTitle" class="font-heading text-xl md:text-2xl text-[var(--primary)]">Pratinjau Formulir</h3>
+          <p class="mt-1 text-sm text-[var(--muted)]">Pastikan data yang Anda masukkan pada formulir di bawah ini sudah benar.</p>
+        </div>
+        
+        <div class="hidden md:block flex-shrink-0 ml-6 w-80 p-4 rounded-xl border border-red-100 bg-[#FFF7F7] text-sm text-[var(--muted)]">
+          <p class="mb-2 font-semibold text-[var(--primary)]"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5 inline-block mr-1"><path fill-rule="evenodd" d="M18 10a8 8 0 1 1-16 0 8 8 0 0 1 16 0Zm-7-4a1 1 0 1 1-2 0 1 1 0 0 1 2 0ZM9 9a.75.75 0 0 0 0 1.5h.253a.25.25 0 0 1 .244.304l-.459 2.066A1.75 1.75 0 0 0 10.747 15H11a.75.75 0 0 0 0-1.5h-.253a.25.25 0 0 1-.244-.304l.459-2.066A1.75 1.75 0 0 0 9.253 9H9Z" clip-rule="evenodd" /></svg>Panduan Singkat</p>
+          <ul class="list-disc pl-5 space-y-1 text-xs">
+            <li>Isi data identitas dan unit kerja.</li>
+            <li>Pilih tanggal, waktu, dan fasilitas.</li>
+            <li>Pastikan nomor kontak aktif.</li>
+          </ul>
+        </div>
+        
+        <button class="ml-4 btn-circle w-10 h-10 -mt-1" onclick="closeFormModal()" aria-label="Tutup">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="white" stroke-width="2.5" stroke-linecap="round"/></svg>
+        </button>
+      </div>
+
+      <!-- Body Iframe (Tinggi 70vh) -->
+      <div class="p-2 md:p-4 bg-gray-50">
+        <div class="relative rounded-xl overflow-hidden border border-gray-200">
+          <!-- Loading State (Tailwind) -->
+          <div id="formLoading" class="absolute inset-0 z-10 flex flex-col items-center justify-center bg-white/80 backdrop-blur-sm">
+            <div class="flex items-center gap-3">
+              <span class="inline-block w-3 h-3 rounded-full bg-[var(--primary)] animate-ping"></span>
+              <span class="text-sm font-medium text-[var(--primary-dark)]">Memuat pratinjau formulir…</span>
+            </div>
+          </div>
+          <!-- Iframe (Dibuat 70vh) -->
+          <iframe id="form-iframe" title="Pratinjau Formulir" src="about:blank" width="100%" height="700" frameborder="0" marginheight="0" marginwidth="0" class="rounded-xl transition-opacity duration-500 opacity-0 bg-white" style="height: 70vh;"></iframe>
+        </div>
+      </div>
+      
+      <!-- Footer -->
+      <div class="p-4 bg-gray-50 border-t border-gray-200 flex justify-end">
+        <button class="btn-primary" onclick="closeFormModal()">Tutup Form</button>
+      </div>
+    </div>
+  </div>
 
   <!-- Hotel Detail Modal -->
   <div id="hotelModal" class="fixed inset-0 hidden items-center justify-center modal-backdrop">
@@ -1049,28 +1069,67 @@
       ruang: "https://script.google.com/macros/s/AKfycbxluPzTz18X6W61ly0keXPNQN-w5b46_gLDuePf9MAmIAHWC-RcQ49XLZEyXDlmqjzv/exec",
       mobil: "https://script.google.com/macros/s/AKfycbx-WYVjSqKFYADRDGnzxrY5WnbkSHWwsec8peUJL2sCqttHJlXI4HVW5HvLDx6Z0ALg/exec"
     };
-    function openFormModal(type){
-      const modal = document.getElementById('formModal');
-      const title = document.getElementById('formTitle');
-      const iframe = document.getElementById('form-iframe');
-      const loading = document.getElementById('formLoading');
-      title.textContent = type === 'mobil' ? 'Pratinjau Formulir Peminjaman Mobil' : 'Pratinjau Formulir Peminjaman Ruang Rapat';
-      iframe.style.opacity = '0';
-      loading.classList.remove('hidden');
-      let loaded=false;
-      iframe.onload = function(){ loaded=true; setTimeout(()=>{ loading.classList.add('hidden'); iframe.style.opacity='1'; }, 200); };
-      iframe.src = FORM_URLS[type] || FORM_URLS.ruang;
-      modal.classList.remove('hidden'); modal.classList.add('flex');
-      requestAnimationFrame(()=>modal.querySelector('.modal-enter').classList.add('in'));
-      setTimeout(()=>{ if(!loaded){ loading.classList.add('hidden'); } }, 3000);
-    }
-    function closeFormModal(){
-      const modal = document.getElementById('formModal');
-      const iframe = document.getElementById('form-iframe');
-      iframe.src = '';
-      modal.classList.add('hidden'); modal.classList.remove('flex');
-      modal.querySelector('.modal-enter').classList.remove('in');
-    }
+     const FORM_URLS = {
+      ruang: "https://script.google.com/macros/s/AKfycbxluPzTz18X6W61ly0keXPNQN-w5b46_gLDuePf9MAmIAHWC-RcQ49XLZEyXDlmqjzv/exec",
+      mobil: "https://script.google.com/macros/s/AKfycbx-WYVjSqKFYADRDGnzxrY5WnbkSHWwsec8peUJL2sCqttHJlXI4HVW5HvLDx6Z0ALg/exec"
+    };
+    const formModal = document.getElementById('formModal');
+    const formTitle = document.getElementById('formTitle');
+    const iframe = document.getElementById('form-iframe');
+  S const loading = document.getElementById('formLoading');
+
+    function openFormModal(type){
+      const url = FORM_URLS[type] || FORM_URLS.ruang;
+      
+      title.textContent = type === 'mobil' ? 'Pratinjau Formulir Peminjaman Mobil' : 'Pratinjau Formulir Peminjaman Ruang Rapat';
+      
+      // Tampilkan loading, sembunyikan iframe
+      iframe.style.opacity = '0';
+      loading.style.display = 'flex'; // Gunakan flex (bukan 'hidden')
+      
+      let loaded = false;
+      iframe.onload = function(){
+        loaded = true;
+        setTimeout(() => {
+          loading.style.display = 'none'; // Sembunyikan loading
+          iframe.style.opacity = '1'; // Tampilkan iframe
+        }, 200); // Sedikit delay untuk transisi
+      };
+      
+      // Set src SETELAH pasang .onload
+      iframe.src = url;
+      
+      // Tampilkan modal
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+      requestAnimationFrame(() => {
+        const modalContent = modal.querySelector('.modal-enter');
+        if (modalContent) modalContent.classList.add('in');
+      });
+
+      // Fallback jika iframe gagal load (misal. diblokir)
+      setTimeout(() => {
+        if (!loaded) {
+          loading.style.display = 'none';
+          // Anda bisa menambahkan pesan error di sini
+        }
+      }, 5000); // Timeout 5 detik
+    }
+
+    function closeFormModal(){
+      // Hentikan iframe
+      iframe.src = 'about:blank';
+      
+      // Sembunyikan modal
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+      const modalContent = modal.querySelector('.modal-enter');
+      if (modalContent) modalContent.classList.remove('in');
+      
+      // Reset loading state
+      loading.style.display = 'flex';
+  *     iframe.style.opacity = '0';
+    }
 
     // Hotel data (15 referensi bintang 4–5 di Yogyakarta)
     const hotels = [
