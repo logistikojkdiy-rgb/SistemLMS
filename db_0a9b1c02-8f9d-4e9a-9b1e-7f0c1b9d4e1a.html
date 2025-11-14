@@ -104,7 +104,7 @@
       window.location.href = 'Index.html'; 
     }
   </script>
-   <header id="siteHeader" ...>
+   <header id="siteHeader" ...
     
   <!-- Header with enhanced navigation -->
   <header id="siteHeader" class="fixed top-0 left-0 right-0 z-50 glass border-b border-white/60" style="background:rgba(255,255,255,.9);">
@@ -217,61 +217,34 @@
 </section>
   <!-- Kalender Kegiatan (di atas Pinjam Ruangan, tidak di navigasi) -->
   <section id="kalender-kegiatan" class="bg-white">
-    <div class="max-w-7xl mx-auto px-6 pt-6 pb-6">
-      <div class="card p-6">
-        <div class="flex flex-col md:flex-row md:items-center gap-3 justify-between">
-          <div>
-            <h2 class="font-heading text-2xl text-[var(--primary)]">Kalender Kegiatan</h2>
-            <p class="text-sm text-[var(--muted)]">Memuat jadwal dari spreadsheet Anda secara otomatis.</p>
-          </div>
-          <div class="flex items-center gap-2">
-            <button class="btn-ghost text-sm" id="prevMonthBtn">Bulan Sebelumnya</button>
-            <button class="btn-ghost text-sm" id="todayBtn">Hari Ini</button>
-            <button class="btn-primary text-sm" id="nextMonthBtn">Bulan Berikutnya</button>
-          </div>
-        </div>
+    <div class="max-w-7xl mx-auto px-6 pt-6 pb-6">
+      <div class="card">
+                <div class="px-6 pt-6 pb-4">
+          <div class="flex flex-col md:flex-row md:items-center gap-3 justify-between">
+            <div>
+              <h2 class="font-heading text-6xl text-[var(--primary)]">Kalender Kegiatan</h2>
+              <p class="text-sm text-[var(--muted)]"></p>
+            </div>
+          </div>
+        </div>
 
-        <div class="mt-4 border rounded-2xl p-4 bg-[#FFF9F9] flex items-center gap-3" id="calLoading">
-          <span class="inline-block w-3 h-3 rounded-full bg-[var(--primary)] animate-ping"></span>
-          <span class="text-sm text-[var(--muted)]">Memuat data kalender dari CSV…</span>
-        </div>
-        <div class="mt-4 hidden" id="calError">
-          <div class="p-4 rounded-xl border border-amber-200 bg-amber-50 text-amber-800 text-sm">
-            Gagal memuat data kalender. Silakan cek koneksi atau izin berbagi CSV.
-          </div>
-        </div>
+                <div class="overflow-hidden rounded-b-xl border-t border-gray-200">
+          <iframe 
+            src="https://calendar.google.com/calendar/embed?src=logistikojkdiy%40gmail.com&ctz=Asia%2FJakarta" 
+            style="border: 0" 
+            class="w-full h-[800px]" 
+            frameborder="0" 
+            scrolling="no">
+          </iframe>
+        </div>
 
-        <div class="mt-4">
-          <div class="flex items-center justify-between gap-3 flex-wrap">
-            <h3 id="calTitle" class="font-heading text-lg text-[var(--primary)]">—</h3>
-            <div class="flex items-center gap-2 ml-auto">
-              <button id="copyAgendaBtn" class="hotel-badge">Salin Rekap Bulan</button>
-              <button id="copyTodayBtn" class="hotel-badge">Salin Agenda Hari Ini</button>
-            </div>
-          </div>
-          <div class="mt-3 cal-head">
-            <div class="text-[var(--primary)]">Sen</div><div class="text-[var(--primary)]">Sel</div><div class="text-[var(--primary)]">Rab</div><div class="text-[var(--primary)]">Kam</div><div class="text-[var(--primary)]">Jum</div><div class="text-[var(--primary)]">Sab</div><div class="text-[var(--primary)]">Min</div>
-          </div>
-          <div class="mt-2 cal-grid" id="calGrid" aria-label="Kalender Bulanan"></div>
-          <div class="mt-4">
-            <div class="text-sm font-semibold text-[var(--primary)] mb-2">Rekap Agenda Bulan Ini</div>
-            <div id="agendaList" class="space-y-2 text-sm text-[var(--muted)]"></div>
-            <div class="mt-3 flex items-center justify-between">
-              <div class="text-xs text-[var(--muted)]" id="agendaInfo">Halaman 1</div>
-              <div class="flex items-center gap-2">
-                <button id="agendaPrev" class="hotel-badge">Sebelumnya</button>
-                <button id="agendaNext" class="hotel-badge">Berikutnya</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <svg class="wave-bottom w-full" viewBox="0 0 1440 60" preserveAspectRatio="none">
-      <path fill="#F7F7F9" d="M0,32L48,26.7C96,21,192,11,288,10.7C384,11,480,21,576,26.7C672,32,768,32,864,34.7C960,37,1056,43,1152,40C1248,37,1344,26,1392,21.3L1440,16L1440,0L0,0Z"></path>
-    </svg>
-  </section>
-
+      </div>
+    </div>
+    <svg class="wave-bottom w-full" viewBox="0 0 1440 60" preserveAspectRatio="none">
+      <path fill="#F7F7F9" d="M0,32L48,26.7C96,21,192,11,288,10.7C384,11,480,21,576,26.7C672,32,768,32,864,34.7C960,37,1056,43,1152,40C1248,37,1344,26,1392,21.3L1440,16L1440,0L0,0Z"></path>
+    </svg>
+  </section>
+  
   <!-- Ruang Rapat -->
   <section id="ruang-rapat" class="bg-[#F7F7F9]">
     <div class="max-w-7xl mx-auto px-6 pt-4 pb-16">
@@ -820,33 +793,24 @@
 
   <!-- Form Modal (pratinjau; tanpa URL tampil) -->
   <div id="formModal" class="fixed inset-0 hidden items-center justify-center modal-backdrop">
-    <div class="absolute inset-0" onclick="closeFormModal()"></div>
-    <div class="relative z-10 w-[92%] max-w-3xl card p-6 modal-enter">
-      <h3 id="formTitle" class="font-heading text-xl text-[var(--primary)]">Pratinjau Formulir</h3>
-      <p class="mt-2 text-sm text-[var(--muted)]">Formulir ditampilkan langsung di area bawah. Jika tidak muncul, kemungkinan dibatasi oleh sumber eksternal.</p>
-      <div class="mt-4 p-4 rounded-xl border border-red-100 bg-[#FFF7F7] text-sm text-[var(--muted)]">
-        <p class="mb-2 font-semibold text-[var(--primary)]">Panduan singkat pengisian:</p>
-        <ul class="list-disc pl-5 space-y-1">
-          <li>Isi data identitas dan unit kerja dengan benar.</li>
-          <li>Pilih tanggal, waktu, dan kebutuhan fasilitas secara lengkap.</li>
-          <li>Pastikan nomor kontak aktif untuk konfirmasi.</li>
-          <li>Periksa kembali sebelum menekan tombol Kirim pada formulir.</li>
-        </ul>
-      </div>
-      <div class="mt-4 relative">
-        <div id="formLoading" class="absolute inset-0 z-10 flex items-center justify-center bg-white/80 rounded-xl border border-red-100">
-          <div class="flex items-center gap-3">
-            <span class="inline-block w-3 h-3 rounded-full bg-[var(--primary)] animate-ping"></span>
-            <span class="text-sm text-[var(--muted)]">Memuat pratinjau formulir…</span>
-          </div>
-        </div>
-        <iframe id="form-iframe" title="Pratinjau Formulir" src="" width="100%" height="600" frameborder="0" marginheight="0" marginwidth="0" class="rounded-xl shadow-lg transition-opacity duration-500 opacity-0 bg-white"></iframe>
-      </div>
-      <div class="mt-5 flex flex-wrap items-center justify-end gap-2">
-        <button class="btn-primary" onclick="closeFormModal()">Tutup Form</button>
-      </div>
-    </div>
-  </div>
+    <div class="absolute inset-0" onclick="closeFormModal()"></div>
+        <div class="relative z-10 w-[92%] max-w-7xl card p-6 modal-enter">
+      <h3 id="formTitle" class="font-heading text-xl text-[var(--primary)]">Pratinjau Formulir</h3>
+      
+                  <div class="mt-4 relative">
+        <div id="formLoading" class="absolute inset-0 z-10 flex items-center justify-center bg-white/80 rounded-xl border border-red-100">
+          <div class="flex items-center gap-3">
+            <span class="inline-block w-3 h-3 rounded-full bg-[var(--primary)] animate-ping"></span>
+            <span class="text-sm text-[var(--muted)]">Memuat pratinjau formulir…</span>
+          </div>
+        </div>
+        <iframe id="form-iframe" title="Pratinjau Formulir" src="" width="100%" height="700" frameborder="0" marginheight="0" marginwidth="0" class="rounded-xl shadow-lg transition-opacity duration-500 opacity-0 bg-white"></iframe>
+      </div>
+      <div class="mt-5 flex flex-wrap items-center justify-end gap-2">
+        <button class="btn-primary" onclick="closeFormModal()">Tutup Form</button>
+      </div>
+    </div>
+  </div>
 
   <!-- Hotel Detail Modal -->
   <div id="hotelModal" class="fixed inset-0 hidden items-center justify-center modal-backdrop">
@@ -1079,7 +1043,7 @@
 
     // Form modal (pratinjau)
     const FORM_URLS = {
-      ruang: "https://script.google.com/macros/s/AKfycbykhUVO4bbMuKS-QnIC8HiTZnn_sxlYsVKZ7jBxxoBNnZQdGZbOrGCiKuN8ux0f-JRS/exec",
+      ruang: "https://script.google.com/macros/s/AKfycby6Lq3xzr7DO06Ljmmhr-odV4ZJU_v80G0HaEFKK2WDBdnqisxYm73BuXJh5O6niJc/exec",
       mobil: "https://script.google.com/macros/s/AKfycbx-WYVjSqKFYADRDGnzxrY5WnbkSHWwsec8peUJL2sCqttHJlXI4HVW5HvLDx6Z0ALg/exec"
     };
     function openFormModal(type){
