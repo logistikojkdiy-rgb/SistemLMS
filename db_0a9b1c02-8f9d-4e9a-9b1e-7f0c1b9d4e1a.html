@@ -104,7 +104,7 @@
       window.location.href = 'Index.html'; 
     }
   </script>
-  <header id="siteHeader" ...>
+   <header id="siteHeader" ...>
     
   <!-- Header with enhanced navigation -->
   <header id="siteHeader" class="fixed top-0 left-0 right-0 z-50 glass border-b border-white/60" style="background:rgba(255,255,255,.9);">
@@ -434,7 +434,17 @@
           <div class="absolute -top-6 -left-6 w-24 h-24 bg-[var(--secondary)] rounded-full opacity-70 blur-xl"></div>
           <div class="absolute -bottom-6 -right-10 w-28 h-28 bg-[#FFEFD8] rounded-full opacity-70 blur-xl"></div>
           <div class="card p-6 relative">
-            <div class="w-full h-64 rounded-xl bg-[var(--bg-soft)]"></div>
+  <video 
+    src="https://ik.imagekit.io/logojkdiy/JOGJA%20ISTIMEWA.mp4?updatedAt=1763092078008" 
+    autoplay 
+    loop 
+    muted 
+    playsinline 
+    class="w-full h-64 object-cover rounded-xl"
+  >
+    Browser Anda tidak mendukung tag video.
+  </video>
+</div>
           </div>
         </div>
       </div>
@@ -443,6 +453,29 @@
       <path fill="#F7F7F9" d="M0,64L48,53.3C96,43,192,21,288,21.3C384,21,480,43,576,53.3C672,64,768,64,864,69.3C960,75,1056,85,1152,80C1248,75,1344,53,1392,42.7L1440,32L1440,0L0,0Z"></path>
     </svg>
   </section>
+  
+  <section id="kalender-mobil" class="bg-white -mt-16 pt-8 pb-14">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="reveal card p-5 md:p-6">
+      <h2 class="font-heading text-2xl text-[var(--primary)]">
+        Kalender Ketersediaan Mobil Dinas
+      </h2>
+      <p class="mt-1 text-[var(--muted)]">
+        Periksa jadwal yang sudah terisi sebelum mengajukan peminjaman.
+      </p>
+      
+            <div class="mt-4 overflow-hidden rounded-xl border border-gray-200">
+        <iframe 
+          src="https://calendar.google.com/calendar/embed?src=6413cb9518f05f1b2984eb294d450f43ce1%40group.calendar.google.com&ctz=Asia%2FJakarta" 
+          style="border: 0" 
+          class="w-full h-[600px]" 
+          frameborder="0" 
+          scrolling="no">
+        </iframe>
+      </div>
+    </div>
+  </div>
+</section>
 
   <!-- Hotel Partner (15 referensi dengan detail) -->
   <section id="hotel-partner" class="bg-[#F7F7F9]">
