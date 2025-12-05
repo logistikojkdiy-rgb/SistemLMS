@@ -9,7 +9,7 @@
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Google Fonts -->
+    <!- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
     <!-- Tailwind Config -->
@@ -79,7 +79,6 @@
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
 </head>
-  <body class="antialiased">
 <script>
     if (localStorage.getItem('isLoggedInLMSt') !== 'true') {
       // Jika belum login, tendang ke login.html
@@ -159,9 +158,8 @@
         </div>
     </header>
 
-    <!-- Hero Section (Card Style with Animation) -->
+    <!-- Hero Section -->
     <section id="hero" class="relative pt-32 pb-20 lg:pt-40 lg:pb-32 overflow-hidden bg-slate-50 dark:bg-dark-bg">
-        <!-- Abstract Background -->
         <div class="absolute inset-0 pointer-events-none -z-10">
             <div class="absolute -top-[20%] -right-[10%] w-[700px] h-[700px] rounded-full bg-primary-100/50 dark:bg-primary-900/10 blur-3xl animate-pulse"></div>
             <div class="absolute top-[40%] -left-[10%] w-[500px] h-[500px] rounded-full bg-blue-100/50 dark:bg-blue-900/10 blur-3xl animate-pulse" style="animation-duration: 4s;"></div>
@@ -169,7 +167,6 @@
 
         <div class="max-w-7xl mx-auto px-6">
             <div class="grid lg:grid-cols-2 gap-16 items-center">
-                <!-- Text Content -->
                 <div class="max-w-2xl fade-in-up relative z-10">
                     <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 text-xs font-bold uppercase tracking-wider mb-6">
                         <span class="w-2 h-2 rounded-full bg-primary-600 animate-pulse"></span>
@@ -193,9 +190,7 @@
                     </div>
                 </div>
                 
-                <!-- Animated Video Card (Returned to Card style) -->
                 <div class="relative fade-in-up" style="animation-delay: 200ms;">
-                    <!-- Decorative Elements -->
                     <div class="absolute -top-10 -right-10 w-32 h-32 bg-yellow-400/20 rounded-full blur-2xl animate-float"></div>
                     <div class="absolute -bottom-10 -left-10 w-40 h-40 bg-primary-600/20 rounded-full blur-2xl animate-float-delayed"></div>
                     
@@ -228,7 +223,6 @@
                 </div>
             </div>
 
-            <!-- Modern Calendar Frame -->
             <div class="p-2 rounded-3xl bg-slate-100 dark:bg-slate-800/50 shadow-inner">
                 <div class="aspect-[16/10] md:aspect-[21/9] w-full relative bg-white dark:bg-dark-card rounded-2xl overflow-hidden shadow-sm">
                     <iframe 
@@ -285,15 +279,13 @@
                 <h2 class="font-heading text-4xl font-bold text-slate-900 dark:text-white mt-6 mb-4" data-i18n="rooms_title">Katalog Ruang Rapat</h2>
                 <p class="text-slate-500 dark:text-slate-400 text-lg leading-relaxed" data-i18n="rooms_desc">Pilih ruangan yang sesuai dengan kapasitas dan kebutuhan teknis pertemuan Anda.</p>
             </div>
-
-            <!-- Rooms Grid -->
             <div id="roomsContainer" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- Javascript will populate this -->
             </div>
         </div>
     </section>
 
-    <!-- Mobil Dinas (Full Background) -->
+    <!-- Mobil Dinas -->
     <section id="mobil-dinas" class="relative py-32 overflow-hidden flex items-center bg-slate-900 min-h-[700px]">
         <div class="absolute inset-0 z-0">
             <video 
@@ -323,7 +315,6 @@
                     </div>
                 </div>
                 
-                <!-- Calendar Card -->
                 <div class="bg-white/10 backdrop-blur-xl border border-white/10 rounded-3xl p-6 lg:p-8 shadow-2xl">
                     <h3 class="text-white font-heading font-bold text-xl mb-4 flex items-center gap-2">
                         <svg class="w-5 h-5 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
@@ -814,11 +805,18 @@
                     if(!row || row.length < 5) continue; // Minimal ada 5 kolom terisi
                     
                     const tglMulai = row[0] || '-';
-                    // const tglSelesai = row[1]; // Bisa dipakai jika ingin range tanggal
+                    const tglSelesai = row[1] || ''; // Data tanggal selesai
                     const jamMulai = row[2] || '';
                     const jamSelesai = row[3] || '';
                     const kegiatan = row[4] || '-';
                     const ruangan = row[5] || '-';
+
+                    // LOGIKA TAMPILAN TANGGAL
+                    let tanggalDisplay = tglMulai;
+                    // Jika tanggal selesai ada dan TIDAK SAMA dengan tanggal mulai, tampilkan range
+                    if(tglSelesai && tglSelesai.trim() !== '' && tglSelesai !== tglMulai) {
+                        tanggalDisplay = `${tglMulai} - ${tglSelesai}`;
+                    }
 
                     // Format Jam "08:00 - 15:00"
                     let waktuDisplay = jamMulai;
@@ -829,7 +827,7 @@
                     html += `
                         <tr class="table-row-hover bg-white dark:bg-dark-card border-b border-slate-50 dark:border-slate-800/50 transition-colors">
                             <td class="px-6 py-4 whitespace-nowrap">
-                                <span class="font-medium text-slate-900 dark:text-white bg-slate-100 dark:bg-slate-700/50 px-2.5 py-1 rounded text-xs">${tglMulai}</span>
+                                <span class="font-medium text-slate-900 dark:text-white bg-slate-100 dark:bg-slate-700/50 px-2.5 py-1 rounded text-xs">${tanggalDisplay}</span>
                             </td>
                             <td class="px-6 py-4 text-sm text-slate-500 dark:text-slate-400 font-mono">${waktuDisplay}</td>
                             <td class="px-6 py-4">
