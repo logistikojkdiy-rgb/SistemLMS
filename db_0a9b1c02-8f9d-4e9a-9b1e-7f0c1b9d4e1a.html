@@ -3,16 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Platform Manajemen Logistik Terintegrasi OJK D.I.Y - Sistem Satu Pintu">
+    <meta name="theme-color" content="#8B1E24">
     <title>Platform Terintegrasi LMSt-OJK D.I.Y</title>
+    
     <link rel="icon" type="image/png" href="https://ik.imagekit.io/logojkdiy/Layanan%20Terintegrasi%20-%20OJK%20DIY.png?updatedAt=." />
     
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
-    <!-- Tailwind Config -->
     <script>
         tailwind.config = {
             darkMode: 'class',
@@ -24,7 +26,7 @@
                     },
                     colors: {
                         primary: {
-                            DEFAULT: '#8B1E24', // OJK Red
+                            DEFAULT: '#8B1E24', 
                             50: '#fdf2f2', 100: '#fde8e8', 500: '#ef4444', 600: '#8B1E24', 700: '#751a1f', 800: '#62151a', 900: '#450a0a'
                         },
                         dark: {
@@ -33,17 +35,37 @@
                     },
                     animation: {
                         'float': 'float 6s ease-in-out infinite',
-                        'float-delayed': 'float 6s ease-in-out 3s infinite',
+                        'fade-in': 'fadeIn 0.5s ease-out forwards',
+                        'pop-in': 'popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards',
+                        'slide-up': 'slideUp 0.6s ease-out forwards',
+                        'marquee': 'marquee 35s linear infinite',
                     },
                     keyframes: {
                         float: {
                             '0%, 100%': { transform: 'translateY(0)' },
-                            '50%': { transform: 'translateY(-20px)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        },
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        popIn: {
+                            '0%': { opacity: '0', transform: 'scale(0.9)' },
+                            '100%': { opacity: '1', transform: 'scale(1)' },
+                        },
+                        slideUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        marquee: {
+                            '0%': { transform: 'translateX(100%)' },
+                            '100%': { transform: 'translateX(-100%)' }
                         }
                     },
                     boxShadow: {
                         'soft': '0 4px 20px -2px rgba(0, 0, 0, 0.05)',
-                        'glow': '0 0 15px rgba(139, 30, 36, 0.3)'
+                        'glow': '0 0 20px rgba(139, 30, 36, 0.15)',
+                        'card': '0 10px 40px -10px rgba(0,0,0,0.1)'
                     }
                 }
             }
@@ -52,31 +74,42 @@
 
     <style>
         /* Custom Scrollbar */
-        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
         ::-webkit-scrollbar-track { background: transparent; }
-        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 99px; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 99px; border: 2px solid transparent; background-clip: content-box; }
         .dark ::-webkit-scrollbar-thumb { background: #334155; }
         ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
 
-        /* Glassmorphism & Utilities */
+        /* Glassmorphism */
         .glass-nav {
-            background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(12px);
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(16px);
             border-bottom: 1px solid rgba(0,0,0,0.05);
         }
         .dark .glass-nav {
-            background: rgba(11, 17, 32, 0.85);
+            background: rgba(11, 17, 32, 0.9);
             border-bottom: 1px solid rgba(255,255,255,0.05);
         }
         
-        .fade-in-up { animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; opacity: 0; transform: translateY(20px); }
-        @keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
-        
-        .table-row-hover:hover td { background-color: rgba(139, 30, 36, 0.03); }
-        .dark .table-row-hover:hover td { background-color: rgba(255, 255, 255, 0.03); }
-        
+        /* Utils */
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        /* Calendar Specific */
+        .calendar-day-hover:hover {
+            background-color: #f8fafc;
+            z-index: 10;
+            box-shadow: inset 0 0 0 1px rgba(139, 30, 36, 0.2);
+        }
+        .dark .calendar-day-hover:hover {
+            background-color: #1e293b;
+        }
+        .line-clamp-2 {
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
     </style>
 </head>
 <script>
@@ -91,75 +124,69 @@
     }
   </script>
    <header id="siteHeader" ...
-     
+
 <body class="bg-slate-50 text-slate-800 dark:bg-dark-bg dark:text-slate-200 transition-colors duration-300 selection:bg-primary-600 selection:text-white font-sans antialiased">
 
-    <!-- Navigation -->
     <header id="navbar" class="fixed top-0 w-full z-50 transition-all duration-300 glass-nav">
         <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-            <!-- Logo Area -->
             <a href="#" class="flex items-center gap-3 group">
-                <div class="relative w-12 h-12 flex items-center justify-center bg-white rounded-full shadow-sm ring-1 ring-slate-100 overflow-hidden p-1.5">
+                <div class="relative w-12 h-12 flex items-center justify-center bg-white rounded-full shadow-sm ring-1 ring-slate-100 overflow-hidden p-1.5 transition-transform group-hover:scale-105">
                     <img src="https://ik.imagekit.io/logojkdiy/Layanan%20Terintegrasi%20-%20OJK%20DIY.png?updatedAt=." alt="OJK Logo" class="w-full h-full object-contain">
                 </div>
                 <div class="flex flex-col">
-                    <span class="font-heading font-bold text-lg leading-tight tracking-tight text-slate-900 dark:text-white">LMSt-OJK D.I.Y</span>
+                    <span class="font-heading font-bold text-lg leading-tight tracking-tight text-slate-900 dark:text-white group-hover:text-primary-600 transition-colors">LMSt-OJK D.I.Y</span>
                     <span class="text-[10px] font-semibold text-primary-600 dark:text-primary-400 uppercase tracking-widest" data-i18n="nav_subtitle">Platform Terintegrasi</span>
                 </div>
             </a>
 
-            <!-- Desktop Menu -->
-            <nav class="hidden lg:flex items-center bg-slate-100/50 dark:bg-slate-800/50 rounded-full px-2 py-1.5 border border-slate-200/50 dark:border-slate-700/50 backdrop-blur-sm">
-                <a href="#hero" class="nav-item px-5 py-2 rounded-full text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-primary-600 dark:hover:text-white hover:bg-white dark:hover:bg-slate-700 transition-all" data-i18n="nav_home">Beranda</a>
-                <a href="#kalender-kegiatan" class="nav-item px-5 py-2 rounded-full text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-primary-600 dark:hover:text-white hover:bg-white dark:hover:bg-slate-700 transition-all" data-i18n="nav_agenda">Agenda</a>
-                <a href="#ruang-rapat" class="nav-item px-5 py-2 rounded-full text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-primary-600 dark:hover:text-white hover:bg-white dark:hover:bg-slate-700 transition-all" data-i18n="nav_rooms">Ruang</a>
-                <a href="#mobil-dinas" class="nav-item px-5 py-2 rounded-full text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-primary-600 dark:hover:text-white hover:bg-white dark:hover:bg-slate-700 transition-all" data-i18n="nav_cars">Mobil</a>
-                <a href="#hotel-partner" class="nav-item px-5 py-2 rounded-full text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-primary-600 dark:hover:text-white hover:bg-white dark:hover:bg-slate-700 transition-all" data-i18n="nav_hotels">Partner</a>
+            <nav class="hidden lg:flex items-center bg-slate-100/50 dark:bg-slate-800/50 rounded-full px-2 py-1.5 border border-slate-200/50 dark:border-slate-700/50 backdrop-blur-sm shadow-sm">
+                <a href="#hero" class="nav-item px-5 py-2 rounded-full text-sm font-medium hover:text-primary-600 dark:hover:text-white hover:bg-white dark:hover:bg-slate-700 transition-all" data-i18n="nav_home">Beranda</a>
+                <a href="#custom-calendar-section" class="nav-item px-5 py-2 rounded-full text-sm font-medium hover:text-primary-600 dark:hover:text-white hover:bg-white dark:hover:bg-slate-700 transition-all" data-i18n="nav_agenda">Kalender</a>
+                <a href="#agenda-csv" class="nav-item px-5 py-2 rounded-full text-sm font-medium hover:text-primary-600 dark:hover:text-white hover:bg-white dark:hover:bg-slate-700 transition-all">List Agenda</a>
+                <a href="#ruang-rapat" class="nav-item px-5 py-2 rounded-full text-sm font-medium hover:text-primary-600 dark:hover:text-white hover:bg-white dark:hover:bg-slate-700 transition-all" data-i18n="nav_rooms">Ruang</a>
+                <a href="#mobil-dinas" class="nav-item px-5 py-2 rounded-full text-sm font-medium hover:text-primary-600 dark:hover:text-white hover:bg-white dark:hover:bg-slate-700 transition-all" data-i18n="nav_cars">Mobil</a>
+                <a href="#hotel-partner" class="nav-item px-5 py-2 rounded-full text-sm font-medium hover:text-primary-600 dark:hover:text-white hover:bg-white dark:hover:bg-slate-700 transition-all" data-i18n="nav_hotels">Partner</a>
             </nav>
 
-            <!-- Actions -->
             <div class="flex items-center gap-3">
-                <!-- Lang Switcher -->
+                <div class="hidden xl:flex flex-col items-end mr-2">
+                    <span class="text-[10px] uppercase tracking-wider text-slate-400 font-bold">Selamat Datang</span>
+                    <span class="text-sm font-bold text-slate-800 dark:text-white">User SPRR</span>
+                </div>
                 <div class="relative group">
-                    <button class="flex items-center gap-2 text-xs font-bold uppercase px-3 py-2 rounded-lg border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition">
+                    <button class="flex items-center gap-2 text-xs font-bold uppercase px-3 py-2 rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 transition">
                         <span id="currentLang">ID</span>
                         <svg class="w-3 h-3 opacity-50" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
                     </button>
-                    <div class="absolute right-0 top-full mt-2 w-32 bg-white dark:bg-dark-card rounded-xl shadow-xl border border-slate-100 dark:border-dark-border overflow-hidden hidden group-hover:block z-50">
+                    <div class="absolute right-0 top-full mt-2 w-32 bg-white dark:bg-dark-card rounded-xl shadow-xl border border-slate-100 dark:border-dark-border overflow-hidden hidden group-hover:block z-50 animate-fade-in">
                         <button onclick="setLang('id')" class="w-full text-left px-4 py-2.5 text-sm hover:bg-slate-50 dark:hover:bg-slate-800 transition">Indonesia</button>
                         <button onclick="setLang('en')" class="w-full text-left px-4 py-2.5 text-sm hover:bg-slate-50 dark:hover:bg-slate-800 transition">English</button>
                         <button onclick="setLang('jv')" class="w-full text-left px-4 py-2.5 text-sm hover:bg-slate-50 dark:hover:bg-slate-800 transition">Jawa</button>
                     </div>
                 </div>
-
-                <!-- Theme Toggle -->
-                <button id="themeToggle" class="p-2 rounded-lg border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-yellow-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors" aria-label="Ganti Mode">
+                <button id="themeToggle" class="p-2 rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors text-slate-600 dark:text-yellow-400">
                     <svg id="sunIcon" class="hidden w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" /></svg>
                     <svg id="moonIcon" class="block w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" /></svg>
                 </button>
-
-                <!-- Mobile Menu Button -->
                 <button id="menuBtn" class="lg:hidden p-2 text-slate-600 dark:text-slate-300">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
                 </button>
             </div>
         </div>
-
-        <!-- Mobile Menu Dropdown -->
-        <div id="mobileMenu" class="hidden lg:hidden bg-white dark:bg-dark-bg border-t border-slate-100 dark:border-slate-800 shadow-xl">
+        <div id="mobileMenu" class="hidden lg:hidden bg-white dark:bg-dark-bg border-t border-slate-100 dark:border-slate-800 shadow-xl absolute w-full left-0 top-full">
             <div class="px-6 py-6 flex flex-col gap-4 text-base font-medium">
-                <a href="#hero" class="block text-slate-700 dark:text-slate-300" data-i18n="nav_home">Beranda</a>
-                <a href="#kalender-kegiatan" class="block text-slate-700 dark:text-slate-300" data-i18n="nav_agenda">Agenda</a>
-                <a href="#ruang-rapat" class="block text-slate-700 dark:text-slate-300" data-i18n="nav_rooms">Ruang Rapat</a>
-                <a href="#mobil-dinas" class="block text-slate-700 dark:text-slate-300" data-i18n="nav_cars">Mobil Dinas</a>
-                <a href="#hotel-partner" class="block text-slate-700 dark:text-slate-300" data-i18n="nav_hotels">Hotel Partner</a>
-                <a href="#bantuan-teknis" class="block text-slate-700 dark:text-slate-300" data-i18n="nav_help">Bantuan</a>
+                <a href="#hero" class="block text-slate-700 dark:text-slate-300">Beranda</a>
+                <a href="#custom-calendar-section" class="block text-slate-700 dark:text-slate-300">Kalender Kegiatan</a>
+                <a href="#agenda-csv" class="block text-slate-700 dark:text-slate-300">List Agenda</a>
+                <a href="#ruang-rapat" class="block text-slate-700 dark:text-slate-300">Ruang Rapat</a>
+                <a href="#mobil-dinas" class="block text-slate-700 dark:text-slate-300">Mobil Dinas</a>
+                <a href="#hotel-partner" class="block text-slate-700 dark:text-slate-300">Hotel Partner</a>
+                <a href="#bantuan-teknis" class="block text-slate-700 dark:text-slate-300">Bantuan</a>
             </div>
         </div>
     </header>
 
-    <!-- Hero Section -->
-    <section id="hero" class="relative pt-32 pb-20 lg:pt-40 lg:pb-32 overflow-hidden bg-slate-50 dark:bg-dark-bg">
+    <section id="hero" class="relative pt-32 pb-16 lg:pt-44 lg:pb-24 overflow-hidden bg-slate-50 dark:bg-dark-bg">
         <div class="absolute inset-0 pointer-events-none -z-10">
             <div class="absolute -top-[20%] -right-[10%] w-[700px] h-[700px] rounded-full bg-primary-100/50 dark:bg-primary-900/10 blur-3xl animate-pulse"></div>
             <div class="absolute top-[40%] -left-[10%] w-[500px] h-[500px] rounded-full bg-blue-100/50 dark:bg-blue-900/10 blur-3xl animate-pulse" style="animation-duration: 4s;"></div>
@@ -167,7 +194,7 @@
 
         <div class="max-w-7xl mx-auto px-6">
             <div class="grid lg:grid-cols-2 gap-16 items-center">
-                <div class="max-w-2xl fade-in-up relative z-10">
+                <div class="max-w-2xl animate-slide-up relative z-10">
                     <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 text-xs font-bold uppercase tracking-wider mb-6">
                         <span class="w-2 h-2 rounded-full bg-primary-600 animate-pulse"></span>
                         <span data-i18n="hero_tag">Sistem Internal</span>
@@ -177,7 +204,7 @@
                         <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary-600 to-red-400" data-i18n="hero_title_2">Logistik Terintegrasi</span>
                     </h1>
                     <p class="text-lg text-slate-600 dark:text-slate-400 mb-8 leading-relaxed max-w-lg" data-i18n="hero_desc">
-                        Platform satu pintu untuk reservasi ruang rapat, peminjaman kendaraan dinas, serta akses cepat ke mitra hotel dan vendor terpercaya OJK D.I.Y.
+                        Akses satu pintu untuk reservasi fasilitas kantor, manajemen armada, dan kemitraan strategis OJK Daerah Istimewa Yogyakarta.
                     </p>
                     <div class="flex flex-wrap gap-4">
                         <a href="#ruang-rapat" class="px-8 py-3.5 rounded-full bg-primary-600 hover:bg-primary-700 text-white font-semibold transition-all shadow-lg shadow-primary-600/20 hover:shadow-primary-600/40 transform hover:-translate-y-1 flex items-center gap-2">
@@ -190,17 +217,10 @@
                     </div>
                 </div>
                 
-                <div class="relative fade-in-up" style="animation-delay: 200ms;">
-                    <div class="absolute -top-10 -right-10 w-32 h-32 bg-yellow-400/20 rounded-full blur-2xl animate-float"></div>
-                    <div class="absolute -bottom-10 -left-10 w-40 h-40 bg-primary-600/20 rounded-full blur-2xl animate-float-delayed"></div>
-                    
-                    <div class="relative rounded-[2rem] overflow-hidden shadow-2xl border-4 border-white dark:border-slate-800 bg-slate-900 group transform transition-transform hover:scale-[1.02] duration-500">
+                <div class="relative animate-slide-up" style="animation-delay: 200ms;">
+                    <div class="relative rounded-[2rem] overflow-hidden shadow-2xl border-4 border-white dark:border-slate-800 bg-slate-900 group">
                         <div class="aspect-video relative">
-                            <video 
-                                src="https://ik.imagekit.io/idnarsipojkdiy/Arsip-OJKDIY.mp4" 
-                                autoplay loop muted playsinline 
-                                class="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity duration-700">
-                            </video>
+                            <video src="https://ik.imagekit.io/idnarsipojkdiy/Arsip-OJKDIY.mp4" autoplay loop muted playsinline class="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity duration-700"></video>
                             <div class="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-transparent to-transparent"></div>
                             <div class="absolute bottom-6 left-6 text-white p-2">
                                 <p class="font-heading font-bold text-2xl">Yogyakarta Istimewa</p>
@@ -213,97 +233,131 @@
         </div>
     </section>
 
-    <!-- Calendar Section -->
-    <section id="kalender-kegiatan" class="py-24 bg-white dark:bg-dark-bg border-y border-slate-100 dark:border-dark-border">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="flex flex-col md:flex-row justify-between items-end mb-10 gap-6">
-                <div>
-                    <h2 class="font-heading text-3xl lg:text-4xl font-bold text-slate-900 dark:text-white" data-i18n="cal_title">Agenda Kegiatan</h2>
-                    <p class="text-slate-500 dark:text-slate-400 mt-2 text-lg" data-i18n="cal_desc">Jadwal resmi kegiatan OJK D.I.Y (Google Calendar)</p>
-                </div>
+    <section id="custom-calendar-section" class="py-16 bg-slate-50 dark:bg-[#0F1623]">
+        <div class="w-full px-4 md:px-8"> <div class="text-center mb-10">
+                <h2 class="font-heading text-3xl font-bold text-slate-900 dark:text-white" data-i18n="cal_title">Kalender Kegiatan</h2>
+                <p class="text-slate-500 dark:text-slate-400 mt-2">Agenda Kantor OJK D.I.Y dikelola SPRR</p>
             </div>
 
-            <div class="p-2 rounded-3xl bg-slate-100 dark:bg-slate-800/50 shadow-inner">
-                <div class="aspect-[16/10] md:aspect-[21/9] w-full relative bg-white dark:bg-dark-card rounded-2xl overflow-hidden shadow-sm">
-                    <iframe 
-                        src="https://calendar.google.com/calendar/embed?src=logistikojkdiy%40gmail.com&ctz=Asia%2FJakarta" 
-                        style="border: 0" 
-                        class="absolute inset-0 w-full h-full" 
-                        frameborder="0" 
-                        scrolling="no">
-                    </iframe>
+            <div class="bg-white dark:bg-dark-card rounded-3xl shadow-xl border border-slate-200 dark:border-slate-700 overflow-hidden">
+                <div class="flex flex-col md:flex-row items-center justify-between p-6 border-b border-slate-100 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50 gap-4">
+                    <div class="flex items-center gap-4">
+                        <h3 id="cal-month-year" class="text-2xl font-bold text-primary-600 dark:text-primary-400 uppercase tracking-wide">Januari 2026</h3>
+                        <div class="flex gap-2">
+                            <button onclick="changeMonth(-1)" class="p-2 hover:bg-slate-200 dark:hover:bg-slate-700 rounded-full transition"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg></button>
+                            <button onclick="changeMonth(1)" class="p-2 hover:bg-slate-200 dark:hover:bg-slate-700 rounded-full transition"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></button>
+                            <button onclick="goToToday()" class="text-xs font-bold uppercase px-3 py-1 bg-primary-100 text-primary-700 rounded-full hover:bg-primary-200 transition">Hari Ini</button>
+                        </div>
+                    </div>
+                    <div class="flex gap-4 text-xs">
+                        <div class="flex items-center gap-1"><span class="w-3 h-3 rounded-full bg-green-500"></span> Disetujui</div>
+                        <div class="flex items-center gap-1"><span class="w-3 h-3 rounded-full bg-yellow-400"></span> Pending</div>
+                    </div>
+                </div>
+
+                <div class="p-2 md:p-4 bg-slate-100/50 dark:bg-slate-900/50">
+                    <div class="grid grid-cols-7 mb-2 text-center">
+                        <div class="text-slate-400 text-xs font-bold uppercase py-2">Min</div>
+                        <div class="text-slate-400 text-xs font-bold uppercase py-2">Sen</div>
+                        <div class="text-slate-400 text-xs font-bold uppercase py-2">Sel</div>
+                        <div class="text-slate-400 text-xs font-bold uppercase py-2">Rab</div>
+                        <div class="text-slate-400 text-xs font-bold uppercase py-2">Kam</div>
+                        <div class="text-slate-400 text-xs font-bold uppercase py-2">Jum</div>
+                        <div class="text-slate-400 text-xs font-bold uppercase py-2">Sab</div>
+                    </div>
+                    <div id="calendar-grid" class="grid grid-cols-7 gap-1 md:gap-2 auto-rows-fr">
+                        </div>
+                </div>
+
+                <div class="bg-yellow-50 dark:bg-yellow-900/20 border-t border-yellow-100 dark:border-yellow-900/30 py-3 relative overflow-hidden">
+                    <div class="flex items-center absolute left-0 top-0 bottom-0 z-10 bg-yellow-50 dark:bg-yellow-900/20 px-4 shadow-lg border-r border-yellow-200 dark:border-yellow-800">
+                        <span class="text-xs font-bold text-yellow-700 dark:text-yellow-400 uppercase tracking-widest flex items-center gap-2">
+                            <span class="w-2 h-2 rounded-full bg-yellow-500 animate-pulse"></span> Menunggu Persetujuan
+                        </span>
+                    </div>
+                    <div class="whitespace-nowrap animate-marquee flex items-center gap-12 pl-48" id="pending-ticker">
+                        <span class="text-sm text-slate-500 italic">Memuat data pending...</span>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- CSV Agenda Section (Table) -->
-    <section id="agenda-csv" class="py-20 bg-slate-50 dark:bg-[#0F1623]">
+    <section id="agenda-csv" class="py-20 bg-white dark:bg-dark-bg">
         <div class="max-w-7xl mx-auto px-6">
-            <div class="mb-8">
-                <div class="flex items-center gap-3 mb-2">
-                    <div class="w-1.5 h-8 bg-primary-600 rounded-full"></div>
-                    <h2 class="font-heading text-2xl font-bold text-slate-900 dark:text-white" data-i18n="csv_title">Detail Kegiatan Bulanan</h2>
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
+                <div>
+                    <div class="flex items-center gap-3 mb-2">
+                        <div class="w-1.5 h-8 bg-primary-600 rounded-full"></div>
+                        <h2 class="font-heading text-2xl font-bold text-slate-900 dark:text-white" data-i18n="csv_title">Daftar Agenda Lengkap</h2>
+                    </div>
+                    <p class="text-slate-500 dark:text-slate-400 ml-5 text-sm" data-i18n="csv_desc">Informasi real-time dari database kegiatan (Auto-update 60s).</p>
                 </div>
-                <p class="text-slate-500 dark:text-slate-400 ml-5 text-sm" data-i18n="csv_desc">Data real-time dari Database Logistik (Update Otomatis)</p>
+                
+                <div class="flex flex-wrap items-center gap-3">
+                    <div class="flex bg-slate-100 dark:bg-slate-800 p-1 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm">
+                        <button onclick="setAgendaView('card')" id="btnViewCard" class="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all text-primary-600 bg-white shadow-sm dark:bg-slate-700 dark:text-white">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/></svg> Card
+                        </button>
+                        <button onclick="setAgendaView('list')" id="btnViewList" class="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg> List
+                        </button>
+                    </div>
+                </div>
             </div>
             
-            <div class="bg-white dark:bg-dark-card rounded-2xl shadow-soft border border-slate-200 dark:border-dark-border overflow-hidden">
-                <div class="overflow-x-auto">
-                    <table class="w-full text-sm text-left border-collapse">
-                        <thead class="bg-slate-50 dark:bg-slate-800/80 border-b border-slate-200 dark:border-dark-border">
-                            <tr>
-                                <th class="px-6 py-5 font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider text-xs" data-i18n="th_date">Tanggal</th>
-                                <th class="px-6 py-5 font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider text-xs" data-i18n="th_time">Waktu</th>
-                                <th class="px-6 py-5 font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider text-xs w-1/3" data-i18n="th_event">Kegiatan</th>
-                                <th class="px-6 py-5 font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider text-xs" data-i18n="th_loc">Lokasi</th>
-                            </tr>
-                        </thead>
-                        <tbody id="csv-table-body" class="divide-y divide-slate-100 dark:divide-slate-800">
-                            <tr><td colspan="4" class="px-6 py-10 text-center text-slate-500 animate-pulse">Memuat data kegiatan...</td></tr>
-                        </tbody>
-                    </table>
+            <div id="agenda-container" class="min-h-[400px]">
+                <div id="agenda-view-card" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 animate-fade-in">
+                    <div class="col-span-full text-center py-20">
+                        <div class="animate-spin inline-block w-8 h-8 border-4 border-primary-600 border-t-transparent rounded-full mb-3"></div>
+                        <p class="text-slate-500">Memuat data terbaru...</p>
+                    </div>
                 </div>
-                <div class="px-6 py-4 bg-slate-50 dark:bg-slate-800/30 border-t border-slate-200 dark:border-dark-border text-xs text-slate-500 text-center">
-                    Data diperbarui secara berkala dari sistem OJK D.I.Y.
+
+                <div id="agenda-view-list" class="hidden bg-white dark:bg-dark-card rounded-2xl shadow-soft border border-slate-200 dark:border-dark-border overflow-hidden animate-fade-in">
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm text-left border-collapse">
+                            <thead class="bg-slate-50 dark:bg-slate-800/80 border-b border-slate-200 dark:border-dark-border">
+                                <tr>
+                                    <th class="px-6 py-5 font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider text-xs" data-i18n="th_date">Tanggal</th>
+                                    <th class="px-6 py-5 font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider text-xs" data-i18n="th_time">Waktu</th>
+                                    <th class="px-6 py-5 font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider text-xs w-1/3" data-i18n="th_event">Kegiatan</th>
+                                    <th class="px-6 py-5 font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider text-xs">PIC</th>
+                                    <th class="px-6 py-5 font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider text-xs" data-i18n="th_loc">Ruangan</th>
+                                    <th class="px-6 py-5 font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider text-xs text-center">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="csv-table-body" class="divide-y divide-slate-100 dark:divide-slate-800"></tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Ruang Rapat -->
-    <section id="ruang-rapat" class="py-24 bg-white dark:bg-dark-bg">
+    <section id="ruang-rapat" class="py-24 bg-slate-50 dark:bg-[#0F1623] border-t border-slate-200 dark:border-slate-800">
         <div class="max-w-7xl mx-auto px-6">
             <div class="text-center max-w-3xl mx-auto mb-16">
                 <span class="text-primary-600 font-bold tracking-wider uppercase text-xs border border-primary-100 dark:border-primary-900 bg-primary-50 dark:bg-primary-900/20 px-3 py-1 rounded-full" data-i18n="rooms_tag">Fasilitas Kantor</span>
                 <h2 class="font-heading text-4xl font-bold text-slate-900 dark:text-white mt-6 mb-4" data-i18n="rooms_title">Katalog Ruang Rapat</h2>
-                <p class="text-slate-500 dark:text-slate-400 text-lg leading-relaxed" data-i18n="rooms_desc">Pilih ruangan yang sesuai dengan kapasitas dan kebutuhan teknis pertemuan Anda.</p>
+                <p class="text-slate-500 dark:text-slate-400 text-lg leading-relaxed" data-i18n="rooms_desc">Klik tombol "Cek Jadwal" untuk melihat detail penggunaan dan saran waktu booking.</p>
             </div>
             <div id="roomsContainer" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Javascript will populate this -->
-            </div>
+                </div>
         </div>
     </section>
 
-    <!-- Mobil Dinas -->
     <section id="mobil-dinas" class="relative py-32 overflow-hidden flex items-center bg-slate-900 min-h-[700px]">
         <div class="absolute inset-0 z-0">
-            <video 
-                src="https://ik.imagekit.io/idnarsipojkdiy/LMSt%20-%20Platform%20Terintegrasi/JOGJA%20ISTIMEWA.mp4?updatedAt=1763092262199" 
-                autoplay loop muted playsinline 
-                class="w-full h-full object-cover opacity-60">
-            </video>
+            <video src="https://ik.imagekit.io/idnarsipojkdiy/LMSt%20-%20Platform%20Terintegrasi/JOGJA%20ISTIMEWA.mp4?updatedAt=1763092262199" autoplay loop muted playsinline class="w-full h-full object-cover opacity-60"></video>
             <div class="absolute inset-0 bg-gradient-to-r from-slate-900/90 via-slate-900/70 to-transparent"></div>
         </div>
-        
         <div class="relative z-10 w-full max-w-7xl mx-auto px-6">
             <div class="grid lg:grid-cols-2 gap-16 items-center">
                 <div>
                     <div class="inline-block px-3 py-1 bg-yellow-500/20 text-yellow-400 rounded-full text-xs font-bold uppercase mb-4" data-i18n="cars_tag">Armada Operasional</div>
-                    <h2 class="font-heading text-4xl lg:text-5xl font-bold text-white mb-6 leading-tight" data-i18n="cars_title">Layanan Peminjaman <br>Kendaraan Dinas (Dalam Tahap Pengembangan)</h2>
-                    <p class="text-slate-300 text-lg mb-8 leading-relaxed max-w-md" data-i18n="cars_desc">
-                        Fasilitas kendaraan operasional dengan pengemudi profesional. Cek jadwal ketersediaan armada sebelum mengajukan permohonan.
-                    </p>
+                    <h2 class="font-heading text-4xl lg:text-5xl font-bold text-white mb-6 leading-tight" data-i18n="cars_title">Layanan Peminjaman <br>Kendaraan Dinas (Maintenance)</h2>
+                    <p class="text-slate-300 text-lg mb-8 leading-relaxed max-w-md" data-i18n="cars_desc">Fasilitas kendaraan operasional dengan pengemudi profesional.</p>
                     <div class="flex flex-wrap gap-4">
                         <button onclick="openFormModal('mobil')" class="px-8 py-3.5 bg-white text-slate-900 rounded-full font-bold hover:bg-slate-100 transition shadow-lg flex items-center gap-2">
                             <span data-i18n="btn_req_car">Ajukan Peminjaman</span>
@@ -314,35 +368,26 @@
                         </button>
                     </div>
                 </div>
-                
-                <div class="bg-white/10 backdrop-blur-xl border border-white/10 rounded-3xl p-6 lg:p-8 shadow-2xl">
+                <div class="bg-white/10 backdrop-blur-xl border border-white/10 rounded-3xl p-6 shadow-2xl">
                     <h3 class="text-white font-heading font-bold text-xl mb-4 flex items-center gap-2">
                         <svg class="w-5 h-5 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
                         <span data-i18n="car_cal_title">Kalender Ketersediaan</span>
                     </h3>
                     <div class="rounded-2xl overflow-hidden bg-white h-[400px]">
-                        <iframe 
-                            src="https://calendar.google.com/calendar/embed?src=6413cb9518f05f1b2984eb294d450f43ce1%40group.calendar.google.com&ctz=Asia%2FJakarta" 
-                            style="border: 0" 
-                            class="w-full h-full" 
-                            frameborder="0" 
-                            scrolling="no">
-                        </iframe>
+                        <iframe src="https://calendar.google.com/calendar/embed?src=6413cb9518f05f1b2984eb294d450f43ce1%40group.calendar.google.com&ctz=Asia%2FJakarta" style="border: 0" class="w-full h-full" frameborder="0" scrolling="no"></iframe>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Hotel Partner -->
-    <section id="hotel-partner" class="py-24 bg-white dark:bg-dark-bg border-t border-slate-100 dark:border-dark-border">
+    <section id="hotel-partner" class="py-24 bg-white dark:bg-dark-bg">
         <div class="max-w-7xl mx-auto px-6">
             <div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
                 <div>
                     <h2 class="font-heading text-3xl font-bold text-slate-900 dark:text-white" data-i18n="hotels_title">Hotel Rekanan</h2>
                     <p class="text-slate-500 mt-2" data-i18n="hotels_desc">Akomodasi bintang 4 & 5 terbaik di Yogyakarta</p>
                 </div>
-                <!-- Filters -->
                 <div class="flex flex-wrap gap-2">
                     <button onclick="filterHotels('all')" class="px-5 py-2.5 rounded-full bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-sm font-semibold hover:bg-primary-600 hover:text-white transition-all active-filter">Semua</button>
                     <button onclick="filterHotels('5')" class="px-5 py-2.5 rounded-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-400 text-sm font-medium hover:border-primary-600 hover:text-primary-600 transition-all">⭐️ 5 Stars</button>
@@ -357,73 +402,62 @@
             <div class="relative group">
                 <button onclick="scrollHotels(-1)" class="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-5 z-20 w-12 h-12 bg-white dark:bg-slate-800 rounded-full shadow-xl flex items-center justify-center text-primary-600 hover:scale-110 transition border border-slate-100 dark:border-slate-700"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg></button>
                 <button onclick="scrollHotels(1)" class="absolute right-0 top-1/2 -translate-y-1/2 translate-x-5 z-20 w-12 h-12 bg-white dark:bg-slate-800 rounded-full shadow-xl flex items-center justify-center text-primary-600 hover:scale-110 transition border border-slate-100 dark:border-slate-700"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></button>
-                
                 <div id="hotelTrack" class="flex gap-6 overflow-x-auto no-scrollbar pb-10 px-4 scroll-pl-6 snap-x">
-                    <!-- JS Generated -->
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Support & Vendor Grid -->
-    <section id="bantuan-teknis" class="py-24 bg-slate-50 dark:bg-dark-bg">
+    <section id="bantuan-teknis" class="py-24 bg-slate-50 dark:bg-dark-bg border-t border-slate-200 dark:border-slate-800">
         <div class="max-w-7xl mx-auto px-6">
-            <div class="grid lg:grid-cols-2 gap-16">
-                <!-- Tech Support -->
+            <div class="grid lg:grid-cols-2 gap-20">
                 <div>
-                    <h2 class="font-heading text-3xl font-bold text-slate-900 dark:text-white mb-8" data-i18n="help_title">Bantuan Teknis</h2>
+                    <div class="flex items-center gap-3 mb-8">
+                        <div class="w-1.5 h-8 bg-blue-600 rounded-full"></div>
+                        <h2 class="font-heading text-3xl font-bold text-slate-900 dark:text-white" data-i18n="help_title">Bantuan Teknis</h2>
+                    </div>
                     <div class="grid sm:grid-cols-2 gap-5">
-                        <!-- Support Cards -->
-                        <a href="https://wa.me/6281532793953" target="_blank" class="p-6 rounded-2xl border border-slate-100 dark:border-dark-border bg-white dark:bg-dark-card hover:border-primary-200 dark:hover:border-primary-900 hover:shadow-soft transition group">
-                            <div class="w-10 h-10 rounded-lg bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
-                            </div>
-                            <h3 class="font-bold text-slate-900 dark:text-white text-base" data-i18n="help_pc">Perangkat Komputer</h3>
+                        <a href="https://wa.me/6281532793953" target="_blank" class="p-6 rounded-2xl bg-white dark:bg-dark-card border border-slate-100 dark:border-slate-700 hover:border-blue-500 hover:shadow-lg hover:-translate-y-1 transition duration-300 group">
+                            <div class="w-12 h-12 rounded-xl bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 flex items-center justify-center mb-4 text-xl group-hover:scale-110 transition">💻</div>
+                            <h3 class="font-bold text-slate-900 dark:text-white" data-i18n="help_pc">Komputer</h3>
                             <p class="text-xs text-slate-500 mt-1">Troubleshooting & Instalasi</p>
                         </a>
-                        <a href="https://wa.me/628562933037" target="_blank" class="p-6 rounded-2xl border border-slate-100 dark:border-dark-border bg-white dark:bg-dark-card hover:border-primary-200 dark:hover:border-primary-900 hover:shadow-soft transition group">
-                            <div class="w-10 h-10 rounded-lg bg-green-50 dark:bg-green-900/20 text-green-600 dark:text-green-400 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.111 16.404a5.5 5.5 0 017.778 0M12 20h.01m-7.08-7.071c3.904-3.905 10.236-3.905 14.141 0M1.394 9.393c5.857-5.857 15.355-5.857 21.213 0"/></svg>
-                            </div>
-                            <h3 class="font-bold text-slate-900 dark:text-white text-base" data-i18n="help_net">Jaringan Internet</h3>
+                        <a href="https://wa.me/628562933037" target="_blank" class="p-6 rounded-2xl bg-white dark:bg-dark-card border border-slate-100 dark:border-slate-700 hover:border-green-500 hover:shadow-lg hover:-translate-y-1 transition duration-300 group">
+                            <div class="w-12 h-12 rounded-xl bg-green-50 dark:bg-green-900/30 text-green-600 dark:text-green-400 flex items-center justify-center mb-4 text-xl group-hover:scale-110 transition">📡</div>
+                            <h3 class="font-bold text-slate-900 dark:text-white" data-i18n="help_net">Internet</h3>
                             <p class="text-xs text-slate-500 mt-1">Wifi, LAN & VPN</p>
                         </a>
-                        <a href="https://wa.me/6281392413337" target="_blank" class="p-6 rounded-2xl border border-slate-100 dark:border-dark-border bg-white dark:bg-dark-card hover:border-primary-200 dark:hover:border-primary-900 hover:shadow-soft transition group">
-                            <div class="w-10 h-10 rounded-lg bg-purple-50 dark:bg-purple-900/20 text-purple-600 dark:text-purple-400 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/></svg>
-                            </div>
-                            <h3 class="font-bold text-slate-900 dark:text-white text-base" data-i18n="help_doc">Dokumentasi</h3>
+                        <a href="https://wa.me/6281392413337" target="_blank" class="p-6 rounded-2xl bg-white dark:bg-dark-card border border-slate-100 dark:border-slate-700 hover:border-purple-500 hover:shadow-lg hover:-translate-y-1 transition duration-300 group">
+                            <div class="w-12 h-12 rounded-xl bg-purple-50 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 flex items-center justify-center mb-4 text-xl group-hover:scale-110 transition">📸</div>
+                            <h3 class="font-bold text-slate-900 dark:text-white" data-i18n="help_doc">Dokumentasi</h3>
                             <p class="text-xs text-slate-500 mt-1">Foto & Video Kegiatan</p>
                         </a>
-                        <a href="https://wa.me/6281532793953" target="_blank" class="p-6 rounded-2xl border border-slate-100 dark:border-dark-border bg-white dark:bg-dark-card hover:border-primary-200 dark:hover:border-primary-900 hover:shadow-soft transition group">
-                            <div class="w-10 h-10 rounded-lg bg-orange-50 dark:bg-orange-900/20 text-orange-600 dark:text-orange-400 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 4v16M17 4v16M3 8h4m10 0h4M3 12h18M3 16h4m10 0h4M4 20h16a1 1 0 001-1V5a1 1 0 00-1-1H4a1 1 0 00-1 1v14a1 1 0 001 1z"/></svg>
-                            </div>
-                            <h3 class="font-bold text-slate-900 dark:text-white text-base" data-i18n="help_pres">Presentasi</h3>
+                        <a href="https://wa.me/6281532793953" target="_blank" class="p-6 rounded-2xl bg-white dark:bg-dark-card border border-slate-100 dark:border-slate-700 hover:border-orange-500 hover:shadow-lg hover:-translate-y-1 transition duration-300 group">
+                            <div class="w-12 h-12 rounded-xl bg-orange-50 dark:bg-orange-900/30 text-orange-600 dark:text-orange-400 flex items-center justify-center mb-4 text-xl group-hover:scale-110 transition">📽️</div>
+                            <h3 class="font-bold text-slate-900 dark:text-white" data-i18n="help_pres">Presentasi</h3>
                             <p class="text-xs text-slate-500 mt-1">Proyektor & Sound</p>
                         </a>
                     </div>
                 </div>
 
-                <!-- Vendors -->
                 <div id="vendor-ref">
                     <div class="flex items-center justify-between mb-8">
-                        <h2 class="font-heading text-3xl font-bold text-slate-900 dark:text-white" data-i18n="vendor_title">Vendor Konsumsi</h2>
-                        <div class="flex bg-white dark:bg-slate-800 rounded-lg p-1 border border-slate-200 dark:border-slate-700">
-                            <button onclick="switchVendorTab('snack')" id="tabSnack" class="px-4 py-1.5 rounded-md text-sm font-semibold transition-all shadow-sm bg-slate-100 dark:bg-slate-700 text-primary-600 dark:text-white">Snack</button>
-                            <button onclick="switchVendorTab('catering')" id="tabCatering" class="px-4 py-1.5 rounded-md text-sm font-medium transition-all text-slate-500 dark:text-slate-400 hover:text-primary-600">Katering</button>
+                        <div class="flex items-center gap-3">
+                            <div class="w-1.5 h-8 bg-yellow-500 rounded-full"></div>
+                            <h2 class="font-heading text-3xl font-bold text-slate-900 dark:text-white" data-i18n="vendor_title">Vendor Konsumsi</h2>
+                        </div>
+                        <div class="flex bg-white dark:bg-slate-800 rounded-xl p-1 border border-slate-200 dark:border-slate-700 shadow-sm">
+                            <button onclick="switchVendorTab('snack')" id="tabSnack" class="px-5 py-2 rounded-lg text-sm font-bold text-primary-600 bg-slate-100 dark:bg-slate-700 dark:text-white shadow-sm transition-all">Snack</button>
+                            <button onclick="switchVendorTab('catering')" id="tabCatering" class="px-5 py-2 rounded-lg text-sm font-medium text-slate-500 dark:text-slate-400 hover:text-primary-600 transition-all">Katering</button>
                         </div>
                     </div>
-                    
-                    <div id="vendorList" class="space-y-3 h-[380px] overflow-y-auto pr-2 custom-scrollbar">
-                        <!-- Populated by JS -->
+                    <div id="vendorList" class="space-y-4 h-[380px] overflow-y-auto pr-2 custom-scrollbar">
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
     <footer class="bg-slate-900 text-slate-300 py-16 border-t border-slate-800">
         <div class="max-w-7xl mx-auto px-6">
             <div class="grid md:grid-cols-4 gap-12">
@@ -432,9 +466,7 @@
                         <img src="https://ik.imagekit.io/logojkdiy/Layanan%20Terintegrasi%20-%20OJK%20DIY.png?updatedAt=." alt="Logo" class="w-10 h-10 bg-white rounded-lg p-1">
                         <span class="font-heading font-bold text-white text-lg">LMSt-OJK D.I.Y</span>
                     </div>
-                    <p class="text-sm text-slate-400 leading-relaxed" data-i18n="footer_desc">
-                        Platform terintegrasi untuk mendukung operasional dan produktivitas pegawai OJK Daerah Istimewa Yogyakarta.
-                    </p>
+                    <p class="text-sm text-slate-400 leading-relaxed" data-i18n="footer_desc">Platform terintegrasi untuk mendukung operasional dan produktivitas pegawai OJK Daerah Istimewa Yogyakarta.</p>
                 </div>
                 <div>
                     <h4 class="font-bold text-white mb-4 text-sm uppercase tracking-wide" data-i18n="footer_serv">Layanan</h4>
@@ -462,40 +494,147 @@
             </div>
             <div class="border-t border-slate-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-slate-500">
                 <p>&copy; <span id="year"></span> Logistik OJK D.I.Y. Hak Cipta Dilindungi.</p>
-                <div class="flex gap-6 mt-4 md:mt-0">
-                    <span>Kebijakan Privasi</span>
-                    <span>Syarat & Ketentuan</span>
-                </div>
+                <div class="flex gap-6 mt-4 md:mt-0"><span>Kebijakan Privasi</span><span>Syarat & Ketentuan</span></div>
             </div>
         </div>
     </footer>
 
-    <!-- MODALS (Gallery, Form, Hotel, Protokol) -->
-    
-    <!-- Gallery Modal -->
-    <div id="galleryModal" class="fixed inset-0 z-[60] hidden items-center justify-center p-4">
-        <div class="absolute inset-0 bg-slate-900/90 backdrop-blur-sm transition-opacity" onclick="closeGallery()"></div>
-        <div class="relative bg-white dark:bg-dark-card w-full max-w-5xl rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh] fade-in">
-            <div class="p-4 border-b border-slate-100 dark:border-dark-border flex justify-between items-center bg-white dark:bg-dark-card z-10">
-                <h3 id="galleryTitle" class="font-heading font-bold text-xl text-slate-900 dark:text-white pl-2">Detail</h3>
-                <button onclick="closeGallery()" class="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-500"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg></button>
+    <div id="eventDetailModal" class="fixed inset-0 z-[80] hidden items-center justify-center p-4">
+        <div class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm transition-opacity" onclick="closeEventModal()"></div>
+        <div class="relative w-full max-w-xl bg-white dark:bg-dark-card rounded-xl shadow-2xl overflow-hidden animate-pop-in flex flex-col max-h-[90vh]">
+            
+            <div class="bg-white dark:bg-slate-800 px-6 pt-6 pb-4 border-b border-slate-100 dark:border-slate-700">
+                <div class="flex justify-between items-start">
+                    <div class="flex-1 pr-4">
+                         <h3 id="modalHeaderTitle" class="font-heading font-bold text-xl text-slate-800 dark:text-white leading-tight mb-1">Judul Kegiatan</h3>
+                         <p id="modalHeaderTime" class="text-sm text-slate-500 dark:text-slate-400 font-medium">Selasa, 10 Februari • 07:00 - 20:00</p>
+                    </div>
+                    <button onclick="closeEventModal()" class="text-slate-400 hover:text-red-500 transition p-1"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg></button>
+                </div>
             </div>
-            <div class="relative flex-1 overflow-hidden bg-black flex items-center justify-center">
-                 <div id="galleryTrack" class="flex transition-transform duration-500 ease-out h-full w-full"></div>
-                 <button onclick="gallerySlide(-1)" class="absolute left-4 p-3 bg-white/20 hover:bg-white/40 backdrop-blur rounded-full text-white"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg></button>
-                 <button onclick="gallerySlide(1)" class="absolute right-4 p-3 bg-white/20 hover:bg-white/40 backdrop-blur rounded-full text-white"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></button>
-            </div>
-            <div class="p-5 bg-white dark:bg-dark-card border-t border-slate-100 dark:border-dark-border flex justify-end gap-3">
-                 <button onclick="closeGallery()" class="px-6 py-2 rounded-full border border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-300 font-medium hover:bg-slate-50 dark:hover:bg-slate-800 text-sm">Tutup</button>
-                 <button onclick="openFormModal('ruang')" class="px-6 py-2 rounded-full bg-primary-600 text-white font-medium hover:bg-primary-700 shadow-lg shadow-primary-600/30 text-sm">Ajukan Peminjaman</button>
+
+            <div class="p-6 overflow-y-auto bg-slate-50 dark:bg-dark-card custom-scrollbar">
+                
+                <div class="mb-6">
+                    <h4 class="text-[11px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-3">[DETAIL KEGIATAN]</h4>
+                    <div class="bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700 p-4 text-sm text-slate-700 dark:text-slate-300 space-y-3">
+                        <div class="grid grid-cols-[140px_1fr] border-b border-slate-100 dark:border-slate-700/50 pb-2 last:border-0 last:pb-0">
+                            <span class="font-bold text-slate-900 dark:text-white">Kegiatan:</span>
+                            <span id="modalBodyTitle" class="leading-snug">Nama Kegiatan...</span>
+                        </div>
+                        <div class="grid grid-cols-[140px_1fr] border-b border-slate-100 dark:border-slate-700/50 pb-2 last:border-0 last:pb-0">
+                            <span class="font-bold text-slate-900 dark:text-white">PIC:</span>
+                            <span id="modalBodyPIC">Nama PIC</span>
+                        </div>
+                        <div class="grid grid-cols-[140px_1fr] border-b border-slate-100 dark:border-slate-700/50 pb-2 last:border-0 last:pb-0">
+                            <span class="font-bold text-slate-900 dark:text-white">Departemen:</span>
+                            <span id="modalBodyDept">DPVR</span>
+                        </div>
+                        <div class="grid grid-cols-[140px_1fr] border-b border-slate-100 dark:border-slate-700/50 pb-2 last:border-0 last:pb-0">
+                            <span class="font-bold text-slate-900 dark:text-white">Kontak PIC:</span>
+                            <span id="modalBodyContact" class="text-green-600 font-medium cursor-pointer hover:underline flex items-center gap-1">812345678</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-6">
+                    <h4 class="text-[11px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-3">[DETAIL RUANGAN & SETUP]</h4>
+                    <div class="bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700 p-4 text-sm text-slate-700 dark:text-slate-300 space-y-3">
+                        <div class="grid grid-cols-[140px_1fr] border-b border-slate-100 dark:border-slate-700/50 pb-2 last:border-0 last:pb-0">
+                            <span class="font-bold text-slate-900 dark:text-white">Ruangan:</span>
+                            <span id="modalBodyRoom">Ballroom</span>
+                        </div>
+                        <div class="grid grid-cols-[140px_1fr] border-b border-slate-100 dark:border-slate-700/50 pb-2 last:border-0 last:pb-0">
+                            <span class="font-bold text-slate-900 dark:text-white">Penataan (Layout):</span>
+                            <span id="modalBodyLayout">Classical</span>
+                        </div>
+                        <div class="grid grid-cols-[140px_1fr] border-b border-slate-100 dark:border-slate-700/50 pb-2 last:border-0 last:pb-0">
+                            <span class="font-bold text-slate-900 dark:text-white">Kelengkapan:</span>
+                            <span id="modalBodyEquip">Mic, Sound...</span>
+                        </div>
+                        <div class="grid grid-cols-[140px_1fr] border-b border-slate-100 dark:border-slate-700/50 pb-2 last:border-0 last:pb-0">
+                            <span class="font-bold text-slate-900 dark:text-white">Catatan Tambahan:</span>
+                            <span id="modalBodyNotes" class="italic text-slate-500">-</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-8 pt-6 border-t border-slate-200 dark:border-slate-700 border-dashed text-center">
+                    <p class="text-xs text-slate-400 mb-1">--------------------------------------------------</p>
+                    <p class="text-xs text-slate-500 font-medium">Dibuat otomatis oleh Sistem Peminjaman Ruangan (SPRR) OJK DIY</p>
+                </div>
+
             </div>
         </div>
     </div>
 
-    <!-- Form Modal -->
-    <div id="formModal" class="fixed inset-0 z-[60] hidden items-center justify-center p-4">
+    <div id="roomScheduleModal" class="fixed inset-0 z-[65] hidden items-center justify-center p-4">
+        <div class="absolute inset-0 bg-slate-900/80 backdrop-blur-sm transition-opacity" onclick="closeRoomSchedule()"></div>
+        <div class="relative w-full max-w-4xl bg-white dark:bg-dark-card rounded-2xl shadow-2xl overflow-hidden max-h-[85vh] flex flex-col animate-pop-in">
+            <div class="p-6 border-b border-slate-100 dark:border-dark-border flex justify-between items-start bg-slate-50 dark:bg-slate-800/50">
+                <div>
+                    <span class="text-xs font-bold text-primary-600 uppercase tracking-widest mb-1 block">Detail Jadwal Ruangan</span>
+                    <h3 id="scheduleRoomName" class="font-heading font-bold text-2xl text-slate-900 dark:text-white">Nama Ruangan</h3>
+                    <p class="text-slate-500 dark:text-slate-400 text-sm mt-1">Acara terkonfirmasi & slot tersedia (Hari ini - Besok).</p>
+                </div>
+                <button onclick="closeRoomSchedule()" class="text-slate-400 hover:text-red-500 transition"><svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg></button>
+            </div>
+            
+            <div class="flex-1 overflow-y-auto p-6 bg-white dark:bg-dark-card custom-scrollbar">
+                
+                <div class="mb-8">
+                    <h4 class="font-bold text-sm text-slate-800 dark:text-white mb-4 flex items-center gap-2">
+                        <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span> Saran Waktu Booking (Available 06:00 - 22:00)
+                    </h4>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-white dark:bg-slate-800 rounded-xl p-0 border-2 border-green-100 dark:border-green-900/30 overflow-hidden shadow-sm">
+                            <div class="bg-green-50 dark:bg-green-900/20 px-4 py-2 border-b border-green-100 dark:border-green-800 flex justify-between items-center">
+                                <h5 class="text-xs font-bold uppercase text-green-700 dark:text-green-300">Hari Ini</h5>
+                                <span class="text-[10px] bg-white dark:bg-slate-800 px-2 py-0.5 rounded text-slate-500 border border-slate-200 dark:border-slate-600" id="dateTodayDisplay">-</span>
+                            </div>
+                            <div class="p-4 bg-white dark:bg-slate-800/50 min-h-[100px] flex items-center justify-center">
+                                <div id="availToday" class="flex flex-wrap gap-2 text-sm text-slate-500 justify-center w-full"><span class="animate-pulse">Checking...</span></div>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-white dark:bg-slate-800 rounded-xl p-0 border-2 border-blue-100 dark:border-blue-900/30 overflow-hidden shadow-sm">
+                            <div class="bg-blue-50 dark:bg-blue-900/20 px-4 py-2 border-b border-blue-100 dark:border-blue-800 flex justify-between items-center">
+                                <h5 class="text-xs font-bold uppercase text-blue-700 dark:text-blue-300">Besok</h5>
+                                <span class="text-[10px] bg-white dark:bg-slate-800 px-2 py-0.5 rounded text-slate-500 border border-slate-200 dark:border-slate-600" id="dateTomorrowDisplay">-</span>
+                            </div>
+                            <div class="p-4 bg-white dark:bg-slate-800/50 min-h-[100px] flex items-center justify-center">
+                                <div id="availTomorrow" class="flex flex-wrap gap-2 text-sm text-slate-500 justify-center w-full"><span class="animate-pulse">Checking...</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <hr class="border-slate-100 dark:border-slate-800 mb-6">
+
+                <div>
+                    <h4 class="font-bold text-sm text-slate-800 dark:text-white mb-4 flex items-center gap-2">
+                        <span class="w-2 h-2 rounded-full bg-red-500"></span> Jadwal Terisi (Approved)
+                    </h4>
+                    <div id="roomScheduleList" class="space-y-3">
+                        <p class="text-center text-slate-400 italic">Memuat data...</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="p-5 border-t border-slate-100 dark:border-dark-border bg-white dark:bg-dark-card flex justify-between items-center">
+                <span class="text-xs text-slate-500 hidden sm:block">Saran waktu untuk reservasi ruangan hari ini dan besok.</span>
+                <button onclick="closeRoomSchedule(); openFormModal('ruang');" class="w-full sm:w-auto px-6 py-2.5 rounded-full bg-primary-600 text-white font-bold hover:bg-primary-700 shadow-lg shadow-primary-600/20 transition flex items-center justify-center gap-2">
+                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+                    Ajukan Reservasi
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="formModal" class="fixed inset-0 z-[70] hidden items-center justify-center p-4">
         <div class="absolute inset-0 bg-slate-900/90 backdrop-blur-sm" onclick="closeFormModal()"></div>
-        <div class="relative w-full max-w-6xl h-[85vh] bg-white dark:bg-dark-card rounded-2xl shadow-2xl overflow-hidden flex flex-col fade-in">
+        <div class="relative w-full max-w-6xl h-[90vh] bg-white dark:bg-dark-card rounded-2xl shadow-2xl overflow-hidden flex flex-col animate-pop-in">
             <div class="p-4 bg-slate-50 dark:bg-dark-card border-b border-slate-200 dark:border-dark-border flex justify-between items-center">
                 <h3 id="formTitle" class="font-heading font-bold text-lg text-slate-800 dark:text-white">Formulir</h3>
                 <button onclick="closeFormModal()" class="text-slate-500 hover:text-red-500"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg></button>
@@ -510,15 +649,27 @@
         </div>
     </div>
 
-    <!-- Hotel Detail Modal -->
+    <div id="galleryModal" class="fixed inset-0 z-[60] hidden items-center justify-center p-4">
+        <div class="absolute inset-0 bg-slate-900/90 backdrop-blur-sm transition-opacity" onclick="closeGallery()"></div>
+        <div class="relative bg-white dark:bg-dark-card w-full max-w-5xl rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh] animate-pop-in">
+            <div class="p-4 border-b border-slate-100 dark:border-dark-border flex justify-between items-center bg-white dark:bg-dark-card z-10">
+                <h3 id="galleryTitle" class="font-heading font-bold text-xl text-slate-900 dark:text-white pl-2">Detail</h3>
+                <button onclick="closeGallery()" class="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-500"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg></button>
+            </div>
+            <div class="relative flex-1 overflow-hidden bg-black flex items-center justify-center">
+                 <div id="galleryTrack" class="flex transition-transform duration-500 ease-out h-full w-full"></div>
+                 <button onclick="gallerySlide(-1)" class="absolute left-4 p-3 bg-white/20 hover:bg-white/40 backdrop-blur rounded-full text-white"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg></button>
+                 <button onclick="gallerySlide(1)" class="absolute right-4 p-3 bg-white/20 hover:bg-white/40 backdrop-blur rounded-full text-white"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></button>
+            </div>
+        </div>
+    </div>
+
     <div id="hotelModal" class="fixed inset-0 z-[60] hidden items-center justify-center p-4">
         <div class="absolute inset-0 bg-slate-900/90 backdrop-blur-sm" onclick="closeHotelModal()"></div>
-        <div class="relative w-full max-w-3xl bg-white dark:bg-dark-card rounded-2xl shadow-2xl overflow-hidden max-h-[90vh] flex flex-col fade-in">
-            <div class="p-6 border-b border-slate-100 dark:border-dark-border">
-                <div class="flex justify-between items-start">
-                    <h3 id="hotelTitle" class="font-heading font-bold text-2xl text-slate-900 dark:text-white">Hotel</h3>
-                    <button onclick="closeHotelModal()" class="text-slate-400 hover:text-slate-600"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg></button>
-                </div>
+        <div class="relative w-full max-w-3xl bg-white dark:bg-dark-card rounded-2xl shadow-2xl overflow-hidden max-h-[90vh] flex flex-col animate-pop-in">
+            <div class="p-6 border-b border-slate-100 dark:border-dark-border flex justify-between items-start">
+                <h3 id="hotelTitle" class="font-heading font-bold text-2xl text-slate-900 dark:text-white">Hotel</h3>
+                <button onclick="closeHotelModal()" class="text-slate-400 hover:text-slate-600"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg></button>
             </div>
             <div class="p-6 overflow-y-auto custom-scrollbar">
                 <div class="grid md:grid-cols-2 gap-8 mb-6">
@@ -539,11 +690,10 @@
             </div>
         </div>
     </div>
-    
-    <!-- Protokol Modal -->
+
     <div id="protokolModal" class="fixed inset-0 z-[60] hidden items-center justify-center p-4">
         <div class="absolute inset-0 bg-slate-900/90 backdrop-blur-sm transition-opacity" onclick="closeProtokolModal()"></div>
-        <div class="relative w-full max-w-md bg-white dark:bg-dark-card rounded-2xl shadow-2xl p-6 fade-in">
+        <div class="relative w-full max-w-md bg-white dark:bg-dark-card rounded-2xl shadow-2xl p-6 animate-pop-in">
             <div class="flex justify-between items-center mb-6">
                 <h3 class="font-heading font-bold text-xl text-slate-900 dark:text-white">Hubungi Protokol</h3>
                 <button onclick="closeProtokolModal()" class="text-slate-400 hover:text-slate-600"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg></button>
@@ -565,84 +715,67 @@
         </div>
     </div>
 
-    <!-- Toast -->
-    <div id="toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-[70] hidden transition-all transform translate-y-10 opacity-0">
-        <div class="px-6 py-3 bg-slate-900 text-white rounded-full shadow-2xl flex items-center gap-3">
-            <svg class="w-5 h-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-            <span class="font-medium text-sm">Action Successful</span>
-        </div>
-    </div>
-
     <script>
         // --- TRANSLATIONS CONFIG ---
         const TRANSLATIONS = {
             id: {
-                nav_subtitle: "Platform Terintegrasi",
-                nav_home: "Beranda", nav_agenda: "Agenda", nav_rooms: "Ruang", nav_cars: "Mobil", nav_hotels: "Partner", nav_help: "Bantuan",
-                hero_tag: "Sistem Internal",
-                hero_title_1: "Sistem Manajemen", hero_title_2: "Logistik Terintegrasi",
+                nav_subtitle: "Platform Terintegrasi", nav_home: "Beranda", nav_agenda: "Kalender", nav_rooms: "Ruang", nav_cars: "Mobil", nav_hotels: "Partner", nav_help: "Bantuan",
+                hero_tag: "Sistem Internal", hero_title_1: "Sistem Manajemen", hero_title_2: "Logistik Terintegrasi",
                 hero_desc: "Akses satu pintu untuk reservasi fasilitas kantor, manajemen armada, dan kemitraan strategis OJK Daerah Istimewa Yogyakarta.",
                 btn_reserve: "Reservasi Ruangan", btn_car: "Pinjam Kendaraan",
-                cal_title: "Agenda Kegiatan", cal_desc: "Jadwal resmi kegiatan OJK D.I.Y (Google Calendar)",
-                csv_title: "Detail Kegiatan Bulanan", csv_desc: "Data real-time dari Database Logistik (Update Otomatis)",
-                th_date: "Tanggal", th_time: "Waktu", th_event: "Kegiatan", th_loc: "Lokasi",
-                rooms_tag: "Fasilitas Kantor", rooms_title: "Katalog Ruang Rapat", rooms_desc: "Pilih ruangan yang sesuai dengan kapasitas dan kebutuhan teknis pertemuan Anda.",
-                cars_tag: "Armada Operasional", cars_title: "Layanan Peminjaman <br>Kendaraan Dinas", cars_desc: "Fasilitas kendaraan operasional dengan pengemudi profesional. Cek jadwal ketersediaan armada sebelum mengajukan permohonan.",
+                cal_title: "Kalender Kegiatan",
+                csv_title: "Daftar Agenda Lengkap", csv_desc: "Informasi real-time dari database kegiatan (Filter otomatis: Hari ini ke depan).",
+                th_date: "Tanggal", th_time: "Waktu", th_event: "Kegiatan", th_loc: "Ruangan",
+                rooms_tag: "Fasilitas Kantor", rooms_title: "Katalog Ruang Rapat", rooms_desc: "Klik tombol 'Cek Jadwal' untuk melihat detail penggunaan dan saran waktu booking.",
+                cars_tag: "Armada Operasional", cars_title: "Layanan Peminjaman <br>Kendaraan Dinas (Maintenance)", cars_desc: "Fasilitas kendaraan operasional dengan pengemudi profesional. Cek jadwal ketersediaan armada sebelum mengajukan permohonan.",
                 btn_req_car: "Ajukan Peminjaman", btn_contact_protokol: "Hubungi Protokol", car_cal_title: "Kalender Ketersediaan",
                 hotels_title: "Hotel Rekanan", hotels_desc: "Akomodasi bintang 4 & 5 terbaik di Yogyakarta",
                 help_title: "Bantuan Teknis", help_pc: "Perangkat Komputer", help_net: "Jaringan Internet", help_doc: "Dokumentasi", help_pres: "Presentasi",
-                vendor_title: "Vendor Konsumsi",
-                footer_desc: "Platform terintegrasi untuk mendukung operasional dan produktivitas pegawai OJK Daerah Istimewa Yogyakarta.",
+                vendor_title: "Vendor Konsumsi", footer_desc: "Platform terintegrasi untuk mendukung operasional dan produktivitas pegawai OJK Daerah Istimewa Yogyakarta.",
                 footer_serv: "Layanan", footer_contact: "Kontak", btn_dl_guide: "Unduh Panduan"
             },
             en: {
-                nav_subtitle: "Integrated Platform",
-                nav_home: "Home", nav_agenda: "Agenda", nav_rooms: "Rooms", nav_cars: "Fleet", nav_hotels: "Partners", nav_help: "Support",
-                hero_tag: "Internal System",
-                hero_title_1: "Logistics Management", hero_title_2: "Integrated System",
+                nav_subtitle: "Integrated Platform", nav_home: "Home", nav_agenda: "Calendar", nav_rooms: "Rooms", nav_cars: "Fleet", nav_hotels: "Partners", nav_help: "Support",
+                hero_tag: "Internal System", hero_title_1: "Logistics Management", hero_title_2: "Integrated System",
                 hero_desc: "One-stop access for office facility reservations, fleet management, and strategic partnerships of OJK Special Region of Yogyakarta.",
                 btn_reserve: "Reserve Room", btn_car: "Book Vehicle",
-                cal_title: "Activity Agenda", cal_desc: "Official OJK D.I.Y Activity Schedule (Google Calendar)",
-                csv_title: "Monthly Activity Detail", csv_desc: "Real-time data from Logistics Database",
-                th_date: "Date", th_time: "Time", th_event: "Event", th_loc: "Location",
-                rooms_tag: "Office Facilities", rooms_title: "Meeting Room Catalog", rooms_desc: "Choose a room that suits your meeting capacity and technical needs.",
+                cal_title: "Activity Calendar",
+                csv_title: "Full Schedule List", csv_desc: "Real-time data from Logistics Database.",
+                th_date: "Date", th_time: "Time", th_event: "Event", th_loc: "Room",
+                rooms_tag: "Office Facilities", rooms_title: "Meeting Room Catalog", rooms_desc: "Click 'Check Schedule' to see specific room usage details.",
                 cars_tag: "Operational Fleet", cars_title: "Official Vehicle <br>Service", cars_desc: "Operational vehicle facility with professional drivers. Check fleet availability schedule before applying.",
                 btn_req_car: "Request Booking", btn_contact_protokol: "Contact Protocol", car_cal_title: "Availability Calendar",
                 hotels_title: "Partner Hotels", hotels_desc: "Best 4 & 5-star accommodation in Yogyakarta",
                 help_title: "Technical Support", help_pc: "Computer Hardware", help_net: "Internet Network", help_doc: "Documentation", help_pres: "Presentation",
-                vendor_title: "Catering Vendors",
-                footer_desc: "Integrated platform to support operations and productivity of OJK Special Region of Yogyakarta employees.",
+                vendor_title: "Catering Vendors", footer_desc: "Integrated platform supporting OJK Yogyakarta operations.",
                 footer_serv: "Services", footer_contact: "Contact", btn_dl_guide: "Download Guide"
             },
             jv: {
-                nav_subtitle: "Platform Terintegrasi",
-                nav_home: "Purwaka", nav_agenda: "Jadwal", nav_rooms: "Panggenan", nav_cars: "Titihan", nav_hotels: "Mitra", nav_help: "Pambiyantu",
-                hero_tag: "Sistem Internal",
-                hero_title_1: "Sistem Manajemen", hero_title_2: "Logistik Terintegrasi",
+                nav_subtitle: "Platform Terintegrasi", nav_home: "Purwaka", nav_agenda: "Pananggalan", nav_rooms: "Panggenan", nav_cars: "Titihan", nav_hotels: "Mitra", nav_help: "Pambiyantu",
+                hero_tag: "Sistem Internal", hero_title_1: "Sistem Manajemen", hero_title_2: "Logistik Terintegrasi",
                 hero_desc: "Akses satunggal pintu kangge reservasi fasilitas kantor, manajemen armada, lan kemitraan strategis OJK D.I.Y.",
                 btn_reserve: "Pesen Panggenan", btn_car: "Nyambut Titihan",
-                cal_title: "Jadwal Kagiatan", cal_desc: "Jadwal resmi kagiatan OJK D.I.Y (Google Calendar)",
-                csv_title: "Rincian Kagiatan Wulanan", csv_desc: "Data saking Database Logistik (Update Otomatis)",
+                cal_title: "Pananggalan Kagiatan",
+                csv_title: "Daftar Kagiatan Jangkep", csv_desc: "Data real-time saking Database Logistik.",
                 th_date: "Tanggal", th_time: "Wekdal", th_event: "Kagiatan", th_loc: "Panggenan",
-                rooms_tag: "Fasilitas Kantor", rooms_title: "Katalog Panggenan Rapat", rooms_desc: "Pilih panggenan ingkang cocog kaliyan kapasitas lan kabetahan teknis rapat Panjenengan.",
+                rooms_tag: "Fasilitas Kantor", rooms_title: "Katalog Panggenan Rapat", rooms_desc: "Klik 'Cek Jadwal' kangge ningali detail pangageman.",
                 cars_tag: "Armada Operasional", cars_title: "Layanan Peminjaman <br>Titihan Dinas", cars_desc: "Fasilitas titihan operasional kaliyan sopir profesional. Cek jadwal ketersediaan armada saderengipun ngajengaken.",
                 btn_req_car: "Ajukan Peminjaman", btn_contact_protokol: "Hubungi Protokol", car_cal_title: "Kalender Ketersediaan",
                 hotels_title: "Hotel Rekanan", hotels_desc: "Akomodasi bintang 4 & 5 paling sae ing Ngayogyakarta",
                 help_title: "Pambiyantu Teknis", help_pc: "Perangkat Komputer", help_net: "Jaringan Internet", help_doc: "Dokumentasi", help_pres: "Presentasi",
-                vendor_title: "Vendor Dhaharan",
-                footer_desc: "Platform terintegrasi kangge nyengkuyung operasional lan produktivitas pegawai OJK Daerah Istimewa Yogyakarta.",
+                vendor_title: "Vendor Dhaharan", footer_desc: "Platform terintegrasi kangge nyengkuyung operasional OJK DIY.",
                 footer_serv: "Layanan", footer_contact: "Kontak", btn_dl_guide: "Unduh Panduan"
             }
         };
 
-        // --- DATA OBJECTS ---
+        // --- DATA OBJECTS WITH UPDATED ROOM NAMES ---
         const ROOMS_DATA = [
             { id: 1, name: "Bale Acitya", cap: "30 Orang", img: "https://ik.imagekit.io/logojkdiy/KATALOG%20RUANGAN%20OJK%20DIY/OJK%20DIY%20-%20KATALOG%20RUANGAN%20III/BALE%20ACITYA%201.png?updatedAt=.", gallery: ['https://ik.imagekit.io/logojkdiy/OJK%20DIY%20-%20KATALOG%20RUANGAN%20UPDATE%20NOVEMBER%202025/BALE%20ACITYA%201.png?updatedAt=1762162493375', 'https://ik.imagekit.io/logojkdiy/OJK%20DIY%20-%20KATALOG%20RUANGAN%20UPDATE%20NOVEMBER%202025/BALE%20ACITYA%202.png?updatedAt=1762162528450', 'https://ik.imagekit.io/logojkdiy/OJK%20DIY%20-%20KATALOG%20RUANGAN%20UPDATE%20NOVEMBER%202025/BALE%20ACITYA%203.png?updatedAt=1762162530526', 'https://ik.imagekit.io/logojkdiy/OJK%20DIY%20-%20KATALOG%20RUANGAN%20UPDATE%20NOVEMBER%202025/BALE%20ACITYA%204.png?updatedAt=1762162525921'] },
             { id: 2, name: "Bale Astama", cap: "60 Orang", img: "https://ik.imagekit.io/logojkdiy/KATALOG%20RUANGAN%20OJK%20DIY/OJK%20DIY%20-%20KATALOG%20RUANGAN%20III/BALE%20ASTAMA%201.png?updatedAt=.", gallery: ['https://ik.imagekit.io/logojkdiy/OJK%20DIY%20-%20KATALOG%20RUANGAN%20UPDATE%20NOVEMBER%202025/BALE%20ASTAMA%201.png?updatedAt=1762162530590', 'https://ik.imagekit.io/logojkdiy/OJK%20DIY%20-%20KATALOG%20RUANGAN%20UPDATE%20NOVEMBER%202025/BALE%20ASTAMA%202.png?updatedAt=1762162526361', 'https://ik.imagekit.io/logojkdiy/OJK%20DIY%20-%20KATALOG%20RUANGAN%20UPDATE%20NOVEMBER%202025/BALE%20ASTAMA%203.png?updatedAt=1762162530017', 'https://ik.imagekit.io/logojkdiy/OJK%20DIY%20-%20KATALOG%20RUANGAN%20UPDATE%20NOVEMBER%202025/BALE%20ASTAMA%204.png?updatedAt=1762162520719'] },
-            { id: 3, name: "Ruang Nakula", cap: "8-10 Orang", img: "https://ik.imagekit.io/logojkdiy/KATALOG%20RUANGAN%20OJK%20DIY/OJK%20DIY%20-%20KATALOG%20RUANGAN%20III/RUANG%20NAKULA%201.png?updatedAt=.", gallery: ['https://ik.imagekit.io/logojkdiy/KATALOG%20RUANGAN%20OJK%20DIY/OJK%20DIY%20-%20KATALOG%20RUANGAN%20III/RUANG%20NAKULA%201.png?updatedAt=.', 'https://ik.imagekit.io/logojkdiy/OJK%20DIY%20-%20KATALOG%20RUANGAN%20UPDATE%20NOVEMBER%202025/RUANG%20NAKULA%202.png?updatedAt=1762162530825', 'https://ik.imagekit.io/logojkdiy/OJK%20DIY%20-%20KATALOG%20RUANGAN%20UPDATE%20NOVEMBER%202025/RUANG%20NAKULA%203.png?updatedAt=1762162529630', 'https://ik.imagekit.io/logojkdiy/OJK%20DIY%20-%20KATALOG%20RUANGAN%20UPDATE%20NOVEMBER%202025/RUANG%20NAKULA%204.png?updatedAt=1762162521382'] },
-            { id: 4, name: "Ruang Sadewa", cap: "8-10 Orang", img: "https://ik.imagekit.io/logojkdiy/KATALOG%20RUANGAN%20OJK%20DIY/OJK%20DIY%20-%20KATALOG%20RUANGAN%20III/RUANG%20SADEWA%201.png?updatedAt=.", gallery: ['https://ik.imagekit.io/logojkdiy/KATALOG%20RUANGAN%20OJK%20DIY/OJK%20DIY%20-%20KATALOG%20RUANGAN%20III/RUANG%20SADEWA%201.png?updatedAt=.', 'https://ik.imagekit.io/logojkdiy/OJK%20DIY%20-%20KATALOG%20RUANGAN%20UPDATE%20NOVEMBER%202025/RUANG%20SADEWA%202.png?updatedAt=1762162531003', 'https://ik.imagekit.io/logojkdiy/OJK%20DIY%20-%20KATALOG%20RUANGAN%20UPDATE%20NOVEMBER%202025/RUANG%20SADEWA%203.png?updatedAt=1762162530938', 'https://ik.imagekit.io/logojkdiy/OJK%20DIY%20-%20KATALOG%20RUANGAN%20UPDATE%20NOVEMBER%202025/RUANG%20SADEWA%204.png?updatedAt=1762162530036'] },
-            { id: 5, name: "Ruang Bima", cap: "20-35 Orang", img: "https://ik.imagekit.io/logojkdiy/KATALOG%20RUANGAN%20OJK%20DIY/OJK%20DIY%20-%20KATALOG%20RUANGAN%20III/RUANG%20BIMA%201.png?updatedAt=.", gallery: ['https://ik.imagekit.io/logojkdiy/KATALOG%20RUANGAN%20OJK%20DIY/OJK%20DIY%20-%20KATALOG%20RUANGAN%20III/RUANG%20BIMA%201.png?updatedAt=.', 'https://ik.imagekit.io/logojkdiy/OJK%20DIY%20-%20KATALOG%20RUANGAN%20UPDATE%20NOVEMBER%202025/RUANG%20BIMA%202.png?updatedAt=1762162530676', 'https://ik.imagekit.io/logojkdiy/OJK%20DIY%20-%20KATALOG%20RUANGAN%20UPDATE%20NOVEMBER%202025/RUANG%20BIMA%203.png?updatedAt=1762162529090', 'https://ik.imagekit.io/logojkdiy/OJK%20DIY%20-%20KATALOG%20RUANGAN%20UPDATE%20NOVEMBER%202025/RUANG%20BIMA%204.png?updatedAt=1762162529098'] },
-            { id: 6, name: "Ruang Arjuna", cap: "8-10 Orang", img: "https://ik.imagekit.io/logojkdiy/KATALOG%20RUANGAN%20OJK%20DIY/OJK%20DIY%20-%20KATALOG%20RUANGAN%20III/RUANG%20ARJUNA%201.png?updatedAt=.", gallery: ['https://ik.imagekit.io/logojkdiy/KATALOG%20RUANGAN%20OJK%20DIY/OJK%20DIY%20-%20KATALOG%20RUANGAN%20III/RUANG%20ARJUNA%201.png?updatedAt=.', 'https://ik.imagekit.io/logojkdiy/OJK%20DIY%20-%20KATALOG%20RUANGAN%20UPDATE%20NOVEMBER%202025/RUANG%20BIMA%202.png?updatedAt=1762162530676', 'https://ik.imagekit.io/logojkdiy/OJK%20DIY%20-%20KATALOG%20RUANGAN%20UPDATE%20NOVEMBER%202025/RUANG%20BIMA%203.png?updatedAt=1762162529090', 'https://ik.imagekit.io/logojkdiy/OJK%20DIY%20-%20KATALOG%20RUANGAN%20UPDATE%20NOVEMBER%202025/RUANG%20BIMA%204.png?updatedAt=1762162529098'] },
+            { id: 3, name: "Ruang Rapat Nakula", cap: "8-10 Orang", img: "https://ik.imagekit.io/logojkdiy/KATALOG%20RUANGAN%20OJK%20DIY/OJK%20DIY%20-%20KATALOG%20RUANGAN%20III/RUANG%20NAKULA%201.png?updatedAt=.", gallery: ['https://ik.imagekit.io/logojkdiy/KATALOG%20RUANGAN%20OJK%20DIY/OJK%20DIY%20-%20KATALOG%20RUANGAN%20III/RUANG%20NAKULA%201.png?updatedAt=.', 'https://ik.imagekit.io/logojkdiy/OJK%20DIY%20-%20KATALOG%20RUANGAN%20UPDATE%20NOVEMBER%202025/RUANG%20NAKULA%202.png?updatedAt=1762162530825', 'https://ik.imagekit.io/logojkdiy/OJK%20DIY%20-%20KATALOG%20RUANGAN%20UPDATE%20NOVEMBER%202025/RUANG%20NAKULA%203.png?updatedAt=1762162529630', 'https://ik.imagekit.io/logojkdiy/OJK%20DIY%20-%20KATALOG%20RUANGAN%20UPDATE%20NOVEMBER%202025/RUANG%20NAKULA%204.png?updatedAt=1762162521382'] },
+            { id: 4, name: "Ruang Rapat Sadewa", cap: "8-10 Orang", img: "https://ik.imagekit.io/logojkdiy/KATALOG%20RUANGAN%20OJK%20DIY/OJK%20DIY%20-%20KATALOG%20RUANGAN%20III/RUANG%20SADEWA%201.png?updatedAt=.", gallery: ['https://ik.imagekit.io/logojkdiy/KATALOG%20RUANGAN%20OJK%20DIY/OJK%20DIY%20-%20KATALOG%20RUANGAN%20III/RUANG%20SADEWA%201.png?updatedAt=.', 'https://ik.imagekit.io/logojkdiy/OJK%20DIY%20-%20KATALOG%20RUANGAN%20UPDATE%20NOVEMBER%202025/RUANG%20SADEWA%202.png?updatedAt=1762162531003', 'https://ik.imagekit.io/logojkdiy/OJK%20DIY%20-%20KATALOG%20RUANGAN%20UPDATE%20NOVEMBER%202025/RUANG%20SADEWA%203.png?updatedAt=1762162530938', 'https://ik.imagekit.io/logojkdiy/OJK%20DIY%20-%20KATALOG%20RUANGAN%20UPDATE%20NOVEMBER%202025/RUANG%20SADEWA%204.png?updatedAt=1762162530036'] },
+            { id: 5, name: "Ruang Rapat Bima", cap: "20-35 Orang", img: "https://ik.imagekit.io/logojkdiy/KATALOG%20RUANGAN%20OJK%20DIY/OJK%20DIY%20-%20KATALOG%20RUANGAN%20III/RUANG%20BIMA%201.png?updatedAt=.", gallery: ['https://ik.imagekit.io/logojkdiy/KATALOG%20RUANGAN%20OJK%20DIY/OJK%20DIY%20-%20KATALOG%20RUANGAN%20III/RUANG%20BIMA%201.png?updatedAt=.', 'https://ik.imagekit.io/logojkdiy/OJK%20DIY%20-%20KATALOG%20RUANGAN%20UPDATE%20NOVEMBER%202025/RUANG%20BIMA%202.png?updatedAt=1762162530676', 'https://ik.imagekit.io/logojkdiy/OJK%20DIY%20-%20KATALOG%20RUANGAN%20UPDATE%20NOVEMBER%202025/RUANG%20BIMA%203.png?updatedAt=1762162529090', 'https://ik.imagekit.io/logojkdiy/OJK%20DIY%20-%20KATALOG%20RUANGAN%20UPDATE%20NOVEMBER%202025/RUANG%20BIMA%204.png?updatedAt=1762162529098'] },
+            { id: 6, name: "Ruang Rapat Arjuna", cap: "8-10 Orang", img: "https://ik.imagekit.io/logojkdiy/KATALOG%20RUANGAN%20OJK%20DIY/OJK%20DIY%20-%20KATALOG%20RUANGAN%20III/RUANG%20ARJUNA%201.png?updatedAt=.", gallery: ['https://ik.imagekit.io/logojkdiy/KATALOG%20RUANGAN%20OJK%20DIY/OJK%20DIY%20-%20KATALOG%20RUANGAN%20III/RUANG%20ARJUNA%201.png?updatedAt=.', 'https://ik.imagekit.io/logojkdiy/OJK%20DIY%20-%20KATALOG%20RUANGAN%20UPDATE%20NOVEMBER%202025/RUANG%20BIMA%202.png?updatedAt=1762162530676', 'https://ik.imagekit.io/logojkdiy/OJK%20DIY%20-%20KATALOG%20RUANGAN%20UPDATE%20NOVEMBER%202025/RUANG%20BIMA%203.png?updatedAt=1762162529090', 'https://ik.imagekit.io/logojkdiy/OJK%20DIY%20-%20KATALOG%20RUANGAN%20UPDATE%20NOVEMBER%202025/RUANG%20BIMA%204.png?updatedAt=1762162529098'] },
             { id: 7, name: "Ruang Rekreasi", cap: "30 Orang", img: "https://ik.imagekit.io/logojkdiy/KATALOG%20RUANGAN%20OJK%20DIY/OJK%20DIY%20-%20KATALOG%20RUANGAN%20III/RUANG%20REKREASI%201.png?updatedAt=.", gallery: ['https://ik.imagekit.io/logojkdiy/KATALOG%20RUANGAN%20OJK%20DIY/OJK%20DIY%20-%20KATALOG%20RUANGAN%20III/RUANG%20REKREASI%201.png?updatedAt=.', 'https://ik.imagekit.io/logojkdiy/OJK%20DIY%20-%20KATALOG%20RUANGAN%20UPDATE%20NOVEMBER%202025/RUANG%20REKREASI%202.png?updatedAt=1762162530543', 'https://ik.imagekit.io/logojkdiy/OJK%20DIY%20-%20KATALOG%20RUANGAN%20UPDATE%20NOVEMBER%202025/RUANG%20REKREASI%203.png?updatedAt=1762162526027'] },
             { id: 8, name: "Ballroom Indraprasta", cap: "Flexible", img: "https://ik.imagekit.io/logojkdiy/KATALOG%20RUANGAN%20OJK%20DIY/OJK%20DIY%20-%20KATALOG%20RUANGAN%20III/BALL%20INDRAPRASTA%201.png?updatedAt=.", gallery: ['https://ik.imagekit.io/logojkdiy/KATALOG%20RUANGAN%20OJK%20DIY/OJK%20DIY%20-%20KATALOG%20RUANGAN%20III/BALL%20INDRAPRASTA%201.png?updatedAt=.', 'https://ik.imagekit.io/logojkdiy/OJK%20DIY%20-%20KATALOG%20RUANGAN%20UPDATE%20NOVEMBER%202025/BALL%20INDRAPRASTA%20CLASSROOM.png?updatedAt=1762162520263', 'https://ik.imagekit.io/logojkdiy/OJK%20DIY%20-%20KATALOG%20RUANGAN%20UPDATE%20NOVEMBER%202025/BALL%20INDRAPRASTA%20ROUNDTABLE.png?updatedAt=1762162513892', 'https://ik.imagekit.io/logojkdiy/OJK%20DIY%20-%20KATALOG%20RUANGAN%20UPDATE%20NOVEMBER%202025/BALL%20INDRAPRASTA%20KLASIKAL.png?updatedAt=1762162513759', 'https://ik.imagekit.io/logojkdiy/OJK%20DIY%20-%20KATALOG%20RUANGAN%20UPDATE%20NOVEMBER%202025/BALL%20INDRAPRASTA%20USHAPE.png?updatedAt=1762162513406'] },
             { id: 9, name: "Bale Hinggil", cap: "10-15 Orang", img: "https://ik.imagekit.io/logojkdiy/KATALOG%20RUANGAN%20OJK%20DIY/OJK%20DIY%20-%20KATALOG%20RUANGAN%20III/BALE%20HINGGIL%201.png?updatedAt=.", gallery: ['https://ik.imagekit.io/logojkdiy/KATALOG%20RUANGAN%20OJK%20DIY/OJK%20DIY%20-%20KATALOG%20RUANGAN%20III/BALE%20HINGGIL%201.png?updatedAt=.', 'https://ik.imagekit.io/logojkdiy/OJK%20DIY%20-%20KATALOG%20RUANGAN%20UPDATE%20NOVEMBER%202025/BALE%20HINGGIL%202.png?updatedAt=1762162529314', 'https://ik.imagekit.io/logojkdiy/OJK%20DIY%20-%20KATALOG%20RUANGAN%20UPDATE%20NOVEMBER%202025/BALE%20HINGGIL%203.png?updatedAt=1762162530265', 'https://ik.imagekit.io/logojkdiy/OJK%20DIY%20-%20KATALOG%20RUANGAN%20UPDATE%20NOVEMBER%202025/BALE%20HINGGIL%201.png?updatedAt=1762162527771'] }
@@ -708,7 +841,10 @@
 
         const PROTOKOL_NUMBERS = { PROTOKOL_I: '628123456789', PROTOKOL_II: '628123456789', PROTOKOL_III: '628123456789' };
         const FORM_URLS = { ruang: "https://script.google.com/macros/s/AKfycbzLQ_NOYsBGMFBgaAZA_eYrCSbR1G47LR72aY2jxhGmu9iKelQ2zUPrFLUK24llhS9qPQ/exec", mobil: "https://script.google.com/macros/s/AKfycbx-WYVjSqKFYADRDGnzxrY5WnbkSHWwsec8peUJL2sCqttHJlXI4HVW5HvLDx6Z0ALg/exec" };
-        const CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRVJMsmHkI7xfqrK-7tglJw8CJJhMdQBwvMC9uB4q_T153g2gZ8qL4Kgk-qc3-GZJ3v_Z_R0VeP_iHU/pub?gid=1935698622&single=true&output=csv";
+        const CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRVJMsmHkI7xfqrK-7tglJw8CJJhMdQBwvMC9uB4q_T153g2gZ8qL4Kgk-qc3-GZJ3v_Z_R0VeP_iHU/pub?gid=0&single=true&output=csv";
+        
+        let GLOBAL_AGENDA_DATA = [];
+        let CALENDAR_DATE = new Date(); // Current viewing month for calendar
 
         // --- INIT ---
         document.getElementById('year').textContent = new Date().getFullYear();
@@ -765,7 +901,7 @@
             if (window.scrollY > 20) nav.classList.add('shadow-md'); else nav.classList.remove('shadow-md');
         });
 
-        // --- CSV PARSER (UPDATED) ---
+        // --- CSV PARSING & AGENDA LOGIC ---
         function parseCSV(str) {
             const arr = [];
             let quote = false;
@@ -782,131 +918,549 @@
             return arr;
         }
 
-        async function loadCSV() {
+        // Parse Date Helper (DD/MM/YYYY)
+        function parseDate(dateStr) {
+            if(!dateStr) return null;
+            const parts = dateStr.split('/');
+            if(parts.length === 3) {
+                return new Date(parts[2], parts[1] - 1, parts[0]);
+            }
+            return new Date(dateStr); 
+        }
+
+        async function loadCSV(silent = false) {
             try {
                 const response = await fetch(CSV_URL);
                 const text = await response.text();
-                const data = parseCSV(text);
+                const rawData = parseCSV(text);
                 
-                // MAPPING BERDASARKAN CONTOH DATA ANDA:
-                // Col 0: Tanggal Mulai
-                // Col 1: Tanggal Selesai
-                // Col 2: Jam Mulai
-                // Col 3: Jam Selesai
-                // Col 4: Kegiatan
-                // Col 5: Ruangan
+                const today = new Date();
+                today.setHours(0,0,0,0);
+
+                GLOBAL_AGENDA_DATA = [];
+
+                // Mapping Header: 
+                // 3: Tanggal, 5: Jam Mulai, 6: Jam Selesai, 7: Kegiatan, 11: Ruangan, 14: Status, 1: PIC, 2: Dept
+                // NOTE: Swapping indices for Contact/Notes as requested.
+                // Assuming Contact was previously 8 and Notes was 10. Swapping them.
                 
-                const tableBody = document.getElementById('csv-table-body');
-                let html = '';
-                
-                // Skip header (i=1)
-                for(let i=1; i<data.length; i++) {
-                    const row = data[i];
-                    if(!row || row.length < 5) continue; // Minimal ada 5 kolom terisi
+                for(let i=1; i<rawData.length; i++) {
+                    const row = rawData[i];
+                    if(!row || row.length < 10) continue;
+
+                    const status = row[14] || 'Pending'; 
+                    // FILTER: Hapus status "Ditolak"
+                    if(status && (status.toLowerCase().includes('tolak') || status.toLowerCase().includes('reject'))) continue;
+
+                    const tglMulai = row[3]; 
+                    const jamMulai = row[5];
+                    const jamSelesai = row[6];
+                    const kegiatan = row[7];
+                    const pic = row[1];
+                    const dept = row[2];
+                    const ruangan = row[11];
+
+                    // FIX: Swapping columns based on user feedback
+                    const contact = row[10] || '-'; // Was row[8]
+                    const notes = row[8] || '-';    // Was row[10]
                     
-                    const tglMulai = row[0] || '-';
-                    const tglSelesai = row[1] || ''; // Data tanggal selesai
-                    const jamMulai = row[2] || '';
-                    const jamSelesai = row[3] || '';
-                    const kegiatan = row[4] || '-';
-                    const ruangan = row[5] || '-';
+                    const layout = row[12] || '-'; // Assuming Layout is col 12
+                    const equipment = row[13] || '-'; // Assuming Equipment is col 13
 
-                    // LOGIKA TAMPILAN TANGGAL
-                    let tanggalDisplay = tglMulai;
-                    // Jika tanggal selesai ada dan TIDAK SAMA dengan tanggal mulai, tampilkan range
-                    if(tglSelesai && tglSelesai.trim() !== '' && tglSelesai !== tglMulai) {
-                        tanggalDisplay = `${tglMulai} - ${tglSelesai}`;
+                    const eventDate = parseDate(tglMulai);
+                    
+                    if(eventDate) {
+                        GLOBAL_AGENDA_DATA.push({
+                            id: i,
+                            tglMulai, jamMulai, jamSelesai, kegiatan, ruangan, status, pic, dept,
+                            contact, layout, equipment, notes,
+                            rawDate: eventDate 
+                        });
+                    }
+                }
+
+                // Sort by date then time
+                GLOBAL_AGENDA_DATA.sort((a,b) => {
+                    if (a.rawDate.getTime() === b.rawDate.getTime()) {
+                        return parseFloat(a.jamMulai.replace(':','.')) - parseFloat(b.jamMulai.replace(':','.'));
+                    }
+                    return a.rawDate - b.rawDate;
+                });
+
+                if(!silent) {
+                    renderAgenda(); 
+                    renderCalendar(); // Render Calendar Grid
+                    renderTicker(); // Render Pending Items
+                }
+                
+            } catch (err) {
+                console.error("Error CSV:", err);
+                if(!silent) document.getElementById('csv-table-body').innerHTML = '<tr><td colspan="6" class="px-6 py-6 text-center text-red-500">Gagal memuat jadwal.</td></tr>';
+            }
+        }
+
+        // --- AGENDA VIEW CONTROLLER ---
+        function setAgendaView(mode) {
+            const btnList = document.getElementById('btnViewList');
+            const btnCard = document.getElementById('btnViewCard');
+            const viewList = document.getElementById('agenda-view-list');
+            const viewCard = document.getElementById('agenda-view-card');
+
+            if(mode === 'list') {
+                btnList.classList.add('bg-primary-50', 'dark:bg-primary-900/30', 'text-primary-600');
+                btnList.classList.remove('text-slate-500');
+                btnCard.classList.remove('bg-primary-50', 'dark:bg-primary-900/30', 'text-primary-600');
+                btnCard.classList.add('text-slate-500');
+                viewList.classList.remove('hidden');
+                viewCard.classList.add('hidden');
+            } else {
+                btnCard.classList.add('bg-primary-50', 'dark:bg-primary-900/30', 'text-primary-600');
+                btnCard.classList.remove('text-slate-500');
+                btnList.classList.remove('bg-primary-50', 'dark:bg-primary-900/30', 'text-primary-600');
+                btnList.classList.add('text-slate-500');
+                viewList.classList.add('hidden');
+                viewCard.classList.remove('hidden');
+            }
+        }
+
+        function renderAgenda() {
+            // 1. Render Table (List) - ONLY FUTURE EVENTS from Today
+            const today = new Date(); today.setHours(0,0,0,0);
+            const futureEvents = GLOBAL_AGENDA_DATA.filter(ev => ev.rawDate >= today);
+
+            const tbody = document.getElementById('csv-table-body');
+            let htmlList = '';
+
+            if(futureEvents.length === 0) {
+                htmlList = '<tr><td colspan="6" class="px-6 py-10 text-center text-slate-500">Tidak ada kegiatan mendatang.</td></tr>';
+            } else {
+                futureEvents.forEach(item => {
+                    let statusClass = "bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300";
+                    if(item.status && item.status.toLowerCase().includes('setuju')) {
+                        statusClass = "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300";
                     }
 
-                    // Format Jam "08:00 - 15:00"
-                    let waktuDisplay = jamMulai;
-                    if(jamSelesai && jamSelesai !== jamMulai) {
-                        waktuDisplay += ` - ${jamSelesai}`;
-                    }
-
-                    html += `
-                        <tr class="table-row-hover bg-white dark:bg-dark-card border-b border-slate-50 dark:border-slate-800/50 transition-colors">
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <span class="font-medium text-slate-900 dark:text-white bg-slate-100 dark:bg-slate-700/50 px-2.5 py-1 rounded text-xs">${tanggalDisplay}</span>
-                            </td>
-                            <td class="px-6 py-4 text-sm text-slate-500 dark:text-slate-400 font-mono">${waktuDisplay}</td>
-                            <td class="px-6 py-4">
-                                <div class="text-sm font-semibold text-primary-700 dark:text-primary-400">${kegiatan}</div>
-                            </td>
-                            <td class="px-6 py-4 text-sm text-slate-600 dark:text-slate-400 flex items-center gap-1.5">
-                                <svg class="w-3.5 h-3.5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-                                ${ruangan}
+                    htmlList += `
+                        <tr class="table-row-hover bg-white dark:bg-dark-card border-b border-slate-50 dark:border-slate-800/50">
+                            <td class="px-6 py-4"><span class="bg-slate-100 dark:bg-slate-700/50 px-2 py-1 rounded text-xs font-medium">${item.tglMulai}</span></td>
+                            <td class="px-6 py-4 text-sm font-mono text-slate-500">${item.jamMulai} - ${item.jamSelesai}</td>
+                            <td class="px-6 py-4 text-sm font-semibold text-primary-700 dark:text-primary-400">${item.kegiatan}</td>
+                            <td class="px-6 py-4 text-sm text-slate-500">${item.pic || '-'} <br><span class="text-[10px] opacity-70">${item.dept || ''}</span></td>
+                            <td class="px-6 py-4 text-sm text-slate-600 dark:text-slate-400 font-medium">${item.ruangan}</td>
+                            <td class="px-6 py-4 text-center">
+                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${statusClass}">
+                                    ${item.status || 'Pending'}
+                                </span>
                             </td>
                         </tr>
                     `;
-                }
-                
-                if(html) {
-                    tableBody.innerHTML = html;
-                } else {
-                    tableBody.innerHTML = '<tr><td colspan="4" class="px-6 py-12 text-center text-slate-500 text-sm">Tidak ada kegiatan terjadwal saat ini.</td></tr>';
-                }
-            } catch (err) {
-                console.error("CSV Error:", err);
-                document.getElementById('csv-table-body').innerHTML = '<tr><td colspan="4" class="px-6 py-12 text-center text-red-500 text-sm">Gagal memuat data jadwal. Silakan cek koneksi internet Anda.</td></tr>';
+                });
             }
-        }
-        loadCSV();
+            tbody.innerHTML = htmlList;
 
-        // --- RENDERERS ---
-        const roomsContainer = document.getElementById('roomsContainer');
-        ROOMS_DATA.forEach(room => {
-            roomsContainer.innerHTML += `
-                <div class="group bg-white dark:bg-dark-card rounded-2xl overflow-hidden border border-slate-100 dark:border-dark-border shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
-                    <div class="aspect-[4/3] overflow-hidden relative">
-                        <img src="${room.img}" alt="${room.name}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" onerror="this.src='https://via.placeholder.com/400x300?text=No+Image'">
-                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent opacity-80"></div>
-                        <div class="absolute bottom-4 left-4">
-                            <span class="text-white text-[10px] font-bold uppercase tracking-wider bg-white/20 backdrop-blur-sm border border-white/20 px-2 py-1 rounded">${room.cap}</span>
-                        </div>
-                    </div>
-                    <div class="p-5">
-                        <h3 class="font-heading font-bold text-lg text-slate-900 dark:text-white mb-4 line-clamp-1" title="${room.name}">${room.name}</h3>
-                        <div class="flex gap-2">
-                            <button onclick="openGallery('${room.name}', ${room.id})" class="flex-1 py-2 rounded-lg bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 font-medium hover:bg-slate-100 dark:hover:bg-slate-700 transition text-xs">Lihat Foto</button>
-                            <button onclick="openFormModal('ruang')" class="flex-1 py-2 rounded-lg bg-primary-600 text-white font-medium hover:bg-primary-700 transition text-xs shadow-md shadow-primary-600/20">Pinjam</button>
-                        </div>
-                    </div>
-                </div>
-            `;
-        });
+            // 2. Render Card Grid (Grouped by Room)
+            const containerCard = document.getElementById('agenda-view-card');
+            const roomGroups = {};
+            
+            ROOMS_DATA.forEach(r => { roomGroups[r.name] = []; });
 
-        // Hotels
-        let hotelFiltered = [...HOTELS_DATA];
-        const hotelTrack = document.getElementById('hotelTrack');
-        
-        function renderHotels() {
-            hotelTrack.innerHTML = '';
-            hotelFiltered.forEach(h => {
-                hotelTrack.innerHTML += `
-                    <div class="snap-start shrink-0 w-[300px] bg-white dark:bg-dark-card rounded-2xl border border-slate-100 dark:border-dark-border overflow-hidden shadow-sm hover:shadow-lg transition-all group cursor-pointer" onclick="openHotelDetail('${h.id}')">
-                        <div class="h-44 overflow-hidden relative">
-                            <img src="${h.img}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://via.placeholder.com/400x250?text=No+Image'">
-                            <div class="absolute top-3 right-3 bg-white/90 dark:bg-black/80 backdrop-blur px-2 py-0.5 rounded-md text-[10px] font-bold text-yellow-600 dark:text-yellow-400 shadow-sm border border-black/5">
-                                ⭐️ ${h.stars}
-                            </div>
+            futureEvents.forEach(item => {
+                // Fuzzy matching for "Nakula" in "Ruang Rapat Nakula"
+                const matchedRoom = ROOMS_DATA.find(r => 
+                    item.ruangan.toLowerCase().includes(r.name.toLowerCase()) || 
+                    r.name.toLowerCase().includes(item.ruangan.toLowerCase()) ||
+                    (r.name.includes('Nakula') && item.ruangan.includes('Nakula')) || 
+                    (r.name.includes('Sadewa') && item.ruangan.includes('Sadewa')) ||
+                    (r.name.includes('Bima') && item.ruangan.includes('Bima')) ||
+                    (r.name.includes('Arjuna') && item.ruangan.includes('Arjuna'))
+                );
+
+                if(matchedRoom) {
+                    roomGroups[matchedRoom.name].push(item);
+                } else {
+                    if(!roomGroups[item.ruangan]) roomGroups[item.ruangan] = [];
+                    roomGroups[item.ruangan].push(item);
+                }
+            });
+
+            let htmlCard = '';
+            for (const [room, events] of Object.entries(roomGroups)) {
+                if(!room) continue;
+                htmlCard += `
+                    <div class="bg-white dark:bg-dark-card p-5 rounded-2xl border border-slate-100 dark:border-slate-800 shadow-sm hover:shadow-md transition flex flex-col h-full cursor-pointer hover:border-primary-300 dark:hover:border-primary-700 group" onclick="openRoomSchedule('${room}')">
+                        <div class="flex justify-between items-center mb-4 pb-3 border-b border-slate-50 dark:border-slate-800">
+                            <h4 class="font-bold text-lg text-primary-700 dark:text-primary-400 truncate pr-2">${room}</h4>
+                            <span class="text-xs bg-slate-100 dark:bg-slate-700 px-2 py-1 rounded text-slate-500 whitespace-nowrap">${events.length} Agenda</span>
                         </div>
-                        <div class="p-4">
-                            <h3 class="font-heading font-bold text-base text-slate-900 dark:text-white truncate mb-1">${h.name}</h3>
-                            <p class="text-slate-500 dark:text-slate-400 text-xs mb-3 flex items-center gap-1 truncate">
-                                <svg class="w-3 h-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-                                ${h.area}
-                            </p>
-                            <div class="flex flex-wrap gap-1.5">
-                                ${h.amenities.slice(0,3).map(a => `<span class="px-2 py-0.5 bg-slate-50 dark:bg-slate-800/80 text-slate-500 dark:text-slate-400 text-[10px] font-medium rounded border border-slate-100 dark:border-slate-700">${a}</span>`).join('')}
+                        <div class="space-y-4 flex-1">
+                `;
+                if(events.length === 0) {
+                     htmlCard += `<div class="text-center py-6 text-sm text-slate-400 italic">Tidak ada agenda dekat.</div>`;
+                } else {
+                    events.slice(0, 3).forEach(ev => {
+                        let statusColor = "text-yellow-600";
+                        if(ev.status && ev.status.toLowerCase().includes('setuju')) statusColor = "text-green-600";
+                        
+                        htmlCard += `
+                            <div class="group/item border-l-2 border-slate-200 pl-3 hover:border-primary-500 transition-colors">
+                                <div class="flex justify-between items-start">
+                                    <span class="text-[10px] font-bold text-slate-400 uppercase">${ev.tglMulai.substring(0,5)}</span>
+                                    <span class="text-[10px] ${statusColor} font-bold uppercase">${ev.status || 'Pending'}</span>
+                                </div>
+                                <h5 class="font-bold text-slate-800 dark:text-slate-200 text-sm mt-0.5 line-clamp-1" title="${ev.kegiatan}">${ev.kegiatan}</h5>
+                                <div class="flex items-center gap-2 text-xs text-slate-500 mt-1 font-mono">
+                                    ${ev.jamMulai} - ${ev.jamSelesai}
+                                </div>
                             </div>
+                        `;
+                    });
+                }
+                if(events.length > 3) htmlCard += `<div class="text-center pt-2"><span class="text-xs text-primary-600 font-medium">+ ${events.length - 3} lainnya</span></div>`;
+                htmlCard += `
+                        </div>
+                        <div class="mt-4 pt-3 border-t border-slate-50 dark:border-slate-800 text-center">
+                            <span class="text-xs font-bold text-slate-400 group-hover:text-primary-600 transition">Lihat Detail & Ketersediaan &rarr;</span>
                         </div>
                     </div>
                 `;
-            });
+            }
+            containerCard.innerHTML = htmlCard;
         }
-        renderHotels();
 
+        // --- CUSTOM CALENDAR LOGIC ---
+        function changeMonth(delta) {
+            CALENDAR_DATE.setMonth(CALENDAR_DATE.getMonth() + delta);
+            renderCalendar();
+        }
+        function goToToday() {
+            CALENDAR_DATE = new Date();
+            renderCalendar();
+        }
+
+        function renderCalendar() {
+            const year = CALENDAR_DATE.getFullYear();
+            const month = CALENDAR_DATE.getMonth();
+            
+            // Update Header
+            const monthNames = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
+            document.getElementById('cal-month-year').textContent = `${monthNames[month]} ${year}`;
+
+            const firstDay = new Date(year, month, 1);
+            const lastDay = new Date(year, month + 1, 0);
+            const daysInMonth = lastDay.getDate();
+            const startDayIndex = firstDay.getDay(); // 0 = Sunday
+
+            const grid = document.getElementById('calendar-grid');
+            let html = '';
+
+            // Empty cells for previous month padding
+            for(let i=0; i < startDayIndex; i++) {
+                html += `<div class="bg-slate-50 dark:bg-slate-800/30 rounded min-h-[140px]"></div>`;
+            }
+
+            // Days
+            for(let day=1; day <= daysInMonth; day++) {
+                const currentDayDate = new Date(year, month, day);
+                const isToday = new Date().toDateString() === currentDayDate.toDateString();
+                
+                // Filter events for this day - APPROVED ONLY
+                const dayEvents = GLOBAL_AGENDA_DATA.filter(ev => 
+                    ev.rawDate.getFullYear() === year && 
+                    ev.rawDate.getMonth() === month && 
+                    ev.rawDate.getDate() === day &&
+                    ev.status.toLowerCase().includes('setuju')
+                );
+
+                // SORT BY TIME
+                dayEvents.sort((a,b) => parseFloat(a.jamMulai.replace(':','.')) - parseFloat(b.jamMulai.replace(':','.')));
+
+                let eventHtml = '';
+                // SHOW ALL EVENTS (No Slicing) - Box grows automatically due to grid-auto-rows
+                dayEvents.forEach(ev => {
+                    // Format: Jam - Ruangan (Short) - Kegiatan
+                    // Clean room name (remove "Ruang Rapat") for shorter display
+                    let shortRoom = ev.ruangan.replace('Ruang Rapat ', '').replace('Ballroom ', '');
+                    
+                    eventHtml += `
+                        <div onclick="openEventModal(${ev.id})" class="group text-[10px] leading-tight bg-green-100 text-green-800 dark:bg-green-900/40 dark:text-green-200 px-1.5 py-1 rounded mb-1 cursor-pointer hover:bg-green-200 dark:hover:bg-green-800 border-l-2 border-green-500 transition shadow-sm">
+                            <div class="font-mono font-bold text-green-700 dark:text-green-300 opacity-80 mb-0.5">${ev.jamMulai}</div>
+                            <div class="font-bold truncate">${shortRoom}</div>
+                            <div class="truncate opacity-90">${ev.kegiatan}</div>
+                        </div>
+                    `;
+                });
+
+                html += `
+                    <div class="calendar-day-hover bg-white dark:bg-dark-card border border-slate-200 dark:border-slate-700 rounded p-1.5 flex flex-col relative min-h-[140px] ${isToday ? 'ring-2 ring-primary-500 z-20' : ''}">
+                        <span class="text-sm font-bold ${isToday ? 'bg-primary-600 text-white w-6 h-6 flex items-center justify-center rounded-full shadow-md' : 'text-slate-700 dark:text-slate-300'} mb-1">${day}</span>
+                        <div class="flex-1 flex flex-col justify-start overflow-hidden">
+                            ${eventHtml}
+                        </div>
+                    </div>
+                `;
+            }
+            grid.innerHTML = html;
+        }
+
+        // --- TICKER / MARQUEE LOGIC (PENDING EVENTS) ---
+        function renderTicker() {
+            const today = new Date(); today.setHours(0,0,0,0);
+            const pendingEvents = GLOBAL_AGENDA_DATA.filter(ev => 
+                ev.rawDate >= today && 
+                (!ev.status || ev.status.toLowerCase() === 'pending' || ev.status === '')
+            );
+
+            const ticker = document.getElementById('pending-ticker');
+            if(pendingEvents.length === 0) {
+                ticker.innerHTML = '<span class="text-sm text-slate-500 italic">Tidak ada kegiatan pending saat ini.</span>';
+            } else {
+                ticker.innerHTML = pendingEvents.map(ev => `
+                    <div class="flex items-center gap-2">
+                        <span class="text-yellow-600 dark:text-yellow-400 font-bold text-xs">[PENDING]</span>
+                        <span class="text-slate-700 dark:text-slate-300 text-sm font-medium">${ev.tglMulai} - ${ev.kegiatan} (${ev.ruangan})</span>
+                        <span class="text-slate-400 mx-4">|</span>
+                    </div>
+                `).join('');
+            }
+        }
+
+        // --- EVENT DETAIL POPUP (FINAL REVISED STRUCTURE) ---
+        const eventModal = document.getElementById('eventDetailModal');
+        function openEventModal(id) {
+            const ev = GLOBAL_AGENDA_DATA.find(x => x.id === id);
+            if(!ev) return;
+            
+            // Header Info
+            document.getElementById('modalHeaderTitle').textContent = ev.kegiatan;
+            const options = { weekday: 'long', day: 'numeric', month: 'long' };
+            const dateStr = ev.rawDate.toLocaleDateString('id-ID', options);
+            document.getElementById('modalHeaderTime').textContent = `${dateStr} • ${ev.jamMulai} - ${ev.jamSelesai}`;
+            
+            // Body Info
+            document.getElementById('modalBodyTitle').textContent = ev.kegiatan;
+            document.getElementById('modalBodyPIC').textContent = ev.pic || '-';
+            document.getElementById('modalBodyDept').textContent = ev.dept || '-';
+            
+            // Phone Link Logic
+            const contactEl = document.getElementById('modalBodyContact');
+            contactEl.textContent = ev.contact || '-';
+            if(ev.contact && ev.contact !== '-') {
+                contactEl.onclick = () => window.open(`https://wa.me/${ev.contact.replace(/\D/g,'')}`, '_blank');
+                contactEl.title = "Klik untuk Chat WhatsApp";
+            } else {
+                contactEl.onclick = null;
+                contactEl.title = "";
+            }
+
+            document.getElementById('modalBodyRoom').textContent = ev.ruangan;
+            document.getElementById('modalBodyLayout').textContent = ev.layout || 'Sesuai Request'; 
+            document.getElementById('modalBodyEquip').textContent = ev.equipment || 'Standar Meeting (Proyektor, Sound, Mic)';
+            document.getElementById('modalBodyNotes').textContent = ev.notes || '-';
+
+            eventModal.classList.remove('hidden');
+            eventModal.classList.add('flex');
+        }
+        function closeEventModal() { eventModal.classList.add('hidden'); eventModal.classList.remove('flex'); }
+
+        // --- RENDER CATALOG ---
+        const roomsContainer = document.getElementById('roomsContainer');
+        roomsContainer.innerHTML = ROOMS_DATA.map(room => `
+            <div class="group bg-white dark:bg-dark-card rounded-2xl overflow-hidden border border-slate-100 dark:border-dark-border shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                <div class="aspect-[4/3] overflow-hidden relative cursor-pointer" onclick="openRoomSchedule('${room.name}')">
+                    <img src="${room.img}" alt="${room.name}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" onerror="this.src='https://via.placeholder.com/400x300?text=No+Image'">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent opacity-80"></div>
+                    <div class="absolute bottom-4 left-4">
+                        <span class="text-white text-[10px] font-bold uppercase tracking-wider bg-white/20 backdrop-blur-sm border border-white/20 px-2 py-1 rounded">${room.cap}</span>
+                    </div>
+                </div>
+                <div class="p-5">
+                    <div class="flex justify-between items-start mb-2">
+                         <h3 class="font-heading font-bold text-lg text-slate-900 dark:text-white mb-4 line-clamp-1" title="${room.name}">${room.name}</h3>
+                         <button onclick="openGallery('${room.name}', ${room.id})" class="text-slate-400 hover:text-primary-600" title="Lihat Foto"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg></button>
+                    </div>
+                    <div class="flex gap-2">
+                        <button onclick="openRoomSchedule('${room.name}')" class="flex-1 py-2 rounded-lg bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 font-medium hover:bg-slate-200 dark:hover:bg-slate-600 transition text-xs flex items-center justify-center gap-2">
+                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                            Cek Jadwal
+                        </button>
+                        <button onclick="openFormModal('ruang')" class="flex-1 py-2 rounded-lg bg-primary-600 text-white font-medium hover:bg-primary-700 transition text-xs shadow-md shadow-primary-600/20">
+                            Reservasi
+                        </button>
+                    </div>
+                </div>
+            </div>
+        `).join('');
+
+        // --- HELPER TIME FORMAT ---
+        function formatTime(val) {
+            let h = Math.floor(val);
+            let m = Math.round((val - h) * 60);
+            return `${h.toString().padStart(2,'0')}:${m.toString().padStart(2,'0')}`;
+        }
+
+        // --- ROOM SCHEDULE POPUP LOGIC ---
+        function openRoomSchedule(roomName) {
+            document.getElementById('scheduleRoomName').textContent = roomName;
+            
+            // Smart Filter: Match "Ruang Rapat Nakula" with "Ruang Nakula" or "Nakula" in CSV
+            const roomEvents = GLOBAL_AGENDA_DATA.filter(item => 
+                item.ruangan.toLowerCase().includes(roomName.toLowerCase()) || 
+                roomName.toLowerCase().includes(item.ruangan.toLowerCase()) ||
+                (roomName.includes('Nakula') && item.ruangan.includes('Nakula')) ||
+                (roomName.includes('Sadewa') && item.ruangan.includes('Sadewa')) ||
+                (roomName.includes('Bima') && item.ruangan.includes('Bima')) ||
+                (roomName.includes('Arjuna') && item.ruangan.includes('Arjuna'))
+            );
+
+            // 1. Availability Logic (Today & Tomorrow)
+            const today = new Date(); today.setHours(0,0,0,0);
+            const tomorrow = new Date(today); tomorrow.setDate(today.getDate() + 1);
+            const checkDays = [today, tomorrow];
+            const targetIds = ['availToday', 'availTomorrow'];
+            const displayIds = ['dateTodayDisplay', 'dateTomorrowDisplay'];
+
+            checkDays.forEach((day, index) => {
+                document.getElementById(displayIds[index]).textContent = day.toLocaleDateString('id-ID', { day: 'numeric', month: 'short' });
+                const dayEvents = roomEvents.filter(ev => ev.rawDate.getTime() === day.getTime() && ev.status.toLowerCase().includes('setuju'));
+                dayEvents.sort((a,b) => parseFloat(a.jamMulai.replace(':','.')) - parseFloat(b.jamMulai.replace(':','.')));
+                
+                let current = 6.0; // 06:00
+                let gaps = [];
+                
+                dayEvents.forEach(ev => {
+                    let start = parseFloat(ev.jamMulai.replace(':','.'));
+                    let end = parseFloat(ev.jamSelesai.replace(':','.'));
+                    if(start > current) {
+                         if(start - current >= 0.5) gaps.push(`${formatTime(current)} - ${formatTime(start)}`);
+                    }
+                    current = Math.max(current, end);
+                });
+                if(current < 22.0) gaps.push(`${formatTime(current)} - 22:00`);
+
+                const targetEl = document.getElementById(targetIds[index]);
+                if(gaps.length > 0) {
+                    targetEl.innerHTML = gaps.map(g => `<button onclick="closeRoomSchedule(); openFormModal('ruang');" class="bg-green-50 hover:bg-green-100 text-green-700 border border-green-200 text-[10px] font-bold px-2 py-1.5 rounded transition shadow-sm">${g}</button>`).join(' ');
+                } else {
+                    targetEl.innerHTML = `<span class="text-xs text-red-500 italic font-medium bg-red-50 px-2 py-1 rounded">Penuh / Full</span>`;
+                }
+            });
+
+            // 2. List Existing Events
+            const listContainer = document.getElementById('roomScheduleList');
+            const futureRoomEvents = roomEvents.filter(ev => ev.rawDate >= today && ev.status.toLowerCase().includes('setuju'));
+            
+            if(futureRoomEvents.length === 0) {
+                listContainer.innerHTML = `<div class="text-center py-8 bg-slate-50 dark:bg-slate-800/30 rounded-xl border border-dashed border-slate-200 dark:border-slate-700"><p class="text-slate-500 font-medium text-sm">Belum ada agenda terkonfirmasi.</p></div>`;
+            } else {
+                listContainer.innerHTML = futureRoomEvents.map(ev => `
+                    <div class="flex items-start gap-4 p-3 rounded-lg border border-slate-100 dark:border-slate-800 bg-white dark:bg-dark-card shadow-sm hover:border-primary-200 transition">
+                        <div class="flex-shrink-0 w-12 text-center pt-0.5">
+                            <span class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider">${ev.tglMulai.substring(0,2)}</span>
+                            <span class="block text-xs font-bold text-slate-800 dark:text-white uppercase">${ev.tglMulai.substring(3,6)}</span>
+                        </div>
+                        <div class="flex-1 border-l-2 border-slate-100 dark:border-slate-700 pl-3">
+                            <h4 class="font-bold text-sm text-slate-900 dark:text-white leading-snug">${ev.kegiatan}</h4>
+                            <div class="flex flex-wrap items-center gap-3 text-xs text-slate-500 mt-1">
+                                <span class="flex items-center gap-1 font-mono bg-slate-100 dark:bg-slate-700 px-1.5 py-0.5 rounded text-[10px]">${ev.jamMulai} - ${ev.jamSelesai}</span>
+                                <span class="text-[10px] text-slate-400">PIC: ${ev.pic || '-'}</span>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            const modal = document.getElementById('roomScheduleModal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+        function closeRoomSchedule() { const modal = document.getElementById('roomScheduleModal'); modal.classList.add('hidden'); modal.classList.remove('flex'); }
+
+        // --- UTILS (Gallery, Form, Theme) ---
+        let currentGallery = []; let galleryIdx = 0;
+        const galleryModal = document.getElementById('galleryModal');
+        const galleryTrack = document.getElementById('galleryTrack');
+
+        function openGallery(title, roomId) {
+            const room = ROOMS_DATA.find(r => r.id === roomId);
+            const images = room.gallery && room.gallery.length > 0 ? room.gallery : [room.img];
+            currentGallery = images; galleryIdx = 0;
+            document.getElementById('galleryTitle').textContent = title;
+            galleryTrack.innerHTML = images.map(src => `<div class="shrink-0 w-full h-full flex items-center justify-center bg-black"><img src="${src}" class="max-h-full max-w-full object-contain"></div>`).join('');
+            galleryModal.classList.remove('hidden'); galleryModal.classList.add('flex');
+            updateGalleryPos();
+        }
+        function closeGallery() { galleryModal.classList.add('hidden'); galleryModal.classList.remove('flex'); }
+        function gallerySlide(dir) { galleryIdx = Math.max(0, Math.min(currentGallery.length - 1, galleryIdx + dir)); updateGalleryPos(); }
+        function updateGalleryPos() { galleryTrack.style.transform = `translateX(-${galleryIdx * 100}%)`; }
+
+        const formModal = document.getElementById('formModal');
+        const formIframe = document.getElementById('form-iframe');
+        const formLoading = document.getElementById('formLoading');
+        function openFormModal(type) {
+            document.getElementById('formTitle').textContent = type === 'mobil' ? 'Peminjaman Mobil Dinas' : 'Peminjaman Ruang Rapat';
+            formLoading.style.display = 'flex'; formIframe.style.opacity = '0';
+            formIframe.src = FORM_URLS[type];
+            formIframe.onload = () => { formLoading.style.display = 'none'; formIframe.style.opacity = '1'; };
+            formModal.classList.remove('hidden'); formModal.classList.add('flex');
+        }
+        function closeFormModal() { formModal.classList.add('hidden'); formModal.classList.remove('flex'); formIframe.src = ''; }
+
+        const hotelModal = document.getElementById('hotelModal');
+        function openHotelDetail(id) {
+            const h = HOTELS_DATA.find(x => x.id === id);
+            if(!h) return;
+            document.getElementById('hotelTitle').textContent = h.name;
+            document.getElementById('hotelDetail').innerHTML = `
+                <p><strong>Kelas:</strong> ⭐️ ${h.stars} (${h.rating})</p>
+                <p><strong>Area:</strong> ${h.area}</p>
+                <p><strong>Alamat:</strong> ${h.address}</p>
+                <p><strong>Fasilitas:</strong> ${h.amenities.join(', ')}</p>
+                <a href="${h.link}" target="_blank" class="inline-block mt-2 text-primary-600 hover:underline">Kunjungi Website</a>
+            `;
+            document.getElementById('hotelContact').innerHTML = `<p>${h.phone}</p>`;
+            document.getElementById('hotelNotes').textContent = h.notes || "Tarif khusus OJK berlaku dengan menunjukkan ID Card.";
+            const gallery = document.getElementById('hotelGallery');
+            gallery.innerHTML = [1,2,3].map(i => `<img src="${h.img}" class="w-full h-24 object-cover rounded-lg">`).join('');
+            hotelModal.classList.remove('hidden'); hotelModal.classList.add('flex');
+        }
+        function closeHotelModal() { hotelModal.classList.add('hidden'); hotelModal.classList.remove('flex'); }
+
+        const protokolModal = document.getElementById('protokolModal');
+        function openProtokolModal() { protokolModal.classList.remove('hidden'); protokolModal.classList.add('flex'); }
+        function closeProtokolModal() { protokolModal.classList.add('hidden'); protokolModal.classList.remove('flex'); }
+        function openWhatsApp(key){
+             const num = PROTOKOL_NUMBERS[key] || '';
+             if(!num){ alert('Nomor WhatsApp belum diisi oleh admin.'); return; }
+             window.open(`https://wa.me/${num}`, '_blank');
+        }
+        function downloadGuide() { alert("Panduan sedang diunduh..."); }
+
+        // Start & Auto Refresh
+        window.addEventListener('DOMContentLoaded', () => {
+            loadCSV();
+            renderHotels();
+            renderVendors();
+            setInterval(() => loadCSV(true), 60000); // 60s Refresh
+        });
+
+        // Hotels Logic
+        let hotelFiltered = [...HOTELS_DATA];
+        const hotelTrack = document.getElementById('hotelTrack');
+        function renderHotels() {
+            hotelTrack.innerHTML = hotelFiltered.map(h => `
+                <div class="snap-start shrink-0 w-[280px] bg-white dark:bg-dark-card rounded-xl border border-slate-100 dark:border-dark-border overflow-hidden cursor-pointer hover:shadow-lg transition" onclick="openHotelDetail('${h.id}')">
+                    <img src="${h.img}" class="h-40 w-full object-cover" onerror="this.src='https://via.placeholder.com/280x160'">
+                    <div class="p-4">
+                        <div class="flex justify-between items-start mb-1">
+                            <h4 class="font-bold text-sm text-slate-800 dark:text-white truncate pr-2">${h.name}</h4>
+                            <span class="text-[10px] bg-yellow-100 text-yellow-700 px-1.5 rounded font-bold">★${h.stars}</span>
+                        </div>
+                        <p class="text-xs text-slate-500">${h.area}</p>
+                    </div>
+                </div>
+            `).join('');
+        }
+        function scrollHotels(dir) { document.getElementById('hotelTrack').scrollBy({ left: dir * 300, behavior: 'smooth' }); }
         function filterHotels(type) {
             document.querySelectorAll('#hotel-partner button').forEach(b => {
                 if(b.textContent.includes(type) || (type==='all' && b.textContent === 'Semua')) {
@@ -926,25 +1480,24 @@
             renderHotels();
         }
         document.getElementById('hotelSearch').addEventListener('input', () => filterHotels('all'));
-        function scrollHotels(dir) { hotelTrack.scrollBy({ left: dir * 320, behavior: 'smooth' }); }
 
-        // Vendors
+        // Vendor Logic
         let currentVendorTab = 'snack';
+        const vList = document.getElementById('vendorList');
         function renderVendors() {
-            const list = document.getElementById('vendorList');
             const data = VENDOR_DATA[currentVendorTab];
             const btnSnack = document.getElementById('tabSnack');
             const btnCatering = document.getElementById('tabCatering');
             
             if(currentVendorTab === 'snack') {
-                btnSnack.className = "px-4 py-1.5 rounded-md text-sm font-bold transition-all shadow-sm bg-white dark:bg-slate-700 text-primary-600 dark:text-white ring-1 ring-slate-200 dark:ring-slate-600";
-                btnCatering.className = "px-4 py-1.5 rounded-md text-sm font-medium transition-all text-slate-500 dark:text-slate-400 hover:text-primary-600";
+                btnSnack.className = "px-4 py-1.5 rounded-md text-sm font-bold shadow-sm bg-slate-100 dark:bg-slate-700 text-primary-600 dark:text-white";
+                btnCatering.className = "px-4 py-1.5 rounded-md text-sm font-medium text-slate-500 dark:text-slate-400 hover:text-primary-600";
             } else {
-                btnCatering.className = "px-4 py-1.5 rounded-md text-sm font-bold transition-all shadow-sm bg-white dark:bg-slate-700 text-primary-600 dark:text-white ring-1 ring-slate-200 dark:ring-slate-600";
-                btnSnack.className = "px-4 py-1.5 rounded-md text-sm font-medium transition-all text-slate-500 dark:text-slate-400 hover:text-primary-600";
+                btnCatering.className = "px-4 py-1.5 rounded-md text-sm font-bold shadow-sm bg-slate-100 dark:bg-slate-700 text-primary-600 dark:text-white";
+                btnSnack.className = "px-4 py-1.5 rounded-md text-sm font-medium text-slate-500 dark:text-slate-400 hover:text-primary-600";
             }
 
-            list.innerHTML = data.map(v => `
+            vList.innerHTML = data.map(v => `
                 <div class="p-4 rounded-xl border border-slate-100 dark:border-dark-border bg-white dark:bg-dark-card hover:border-primary-100 dark:hover:border-primary-900 transition-all group">
                     <div class="flex items-start justify-between">
                         <div class="flex items-start gap-3">
@@ -962,7 +1515,6 @@
                         </div>
                     </div>
                     <p class="text-xs text-slate-500 mt-2 line-clamp-2">${v.desc}</p>
-                    
                     <div id="detail-${v.id}" class="hidden mt-3 pt-3 border-t border-slate-100 dark:border-slate-800 text-xs animate-fade-in">
                         <div class="grid grid-cols-2 gap-2 text-slate-600 dark:text-slate-400">
                              <div><span class="font-bold text-slate-900 dark:text-slate-200 block mb-0.5">Harga</span>${VENDOR_INFO[v.id]?.price || '-'}</div>
@@ -980,99 +1532,6 @@
              const num = VENDOR_WA[id] || '';
              if(!num){ alert('Nomor WhatsApp belum diisi oleh admin.'); return; }
              window.open(`https://wa.me/${num}`, '_blank');
-        }
-        renderVendors();
-
-        // --- MODAL UTILS ---
-        let currentGallery = [];
-        let galleryIdx = 0;
-        const galleryModal = document.getElementById('galleryModal');
-        const galleryTrack = document.getElementById('galleryTrack');
-
-        function openGallery(title, roomId) {
-            const room = ROOMS_DATA.find(r => r.id === roomId);
-            const images = room.gallery && room.gallery.length > 0 ? room.gallery : [room.img];
-            
-            currentGallery = images;
-            galleryIdx = 0;
-            document.getElementById('galleryTitle').textContent = title;
-            
-            galleryTrack.innerHTML = images.map(src => 
-                `<div class="shrink-0 w-full h-full flex items-center justify-center bg-black">
-                    <img src="${src}" class="max-h-full max-w-full object-contain" onerror="this.src='https://via.placeholder.com/800x600?text=No+Image'">
-                 </div>`
-            ).join('');
-            
-            galleryModal.classList.remove('hidden');
-            galleryModal.classList.add('flex');
-            updateGalleryPos();
-        }
-
-        function closeGallery() { galleryModal.classList.add('hidden'); galleryModal.classList.remove('flex'); }
-        function gallerySlide(dir) { galleryIdx = Math.max(0, Math.min(currentGallery.length - 1, galleryIdx + dir)); updateGalleryPos(); }
-        function updateGalleryPos() { galleryTrack.style.transform = `translateX(-${galleryIdx * 100}%)`; }
-
-        const formModal = document.getElementById('formModal');
-        const formIframe = document.getElementById('form-iframe');
-        const formLoading = document.getElementById('formLoading');
-
-        function openFormModal(type) {
-            document.getElementById('formTitle').textContent = type === 'mobil' ? 'Peminjaman Mobil Dinas' : 'Peminjaman Ruang Rapat';
-            formLoading.style.display = 'flex';
-            formIframe.style.opacity = '0';
-            formIframe.src = FORM_URLS[type];
-            formIframe.onload = () => { formLoading.style.display = 'none'; formIframe.style.opacity = '1'; };
-            formModal.classList.remove('hidden');
-            formModal.classList.add('flex');
-        }
-        function closeFormModal() { formModal.classList.add('hidden'); formModal.classList.remove('flex'); formIframe.src = ''; }
-        
-        const hotelModal = document.getElementById('hotelModal');
-        function openHotelDetail(id) {
-            const h = HOTELS_DATA.find(x => x.id === id);
-            if(!h) return;
-            document.getElementById('hotelTitle').textContent = h.name;
-            document.getElementById('hotelDetail').innerHTML = `
-                <p><strong>Kelas:</strong> ⭐️ ${h.stars} (${h.rating})</p>
-                <p><strong>Area:</strong> ${h.area}</p>
-                <p><strong>Alamat:</strong> ${h.address}</p>
-                <p><strong>Fasilitas:</strong> ${h.amenities.join(', ')}</p>
-                <a href="${h.link}" target="_blank" class="inline-block mt-2 text-primary-600 hover:underline">Kunjungi Website</a>
-            `;
-            document.getElementById('hotelContact').innerHTML = `<p>${h.phone}</p>`;
-            document.getElementById('hotelNotes').textContent = h.notes || "Tarif khusus OJK berlaku dengan menunjukkan ID Card.";
-            const gallery = document.getElementById('hotelGallery');
-            gallery.innerHTML = [1,2,3].map(i => `<img src="${h.img}" class="w-full h-24 object-cover rounded-lg">`).join('');
-            hotelModal.classList.remove('hidden');
-            hotelModal.classList.add('flex');
-        }
-        function closeHotelModal() { hotelModal.classList.add('hidden'); hotelModal.classList.remove('flex'); }
-        
-        function downloadGuide() {
-             const blob = new Blob([`Panduan Pengguna Ruang Dinamis\n\n- Pinjam ruang rapat\n- Ajukan peminjaman mobil\n- Lihat referensi hotel\n\n© ${new Date().getFullYear()} Ruang Dinamis`], {type:'text/plain'});
-             const url = URL.createObjectURL(blob);
-             const a = document.createElement('a'); a.href = url; a.download = 'Panduan-Ruang-Dinamis.txt';
-             document.body.appendChild(a); a.click(); URL.revokeObjectURL(url); a.remove();
-             showToast('Panduan berhasil diunduh');
-        }
-        
-        const protokolModal = document.getElementById('protokolModal');
-        function openProtokolModal() { protokolModal.classList.remove('hidden'); protokolModal.classList.add('flex'); }
-        function closeProtokolModal() { protokolModal.classList.add('hidden'); protokolModal.classList.remove('flex'); }
-        function openWhatsApp(key){
-             const num = PROTOKOL_NUMBERS[key] || '';
-             if(!num){ alert('Nomor WhatsApp belum diisi oleh admin.'); return; }
-             window.open(`https://wa.me/${num}`, '_blank');
-        }
-
-        const toast = document.getElementById('toast');
-        function showToast(msg) {
-            toast.querySelector('span').textContent = msg;
-            toast.classList.remove('hidden', 'translate-y-10', 'opacity-0');
-            setTimeout(() => {
-                toast.classList.add('translate-y-10', 'opacity-0');
-                setTimeout(() => toast.classList.add('hidden'), 300);
-            }, 2000);
         }
     </script>
 </body>
