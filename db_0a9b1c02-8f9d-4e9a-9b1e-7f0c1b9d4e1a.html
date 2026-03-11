@@ -110,6 +110,126 @@
             -webkit-box-orient: vertical;
             overflow: hidden;
         }
+    
+        /* === UI PROFESSIONAL UPGRADE === */
+        body {
+          background-image:
+            radial-gradient(circle at top right, rgba(139,30,36,0.08), transparent 28%),
+            radial-gradient(circle at 10% 20%, rgba(59,130,246,0.05), transparent 22%);
+        }
+        .section-card, .premium-card {
+          background: rgba(255,255,255,0.88);
+          border: 1px solid rgba(226,232,240,0.9);
+          box-shadow: 0 18px 55px rgba(15,23,42,0.08);
+          backdrop-filter: blur(16px);
+          -webkit-backdrop-filter: blur(16px);
+        }
+        .dark .section-card, .dark .premium-card {
+          background: rgba(15,23,42,0.88);
+          border-color: rgba(51,65,85,0.75);
+          box-shadow: 0 22px 60px rgba(2,6,23,0.36);
+        }
+        .premium-card-hover { transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease; }
+        .premium-card-hover:hover { transform: translateY(-4px); border-color: rgba(139,30,36,0.28) !important; box-shadow: 0 20px 60px rgba(15,23,42,0.12); }
+        .dark .premium-card-hover:hover { box-shadow: 0 24px 65px rgba(2,6,23,0.45); }
+        .metric-box {
+          border-radius: 1rem; border:1px solid rgba(226,232,240,.9); padding:1rem;
+          background: rgba(255,255,255,.74);
+        }
+        .dark .metric-box { background: rgba(15,23,42,.55); border-color: rgba(51,65,85,.75); }
+        .clean-icon {
+          width: 1.3rem; height: 1.3rem; stroke: currentColor; stroke-width: 1.8; fill: none;
+        }
+        .clean-icon-lg {
+          width: 1.7rem; height: 1.7rem; stroke: currentColor; stroke-width: 1.75; fill: none;
+        }
+        .clean-chip {
+          display:inline-flex; align-items:center; gap:.5rem; padding:.45rem .75rem; border-radius:999px;
+          border:1px solid rgba(226,232,240,.9); background: rgba(255,255,255,.7);
+        }
+        .dark .clean-chip { background: rgba(15,23,42,.55); border-color: rgba(51,65,85,.75); }
+        .pending-panel-item {
+          border:1px solid rgba(250,204,21,.28); background: rgba(254,252,232,.88);
+        }
+        .dark .pending-panel-item {
+          border-color: rgba(234,179,8,.24); background: rgba(113,63,18,.18);
+        }
+        .multi-day-badge {
+          background: rgba(59,130,246,.12); color: rgb(37,99,235); border:1px solid rgba(59,130,246,.18);
+        }
+        .dark .multi-day-badge { background: rgba(37,99,235,.18); color: rgb(191,219,254); border-color: rgba(96,165,250,.22); }
+        .selected-calendar-day {
+          outline: 2px solid rgba(139,30,36,.52); outline-offset: -2px; box-shadow: 0 12px 35px rgba(139,30,36,.10);
+        }
+        .calendar-day-hover { transition: transform .18s ease, box-shadow .18s ease, background-color .18s ease; }
+        .calendar-day-hover:hover { transform: translateY(-1px); }
+        .toast-stack {
+          position: fixed; right: 20px; bottom: 20px; z-index: 100; display: flex; flex-direction: column; gap: 12px; pointer-events:none;
+        }
+        .toast-item {
+          min-width: 300px; max-width: 380px; padding: 14px 16px; border-radius: 18px;
+          background: rgba(15,23,42,.96); color: white; box-shadow: 0 18px 50px rgba(2,6,23,.34);
+          border:1px solid rgba(255,255,255,.08); transform: translateY(10px); opacity:0; animation: toastIn .35s ease forwards;
+        }
+        .toast-item.success { background: rgba(6,95,70,.95); }
+        .toast-item.warn { background: rgba(133,77,14,.95); }
+        @keyframes toastIn { to { transform: translateY(0); opacity: 1; } }
+        .welcome-overlay {
+          position: fixed; inset: 0; z-index: 120; display:none; align-items:center; justify-content:center; padding:1rem;
+          background: rgba(2,6,23,.7); backdrop-filter: blur(10px);
+        }
+        .welcome-overlay.show { display:flex; }
+        .welcome-card {
+          width:min(92vw, 760px); border-radius: 2rem; overflow:hidden;
+          background: linear-gradient(135deg, rgba(255,255,255,.96), rgba(248,250,252,.98));
+          border:1px solid rgba(226,232,240,.95); box-shadow: 0 30px 80px rgba(2,6,23,.3);
+        }
+        .dark .welcome-card {
+          background: linear-gradient(135deg, rgba(15,23,42,.97), rgba(30,41,59,.98));
+          border-color: rgba(51,65,85,.75);
+        }
+        .agenda-table-row:hover { background: rgba(248,250,252,.78); }
+        .dark .agenda-table-row:hover { background: rgba(15,23,42,.56); }
+        .hero-mini-grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:1rem; }
+        @media (max-width: 1024px) { .hero-mini-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+        @media (max-width: 640px) { .hero-mini-grid { grid-template-columns:1fr; } }
+
+        /* --- FITUR PREMIUM CSS --- */
+        /* 1. Animasi Loading Bar */
+        @keyframes loadingBar {
+            0% { width: 0%; }
+            100% { width: 100%; }
+        }
+
+        /* 2. Animasi Transisi Reveal */
+        .reveal-section {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease-out, transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .reveal-section.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* 3. Export to PDF / CSS Print Mode */
+        @media print {
+            body { background: white !important; color: black !important; }
+            .no-print, header, nav, video, #premiumLoader, .toast-stack, button, .hero-mini-grid, #mobileMenu, .welcome-overlay { 
+                display: none !important; 
+            }
+            .print-area { display: block !important; width: 100% !important; margin: 0 !important; max-width: 100% !important; }
+            .print-area * { color: black !important; background: transparent !important; box-shadow: none !important; }
+            
+            /* Penyesuaian Tabel untuk Print */
+            table { border-collapse: collapse; width: 100%; }
+            th, td { border: 1px solid #ccc !important; padding: 10px !important; }
+            .multi-day-badge, .status-badge { border: 1px solid black !important; color: black !important; }
+            
+            #printHeader { display: flex !important; }
+            
+            @page { margin: 15mm; }
+        }
     </style>
 </head>
 <script>
@@ -123,11 +243,21 @@
       window.location.href = 'Index.html'; 
     }
   </script>
-   <header id="siteHeader" ...
-
+</head>
 <body class="bg-slate-50 text-slate-800 dark:bg-dark-bg dark:text-slate-200 transition-colors duration-300 selection:bg-primary-600 selection:text-white font-sans antialiased">
 
-    <header id="navbar" class="fixed top-0 w-full z-50 transition-all duration-300 glass-nav">
+    <div id="premiumLoader" class="fixed inset-0 z-[9999] bg-slate-50 dark:bg-dark-bg flex flex-col items-center justify-center transition-all duration-700 ease-in-out">
+        <div class="relative w-28 h-28 mb-8 animate-float">
+            <div class="absolute inset-0 rounded-full bg-primary-600/20 blur-2xl animate-pulse"></div>
+            <img src="https://ik.imagekit.io/logojkdiy/Layanan%20Terintegrasi%20-%20OJK%20DIY.png" alt="OJK Logo" class="relative z-10 w-full h-full object-contain drop-shadow-2xl">
+        </div>
+        <h2 class="text-slate-900 dark:text-white font-heading text-3xl font-bold tracking-tight mb-3">LMSt-OJK D.I.Y</h2>
+        <div class="w-64 h-1.5 bg-slate-200 dark:bg-slate-800 rounded-full overflow-hidden">
+            <div class="h-full bg-gradient-to-r from-primary-600 to-red-400 w-0" style="animation: loadingBar 1.5s ease-in-out forwards;"></div>
+        </div>
+    </div>
+
+    <header id="navbar" class="fixed top-0 w-full z-50 transition-all duration-300 glass-nav no-print">
         <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
             <a href="#" class="flex items-center gap-3 group">
                 <div class="relative w-12 h-12 flex items-center justify-center bg-white rounded-full shadow-sm ring-1 ring-slate-100 overflow-hidden p-1.5 transition-transform group-hover:scale-105">
@@ -186,7 +316,7 @@
         </div>
     </header>
 
-    <section id="hero" class="relative pt-32 pb-16 lg:pt-44 lg:pb-24 overflow-hidden bg-slate-50 dark:bg-dark-bg">
+    <section id="hero" class="relative pt-32 pb-16 lg:pt-44 lg:pb-24 overflow-hidden bg-slate-50 dark:bg-dark-bg reveal-section">
         <div class="absolute inset-0 pointer-events-none -z-10">
             <div class="absolute -top-[20%] -right-[10%] w-[700px] h-[700px] rounded-full bg-primary-100/50 dark:bg-primary-900/10 blur-3xl animate-pulse"></div>
             <div class="absolute top-[40%] -left-[10%] w-[500px] h-[500px] rounded-full bg-blue-100/50 dark:bg-blue-900/10 blur-3xl animate-pulse" style="animation-duration: 4s;"></div>
@@ -233,12 +363,91 @@
         </div>
     </section>
 
-    <section id="custom-calendar-section" class="py-16 bg-slate-50 dark:bg-[#0F1623]">
-        <div class="w-full px-4 md:px-8"> <div class="text-center mb-10">
+    <section id="overview-insight" class="relative -mt-3 lg:-mt-10 pb-6 lg:pb-10 reveal-section">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="section-card rounded-[2rem] p-5 lg:p-7 overflow-hidden relative">
+                <div class="absolute inset-0 bg-gradient-to-r from-primary-50/60 via-transparent to-blue-50/50 dark:from-primary-900/10 dark:to-blue-900/10 pointer-events-none"></div>
+                <div class="relative z-10 grid lg:grid-cols-[1.2fr_.8fr] gap-6 items-start">
+                    <div>
+                        <div class="inline-flex items-center gap-2 clean-chip text-[11px] font-bold uppercase tracking-[0.18em] text-primary-700 dark:text-primary-300 mb-4">
+                            <span class="w-2 h-2 rounded-full bg-primary-600 animate-pulse"></span> Dashboard Ringkas
+                        </div>
+                        <h2 class="font-heading text-2xl lg:text-3xl font-bold text-slate-900 dark:text-white mb-2">Agenda Terdekat</h2>
+                        <p class="text-slate-600 dark:text-slate-400 max-w-3xl">Panel ini otomatis memonitor kegiatan yang masih aktif, menyorot agenda yang sedang berlangsung saat ini, serta menyiapkan notifikasi untuk kegiatan berikutnya.</p>
+                        <div class="hero-mini-grid mt-6">
+                            <div class="metric-box premium-card-hover">
+                                <div class="text-xs uppercase tracking-wider text-slate-500">Sedang Berlangsung</div>
+                                <div id="metricOngoingCount" class="text-2xl font-bold text-slate-900 dark:text-white mt-2">0</div>
+                            </div>
+                            <div class="metric-box premium-card-hover">
+                                <div class="text-xs uppercase tracking-wider text-slate-500">Agenda Hari Ini</div>
+                                <div id="metricTodayCount" class="text-2xl font-bold text-slate-900 dark:text-white mt-2">0</div>
+                            </div>
+                            <div class="metric-box premium-card-hover">
+                                <div class="text-xs uppercase tracking-wider text-slate-500">Disetujui</div>
+                                <div id="metricApprovedCount" class="text-2xl font-bold text-slate-900 dark:text-white mt-2">0</div>
+                            </div>
+                            <div class="metric-box premium-card-hover">
+                                <div class="text-xs uppercase tracking-wider text-slate-500">Pending</div>
+                                <div id="metricPendingCount" class="text-2xl font-bold text-slate-900 dark:text-white mt-2">0</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="grid gap-4">
+                        <div class="section-card rounded-2xl p-5 premium-card-hover">
+                            <div class="flex items-center justify-between gap-3 mb-3">
+                                <div>
+                                    <div class="text-xs uppercase tracking-wider text-slate-500">Sedang Berlangsung</div>
+                                    <div class="font-bold text-slate-900 dark:text-white">Sorotan otomatis real-time</div>
+                                </div>
+                                <button id="requestNotifyBtn" class="px-3 py-2 rounded-xl bg-primary-600 text-white text-xs font-bold hover:bg-primary-700 transition">Aktifkan Notifikasi</button>
+                            </div>
+                            <div id="ongoingPanel" class="space-y-3 text-sm text-slate-600 dark:text-slate-300">
+                                <div class="italic text-slate-400">Belum ada kegiatan yang sedang berlangsung.</div>
+                            </div>
+                        </div>
+                        <div class="section-card rounded-2xl p-5 premium-card-hover">
+                            <div class="text-xs uppercase tracking-wider text-slate-500 mb-2">Agenda Berikutnya</div>
+                            <div id="nextEventReminder" class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">Sedang memeriksa kegiatan berikutnya...</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="custom-calendar-section" class="py-16 bg-slate-50 dark:bg-[#0F1623] reveal-section">
+        <div class="w-full px-4 md:px-8"> 
+            <div class="text-center mb-10">
                 <h2 class="font-heading text-3xl font-bold text-slate-900 dark:text-white" data-i18n="cal_title">Kalender Kegiatan</h2>
                 <p class="text-slate-500 dark:text-slate-400 mt-2">Agenda Kantor OJK D.I.Y dikelola SPRR</p>
             </div>
 
+            <div class="grid lg:grid-cols-[1.15fr_.85fr] gap-6 mb-6">
+                <div class="section-card rounded-3xl p-5 lg:p-6 premium-card-hover">
+                    <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-4">
+                        <div>
+                            <h3 class="font-heading text-xl font-bold text-slate-900 dark:text-white">Jumlah Agenda OJK DIY Dalam 1 Bulan</h3>
+                            <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">Update Otomatis dari Database SPRR OJK Daerah Istimewa Yogyakarta</p>
+                        </div>
+                        <button onclick="goToToday()" class="px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 hover:border-primary-600 hover:text-primary-600 text-sm font-semibold transition">Hari Ini</button>
+                    </div>
+                    <div class="grid md:grid-cols-3 gap-4">
+                        <div class="metric-box"><div class="text-xs uppercase tracking-wider text-slate-500 mb-2">Agenda Bulan Ini</div><div id="calendarMonthCount" class="text-2xl font-bold text-slate-900 dark:text-white">0</div></div>
+                    </div>
+                </div>
+                <div class="section-card rounded-3xl p-5 lg:p-6 premium-card-hover">
+                    <div class="flex items-center justify-between gap-3 mb-4">
+                        <div>
+                            <h3 class="font-heading text-lg font-bold text-slate-900 dark:text-white">Detail Tanggal Dipilih</h3>
+                            <p id="selectedDayLabel" class="text-sm text-slate-500 dark:text-slate-400 mt-1">Klik tanggal pada kalender</p>
+                        </div>
+                        <span class="clean-chip text-[11px] font-bold uppercase tracking-[0.18em] text-primary-700 dark:text-primary-300"><span class="w-2 h-2 rounded-full bg-primary-600"></span> Agenda Terdekat </span>
+                    </div>
+                    <div id="selectedDaySummary" class="space-y-3 text-sm text-slate-600 dark:text-slate-300"><div class="italic text-slate-400">Belum ada tanggal dipilih.</div></div>
+                </div>
+            </div>
+            
             <div class="bg-white dark:bg-dark-card rounded-3xl shadow-xl border border-slate-200 dark:border-slate-700 overflow-hidden">
                 <div class="flex flex-col md:flex-row items-center justify-between p-6 border-b border-slate-100 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50 gap-4">
                     <div class="flex items-center gap-4">
@@ -269,23 +478,40 @@
                         </div>
                 </div>
 
-                <div class="bg-yellow-50 dark:bg-yellow-900/20 border-t border-yellow-100 dark:border-yellow-900/30 py-3 relative overflow-hidden">
-                    <div class="flex items-center absolute left-0 top-0 bottom-0 z-10 bg-yellow-50 dark:bg-yellow-900/20 px-4 shadow-lg border-r border-yellow-200 dark:border-yellow-800">
-                        <span class="text-xs font-bold text-yellow-700 dark:text-yellow-400 uppercase tracking-widest flex items-center gap-2">
-                            <span class="w-2 h-2 rounded-full bg-yellow-500 animate-pulse"></span> Menunggu Persetujuan
-                        </span>
+                <div class="border-t border-yellow-100 dark:border-yellow-900/30 bg-gradient-to-r from-yellow-50 via-amber-50 to-white dark:from-yellow-900/20 dark:via-amber-900/10 dark:to-slate-900 p-5 md:p-6">
+                    <div class="flex flex-col lg:flex-row lg:items-start justify-between gap-4 mb-4">
+                        <div>
+                            <div class="inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.18em] text-yellow-700 dark:text-yellow-400 mb-2">
+                                <span class="w-2 h-2 rounded-full bg-yellow-500 animate-pulse"></span> Menunggu Persetujuan
+                            </div>
+                            <h4 class="font-heading text-lg font-bold text-slate-900 dark:text-white">Pengajuan Pending</h4>
+                            <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">Panel ini menampilkan pengajuan terbaru yang masih pending, lengkap dengan waktu, PIC, dan ruangan agar mudah ditindaklanjuti.</p>
+                        </div>
+                        <div class="clean-chip text-xs font-semibold text-slate-600 dark:text-slate-300">
+                            <span class="w-2 h-2 rounded-full bg-yellow-500"></span>
+                            <span id="pendingCountLabel">0 Pengajuan</span>
+                        </div>
                     </div>
-                    <div class="whitespace-nowrap animate-marquee flex items-center gap-12 pl-48" id="pending-ticker">
-                        <span class="text-sm text-slate-500 italic">Memuat data pending...</span>
+                    <div id="pending-ticker" class="grid md:grid-cols-2 xl:grid-cols-3 gap-3">
+                        <div class="text-sm text-slate-500 italic">Memuat data pending...</div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="agenda-csv" class="py-20 bg-white dark:bg-dark-bg">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
+    <div id="printHeader" class="hidden print:flex items-center border-b-[3px] border-primary-700 pb-4 mb-8 mt-4 w-full">
+        <img src="https://ik.imagekit.io/logojkdiy/Layanan%20Terintegrasi%20-%20OJK%20DIY.png" alt="Logo OJK" class="w-24 h-24 object-contain mr-6">
+        <div>
+            <h1 class="text-2xl font-bold text-slate-900 uppercase tracking-wide" data-i18n="print_title">OTORITAS JASA KEUANGAN</h1>
+            <h2 class="text-lg font-semibold text-slate-700" data-i18n="print_subtitle">KANTOR DAERAH ISTIMEWA YOGYAKARTA</h2>
+            <p class="text-sm text-slate-500 mt-1" data-i18n="print_address">Jl. Timoho No.109, Muja Muju, Kec. Umbulharjo, Kota Yogyakarta, D.I. Yogyakarta 55165</p>
+        </div>
+    </div>
+
+    <section id="agenda-csv" class="py-20 bg-white dark:bg-dark-bg reveal-section print-area">
+        <div class="max-w-7xl mx-auto px-6 print-area">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4 no-print">
                 <div>
                     <div class="flex items-center gap-3 mb-2">
                         <div class="w-1.5 h-8 bg-primary-600 rounded-full"></div>
@@ -294,7 +520,36 @@
                     <p class="text-slate-500 dark:text-slate-400 ml-5 text-sm" data-i18n="csv_desc">Informasi real-time dari database kegiatan (Auto-update 60s).</p>
                 </div>
                 
-                <div class="flex flex-wrap items-center gap-3">
+                <div class="flex flex-wrap items-center gap-3 w-full md:w-auto md:justify-end">
+                    <div class="relative flex-1 min-w-[240px] md:min-w-[320px]">
+                        <input id="agendaSearch" type="text" placeholder="Cari kegiatan, PIC, departemen, atau ruangan..." class="w-full pl-11 pr-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm text-slate-700 dark:text-slate-200 outline-none transition" />
+                        <svg class="w-4 h-4 absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                    </div>
+                    
+                    <select id="agendaRoomFilter" class="px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm text-slate-700 dark:text-slate-200 outline-none transition">
+                        <option value="all" data-i18n="filter_all_rooms">Semua Ruangan</option>
+                        <option value="Bima">Ruang Bima</option>
+                        <option value="Arjuna">Ruang Arjuna</option>
+                        <option value="Nakula">Ruang Nakula</option>
+                        <option value="Sadewa">Ruang Sadewa</option>
+                        <option value="Bale Acitya">Bale Acitya</option>
+                        <option value="Bale Astama">Bale Astama</option>
+                        <option value="Ballroom">Ballroom Indraprasta</option>
+                    </select>
+
+                    <select id="agendaStatusFilter" class="px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm text-slate-700 dark:text-slate-200 outline-none transition">
+                        <option value="all">Semua status</option>
+                        <option value="approved">Disetujui</option>
+                        <option value="pending">Pending</option>
+                    </select>
+                    <select id="agendaRangeFilter" class="px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm text-slate-700 dark:text-slate-200 outline-none transition">
+                        <option value="upcoming">Hari ini ke depan</option>
+                        <option value="today">Hari ini</option>
+                        <option value="week">7 hari ke depan</option>
+                        <option value="month">Bulan ini</option>
+                        <option value="all">Semua data</option>
+                    </select>
+                    
                     <div class="flex bg-slate-100 dark:bg-slate-800 p-1 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm">
                         <button onclick="setAgendaView('card')" id="btnViewCard" class="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all text-primary-600 bg-white shadow-sm dark:bg-slate-700 dark:text-white">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/></svg> Card
@@ -303,20 +558,36 @@
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg> List
                         </button>
                     </div>
+
+                    <div class="flex gap-2 no-print">
+                        <button onclick="exportToPDF('portrait')" class="flex items-center gap-2 px-4 py-2 bg-slate-800 hover:bg-slate-900 text-white rounded-lg text-sm font-bold transition shadow-sm">
+                            <span data-i18n="print_p">PDF (P)</span>
+                        </button>
+                        <button onclick="exportToPDF('landscape')" class="flex items-center gap-2 px-4 py-2 bg-primary-600 hover:bg-primary-700 text-white rounded-lg text-sm font-bold transition shadow-sm">
+                            <span data-i18n="print_l">PDF (L)</span>
+                        </button>
+                    </div>
                 </div>
             </div>
             
-            <div id="agenda-container" class="min-h-[400px]">
-                <div id="agenda-view-card" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 animate-fade-in">
+            <div class="grid sm:grid-cols-2 xl:grid-cols-4 gap-4 mb-6 no-print">
+                <div class="metric-box premium-card-hover"><div class="text-xs uppercase tracking-wider text-slate-500">Total Terfilter</div><div id="agendaMetricTotal" class="text-2xl font-bold text-slate-900 dark:text-white mt-2">0</div></div>
+                <div class="metric-box premium-card-hover"><div class="text-xs uppercase tracking-wider text-slate-500">Approved</div><div id="agendaMetricApproved" class="text-2xl font-bold text-slate-900 dark:text-white mt-2">0</div></div>
+                <div class="metric-box premium-card-hover"><div class="text-xs uppercase tracking-wider text-slate-500">Pending</div><div id="agendaMetricPending" class="text-2xl font-bold text-slate-900 dark:text-white mt-2">0</div></div>
+                <div class="metric-box premium-card-hover"><div class="text-xs uppercase tracking-wider text-slate-500">Ruangan Terpakai</div><div id="agendaMetricRooms" class="text-2xl font-bold text-slate-900 dark:text-white mt-2">0</div></div>
+            </div>
+            
+            <div id="agenda-container" class="min-h-[400px] print-area">
+                <div id="agenda-view-card" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 animate-fade-in no-print">
                     <div class="col-span-full text-center py-20">
                         <div class="animate-spin inline-block w-8 h-8 border-4 border-primary-600 border-t-transparent rounded-full mb-3"></div>
                         <p class="text-slate-500">Memuat data terbaru...</p>
                     </div>
                 </div>
 
-                <div id="agenda-view-list" class="hidden bg-white dark:bg-dark-card rounded-2xl shadow-soft border border-slate-200 dark:border-dark-border overflow-hidden animate-fade-in">
-                    <div class="overflow-x-auto">
-                        <table class="w-full text-sm text-left border-collapse">
+                <div id="agenda-view-list" class="hidden bg-white dark:bg-dark-card rounded-2xl shadow-soft border border-slate-200 dark:border-dark-border overflow-hidden animate-fade-in print-area">
+                    <div class="overflow-x-auto print-area">
+                        <table class="w-full text-sm text-left border-collapse print-area">
                             <thead class="bg-slate-50 dark:bg-slate-800/80 border-b border-slate-200 dark:border-dark-border">
                                 <tr>
                                     <th class="px-6 py-5 font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider text-xs" data-i18n="th_date">Tanggal</th>
@@ -335,7 +606,7 @@
         </div>
     </section>
 
-    <section id="ruang-rapat" class="py-24 bg-slate-50 dark:bg-[#0F1623] border-t border-slate-200 dark:border-slate-800">
+    <section id="ruang-rapat" class="py-24 bg-slate-50 dark:bg-[#0F1623] border-t border-slate-200 dark:border-slate-800 reveal-section">
         <div class="max-w-7xl mx-auto px-6">
             <div class="text-center max-w-3xl mx-auto mb-16">
                 <span class="text-primary-600 font-bold tracking-wider uppercase text-xs border border-primary-100 dark:border-primary-900 bg-primary-50 dark:bg-primary-900/20 px-3 py-1 rounded-full" data-i18n="rooms_tag">Fasilitas Kantor</span>
@@ -347,7 +618,7 @@
         </div>
     </section>
 
-    <section id="mobil-dinas" class="relative py-32 overflow-hidden flex items-center bg-slate-900 min-h-[700px]">
+    <section id="mobil-dinas" class="relative py-32 overflow-hidden flex items-center bg-slate-900 min-h-[700px] reveal-section">
         <div class="absolute inset-0 z-0">
             <video src="https://ik.imagekit.io/idnarsipojkdiy/LMSt%20-%20Platform%20Terintegrasi/JOGJA%20ISTIMEWA.mp4?updatedAt=1763092262199" autoplay loop muted playsinline class="w-full h-full object-cover opacity-60"></video>
             <div class="absolute inset-0 bg-gradient-to-r from-slate-900/90 via-slate-900/70 to-transparent"></div>
@@ -381,7 +652,7 @@
         </div>
     </section>
 
-    <section id="hotel-partner" class="py-24 bg-white dark:bg-dark-bg">
+    <section id="hotel-partner" class="py-24 bg-white dark:bg-dark-bg reveal-section">
         <div class="max-w-7xl mx-auto px-6">
             <div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
                 <div>
@@ -408,57 +679,106 @@
         </div>
     </section>
 
-    <section id="bantuan-teknis" class="py-24 bg-slate-50 dark:bg-dark-bg border-t border-slate-200 dark:border-slate-800">
+    <section id="bantuan-teknis" class="py-24 bg-slate-50 dark:bg-dark-bg border-t border-slate-200 dark:border-slate-800 reveal-section">
         <div class="max-w-7xl mx-auto px-6">
-            <div class="grid lg:grid-cols-2 gap-20">
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10">
                 <div>
-                    <div class="flex items-center gap-3 mb-8">
-                        <div class="w-1.5 h-8 bg-blue-600 rounded-full"></div>
-                        <h2 class="font-heading text-3xl font-bold text-slate-900 dark:text-white" data-i18n="help_title">Bantuan Teknis</h2>
+                    <span class="inline-flex items-center gap-2 clean-chip text-[11px] font-bold uppercase tracking-[0.18em] text-slate-700 dark:text-slate-300 mb-3">
+                        <span class="w-2 h-2 rounded-full bg-primary-600"></span> Support & Vendor Center
+                    </span>
+                    <h2 class="font-heading text-3xl lg:text-4xl font-bold text-slate-900 dark:text-white">Bantuan teknis dan vendor</h2>
+                    <p class="text-slate-500 dark:text-slate-400 mt-2 max-w-3xl">Bantuan Teknis Pelaksanaan Kegiatan OJK Daerah Istimewa Yogyakarta</p>
+                </div>
+            </div>
+
+            <div class="grid xl:grid-cols-[1.05fr_.95fr] gap-8 items-start">
+                <div class="section-card rounded-[2rem] p-6 lg:p-7">
+                    <div class="flex items-center gap-3 mb-7">
+                        <div class="w-10 h-10 rounded-2xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-700 dark:text-slate-200">
+                            <svg class="clean-icon-lg" viewBox="0 0 24 24"><path d="M12 3v6m0 6v6M3 12h6m6 0h6"/><circle cx="12" cy="12" r="9"/></svg>
+                        </div>
+                        <div>
+                            <h3 class="font-heading text-2xl font-bold text-slate-900 dark:text-white" data-i18n="help_title">Bantuan Teknis</h3>
+                            <p class="text-sm text-slate-500 dark:text-slate-400">Hubungi PIC sesuai kebutuhan secara lebih cepat dan jelas.</p>
+                        </div>
                     </div>
                     <div class="grid sm:grid-cols-2 gap-5">
-                        <a href="https://wa.me/6281532793953" target="_blank" class="p-6 rounded-2xl bg-white dark:bg-dark-card border border-slate-100 dark:border-slate-700 hover:border-blue-500 hover:shadow-lg hover:-translate-y-1 transition duration-300 group">
-                            <div class="w-12 h-12 rounded-xl bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 flex items-center justify-center mb-4 text-xl group-hover:scale-110 transition">💻</div>
-                            <h3 class="font-bold text-slate-900 dark:text-white" data-i18n="help_pc">Komputer</h3>
-                            <p class="text-xs text-slate-500 mt-1">Troubleshooting & Instalasi</p>
+                        <a href="https://wa.me/6281532793953" target="_blank" class="section-card premium-card-hover p-5 rounded-2xl group text-slate-700 dark:text-slate-200">
+                            <div class="flex items-start justify-between gap-3">
+                                <div class="w-12 h-12 rounded-2xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center">
+                                    <svg class="clean-icon-lg" viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="10" rx="2"/><path d="M8 19h8M10 15v4m4-4v4"/></svg>
+                                </div>
+                                <span class="text-[11px] font-bold uppercase tracking-wider text-slate-400 group-hover:text-primary-600">Support</span>
+                            </div>
+                            <h4 class="font-bold text-slate-900 dark:text-white mt-4" data-i18n="help_pc">Komputer</h4>
+                            <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">Troubleshooting perangkat, instalasi, aplikasi internal, dan masalah hardware ringan.</p>
+                            <div class="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-primary-600">Hubungi sekarang
+                                <svg class="clean-icon" viewBox="0 0 24 24"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+                            </div>
                         </a>
-                        <a href="https://wa.me/628562933037" target="_blank" class="p-6 rounded-2xl bg-white dark:bg-dark-card border border-slate-100 dark:border-slate-700 hover:border-green-500 hover:shadow-lg hover:-translate-y-1 transition duration-300 group">
-                            <div class="w-12 h-12 rounded-xl bg-green-50 dark:bg-green-900/30 text-green-600 dark:text-green-400 flex items-center justify-center mb-4 text-xl group-hover:scale-110 transition">📡</div>
-                            <h3 class="font-bold text-slate-900 dark:text-white" data-i18n="help_net">Internet</h3>
-                            <p class="text-xs text-slate-500 mt-1">Wifi, LAN & VPN</p>
+                        <a href="https://wa.me/628562933037" target="_blank" class="section-card premium-card-hover p-5 rounded-2xl group text-slate-700 dark:text-slate-200">
+                            <div class="flex items-start justify-between gap-3">
+                                <div class="w-12 h-12 rounded-2xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center">
+                                    <svg class="clean-icon-lg" viewBox="0 0 24 24"><path d="M4 18a8 8 0 0 1 16 0"/><path d="M7 15a5 5 0 0 1 10 0"/><path d="M10.5 12a1.5 1.5 0 0 1 3 0"/></svg>
+                                </div>
+                                <span class="text-[11px] font-bold uppercase tracking-wider text-slate-400 group-hover:text-primary-600">Network</span>
+                            </div>
+                            <h4 class="font-bold text-slate-900 dark:text-white mt-4" data-i18n="help_net">Internet</h4>
+                            <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">Gangguan Wi‑Fi, LAN, VPN, dan konektivitas meeting online yang membutuhkan penanganan cepat.</p>
+                            <div class="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-primary-600">Hubungi sekarang
+                                <svg class="clean-icon" viewBox="0 0 24 24"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+                            </div>
                         </a>
-                        <a href="https://wa.me/6281392413337" target="_blank" class="p-6 rounded-2xl bg-white dark:bg-dark-card border border-slate-100 dark:border-slate-700 hover:border-purple-500 hover:shadow-lg hover:-translate-y-1 transition duration-300 group">
-                            <div class="w-12 h-12 rounded-xl bg-purple-50 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 flex items-center justify-center mb-4 text-xl group-hover:scale-110 transition">📸</div>
-                            <h3 class="font-bold text-slate-900 dark:text-white" data-i18n="help_doc">Dokumentasi</h3>
-                            <p class="text-xs text-slate-500 mt-1">Foto & Video Kegiatan</p>
+                        <a href="https://wa.me/6281392413337" target="_blank" class="section-card premium-card-hover p-5 rounded-2xl group text-slate-700 dark:text-slate-200">
+                            <div class="flex items-start justify-between gap-3">
+                                <div class="w-12 h-12 rounded-2xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center">
+                                    <svg class="clean-icon-lg" viewBox="0 0 24 24"><path d="M5 7h14M8 5v4M16 5v4"/><rect x="4" y="7" width="16" height="12" rx="2"/><path d="m9 13 2 2 4-4"/></svg>
+                                </div>
+                                <span class="text-[11px] font-bold uppercase tracking-wider text-slate-400 group-hover:text-primary-600">Media</span>
+                            </div>
+                            <h4 class="font-bold text-slate-900 dark:text-white mt-4" data-i18n="help_doc">Dokumentasi</h4>
+                            <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">Koordinasi dokumentasi foto, video kegiatan, publikasi internal, dan kebutuhan materi visual.</p>
+                            <div class="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-primary-600">Hubungi sekarang
+                                <svg class="clean-icon" viewBox="0 0 24 24"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+                            </div>
                         </a>
-                        <a href="https://wa.me/6281532793953" target="_blank" class="p-6 rounded-2xl bg-white dark:bg-dark-card border border-slate-100 dark:border-slate-700 hover:border-orange-500 hover:shadow-lg hover:-translate-y-1 transition duration-300 group">
-                            <div class="w-12 h-12 rounded-xl bg-orange-50 dark:bg-orange-900/30 text-orange-600 dark:text-orange-400 flex items-center justify-center mb-4 text-xl group-hover:scale-110 transition">📽️</div>
-                            <h3 class="font-bold text-slate-900 dark:text-white" data-i18n="help_pres">Presentasi</h3>
-                            <p class="text-xs text-slate-500 mt-1">Proyektor & Sound</p>
+                        <a href="https://wa.me/6281532793953" target="_blank" class="section-card premium-card-hover p-5 rounded-2xl group text-slate-700 dark:text-slate-200">
+                            <div class="flex items-start justify-between gap-3">
+                                <div class="w-12 h-12 rounded-2xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center">
+                                    <svg class="clean-icon-lg" viewBox="0 0 24 24"><rect x="4" y="6" width="16" height="10" rx="2"/><path d="m10 16-2 3m6-3 2 3M8 19h8"/></svg>
+                                </div>
+                                <span class="text-[11px] font-bold uppercase tracking-wider text-slate-400 group-hover:text-primary-600">Meeting</span>
+                            </div>
+                            <h4 class="font-bold text-slate-900 dark:text-white mt-4" data-i18n="help_pres">Presentasi</h4>
+                            <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">Bantuan proyektor, audio, layout presentasi, dan kebutuhan teknis kegiatan di ruangan rapat.</p>
+                            <div class="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-primary-600">Hubungi sekarang
+                                <svg class="clean-icon" viewBox="0 0 24 24"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+                            </div>
                         </a>
                     </div>
                 </div>
 
-                <div id="vendor-ref">
-                    <div class="flex items-center justify-between mb-8">
-                        <div class="flex items-center gap-3">
-                            <div class="w-1.5 h-8 bg-yellow-500 rounded-full"></div>
-                            <h2 class="font-heading text-3xl font-bold text-slate-900 dark:text-white" data-i18n="vendor_title">Vendor Konsumsi</h2>
+                <div id="vendor-ref" class="section-card rounded-[2rem] p-6 lg:p-7">
+                    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
+                        <div>
+                            <div class="inline-flex items-center gap-2 clean-chip text-[11px] font-bold uppercase tracking-[0.18em] text-yellow-700 dark:text-yellow-400 mb-3">
+                                <span class="w-2 h-2 rounded-full bg-yellow-500"></span> Vendor Konsumsi
+                            </div>
+                            <h3 class="font-heading text-2xl font-bold text-slate-900 dark:text-white" data-i18n="vendor_title">Vendor Konsumsi</h3>
+                            <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">Referensi vendor snack & katering dengan informasi harga, min order, area layanan, dan akses WhatsApp yang lebih rapi.</p>
                         </div>
-                        <div class="flex bg-white dark:bg-slate-800 rounded-xl p-1 border border-slate-200 dark:border-slate-700 shadow-sm">
-                            <button onclick="switchVendorTab('snack')" id="tabSnack" class="px-5 py-2 rounded-lg text-sm font-bold text-primary-600 bg-slate-100 dark:bg-slate-700 dark:text-white shadow-sm transition-all">Snack</button>
-                            <button onclick="switchVendorTab('catering')" id="tabCatering" class="px-5 py-2 rounded-lg text-sm font-medium text-slate-500 dark:text-slate-400 hover:text-primary-600 transition-all">Katering</button>
+                        <div class="flex bg-white dark:bg-slate-800 rounded-2xl p-1 border border-slate-200 dark:border-slate-700 shadow-sm">
+                            <button onclick="switchVendorTab('snack')" id="tabSnack" class="px-5 py-2 rounded-xl text-sm font-bold text-primary-600 bg-slate-100 dark:bg-slate-700 dark:text-white shadow-sm transition-all">Snack</button>
+                            <button onclick="switchVendorTab('catering')" id="tabCatering" class="px-5 py-2 rounded-xl text-sm font-medium text-slate-500 dark:text-slate-400 hover:text-primary-600 transition-all">Katering</button>
                         </div>
                     </div>
-                    <div id="vendorList" class="space-y-4 h-[380px] overflow-y-auto pr-2 custom-scrollbar">
-                    </div>
+                    <div id="vendorList" class="space-y-4 h-[520px] overflow-y-auto pr-1 custom-scrollbar"></div>
                 </div>
             </div>
         </div>
     </section>
 
-    <footer class="bg-slate-900 text-slate-300 py-16 border-t border-slate-800">
+    <footer class="bg-slate-900 text-slate-300 py-16 border-t border-slate-800 no-print">
         <div class="max-w-7xl mx-auto px-6">
             <div class="grid md:grid-cols-4 gap-12">
                 <div class="col-span-1">
@@ -716,7 +1036,7 @@
     </div>
 
     <script>
-        // --- TRANSLATIONS CONFIG ---
+        // --- TRANSLATIONS CONFIG (UPDATED WITH PREMIUM FEATURES) ---
         const TRANSLATIONS = {
             id: {
                 nav_subtitle: "Platform Terintegrasi", nav_home: "Beranda", nav_agenda: "Kalender", nav_rooms: "Ruang", nav_cars: "Mobil", nav_hotels: "Partner", nav_help: "Bantuan",
@@ -732,7 +1052,12 @@
                 hotels_title: "Hotel Rekanan", hotels_desc: "Akomodasi bintang 4 & 5 terbaik di Yogyakarta",
                 help_title: "Bantuan Teknis", help_pc: "Perangkat Komputer", help_net: "Jaringan Internet", help_doc: "Dokumentasi", help_pres: "Presentasi",
                 vendor_title: "Vendor Konsumsi", footer_desc: "Platform terintegrasi untuk mendukung operasional dan produktivitas pegawai OJK Daerah Istimewa Yogyakarta.",
-                footer_serv: "Layanan", footer_contact: "Kontak", btn_dl_guide: "Unduh Panduan"
+                footer_serv: "Layanan", footer_contact: "Kontak", btn_dl_guide: "Unduh Panduan",
+                
+                status_upcoming: "Akan Dimulai", status_ongoing: "Sedang Berlangsung", status_finished: "Selesai", status_pending: "Pending",
+                print_p: "PDF (Portrait)", print_l: "PDF (Landscape)",
+                print_title: "OTORITAS JASA KEUANGAN", print_subtitle: "KANTOR DAERAH ISTIMEWA YOGYAKARTA", print_address: "Jl. Timoho No.109, Yogyakarta",
+                filter_all_rooms: "Semua Ruangan"
             },
             en: {
                 nav_subtitle: "Integrated Platform", nav_home: "Home", nav_agenda: "Calendar", nav_rooms: "Rooms", nav_cars: "Fleet", nav_hotels: "Partners", nav_help: "Support",
@@ -748,7 +1073,12 @@
                 hotels_title: "Partner Hotels", hotels_desc: "Best 4 & 5-star accommodation in Yogyakarta",
                 help_title: "Technical Support", help_pc: "Computer Hardware", help_net: "Internet Network", help_doc: "Documentation", help_pres: "Presentation",
                 vendor_title: "Catering Vendors", footer_desc: "Integrated platform supporting OJK Yogyakarta operations.",
-                footer_serv: "Services", footer_contact: "Contact", btn_dl_guide: "Download Guide"
+                footer_serv: "Services", footer_contact: "Contact", btn_dl_guide: "Download Guide",
+
+                status_upcoming: "Upcoming", status_ongoing: "Ongoing", status_finished: "Finished", status_pending: "Pending",
+                print_p: "PDF (Portrait)", print_l: "PDF (Landscape)",
+                print_title: "FINANCIAL SERVICES AUTHORITY", print_subtitle: "SPECIAL REGION OF YOGYAKARTA OFFICE", print_address: "Timoho St. No.109, Yogyakarta",
+                filter_all_rooms: "All Rooms"
             },
             jv: {
                 nav_subtitle: "Platform Terintegrasi", nav_home: "Purwaka", nav_agenda: "Pananggalan", nav_rooms: "Panggenan", nav_cars: "Titihan", nav_hotels: "Mitra", nav_help: "Pambiyantu",
@@ -764,11 +1094,15 @@
                 hotels_title: "Hotel Rekanan", hotels_desc: "Akomodasi bintang 4 & 5 paling sae ing Ngayogyakarta",
                 help_title: "Pambiyantu Teknis", help_pc: "Perangkat Komputer", help_net: "Jaringan Internet", help_doc: "Dokumentasi", help_pres: "Presentasi",
                 vendor_title: "Vendor Dhaharan", footer_desc: "Platform terintegrasi kangge nyengkuyung operasional OJK DIY.",
-                footer_serv: "Layanan", footer_contact: "Kontak", btn_dl_guide: "Unduh Panduan"
+                footer_serv: "Layanan", footer_contact: "Kontak", btn_dl_guide: "Unduh Panduan",
+
+                status_upcoming: "Bade Dipunwiwiti", status_ongoing: "Saweg Lumampah", status_finished: "Sampun Rampung", status_pending: "Prantos",
+                print_p: "PDF (Njegreg)", print_l: "PDF (Malang)",
+                print_title: "OTORITAS JASA KEUANGAN", print_subtitle: "KANTOR DAERAH ISTIMEWA YOGYAKARTA", print_address: "Marga Timoho No.109, Ngayogyakarta",
+                filter_all_rooms: "Sedaya Ruangan"
             }
         };
 
-        // --- DATA OBJECTS WITH UPDATED ROOM NAMES ---
         const ROOMS_DATA = [
             { id: 1, name: "Bale Acitya", cap: "30 Orang", img: "https://ik.imagekit.io/logojkdiy/KATALOG%20RUANGAN%20OJK%20DIY/OJK%20DIY%20-%20KATALOG%20RUANGAN%20III/BALE%20ACITYA%201.png?updatedAt=.", gallery: ['https://ik.imagekit.io/logojkdiy/OJK%20DIY%20-%20KATALOG%20RUANGAN%20UPDATE%20NOVEMBER%202025/BALE%20ACITYA%201.png?updatedAt=1762162493375', 'https://ik.imagekit.io/logojkdiy/OJK%20DIY%20-%20KATALOG%20RUANGAN%20UPDATE%20NOVEMBER%202025/BALE%20ACITYA%202.png?updatedAt=1762162528450', 'https://ik.imagekit.io/logojkdiy/OJK%20DIY%20-%20KATALOG%20RUANGAN%20UPDATE%20NOVEMBER%202025/BALE%20ACITYA%203.png?updatedAt=1762162530526', 'https://ik.imagekit.io/logojkdiy/OJK%20DIY%20-%20KATALOG%20RUANGAN%20UPDATE%20NOVEMBER%202025/BALE%20ACITYA%204.png?updatedAt=1762162525921'] },
             { id: 2, name: "Bale Astama", cap: "60 Orang", img: "https://ik.imagekit.io/logojkdiy/KATALOG%20RUANGAN%20OJK%20DIY/OJK%20DIY%20-%20KATALOG%20RUANGAN%20III/BALE%20ASTAMA%201.png?updatedAt=.", gallery: ['https://ik.imagekit.io/logojkdiy/OJK%20DIY%20-%20KATALOG%20RUANGAN%20UPDATE%20NOVEMBER%202025/BALE%20ASTAMA%201.png?updatedAt=1762162530590', 'https://ik.imagekit.io/logojkdiy/OJK%20DIY%20-%20KATALOG%20RUANGAN%20UPDATE%20NOVEMBER%202025/BALE%20ASTAMA%202.png?updatedAt=1762162526361', 'https://ik.imagekit.io/logojkdiy/OJK%20DIY%20-%20KATALOG%20RUANGAN%20UPDATE%20NOVEMBER%202025/BALE%20ASTAMA%203.png?updatedAt=1762162530017', 'https://ik.imagekit.io/logojkdiy/OJK%20DIY%20-%20KATALOG%20RUANGAN%20UPDATE%20NOVEMBER%202025/BALE%20ASTAMA%204.png?updatedAt=1762162520719'] },
@@ -844,17 +1178,76 @@
         const CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRVJMsmHkI7xfqrK-7tglJw8CJJhMdQBwvMC9uB4q_T153g2gZ8qL4Kgk-qc3-GZJ3v_Z_R0VeP_iHU/pub?gid=0&single=true&output=csv";
         
         let GLOBAL_AGENDA_DATA = [];
-        let CALENDAR_DATE = new Date(); // Current viewing month for calendar
-
-        // --- INIT ---
-        document.getElementById('year').textContent = new Date().getFullYear();
+        let CALENDAR_DATE = new Date(); 
+        let SELECTED_DATE = new Date();
+        let FILTERED_AGENDA = [];
+        let NOTIFIED_EVENT_SIGNATURES = new Set();
         let currentLang = 'id';
 
-        // Language Logic
+        // --- LIFECYCLE & ENGINE INIT ---
+        window.addEventListener('load', () => {
+            // Remove Loader Safely
+            setTimeout(() => {
+                const loader = document.getElementById('premiumLoader');
+                if (loader) {
+                    loader.style.opacity = '0';
+                    loader.style.pointerEvents = 'none';
+                    setTimeout(() => loader.remove(), 700); 
+                }
+            }, 1200);
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('year').textContent = new Date().getFullYear();
+            
+            // Intersection Observer (Scroll Reveal)
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+            document.querySelectorAll('.reveal-section').forEach(sec => observer.observe(sec));
+
+            // System Boots
+            loadCSV();
+            renderHotels();
+            renderVendors();
+            
+            // Listeners
+            const searchEl = document.getElementById('agendaSearch');
+            const statusEl = document.getElementById('agendaStatusFilter');
+            const rangeEl = document.getElementById('agendaRangeFilter');
+            const roomFilterEl = document.getElementById('agendaRoomFilter');
+            
+            [searchEl, statusEl, rangeEl, roomFilterEl].forEach(el => { 
+                if(el) el.addEventListener(el.tagName === 'INPUT' ? 'input' : 'change', () => { 
+                    renderAgenda(); renderOperationalOverview(); 
+                }); 
+            });
+            
+            const notifyBtn = document.getElementById('requestNotifyBtn');
+            if(notifyBtn) notifyBtn.addEventListener('click', requestBrowserNotification);
+            
+            if(localStorage.getItem('lmsWelcomeDismissed') !== 'true' && localStorage.getItem('lmsWelcomeShownOnce') !== 'true') {
+                setTimeout(openWelcomeModal, 500);
+            }
+            
+            // Auto-Refresh
+            setInterval(() => {
+                loadCSV(true);
+            }, 60000); 
+        });
+
+        // --- LANGUAGE SYSTEM ---
         function setLang(lang) {
             currentLang = lang;
             document.getElementById('currentLang').textContent = lang.toUpperCase();
             const texts = TRANSLATIONS[lang];
+            
+            // Update static elements
             document.querySelectorAll('[data-i18n]').forEach(el => {
                 const key = el.getAttribute('data-i18n');
                 if (texts[key]) {
@@ -862,9 +1255,34 @@
                     else el.innerHTML = texts[key];
                 }
             });
+            
+            // Update dynamic agenda elements if data exists
+            if (GLOBAL_AGENDA_DATA.length > 0) {
+                renderAgenda();
+            }
         }
 
-        // Theme Toggle
+        // --- EXPORT PDF ENGINE ---
+        window.exportToPDF = function(layout) {
+            const styleId = 'dynamic-print-layout';
+            let existingStyle = document.getElementById(styleId);
+            if (existingStyle) existingStyle.remove();
+
+            const style = document.createElement('style');
+            style.id = styleId;
+            style.innerHTML = `@page { size: A4 ${layout}; margin: 15mm; }`;
+            document.head.appendChild(style);
+
+            // Paksa mode List sebelum Print
+            setAgendaView('list');
+            
+            setTimeout(() => {
+                window.print();
+                setTimeout(() => style.remove(), 1000);
+            }, 300);
+        };
+
+        // --- THEME TOGGLE ---
         const themeToggleBtn = document.getElementById('themeToggle');
         const sunIcon = document.getElementById('sunIcon');
         const moonIcon = document.getElementById('moonIcon');
@@ -901,7 +1319,7 @@
             if (window.scrollY > 20) nav.classList.add('shadow-md'); else nav.classList.remove('shadow-md');
         });
 
-        // --- CSV PARSING & AGENDA LOGIC ---
+        // --- CSV PARSER ---
         function parseCSV(str) {
             const arr = [];
             let quote = false;
@@ -918,7 +1336,6 @@
             return arr;
         }
 
-        // Parse Date Helper (DD/MM/YYYY)
         function parseDate(dateStr) {
             if(!dateStr) return null;
             const parts = dateStr.split('/');
@@ -933,73 +1350,55 @@
                 const response = await fetch(CSV_URL);
                 const text = await response.text();
                 const rawData = parseCSV(text);
-                
-                const today = new Date();
-                today.setHours(0,0,0,0);
-
                 GLOBAL_AGENDA_DATA = [];
 
-                // Mapping Header: 
-                // 3: Tanggal, 5: Jam Mulai, 6: Jam Selesai, 7: Kegiatan, 11: Ruangan, 14: Status, 1: PIC, 2: Dept
-                // NOTE: Swapping indices for Contact/Notes as requested.
-                // Assuming Contact was previously 8 and Notes was 10. Swapping them.
-                
                 for(let i=1; i<rawData.length; i++) {
                     const row = rawData[i];
                     if(!row || row.length < 10) continue;
 
-                    const status = row[14] || 'Pending'; 
-                    // FILTER: Hapus status "Ditolak"
+                    const status = row[14] || 'Pending';
                     if(status && (status.toLowerCase().includes('tolak') || status.toLowerCase().includes('reject'))) continue;
 
-                    const tglMulai = row[3]; 
-                    const jamMulai = row[5];
-                    const jamSelesai = row[6];
+                    const tglMulai = row[3];
+                    const tglSelesai = row[4] || row[3];
+                    const jamMulai = row[5] || '00:00';
+                    const jamSelesai = row[6] || '23:59';
                     const kegiatan = row[7];
                     const pic = row[1];
                     const dept = row[2];
                     const ruangan = row[11];
+                    const contact = row[10] || '-';
+                    const notes = row[8] || '-';
+                    const layout = row[12] || '-';
+                    const equipment = row[13] || '-';
 
-                    // FIX: Swapping columns based on user feedback
-                    const contact = row[10] || '-'; // Was row[8]
-                    const notes = row[8] || '-';    // Was row[10]
-                    
-                    const layout = row[12] || '-'; // Assuming Layout is col 12
-                    const equipment = row[13] || '-'; // Assuming Equipment is col 13
-
-                    const eventDate = parseDate(tglMulai);
-                    
-                    if(eventDate) {
+                    const startDate = parseDate(tglMulai);
+                    const endDate = parseDate(tglSelesai || tglMulai);
+                    if(startDate) {
                         GLOBAL_AGENDA_DATA.push({
                             id: i,
-                            tglMulai, jamMulai, jamSelesai, kegiatan, ruangan, status, pic, dept,
+                            tglMulai, tglSelesai: tglSelesai || tglMulai, jamMulai, jamSelesai, kegiatan, ruangan, status, pic, dept,
                             contact, layout, equipment, notes,
-                            rawDate: eventDate 
+                            rawDate: startDate,
+                            rawEndDate: endDate || startDate,
+                            isMultiDay: !!(endDate && endDate.getTime() !== startDate.getTime())
                         });
                     }
                 }
 
-                // Sort by date then time
-                GLOBAL_AGENDA_DATA.sort((a,b) => {
-                    if (a.rawDate.getTime() === b.rawDate.getTime()) {
-                        return parseFloat(a.jamMulai.replace(':','.')) - parseFloat(b.jamMulai.replace(':','.'));
-                    }
-                    return a.rawDate - b.rawDate;
-                });
-
-                if(!silent) {
-                    renderAgenda(); 
-                    renderCalendar(); // Render Calendar Grid
-                    renderTicker(); // Render Pending Items
-                }
-                
+                GLOBAL_AGENDA_DATA.sort((a,b) => getEventStartDateTime(a) - getEventStartDateTime(b));
+                renderAgenda();
+                renderCalendar();
+                renderTicker();
+                renderOperationalOverview();
+                autoCheckAndNotify(silent);
             } catch (err) {
                 console.error("Error CSV:", err);
-                if(!silent) document.getElementById('csv-table-body').innerHTML = '<tr><td colspan="6" class="px-6 py-6 text-center text-red-500">Gagal memuat jadwal.</td></tr>';
+                document.getElementById('csv-table-body').innerHTML = '<tr><td colspan="6" class="px-6 py-6 text-center text-red-500">Gagal memuat jadwal.</td></tr>';
             }
         }
 
-        // --- AGENDA VIEW CONTROLLER ---
+        // --- AGENDA & LIVE STATUS ENGINE ---
         function setAgendaView(mode) {
             const btnList = document.getElementById('btnViewList');
             const btnCard = document.getElementById('btnViewCard');
@@ -1024,110 +1423,155 @@
         }
 
         function renderAgenda() {
-            // 1. Render Table (List) - ONLY FUTURE EVENTS from Today
+            const searchEl = document.getElementById('agendaSearch');
+            const statusEl = document.getElementById('agendaStatusFilter');
+            const rangeEl = document.getElementById('agendaRangeFilter');
+            const roomEl = document.getElementById('agendaRoomFilter');
+            
+            const query = searchEl ? searchEl.value.trim().toLowerCase() : '';
+            const statusFilter = statusEl ? statusEl.value : 'all';
+            const rangeFilter = rangeEl ? rangeEl.value : 'upcoming';
+            const roomFilter = roomEl ? roomEl.value : 'all';
+
             const today = new Date(); today.setHours(0,0,0,0);
-            const futureEvents = GLOBAL_AGENDA_DATA.filter(ev => ev.rawDate >= today);
+            const endToday = new Date(today); endToday.setHours(23,59,59,999);
+            const endWeek = new Date(today); endWeek.setDate(endWeek.getDate() + 7); endWeek.setHours(23,59,59,999);
+            const endMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0); endMonth.setHours(23,59,59,999);
+            const nowTime = new Date();
+
+            FILTERED_AGENDA = GLOBAL_AGENDA_DATA.filter(item => {
+                const normalizedStatus = item.status && item.status.toLowerCase().includes('setuju') ? 'approved' : 'pending';
+                const searchText = [item.kegiatan, item.pic, item.dept, item.ruangan, item.tglMulai, item.tglSelesai].join(' ').toLowerCase();
+                
+                const matchSearch = !query || searchText.includes(query);
+                const matchStatus = statusFilter === 'all' ? true : normalizedStatus === statusFilter;
+                
+                let matchRange = true;
+                if(rangeFilter === 'upcoming') matchRange = item.rawEndDate >= today;
+                else if(rangeFilter === 'today') matchRange = eventOccursOnDate(item, today);
+                else if(rangeFilter === 'week') matchRange = item.rawEndDate >= today && item.rawDate <= endWeek;
+                else if(rangeFilter === 'month') matchRange = item.rawDate <= endMonth && item.rawEndDate >= today;
+
+                const matchRoom = roomFilter === 'all' ? true : item.ruangan.toLowerCase().includes(roomFilter.toLowerCase());
+
+                return matchSearch && matchStatus && matchRange && matchRoom;
+            });
 
             const tbody = document.getElementById('csv-table-body');
+            if(!tbody) return;
             let htmlList = '';
-
-            if(futureEvents.length === 0) {
-                htmlList = '<tr><td colspan="6" class="px-6 py-10 text-center text-slate-500">Tidak ada kegiatan mendatang.</td></tr>';
+            
+            if(FILTERED_AGENDA.length === 0) {
+                htmlList = '<tr><td colspan="6" class="px-6 py-10 text-center text-slate-500">Tidak ada agenda yang sesuai filter.</td></tr>';
             } else {
-                futureEvents.forEach(item => {
-                    let statusClass = "bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300";
-                    if(item.status && item.status.toLowerCase().includes('setuju')) {
-                        statusClass = "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300";
+                FILTERED_AGENDA.forEach(item => {
+                    const approved = item.status && item.status.toLowerCase().includes('setuju');
+                    let liveStatusHtml = '';
+
+                    if (approved) {
+                        const startDateTime = getEventStartDateTime(item);
+                        const endDateTime = getEventEndDateTime(item);
+                        let liveStatusKey = '';
+                        let liveStatusClass = '';
+
+                        if (nowTime < startDateTime) {
+                            liveStatusKey = 'status_upcoming';
+                            liveStatusClass = 'bg-blue-100 text-blue-800 dark:bg-blue-900/40 dark:text-blue-300 border-blue-200';
+                        } else if (nowTime >= startDateTime && nowTime <= endDateTime) {
+                            liveStatusKey = 'status_ongoing';
+                            liveStatusClass = 'bg-emerald-100 text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-300 border-emerald-200 animate-pulse';
+                        } else {
+                            liveStatusKey = 'status_finished';
+                            liveStatusClass = 'bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-400 border-slate-200';
+                        }
+                        const textLabel = TRANSLATIONS[currentLang][liveStatusKey] || 'Status';
+                        liveStatusHtml = `<span class="inline-flex items-center px-2.5 py-0.5 rounded-full border text-[10px] font-bold ${liveStatusClass}">${textLabel}</span>`;
+                    } else {
+                        const textLabel = TRANSLATIONS[currentLang]['status_pending'] || 'Pending';
+                        liveStatusHtml = `<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300 border border-yellow-200">${textLabel}</span>`;
                     }
 
+                    const displayDate = item.isMultiDay ? `${item.tglMulai} - ${item.tglSelesai}` : item.tglMulai;
                     htmlList += `
-                        <tr class="table-row-hover bg-white dark:bg-dark-card border-b border-slate-50 dark:border-slate-800/50">
-                            <td class="px-6 py-4"><span class="bg-slate-100 dark:bg-slate-700/50 px-2 py-1 rounded text-xs font-medium">${item.tglMulai}</span></td>
-                            <td class="px-6 py-4 text-sm font-mono text-slate-500">${item.jamMulai} - ${item.jamSelesai}</td>
-                            <td class="px-6 py-4 text-sm font-semibold text-primary-700 dark:text-primary-400">${item.kegiatan}</td>
-                            <td class="px-6 py-4 text-sm text-slate-500">${item.pic || '-'} <br><span class="text-[10px] opacity-70">${item.dept || ''}</span></td>
-                            <td class="px-6 py-4 text-sm text-slate-600 dark:text-slate-400 font-medium">${item.ruangan}</td>
-                            <td class="px-6 py-4 text-center">
-                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${statusClass}">
-                                    ${item.status || 'Pending'}
-                                </span>
-                            </td>
-                        </tr>
-                    `;
+                    <tr class="agenda-table-row bg-white dark:bg-dark-card border-b border-slate-50 dark:border-slate-800/50 cursor-pointer transition" onclick="openEventModal(${item.id})">
+                        <td class="px-6 py-4">
+                            <div class="flex flex-col gap-1">
+                                <span class="bg-slate-100 dark:bg-slate-700/50 px-2 py-1 rounded text-xs font-medium w-fit">${displayDate}</span>
+                                ${item.isMultiDay ? '<span class="multi-day-badge text-[10px] font-bold px-2 py-1 rounded-full w-fit">Multi-hari</span>' : ''}
+                            </div>
+                        </td>
+                        <td class="px-6 py-4 text-sm font-mono text-slate-500">${item.jamMulai} - ${item.jamSelesai}</td>
+                        <td class="px-6 py-4 text-sm font-semibold text-primary-700 dark:text-primary-400">${item.kegiatan}</td>
+                        <td class="px-6 py-4 text-sm text-slate-500">${item.pic || '-'} <br><span class="text-[10px] opacity-70">${item.dept || ''}</span></td>
+                        <td class="px-6 py-4 text-sm text-slate-600 dark:text-slate-400 font-medium">${item.ruangan}</td>
+                        <td class="px-6 py-4 text-center status-badge">${liveStatusHtml}</td>
+                    </tr>`;
                 });
             }
             tbody.innerHTML = htmlList;
 
-            // 2. Render Card Grid (Grouped by Room)
+            // CARD VIEW
             const containerCard = document.getElementById('agenda-view-card');
-            const roomGroups = {};
-            
-            ROOMS_DATA.forEach(r => { roomGroups[r.name] = []; });
-
-            futureEvents.forEach(item => {
-                // Fuzzy matching for "Nakula" in "Ruang Rapat Nakula"
-                const matchedRoom = ROOMS_DATA.find(r => 
-                    item.ruangan.toLowerCase().includes(r.name.toLowerCase()) || 
-                    r.name.toLowerCase().includes(item.ruangan.toLowerCase()) ||
-                    (r.name.includes('Nakula') && item.ruangan.includes('Nakula')) || 
-                    (r.name.includes('Sadewa') && item.ruangan.includes('Sadewa')) ||
-                    (r.name.includes('Bima') && item.ruangan.includes('Bima')) ||
-                    (r.name.includes('Arjuna') && item.ruangan.includes('Arjuna'))
-                );
-
-                if(matchedRoom) {
-                    roomGroups[matchedRoom.name].push(item);
-                } else {
-                    if(!roomGroups[item.ruangan]) roomGroups[item.ruangan] = [];
-                    roomGroups[item.ruangan].push(item);
-                }
-            });
-
-            let htmlCard = '';
-            for (const [room, events] of Object.entries(roomGroups)) {
-                if(!room) continue;
-                htmlCard += `
-                    <div class="bg-white dark:bg-dark-card p-5 rounded-2xl border border-slate-100 dark:border-slate-800 shadow-sm hover:shadow-md transition flex flex-col h-full cursor-pointer hover:border-primary-300 dark:hover:border-primary-700 group" onclick="openRoomSchedule('${room}')">
+            if(containerCard) {
+                const roomGroups = {};
+                ROOMS_DATA.forEach(r => { roomGroups[r.name] = []; });
+                FILTERED_AGENDA.forEach(item => {
+                    const matchedRoom = ROOMS_DATA.find(r => item.ruangan.toLowerCase().includes(r.name.toLowerCase()) || r.name.toLowerCase().includes(item.ruangan.toLowerCase()) || (r.name.includes('Nakula') && item.ruangan.includes('Nakula')) || (r.name.includes('Sadewa') && item.ruangan.includes('Sadewa')) || (r.name.includes('Bima') && item.ruangan.includes('Bima')) || (r.name.includes('Arjuna') && item.ruangan.includes('Arjuna')));
+                    if(matchedRoom) roomGroups[matchedRoom.name].push(item);
+                    else {
+                        if(!roomGroups[item.ruangan]) roomGroups[item.ruangan] = [];
+                        roomGroups[item.ruangan].push(item);
+                    }
+                });
+                let htmlCard = '';
+                for (const [room, events] of Object.entries(roomGroups)) {
+                    if(!room) continue;
+                    htmlCard += `<div class="premium-card premium-card-hover bg-white dark:bg-dark-card p-5 rounded-2xl border border-slate-100 dark:border-slate-800 shadow-sm flex flex-col h-full cursor-pointer group" onclick="openRoomSchedule('${room.replace(/'/g, "\'")}')">
                         <div class="flex justify-between items-center mb-4 pb-3 border-b border-slate-50 dark:border-slate-800">
                             <h4 class="font-bold text-lg text-primary-700 dark:text-primary-400 truncate pr-2">${room}</h4>
                             <span class="text-xs bg-slate-100 dark:bg-slate-700 px-2 py-1 rounded text-slate-500 whitespace-nowrap">${events.length} Agenda</span>
-                        </div>
-                        <div class="space-y-4 flex-1">
-                `;
-                if(events.length === 0) {
-                     htmlCard += `<div class="text-center py-6 text-sm text-slate-400 italic">Tidak ada agenda dekat.</div>`;
-                } else {
-                    events.slice(0, 3).forEach(ev => {
-                        let statusColor = "text-yellow-600";
-                        if(ev.status && ev.status.toLowerCase().includes('setuju')) statusColor = "text-green-600";
-                        
-                        htmlCard += `
-                            <div class="group/item border-l-2 border-slate-200 pl-3 hover:border-primary-500 transition-colors">
-                                <div class="flex justify-between items-start">
-                                    <span class="text-[10px] font-bold text-slate-400 uppercase">${ev.tglMulai.substring(0,5)}</span>
-                                    <span class="text-[10px] ${statusColor} font-bold uppercase">${ev.status || 'Pending'}</span>
+                        </div><div class="space-y-4 flex-1">`;
+                    if(events.length === 0) htmlCard += `<div class="text-center py-6 text-sm text-slate-400 italic">Tidak ada agenda sesuai filter.</div>`;
+                    else {
+                        events.slice(0, 3).forEach(ev => {
+                            const approved = ev.status && ev.status.toLowerCase().includes('setuju');
+                            let liveStatusKey = 'status_pending';
+                            let liveStatusClass = 'text-yellow-600';
+                            
+                            if (approved) {
+                                const startDateTime = getEventStartDateTime(ev);
+                                const endDateTime = getEventEndDateTime(ev);
+                                if (nowTime < startDateTime) {
+                                    liveStatusKey = 'status_upcoming';
+                                    liveStatusClass = 'text-blue-600';
+                                } else if (nowTime >= startDateTime && nowTime <= endDateTime) {
+                                    liveStatusKey = 'status_ongoing';
+                                    liveStatusClass = 'text-emerald-600 animate-pulse';
+                                } else {
+                                    liveStatusKey = 'status_finished';
+                                    liveStatusClass = 'text-slate-500';
+                                }
+                            }
+                            const statusTextCard = TRANSLATIONS[currentLang][liveStatusKey] || (approved ? 'Approved' : 'Pending');
+
+                            htmlCard += `<div class="border-l-2 border-slate-200 pl-3 hover:border-primary-500 transition-colors">
+                                <div class="flex justify-between items-start gap-2">
+                                    <span class="text-[10px] font-bold text-slate-400 uppercase">${ev.isMultiDay ? ev.tglMulai.substring(0,5) + '→' + ev.tglSelesai.substring(0,5) : ev.tglMulai.substring(0,5)}</span>
+                                    <span class="text-[10px] font-bold uppercase ${liveStatusClass}">${statusTextCard}</span>
                                 </div>
-                                <h5 class="font-bold text-slate-800 dark:text-slate-200 text-sm mt-0.5 line-clamp-1" title="${ev.kegiatan}">${ev.kegiatan}</h5>
-                                <div class="flex items-center gap-2 text-xs text-slate-500 mt-1 font-mono">
-                                    ${ev.jamMulai} - ${ev.jamSelesai}
-                                </div>
-                            </div>
-                        `;
-                    });
+                                <h5 class="font-bold text-slate-800 dark:text-slate-200 text-sm mt-0.5 line-clamp-1">${ev.kegiatan}</h5>
+                                <div class="flex items-center gap-2 text-xs text-slate-500 mt-1 font-mono">${ev.jamMulai} - ${ev.jamSelesai}</div>
+                            </div>`;
+                        });
+                    }
+                    if(events.length > 3) htmlCard += `<div class="text-center pt-2"><span class="text-xs text-primary-600 font-medium">+ ${events.length - 3} lainnya</span></div>`;
+                    htmlCard += `</div><div class="mt-4 pt-3 border-t border-slate-50 dark:border-slate-800 text-center"><span class="text-xs font-bold text-slate-400 group-hover:text-primary-600 transition">Lihat Detail & Ketersediaan →</span></div></div>`;
                 }
-                if(events.length > 3) htmlCard += `<div class="text-center pt-2"><span class="text-xs text-primary-600 font-medium">+ ${events.length - 3} lainnya</span></div>`;
-                htmlCard += `
-                        </div>
-                        <div class="mt-4 pt-3 border-t border-slate-50 dark:border-slate-800 text-center">
-                            <span class="text-xs font-bold text-slate-400 group-hover:text-primary-600 transition">Lihat Detail & Ketersediaan &rarr;</span>
-                        </div>
-                    </div>
-                `;
+                containerCard.innerHTML = htmlCard;
             }
-            containerCard.innerHTML = htmlCard;
         }
 
-        // --- CUSTOM CALENDAR LOGIC ---
+        // --- CALENDAR ENGINE ---
         function changeMonth(delta) {
             CALENDAR_DATE.setMonth(CALENDAR_DATE.getMonth() + delta);
             renderCalendar();
@@ -1140,108 +1584,90 @@
         function renderCalendar() {
             const year = CALENDAR_DATE.getFullYear();
             const month = CALENDAR_DATE.getMonth();
-            
-            // Update Header
             const monthNames = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
             document.getElementById('cal-month-year').textContent = `${monthNames[month]} ${year}`;
 
             const firstDay = new Date(year, month, 1);
             const lastDay = new Date(year, month + 1, 0);
             const daysInMonth = lastDay.getDate();
-            const startDayIndex = firstDay.getDay(); // 0 = Sunday
-
+            const startDayIndex = firstDay.getDay();
             const grid = document.getElementById('calendar-grid');
             let html = '';
 
-            // Empty cells for previous month padding
-            for(let i=0; i < startDayIndex; i++) {
-                html += `<div class="bg-slate-50 dark:bg-slate-800/30 rounded min-h-[140px]"></div>`;
-            }
+            for(let i=0; i < startDayIndex; i++) html += `<div class="bg-slate-50 dark:bg-slate-800/30 rounded min-h-[140px]"></div>`;
 
-            // Days
             for(let day=1; day <= daysInMonth; day++) {
                 const currentDayDate = new Date(year, month, day);
-                const isToday = new Date().toDateString() === currentDayDate.toDateString();
-                
-                // Filter events for this day - APPROVED ONLY
-                const dayEvents = GLOBAL_AGENDA_DATA.filter(ev => 
-                    ev.rawDate.getFullYear() === year && 
-                    ev.rawDate.getMonth() === month && 
-                    ev.rawDate.getDate() === day &&
-                    ev.status.toLowerCase().includes('setuju')
-                );
-
-                // SORT BY TIME
-                dayEvents.sort((a,b) => parseFloat(a.jamMulai.replace(':','.')) - parseFloat(b.jamMulai.replace(':','.')));
+                const isToday = isSameDay(new Date(), currentDayDate);
+                const isSelected = SELECTED_DATE && isSameDay(SELECTED_DATE, currentDayDate);
+                const dayEvents = GLOBAL_AGENDA_DATA.filter(ev => eventOccursOnDate(ev, currentDayDate) && ev.status && ev.status.toLowerCase().includes('setuju'));
+                dayEvents.sort((a,b) => getEventStartDateTime(a) - getEventStartDateTime(b));
 
                 let eventHtml = '';
-                // SHOW ALL EVENTS (No Slicing) - Box grows automatically due to grid-auto-rows
                 dayEvents.forEach(ev => {
-                    // Format: Jam - Ruangan (Short) - Kegiatan
-                    // Clean room name (remove "Ruang Rapat") for shorter display
                     let shortRoom = ev.ruangan.replace('Ruang Rapat ', '').replace('Ballroom ', '');
-                    
+                    const multiDay = ev.isMultiDay ? `<span class="inline-flex mt-1 multi-day-badge text-[9px] font-bold px-1.5 py-0.5 rounded-full">${ev.tglMulai === ev.tglSelesai ? '' : 'Multi-hari'}</span>` : '';
+                    const timeLabel = ev.isMultiDay ? (isSameDay(ev.rawDate, currentDayDate) ? `${ev.jamMulai} • mulai` : isSameDay(ev.rawEndDate, currentDayDate) ? `${ev.jamSelesai} • selesai` : 'Seharian') : ev.jamMulai;
                     eventHtml += `
-                        <div onclick="openEventModal(${ev.id})" class="group text-[10px] leading-tight bg-green-100 text-green-800 dark:bg-green-900/40 dark:text-green-200 px-1.5 py-1 rounded mb-1 cursor-pointer hover:bg-green-200 dark:hover:bg-green-800 border-l-2 border-green-500 transition shadow-sm">
-                            <div class="font-mono font-bold text-green-700 dark:text-green-300 opacity-80 mb-0.5">${ev.jamMulai}</div>
-                            <div class="font-bold truncate">${shortRoom}</div>
-                            <div class="truncate opacity-90">${ev.kegiatan}</div>
-                        </div>
-                    `;
+                    <div onclick="event.stopPropagation(); openEventModal(${ev.id})" class="group text-[10px] leading-tight ${ev.isMultiDay ? 'bg-blue-100 text-blue-800 dark:bg-blue-900/40 dark:text-blue-100 border-blue-500' : 'bg-green-100 text-green-800 dark:bg-green-900/40 dark:text-green-200 border-green-500'} px-1.5 py-1 rounded mb-1 cursor-pointer hover:brightness-95 border-l-2 transition shadow-sm">
+                        <div class="font-mono font-bold opacity-80 mb-0.5">${timeLabel}</div>
+                        <div class="font-bold truncate">${shortRoom}</div>
+                        <div class="truncate opacity-90">${ev.kegiatan}</div>
+                        ${multiDay}
+                    </div>`;
                 });
 
-                html += `
-                    <div class="calendar-day-hover bg-white dark:bg-dark-card border border-slate-200 dark:border-slate-700 rounded p-1.5 flex flex-col relative min-h-[140px] ${isToday ? 'ring-2 ring-primary-500 z-20' : ''}">
-                        <span class="text-sm font-bold ${isToday ? 'bg-primary-600 text-white w-6 h-6 flex items-center justify-center rounded-full shadow-md' : 'text-slate-700 dark:text-slate-300'} mb-1">${day}</span>
-                        <div class="flex-1 flex flex-col justify-start overflow-hidden">
-                            ${eventHtml}
-                        </div>
-                    </div>
-                `;
+                html += `<div onclick="selectCalendarDay(${year}, ${month}, ${day})" class="calendar-day-hover ${isSelected ? 'selected-calendar-day' : ''} bg-white dark:bg-dark-card border border-slate-200 dark:border-slate-700 rounded p-1.5 flex flex-col relative min-h-[140px] ${isToday ? 'ring-2 ring-primary-500 z-20' : ''}">
+                    <span class="text-sm font-bold ${isToday ? 'bg-primary-600 text-white w-6 h-6 flex items-center justify-center rounded-full shadow-md' : 'text-slate-700 dark:text-slate-300'} mb-1">${day}</span>
+                    <div class="flex-1 flex flex-col justify-start overflow-hidden">${eventHtml}</div>
+                </div>`;
             }
             grid.innerHTML = html;
+            renderSelectedDaySummary(SELECTED_DATE || new Date());
         }
 
-        // --- TICKER / MARQUEE LOGIC (PENDING EVENTS) ---
+        // --- TICKER / PENDING LOGIC ---
         function renderTicker() {
             const today = new Date(); today.setHours(0,0,0,0);
-            const pendingEvents = GLOBAL_AGENDA_DATA.filter(ev => 
-                ev.rawDate >= today && 
-                (!ev.status || ev.status.toLowerCase() === 'pending' || ev.status === '')
-            );
-
+            const pendingEvents = GLOBAL_AGENDA_DATA.filter(ev => ev.rawEndDate >= today && (!ev.status || ev.status.toLowerCase() === 'pending' || ev.status === '')).sort((a,b) => getEventStartDateTime(a) - getEventStartDateTime(b));
             const ticker = document.getElementById('pending-ticker');
+            const countLabel = document.getElementById('pendingCountLabel');
+            if(countLabel) countLabel.textContent = `${pendingEvents.length} Pengajuan`;
+            if(!ticker) return;
             if(pendingEvents.length === 0) {
-                ticker.innerHTML = '<span class="text-sm text-slate-500 italic">Tidak ada kegiatan pending saat ini.</span>';
+                ticker.innerHTML = '<div class="text-sm text-slate-500 italic">Tidak ada kegiatan pending saat ini.</div>';
             } else {
-                ticker.innerHTML = pendingEvents.map(ev => `
-                    <div class="flex items-center gap-2">
-                        <span class="text-yellow-600 dark:text-yellow-400 font-bold text-xs">[PENDING]</span>
-                        <span class="text-slate-700 dark:text-slate-300 text-sm font-medium">${ev.tglMulai} - ${ev.kegiatan} (${ev.ruangan})</span>
-                        <span class="text-slate-400 mx-4">|</span>
-                    </div>
-                `).join('');
+                ticker.innerHTML = pendingEvents.slice(0, 6).map(ev => `
+                    <button onclick="openEventModal(${ev.id})" class="pending-panel-item premium-card-hover text-left p-4 rounded-2xl">
+                        <div class="flex items-start justify-between gap-3">
+                            <div>
+                                <div class="font-semibold text-slate-900 dark:text-white line-clamp-2">${ev.kegiatan}</div>
+                                <div class="text-xs text-slate-500 dark:text-slate-400 mt-2">${ev.isMultiDay ? `${ev.tglMulai} - ${ev.tglSelesai}` : ev.tglMulai} • ${ev.jamMulai} - ${ev.jamSelesai}</div>
+                                <div class="text-xs text-slate-500 dark:text-slate-400 mt-1">${ev.ruangan || 'Tanpa Ruangan'} • PIC: ${ev.pic || '-'}</div>
+                                ${ev.notes && ev.notes !== '-' ? `<div class="text-xs text-slate-500 dark:text-slate-400 mt-2 line-clamp-2">Catatan: ${ev.notes}</div>` : ''}
+                            </div>
+                            <span class="shrink-0 rounded-full px-3 py-1 text-[10px] font-bold bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-300">Pending</span>
+                        </div>
+                    </button>`).join('');
             }
         }
 
-        // --- EVENT DETAIL POPUP (FINAL REVISED STRUCTURE) ---
+        // --- EVENT MODAL ---
         const eventModal = document.getElementById('eventDetailModal');
         function openEventModal(id) {
             const ev = GLOBAL_AGENDA_DATA.find(x => x.id === id);
             if(!ev) return;
             
-            // Header Info
             document.getElementById('modalHeaderTitle').textContent = ev.kegiatan;
             const options = { weekday: 'long', day: 'numeric', month: 'long' };
             const dateStr = ev.rawDate.toLocaleDateString('id-ID', options);
-            document.getElementById('modalHeaderTime').textContent = `${dateStr} • ${ev.jamMulai} - ${ev.jamSelesai}`;
+            const headerDateText = ev.isMultiDay ? `${ev.tglMulai} - ${ev.tglSelesai}` : dateStr;
+            document.getElementById('modalHeaderTime').textContent = `${headerDateText} • ${ev.jamMulai} - ${ev.jamSelesai}`;
             
-            // Body Info
             document.getElementById('modalBodyTitle').textContent = ev.kegiatan;
             document.getElementById('modalBodyPIC').textContent = ev.pic || '-';
             document.getElementById('modalBodyDept').textContent = ev.dept || '-';
             
-            // Phone Link Logic
             const contactEl = document.getElementById('modalBodyContact');
             contactEl.textContent = ev.contact || '-';
             if(ev.contact && ev.contact !== '-') {
@@ -1252,7 +1678,7 @@
                 contactEl.title = "";
             }
 
-            document.getElementById('modalBodyRoom').textContent = ev.ruangan;
+            document.getElementById('modalBodyRoom').textContent = ev.ruangan + (ev.isMultiDay ? ` • ${ev.tglMulai} - ${ev.tglSelesai}` : '');
             document.getElementById('modalBodyLayout').textContent = ev.layout || 'Sesuai Request'; 
             document.getElementById('modalBodyEquip').textContent = ev.equipment || 'Standar Meeting (Proyektor, Sound, Mic)';
             document.getElementById('modalBodyNotes').textContent = ev.notes || '-';
@@ -1262,7 +1688,7 @@
         }
         function closeEventModal() { eventModal.classList.add('hidden'); eventModal.classList.remove('flex'); }
 
-        // --- RENDER CATALOG ---
+        // --- ROOM CATALOG ---
         const roomsContainer = document.getElementById('roomsContainer');
         roomsContainer.innerHTML = ROOMS_DATA.map(room => `
             <div class="group bg-white dark:bg-dark-card rounded-2xl overflow-hidden border border-slate-100 dark:border-dark-border shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
@@ -1291,28 +1717,17 @@
             </div>
         `).join('');
 
-        // --- HELPER TIME FORMAT ---
         function formatTime(val) {
             let h = Math.floor(val);
             let m = Math.round((val - h) * 60);
             return `${h.toString().padStart(2,'0')}:${m.toString().padStart(2,'0')}`;
         }
 
-        // --- ROOM SCHEDULE POPUP LOGIC ---
+        // --- ROOM SCHEDULE LOGIC ---
         function openRoomSchedule(roomName) {
             document.getElementById('scheduleRoomName').textContent = roomName;
-            
-            // Smart Filter: Match "Ruang Rapat Nakula" with "Ruang Nakula" or "Nakula" in CSV
-            const roomEvents = GLOBAL_AGENDA_DATA.filter(item => 
-                item.ruangan.toLowerCase().includes(roomName.toLowerCase()) || 
-                roomName.toLowerCase().includes(item.ruangan.toLowerCase()) ||
-                (roomName.includes('Nakula') && item.ruangan.includes('Nakula')) ||
-                (roomName.includes('Sadewa') && item.ruangan.includes('Sadewa')) ||
-                (roomName.includes('Bima') && item.ruangan.includes('Bima')) ||
-                (roomName.includes('Arjuna') && item.ruangan.includes('Arjuna'))
-            );
+            const roomEvents = GLOBAL_AGENDA_DATA.filter(item => item.ruangan.toLowerCase().includes(roomName.toLowerCase()) || roomName.toLowerCase().includes(item.ruangan.toLowerCase()) || (roomName.includes('Nakula') && item.ruangan.includes('Nakula')) || (roomName.includes('Sadewa') && item.ruangan.includes('Sadewa')) || (roomName.includes('Bima') && item.ruangan.includes('Bima')) || (roomName.includes('Arjuna') && item.ruangan.includes('Arjuna')));
 
-            // 1. Availability Logic (Today & Tomorrow)
             const today = new Date(); today.setHours(0,0,0,0);
             const tomorrow = new Date(today); tomorrow.setDate(today.getDate() + 1);
             const checkDays = [today, tomorrow];
@@ -1321,61 +1736,53 @@
 
             checkDays.forEach((day, index) => {
                 document.getElementById(displayIds[index]).textContent = day.toLocaleDateString('id-ID', { day: 'numeric', month: 'short' });
-                const dayEvents = roomEvents.filter(ev => ev.rawDate.getTime() === day.getTime() && ev.status.toLowerCase().includes('setuju'));
-                dayEvents.sort((a,b) => parseFloat(a.jamMulai.replace(':','.')) - parseFloat(b.jamMulai.replace(':','.')));
-                
-                let current = 6.0; // 06:00
+                const dayEvents = roomEvents.filter(ev => eventOccursOnDate(ev, day) && ev.status && ev.status.toLowerCase().includes('setuju'));
+                dayEvents.sort((a,b) => getEventStartDateTime(a) - getEventStartDateTime(b));
+
+                let current = 6.0;
                 let gaps = [];
-                
                 dayEvents.forEach(ev => {
-                    let start = parseFloat(ev.jamMulai.replace(':','.'));
-                    let end = parseFloat(ev.jamSelesai.replace(':','.'));
-                    if(start > current) {
-                         if(start - current >= 0.5) gaps.push(`${formatTime(current)} - ${formatTime(start)}`);
-                    }
+                    let start = 6.0;
+                    let end = 22.0;
+                    if(isSameDay(ev.rawDate, day)) start = parseFloat((ev.jamMulai || '06:00').replace(':','.'));
+                    if(isSameDay(ev.rawEndDate, day)) end = parseFloat((ev.jamSelesai || '22:00').replace(':','.'));
+                    if(start > current && start - current >= 0.5) gaps.push(`${formatTime(current)} - ${formatTime(start)}`);
                     current = Math.max(current, end);
                 });
                 if(current < 22.0) gaps.push(`${formatTime(current)} - 22:00`);
-
                 const targetEl = document.getElementById(targetIds[index]);
-                if(gaps.length > 0) {
-                    targetEl.innerHTML = gaps.map(g => `<button onclick="closeRoomSchedule(); openFormModal('ruang');" class="bg-green-50 hover:bg-green-100 text-green-700 border border-green-200 text-[10px] font-bold px-2 py-1.5 rounded transition shadow-sm">${g}</button>`).join(' ');
-                } else {
-                    targetEl.innerHTML = `<span class="text-xs text-red-500 italic font-medium bg-red-50 px-2 py-1 rounded">Penuh / Full</span>`;
-                }
+                if(gaps.length > 0) targetEl.innerHTML = gaps.map(g => `<button onclick="closeRoomSchedule(); openFormModal('ruang');" class="bg-green-50 hover:bg-green-100 text-green-700 border border-green-200 text-[10px] font-bold px-2 py-1.5 rounded transition shadow-sm">${g}</button>`).join(' ');
+                else targetEl.innerHTML = `<span class="text-xs text-red-500 italic font-medium bg-red-50 px-2 py-1 rounded">Penuh / Full</span>`;
             });
 
-            // 2. List Existing Events
             const listContainer = document.getElementById('roomScheduleList');
-            const futureRoomEvents = roomEvents.filter(ev => ev.rawDate >= today && ev.status.toLowerCase().includes('setuju'));
-            
+            const futureRoomEvents = roomEvents.filter(ev => ev.rawEndDate >= today && ev.status && ev.status.toLowerCase().includes('setuju')).sort((a,b) => getEventStartDateTime(a) - getEventStartDateTime(b));
             if(futureRoomEvents.length === 0) {
                 listContainer.innerHTML = `<div class="text-center py-8 bg-slate-50 dark:bg-slate-800/30 rounded-xl border border-dashed border-slate-200 dark:border-slate-700"><p class="text-slate-500 font-medium text-sm">Belum ada agenda terkonfirmasi.</p></div>`;
             } else {
                 listContainer.innerHTML = futureRoomEvents.map(ev => `
                     <div class="flex items-start gap-4 p-3 rounded-lg border border-slate-100 dark:border-slate-800 bg-white dark:bg-dark-card shadow-sm hover:border-primary-200 transition">
-                        <div class="flex-shrink-0 w-12 text-center pt-0.5">
-                            <span class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider">${ev.tglMulai.substring(0,2)}</span>
-                            <span class="block text-xs font-bold text-slate-800 dark:text-white uppercase">${ev.tglMulai.substring(3,6)}</span>
+                        <div class="flex-shrink-0 w-16 text-center pt-0.5">
+                            <span class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider">${ev.isMultiDay ? 'MULTI' : ev.tglMulai.substring(0,2)}</span>
+                            <span class="block text-xs font-bold text-slate-800 dark:text-white uppercase">${ev.isMultiDay ? `${ev.tglMulai.substring(0,5)} → ${ev.tglSelesai.substring(0,5)}` : ev.tglMulai.substring(3,6)}</span>
                         </div>
                         <div class="flex-1 border-l-2 border-slate-100 dark:border-slate-700 pl-3">
                             <h4 class="font-bold text-sm text-slate-900 dark:text-white leading-snug">${ev.kegiatan}</h4>
                             <div class="flex flex-wrap items-center gap-3 text-xs text-slate-500 mt-1">
                                 <span class="flex items-center gap-1 font-mono bg-slate-100 dark:bg-slate-700 px-1.5 py-0.5 rounded text-[10px]">${ev.jamMulai} - ${ev.jamSelesai}</span>
                                 <span class="text-[10px] text-slate-400">PIC: ${ev.pic || '-'}</span>
+                                ${ev.isMultiDay ? '<span class="multi-day-badge text-[10px] font-bold px-2 py-0.5 rounded-full">Multi-hari</span>' : ''}
                             </div>
                         </div>
-                    </div>
-                `).join('');
+                    </div>`).join('');
             }
-
             const modal = document.getElementById('roomScheduleModal');
             modal.classList.remove('hidden');
             modal.classList.add('flex');
         }
         function closeRoomSchedule() { const modal = document.getElementById('roomScheduleModal'); modal.classList.add('hidden'); modal.classList.remove('flex'); }
 
-        // --- UTILS (Gallery, Form, Theme) ---
+        // --- DASHBOARD OVERVIEW & UTILS ---
         let currentGallery = []; let galleryIdx = 0;
         const galleryModal = document.getElementById('galleryModal');
         const galleryTrack = document.getElementById('galleryTrack');
@@ -1435,15 +1842,158 @@
         }
         function downloadGuide() { alert("Panduan sedang diunduh..."); }
 
-        // Start & Auto Refresh
-        window.addEventListener('DOMContentLoaded', () => {
-            loadCSV();
-            renderHotels();
-            renderVendors();
-            setInterval(() => loadCSV(true), 60000); // 60s Refresh
-        });
+        function isSameDay(a, b) {
+            return a && b && a.getFullYear() === b.getFullYear() && a.getMonth() === b.getMonth() && a.getDate() === b.getDate();
+        }
+        function getEventStartDateTime(ev) {
+            const d = new Date(ev.rawDate);
+            const parts = (ev.jamMulai || '00:00').split(':');
+            d.setHours(parseInt(parts[0] || 0), parseInt(parts[1] || 0), 0, 0);
+            return d;
+        }
+        function getEventEndDateTime(ev) {
+            const d = new Date(ev.rawEndDate || ev.rawDate);
+            const parts = (ev.jamSelesai || '23:59').split(':');
+            d.setHours(parseInt(parts[0] || 23), parseInt(parts[1] || 59), 59, 999);
+            return d;
+        }
+        function eventOccursOnDate(ev, dateObj) {
+            const check = new Date(dateObj); check.setHours(0,0,0,0);
+            const start = new Date(ev.rawDate); start.setHours(0,0,0,0);
+            const end = new Date(ev.rawEndDate || ev.rawDate); end.setHours(0,0,0,0);
+            return check >= start && check <= end;
+        }
+        
+        function renderSelectedDaySummary(dateObj) {
+            const label = document.getElementById('selectedDayLabel');
+            const container = document.getElementById('selectedDaySummary');
+            if(!label || !container || !dateObj) return;
+            label.textContent = dateObj.toLocaleDateString('id-ID', { weekday:'long', day:'numeric', month:'long', year:'numeric' });
+            const items = GLOBAL_AGENDA_DATA.filter(ev => eventOccursOnDate(ev, dateObj)).sort((a,b) => getEventStartDateTime(a) - getEventStartDateTime(b));
+            if(items.length === 0) { container.innerHTML = '<div class="italic text-slate-400">Tidak ada agenda pada tanggal ini.</div>'; return; }
+            container.innerHTML = items.map(ev => {
+                const approved = ev.status && ev.status.toLowerCase().includes('setuju');
+                return `<button onclick="openEventModal(${ev.id})" class="w-full text-left p-3 rounded-2xl border ${approved ? 'border-green-200 dark:border-green-900/40 bg-green-50 dark:bg-green-900/10' : 'border-yellow-200 dark:border-yellow-900/30 bg-yellow-50 dark:bg-yellow-900/10'} premium-card-hover">
+                    <div class="flex items-start justify-between gap-3">
+                        <div>
+                            <div class="font-semibold text-slate-900 dark:text-white line-clamp-2">${ev.kegiatan}</div>
+                            <div class="text-xs text-slate-500 mt-1">${ev.isMultiDay ? `${ev.tglMulai} - ${ev.tglSelesai}` : ev.tglMulai} • ${ev.jamMulai} - ${ev.jamSelesai}</div>
+                            <div class="text-xs text-slate-500 mt-1">${ev.ruangan} • PIC: ${ev.pic || '-'}</div>
+                        </div>
+                        <span class="inline-flex items-center px-2 py-1 rounded-full text-[10px] font-bold ${approved ? 'bg-green-100 text-green-700 dark:bg-green-900/40 dark:text-green-300' : 'bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-300'}">${ev.status || 'Pending'}</span>
+                    </div>
+                </button>`;
+            }).join('');
+        }
+        function selectCalendarDay(year, month, day) {
+            SELECTED_DATE = new Date(year, month, day);
+            renderCalendar();
+        }
+        
+        function renderOperationalOverview() {
+            const now = new Date();
+            const today = new Date(now); today.setHours(0,0,0,0);
+            const todayEnd = new Date(now); todayEnd.setHours(23,59,59,999);
+            const ongoingEvents = GLOBAL_AGENDA_DATA.filter(ev => {
+                const approved = ev.status && ev.status.toLowerCase().includes('setuju');
+                return approved && getEventStartDateTime(ev) <= now && getEventEndDateTime(ev) >= now;
+            }).sort((a,b) => getEventStartDateTime(a) - getEventStartDateTime(b));
+            
+            const todayEvents = GLOBAL_AGENDA_DATA.filter(ev => eventOccursOnDate(ev, today));
+            const approved = GLOBAL_AGENDA_DATA.filter(ev => ev.status && ev.status.toLowerCase().includes('setuju')).length;
+            const pending = GLOBAL_AGENDA_DATA.filter(ev => !ev.status || ev.status.toLowerCase() === 'pending').length;
+            
+            const setText = (id, value) => { const el = document.getElementById(id); if(el) el.textContent = value; };
+            setText('metricOngoingCount', ongoingEvents.length);
+            setText('metricTodayCount', todayEvents.length);
+            setText('metricApprovedCount', approved);
+            setText('metricPendingCount', pending);
+            
+            if(FILTERED_AGENDA) {
+                setText('agendaMetricTotal', FILTERED_AGENDA.length);
+                setText('agendaMetricApproved', FILTERED_AGENDA.filter(ev => ev.status && ev.status.toLowerCase().includes('setuju')).length);
+                setText('agendaMetricPending', FILTERED_AGENDA.filter(ev => !ev.status || ev.status.toLowerCase() === 'pending').length);
+                setText('agendaMetricRooms', new Set(FILTERED_AGENDA.map(ev => ev.ruangan).filter(Boolean)).size);
+            }
 
-        // Hotels Logic
+            const monthEvents = GLOBAL_AGENDA_DATA.filter(ev => ev.rawDate.getMonth() === CALENDAR_DATE.getMonth() && ev.rawDate.getFullYear() === CALENDAR_DATE.getFullYear());
+            setText('calendarMonthCount', monthEvents.length);
+            setText('calendarApprovedMonthCount', monthEvents.filter(ev => ev.status && ev.status.toLowerCase().includes('setuju')).length);
+            setText('calendarPendingMonthCount', monthEvents.filter(ev => !ev.status || ev.status.toLowerCase() === 'pending').length);
+
+            const panel = document.getElementById('ongoingPanel');
+            if(panel) {
+                panel.innerHTML = ongoingEvents.length ? ongoingEvents.map(ev => `
+                    <button onclick="openEventModal(${ev.id})" class="w-full text-left p-3 rounded-2xl border border-green-200 dark:border-green-900/40 bg-green-50 dark:bg-green-900/10 premium-card-hover">
+                        <div class="flex items-start justify-between gap-3">
+                            <div>
+                                <div class="font-semibold text-slate-900 dark:text-white line-clamp-2">${ev.kegiatan}</div>
+                                <div class="text-xs text-slate-500 mt-1">${ev.jamMulai} - ${ev.jamSelesai} • ${ev.ruangan}</div>
+                                <div class="text-xs text-slate-500 mt-1">PIC: ${ev.pic || '-'} ${ev.isMultiDay ? '• Multi-hari' : ''}</div>
+                            </div>
+                            <span class="inline-flex items-center gap-1 text-[10px] font-bold text-green-700 dark:text-green-300"><span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span> LIVE</span>
+                        </div>
+                    </button>`).join('') : '<div class="italic text-slate-400">Tidak ada kegiatan yang sedang berlangsung saat ini.</div>';
+            }
+
+            const nextEvent = GLOBAL_AGENDA_DATA.filter(ev => ev.status && ev.status.toLowerCase().includes('setuju') && getEventStartDateTime(ev) > now).sort((a,b) => getEventStartDateTime(a) - getEventStartDateTime(b))[0];
+            const reminder = document.getElementById('nextEventReminder');
+            if(reminder) {
+                if(nextEvent) {
+                    reminder.innerHTML = `<div class="font-semibold text-slate-900 dark:text-white">${nextEvent.kegiatan}</div><div class="mt-2 text-sm text-slate-500 dark:text-slate-400">${nextEvent.isMultiDay ? `${nextEvent.tglMulai} - ${nextEvent.tglSelesai}` : nextEvent.tglMulai} • ${nextEvent.jamMulai} - ${nextEvent.jamSelesai}</div><div class="mt-1 text-sm text-slate-500 dark:text-slate-400">${nextEvent.ruangan} • PIC: ${nextEvent.pic || '-'}</div>`;
+                } else reminder.innerHTML = '<span class="italic text-slate-400">Tidak ada agenda berikutnya.</span>';
+            }
+        }
+
+        function showToast(message, type = 'default') {
+            const stack = document.getElementById('toastStack');
+            if(!stack) return;
+            const item = document.createElement('div');
+            item.className = `toast-item ${type === 'success' ? 'success' : type === 'warn' ? 'warn' : ''}`;
+            item.innerHTML = `<div class="text-sm font-semibold">${message}</div>`;
+            stack.appendChild(item);
+            setTimeout(() => { item.style.opacity = '0'; item.style.transform = 'translateY(8px)'; setTimeout(() => item.remove(), 250); }, 4200);
+        }
+
+        function requestBrowserNotification() {
+            if(!('Notification' in window)) { showToast('Browser ini belum mendukung notifikasi.', 'warn'); return; }
+            Notification.requestPermission().then(permission => {
+                if(permission === 'granted') showToast('Notifikasi browser berhasil diaktifkan.', 'success');
+                else showToast('Izin notifikasi belum diberikan.', 'warn');
+            });
+        }
+
+        function autoCheckAndNotify(silent = false) {
+            const now = new Date();
+            const upcoming = GLOBAL_AGENDA_DATA.filter(ev => ev.status && ev.status.toLowerCase().includes('setuju') && getEventStartDateTime(ev) > now).sort((a,b) => getEventStartDateTime(a) - getEventStartDateTime(b));
+            if(!upcoming.length) return;
+            const nearest = upcoming[0];
+            const diffMin = Math.max(0, Math.round((getEventStartDateTime(nearest) - now) / 60000));
+            const sig = `${nearest.id}-${nearest.tglMulai}-${nearest.jamMulai}`;
+            if(NOTIFIED_EVENT_SIGNATURES.has(sig)) return;
+            let msg = '';
+            if(diffMin <= 60) msg = `Pengingat: ${nearest.kegiatan} dimulai sekitar ${diffMin} menit lagi di ${nearest.ruangan}.`;
+            else if(diffMin <= 24*60) msg = `Agenda terdekat: ${nearest.kegiatan} pada ${nearest.isMultiDay ? nearest.tglMulai + ' - ' + nearest.tglSelesai : nearest.tglMulai} pukul ${nearest.jamMulai}.`;
+            if(msg && !silent) showToast(msg, diffMin <= 60 ? 'warn' : 'success');
+            if(msg && 'Notification' in window && Notification.permission === 'granted') {
+                try { new Notification('LMSt Reminder', { body: msg, icon: 'https://ik.imagekit.io/logojkdiy/Layanan%20Terintegrasi%20-%20OJK%20DIY.png?updatedAt=.' }); } catch(e) { console.warn(e); }
+            }
+            NOTIFIED_EVENT_SIGNATURES.add(sig);
+        }
+
+        function openWelcomeModal() {
+            const modal = document.getElementById('welcomeModal');
+            if(modal) modal.classList.add('show');
+        }
+
+        function closeWelcomeModal(remember = false) {
+            const modal = document.getElementById('welcomeModal');
+            if(modal) modal.classList.remove('show');
+            if(remember) localStorage.setItem('lmsWelcomeDismissed', 'true');
+            else localStorage.setItem('lmsWelcomeShownOnce', 'true');
+        }
+
+        // --- HOTEL & VENDOR TABS ---
         let hotelFiltered = [...HOTELS_DATA];
         const hotelTrack = document.getElementById('hotelTrack');
         function renderHotels() {
@@ -1481,50 +2031,63 @@
         }
         document.getElementById('hotelSearch').addEventListener('input', () => filterHotels('all'));
 
-        // Vendor Logic
         let currentVendorTab = 'snack';
         const vList = document.getElementById('vendorList');
         function renderVendors() {
             const data = VENDOR_DATA[currentVendorTab];
             const btnSnack = document.getElementById('tabSnack');
             const btnCatering = document.getElementById('tabCatering');
-            
+
             if(currentVendorTab === 'snack') {
-                btnSnack.className = "px-4 py-1.5 rounded-md text-sm font-bold shadow-sm bg-slate-100 dark:bg-slate-700 text-primary-600 dark:text-white";
-                btnCatering.className = "px-4 py-1.5 rounded-md text-sm font-medium text-slate-500 dark:text-slate-400 hover:text-primary-600";
+                btnSnack.className = "px-5 py-2 rounded-xl text-sm font-bold text-primary-600 bg-slate-100 dark:bg-slate-700 dark:text-white shadow-sm transition-all";
+                btnCatering.className = "px-5 py-2 rounded-xl text-sm font-medium text-slate-500 dark:text-slate-400 hover:text-primary-600 transition-all";
             } else {
-                btnCatering.className = "px-4 py-1.5 rounded-md text-sm font-bold shadow-sm bg-slate-100 dark:bg-slate-700 text-primary-600 dark:text-white";
-                btnSnack.className = "px-4 py-1.5 rounded-md text-sm font-medium text-slate-500 dark:text-slate-400 hover:text-primary-600";
+                btnCatering.className = "px-5 py-2 rounded-xl text-sm font-bold text-primary-600 bg-slate-100 dark:bg-slate-700 dark:text-white shadow-sm transition-all";
+                btnSnack.className = "px-5 py-2 rounded-xl text-sm font-medium text-slate-500 dark:text-slate-400 hover:text-primary-600 transition-all";
             }
 
+            const iconSvg = currentVendorTab === 'snack'
+                ? '<svg class="clean-icon-lg" viewBox="0 0 24 24"><path d="M7 4h10l1 4H6l1-4Z"/><path d="M6 8h12v9a3 3 0 0 1-3 3H9a3 3 0 0 1-3-3V8Z"/><path d="M10 12h4"/></svg>'
+                : '<svg class="clean-icon-lg" viewBox="0 0 24 24"><path d="M4 11h16"/><path d="M6 11V7a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v4"/><path d="M6 11v6a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-6"/></svg>';
+
             vList.innerHTML = data.map(v => `
-                <div class="p-4 rounded-xl border border-slate-100 dark:border-dark-border bg-white dark:bg-dark-card hover:border-primary-100 dark:hover:border-primary-900 transition-all group">
-                    <div class="flex items-start justify-between">
+                <div class="section-card premium-card-hover p-4 rounded-2xl border border-slate-100 dark:border-dark-border group">
+                    <div class="flex items-start justify-between gap-3">
                         <div class="flex items-start gap-3">
-                            <div class="w-10 h-10 shrink-0 rounded-full bg-primary-50 dark:bg-primary-900/20 text-primary-600 dark:text-primary-400 flex items-center justify-center font-bold text-sm border border-primary-100 dark:border-primary-900/50">
-                                ${v.name.charAt(0)}
-                            </div>
+                            <div class="w-12 h-12 rounded-2xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 flex items-center justify-center border border-slate-200 dark:border-slate-700 shrink-0">${iconSvg}</div>
                             <div>
                                 <h4 class="font-bold text-slate-900 dark:text-white text-sm group-hover:text-primary-600 transition-colors">${v.name}</h4>
-                                <span class="text-[10px] font-semibold uppercase tracking-wider text-slate-500 bg-slate-100 dark:bg-slate-800 px-1.5 py-0.5 rounded mt-1 inline-block">${v.tag}</span>
+                                <span class="text-[10px] font-semibold uppercase tracking-wider text-slate-500 bg-slate-100 dark:bg-slate-800 px-2 py-1 rounded-full mt-1 inline-flex">${v.tag}</span>
+                                <p class="text-xs text-slate-500 mt-2 leading-relaxed">${v.desc}</p>
                             </div>
                         </div>
-                        <div class="flex gap-1">
-                             <button onclick="toggleVendorDetail('${v.id}')" class="p-2 rounded-full text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-primary-600 transition"><svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg></button>
-                             <button onclick="vendorWhatsApp('${v.id}','${v.name}')" class="p-2 rounded-full text-green-500 hover:bg-green-50 dark:hover:bg-green-900/20 transition"><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg></button>
+                        <div class="flex items-center gap-1">
+                            <button onclick="toggleVendorDetail('${v.id}')" class="p-2 rounded-full text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-primary-600 transition" title="Lihat detail">
+                                <svg class="clean-icon" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+                            </button>
+                            <button onclick="vendorWhatsApp('${v.id}','${v.name}')" class="p-2 rounded-full text-slate-500 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-green-600 transition" title="Hubungi via WhatsApp">
+                                <svg class="clean-icon" viewBox="0 0 24 24"><path d="M20 12a8 8 0 0 1-11.7 7l-4.3 1 1.1-4.1A8 8 0 1 1 20 12Z"/><path d="M9.5 9.5c.3-.7.8-.8 1.1-.8h.4c.1 0 .3 0 .4.4l.6 1.5c.1.2 0 .4-.1.5l-.3.4c-.1.1-.2.3 0 .5.3.5.7 1 1.2 1.4.6.4 1 .7 1.7.9.2.1.4 0 .5-.1l.4-.5c.1-.1.3-.2.5-.1l1.5.7c.2.1.3.2.3.4v.3c0 .3-.1.9-.8 1.2-.7.3-1.6.3-2.2.1-1.6-.5-3.1-1.9-4-3.4-.5-.8-.8-1.8-.2-2.9Z"/></svg>
+                            </button>
                         </div>
                     </div>
-                    <p class="text-xs text-slate-500 mt-2 line-clamp-2">${v.desc}</p>
-                    <div id="detail-${v.id}" class="hidden mt-3 pt-3 border-t border-slate-100 dark:border-slate-800 text-xs animate-fade-in">
-                        <div class="grid grid-cols-2 gap-2 text-slate-600 dark:text-slate-400">
-                             <div><span class="font-bold text-slate-900 dark:text-slate-200 block mb-0.5">Harga</span>${VENDOR_INFO[v.id]?.price || '-'}</div>
-                             <div><span class="font-bold text-slate-900 dark:text-slate-200 block mb-0.5">Min Order</span>${VENDOR_INFO[v.id]?.minOrder || '-'}</div>
-                             <div class="col-span-2"><span class="font-bold text-slate-900 dark:text-slate-200 block mb-0.5">Area</span>${VENDOR_INFO[v.id]?.area || '-'}</div>
-                             <div class="col-span-2 bg-slate-50 dark:bg-slate-800/50 p-2 rounded border border-slate-100 dark:border-slate-700 italic">${VENDOR_INFO[v.id]?.strengths || '-'}</div>
+                    <div id="detail-${v.id}" class="hidden mt-4 pt-4 border-t border-slate-100 dark:border-slate-800 text-xs animate-fade-in">
+                        <div class="grid sm:grid-cols-2 gap-3 text-slate-600 dark:text-slate-400">
+                            <div class="rounded-xl bg-slate-50 dark:bg-slate-800/50 p-3 border border-slate-100 dark:border-slate-700">
+                                <span class="font-bold text-slate-900 dark:text-slate-200 block mb-1">Harga</span>${VENDOR_INFO[v.id]?.price || '-'}
+                            </div>
+                            <div class="rounded-xl bg-slate-50 dark:bg-slate-800/50 p-3 border border-slate-100 dark:border-slate-700">
+                                <span class="font-bold text-slate-900 dark:text-slate-200 block mb-1">Min Order</span>${VENDOR_INFO[v.id]?.minOrder || '-'}
+                            </div>
+                            <div class="rounded-xl bg-slate-50 dark:bg-slate-800/50 p-3 border border-slate-100 dark:border-slate-700 sm:col-span-2">
+                                <span class="font-bold text-slate-900 dark:text-slate-200 block mb-1">Area Layanan</span>${VENDOR_INFO[v.id]?.area || '-'}
+                            </div>
+                            <div class="rounded-xl bg-primary-50 dark:bg-primary-900/10 p-3 border border-primary-100 dark:border-primary-900/30 sm:col-span-2">
+                                <span class="font-bold text-slate-900 dark:text-slate-200 block mb-1">Keunggulan</span>${VENDOR_INFO[v.id]?.strengths || '-'}
+                            </div>
+                            ${VENDOR_INFO[v.id]?.notes ? `<div class="rounded-xl bg-yellow-50 dark:bg-yellow-900/20 p-3 border border-yellow-100 dark:border-yellow-900/30 sm:col-span-2"><span class="font-bold text-slate-900 dark:text-slate-200 block mb-1">Catatan</span>${VENDOR_INFO[v.id]?.notes}</div>` : ''}
                         </div>
                     </div>
-                </div>
-            `).join('');
+                </div>`).join('');
         }
         function switchVendorTab(t){ currentVendorTab=t; renderVendors(); }
         function toggleVendorDetail(id){ document.getElementById(`detail-${id}`).classList.toggle('hidden'); }
@@ -1534,5 +2097,41 @@
              window.open(`https://wa.me/${num}`, '_blank');
         }
     </script>
+
+    <div id="welcomeModal" class="welcome-overlay z-[9999]">
+        <div class="welcome-card">
+            <div class="grid lg:grid-cols-[1.1fr_.9fr]">
+                <div class="p-7 lg:p-9">
+                    <div class="inline-flex items-center gap-2 clean-chip text-[11px] font-bold uppercase tracking-[0.18em] text-primary-700 dark:text-primary-300 mb-4">
+                        <span class="w-2 h-2 rounded-full bg-primary-600 animate-pulse"></span> Selamat Datang
+                    </div>
+                    <h3 class="font-heading text-3xl lg:text-4xl font-bold text-slate-900 dark:text-white">Selamat datang di website <span class="text-primary-600">LMS</span></h3>
+                    <p class="text-slate-600 dark:text-slate-400 mt-4 leading-relaxed">Semua agenda, fasilitas, vendor, dan bantuan teknis sudah dikemas lebih rapi agar lebih mudah dipantau. Kamu bisa langsung cek kalender, status pending, atau kebutuhan ruangan dari satu halaman ini.</p>
+                    <div class="grid sm:grid-cols-3 gap-3 mt-6 text-sm">
+                        <div class="metric-box"><div class="font-semibold text-slate-900 dark:text-white">Kalender aktif</div><div class="text-slate-500 mt-1">Cek agenda berjalan & multi-hari.</div></div>
+                        <div class="metric-box"><div class="font-semibold text-slate-900 dark:text-white">Pending informatif</div><div class="text-slate-500 mt-1">Pengajuan yang menunggu approval lebih mudah dibaca.</div></div>
+                        <div class="metric-box"><div class="font-semibold text-slate-900 dark:text-white">Support center</div><div class="text-slate-500 mt-1">Bantuan teknis dan vendor lebih profesional.</div></div>
+                    </div>
+                    <div class="flex flex-wrap gap-3 mt-7">
+                        <button onclick="closeWelcomeModal()" class="px-6 py-3 rounded-xl bg-primary-600 text-white font-semibold hover:bg-primary-700 transition">Masuk ke LMS</button>
+                        <button onclick="closeWelcomeModal(true)" class="px-6 py-3 rounded-xl border border-slate-200 dark:border-slate-700 font-semibold text-slate-700 dark:text-slate-200 hover:border-primary-600 hover:text-primary-600 transition">Jangan tampilkan lagi</button>
+                    </div>
+                </div>
+                <div class="hidden lg:flex items-center justify-center bg-gradient-to-br from-primary-50 to-blue-50 dark:from-primary-900/10 dark:to-slate-900 p-8">
+                    <div class="w-full h-full rounded-[1.75rem] border border-white/60 dark:border-slate-700/70 bg-white/70 dark:bg-slate-900/70 p-7 flex flex-col justify-between">
+                        <div class="w-14 h-14 rounded-2xl bg-white dark:bg-slate-800 shadow-sm flex items-center justify-center text-primary-600">
+                            <svg class="clean-icon-lg" viewBox="0 0 24 24"><path d="M4 6h16v12H4z"/><path d="M8 10h8M8 14h5"/></svg>
+                        </div>
+                        <div>
+                            <div class="font-heading text-xl font-bold text-slate-900 dark:text-white">Workspace operasional yang lebih tertata</div>
+                            <p class="text-sm text-slate-500 dark:text-slate-400 mt-3">Tampilan baru dirancang agar clean, mudah dipindai, dan tetap menjaga seluruh fungsi lama yang sudah kamu gunakan.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div id="toastStack" class="toast-stack z-[9999]"></div>
 </body>
 </html>
