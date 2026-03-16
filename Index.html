@@ -3,329 +3,294 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-  <title>Login - Platform terintegrasi LMSt-OJK D.I.Y</title>
+  <title>Login - Platform Terintegrasi LMSt-OJK D.I.Y</title>
   <link rel="icon" type="image/png" href="https://ik.imagekit.io/logojkdiy/Layanan%20Terintegrasi%20-%20OJK%20DIY.png?updatedAt=." />
+  
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            heading: ['Poppins', 'sans-serif'],
+          },
+          colors: {
+            ojk: {
+              DEFAULT: '#8B1E24',
+              900: '#6F171C',
+              50: '#FDF8F8',
+            }
+          },
+          animation: {
+            'fade-in': 'fadeIn 0.6s ease-out forwards',
+            'slide-up': 'slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+          },
+          keyframes: {
+            fadeIn: {
+              '0%': { opacity: '0' },
+              '100%': { opacity: '1' },
+            },
+            slideUp: {
+              '0%': { opacity: '0', transform: 'translateY(20px)' },
+              '100%': { opacity: '1', transform: 'translateY(0)' },
+            }
+          }
+        }
+      }
+    }
+  </script>
+
   <style>
-    /* Variabel Warna CSS */
-    :root {
-      --primary: #8B1E24; /* Merah OJK utama */
-      --primary-900: #6F171C; /* Merah OJK lebih gelap */
-      --text: #0B1222; /* Warna teks gelap */
-      --muted: #475569; /* Warna teks abu-abu */
-      --bg-soft: #F7F7F9; /* Latar belakang halaman */
-      --bg-white: #FFFFFF;
-
-    }
-    /* Style Dasar Body */
     body {
-      font-family: 'Inter', system-ui; 
-      color: var(--text); 
-      background: var(--bg-soft);
+      background: #F0F2F5; /* Warna background abu terang yang clean */
     }
 
-    /* Font Khusus Heading */
-    .font-heading {
-
-      font-family: 'Poppins', ui-sans-serif, system-ui;
-
-    }
-    /* Style Input Field Modern */
-
-    .input-field {
-      background: #F3F4F6; /* bg-gray-100 */
-      border: 1px solid transparent;
-      border-radius: 12px; /* rounded-xl */
-      padding: 0.85rem 1rem;
-      font-size: 0.95rem;
-      color: var(--text);
-      transition: all .2s ease;
-
-    }
-    /* Efek ':focus' pada Input Field */
-
-    .input-field:focus {
-      outline: none;
-      background: var(--bg-white);
-      border-color: var(--primary);
-      box-shadow: 0 0 0 3px rgba(139, 30, 36, 0.2); /* Ring focus merah OJK */
-    }
-    /* Style Tombol Utama */
-
-    .btn-primary {
-      background: var(--primary);
-      color: #fff;
-      border-radius: 12px; /* rounded-xl */
-      padding: 0.85rem 1.5rem;
-      font-weight: 600;
-      font-size: 1rem;
-      box-shadow: 0 5px 15px rgba(139, 30, 36, .3); 
-      transition: all .2s ease;
-
-    }
-
-    
-
-    /* Efek ':hover' pada Tombol */
-
-    .btn-primary:hover {
-      transform: translateY(-2px);
-      background: var(--primary-900);
-      box-shadow: 0 8px 20px rgba(139, 30, 36, .4);
-
-    }
-
-    
-
-    /* Style untuk Panel Video (Agar Video Pas) */
-
-    .video-panel {
-
+    /* Floating Label Input Style */
+    .input-floating {
       position: relative;
-
-      overflow: hidden; /* Sembunyikan bagian video yang 'over' */
-
+      width: 100%;
+    }
+    
+    .input-floating input {
+      width: 100%;
+      background-color: #F8FAFC;
+      border: 1.5px solid #E2E8F0;
+      border-radius: 1rem; /* rounded-2xl */
+      padding: 1.5rem 1rem 0.5rem 1.25rem; /* Padding atas lebih besar untuk tempat label */
+      font-size: 0.95rem;
+      color: #1E293B;
+      transition: all 0.3s ease;
     }
 
-    .video-panel video {
+    .input-floating input:focus {
+      outline: none;
+      background-color: #FFFFFF;
+      border-color: #8B1E24;
+      box-shadow: 0 0 0 4px rgba(139, 30, 36, 0.1);
+    }
 
+    .input-floating label {
       position: absolute;
-
-      top: 50%;
-
-      left: 50%;
-
-      min-width: 100%;
-
-      min-height: 100%;
-
-      width: auto;
-
-      height: auto;
-
-      transform: translate(-50%, -50%);
-
+      left: 1.25rem;
+      top: 1rem;
+      color: #94A3B8;
+      font-size: 0.95rem;
+      pointer-events: none;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
-
-
-    /* Style Link Bawah (Footer Links) */
-
-    .footer-links {
-
-      color: #9CA3AF; /* text-gray-400 */
-
-      transition: color .2s ease;
-
+    /* Animasi Label saat diketik atau fokus */
+    .input-floating input:focus ~ label,
+    .input-floating input:not(:placeholder-shown) ~ label {
+      top: 0.35rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: #8B1E24;
     }
 
-    .footer-links:hover {
-
-      color: var(--primary); /* Berubah jadi merah saat di-hover */
-
-      text-decoration: underline;
-
-    }
-
+    /* Animasi Delay */
+    .delay-100 { animation-delay: 100ms; }
+    .delay-200 { animation-delay: 200ms; }
+    .delay-300 { animation-delay: 300ms; }
   </style>
-
 </head>
 
-<body class="antiasaed">
+<body class="antialiased min-h-screen flex items-center justify-center p-4 sm:p-6 lg:p-12 text-gray-800">
 
-
-
-  <div class="min-h-screen flex items-center justify-center p-4">
-
+  <div class="w-full max-w-[1200px] min-h-[640px] bg-white rounded-[2.5rem] shadow-[0_20px_60px_-15px_rgba(0,0,0,0.1)] flex flex-col lg:flex-row p-3 opacity-0 animate-slide-up">
     
-
-    <div class="flex w-full max-w-6xl rounded-2xl overflow-hidden shadow-2xl bg-white">
-
+    <div class="relative w-full lg:w-[55%] h-64 lg:h-auto rounded-[2rem] overflow-hidden group bg-gray-900 shadow-inner">
+      <video 
+        src="https://ik.imagekit.io/idnarsipojkdiy/Platform%20Layanan%20Manajemen%20Strategis%20II.mp4?updatedAt=1773667560982" 
+        autoplay loop muted playsinline
+        class="absolute inset-0 w-full h-full object-cover object-center transition-transform duration-[1.5s] group-hover:scale-[1.03]"
+      ></video>
       
-
-      <div class="hidden lg:flex lg:w-1/2 video-panel">
-
-        <video 
-
-          src="https://ik.imagekit.io/idnarsipojkdiy/LMSt%20-%20Platform%20Terintegrasi/LMS%20-%20OJK%20DIY%20II.mp4?updatedAt=1762819870646" 
-
-          autoplay 
-
-          loop
-
-          muted
-
-          playsinline
-
-          class="w-full h-full object-cover"
-
-        >
-
-          Browser Anda tidak mendukung tag video.
-
-        </video>
-
-      </div>
-
-      <div class="w-full lg:w-1/2 flex flex-col justify-center p-8 sm:p-12">
-
-        <div class="w-full max-w-md mx-auto">
-
-          
-
-          <div class="text-left mb-8">
-
-            <img src="https://ik.imagekit.io/logojkdiy/Layanan%20Terintegrasi%20-%20OJK%20DIY.png?updatedAt=." alt="Logo OJK DIY" class="w-20 h-20 mb-4">
-
-            <h1 class="font-heading text-3xl font-bold text-gray-900">Selamat Datang!</h1>
-
-            <p class="text-base text-[var(--muted)] mt-1">Silakan masuk ke Platform Terintegrasi LMSt - OJK DIY.</p>
-
-          </div>
-
-
-
-          <form id="loginForm" class="space-y-5">
-
-            
-
-            <div>
-
-              <label for="username" class="block text-sm font-medium text-gray-700 mb-2">Username</label>
-
-              <input 
-
-                type="text" 
-
-                id="username" 
-
-                placeholder="Masukkan username Anda"
-
-                class="input-field w-full"
-
-                required>
-
-            </div>
-
-
-
-            <div>
-
-              <label for="password" class="block text-sm font-medium text-gray-700 mb-2">Password</label>
-
-              <input 
-
-                type="password" 
-
-                id="password" 
-
-                placeholder="Masukkan password Anda"
-
-                class="input-field w-full"
-
-                required>
-
-            </div>
-
-
-
-            <div id="errorMessage" class="hidden p-3 rounded-lg bg-red-100 text-red-800 text-sm font-medium">
-
-              Username atau Password salah. Silakan coba lagi.
-
-            </div>
-
-
-
-            <button type="submit" class="btn-primary w-full !mt-8">
-
-              Login
-
-            </button>
-
-          </form>
-
-          
-
-          <div class="text-sm text-center text-gray-500 mt-8 space-y-2">
-
-            <div class="space-x-4">
-
-              <a href="#" class="hover:underline">Kebijakan Privasi</a>
-
-              <span>&bull;</span>
-
-              <a href="#" class="hover:underline">Hubungi Bantuan</a>
-
-            </div>
-
-            <div>
-
-              <a href="https://tr.ee/IcAJhdxjdx" target="_blank" rel="noopener noreferrer" class="hover:underline">Daftar Fintech P2P Lending</a>
-
-              <span>&bull;</span>
-
-              <a href="https://www.instagram.com/ojk_jogja/" target="_blank" rel="noopener noreferrer" class="hover:underline">Instagram OJK Jogja</a>
-
-            </div>
-
-          </div>
-        </div>
-      </div>
+      <div class="absolute inset-0 bg-gradient-to-t from-gray-900/95 via-gray-900/30 to-transparent"></div>
+
+      <div class="absolute bottom-0 left-0 w-full p-8 lg:p-12 z-10 text-white opacity-0 animate-slide-up delay-200">
+        <div class="w-12 h-1 bg-ojk rounded-full mb-6"></div>
+        <h2 class="font-heading text-3xl lg:text-4xl font-bold leading-tight mb-4 tracking-tight">
+          Sinergi<br> Layanan Manajemen Strategis
+        </h2>
+        <p class="text-gray-300 text-sm lg:text-base font-medium leading-relaxed max-w-md">
+          Platform terintegrasi untuk manajemen peminjaman ruangan, dan kolaborasi ekosistem OJK Daerah Istimewa Yogyakarta.
+        </p>
       </div>
     </div>
+
+    <div class="w-full lg:w-[45%] flex flex-col justify-center px-6 py-12 lg:px-14 xl:px-16 relative">
+      
+      <div class="w-full max-w-sm mx-auto">
+        
+        <div class="mb-10 text-center lg:text-left opacity-0 animate-fade-in delay-100">
+          <img src="https://ik.imagekit.io/logojkdiy/Layanan%20Terintegrasi%20-%20OJK%20DIY.png?updatedAt=." alt="Logo OJK DIY" class="w-20 h-20 object-contain mx-auto lg:mx-0 mb-6 drop-shadow-sm">
+          <h1 class="font-heading text-3xl font-bold text-gray-900 tracking-tight">Otentikasi Sistem</h1>
+          <p class="text-gray-500 mt-2 text-sm font-medium">Masukkan kredensial Anda untuk mengakses portal.</p>
+        </div>
+
+        <form id="loginForm" class="space-y-5">
+          
+          <div class="opacity-0 animate-slide-up delay-200">
+            <div class="input-floating">
+              <input 
+                type="text" 
+                id="username" 
+                placeholder=" " 
+                autocomplete="off"
+                required>
+              <label for="username">ID Pengguna</label>
+            </div>
+          </div>
+
+          <div class="opacity-0 animate-slide-up delay-200">
+            <div class="input-floating relative">
+              <input 
+                type="password" 
+                id="password" 
+                placeholder=" " 
+                required>
+              <label for="password">Kata Sandi</label>
+              
+              <button type="button" id="togglePassword" class="absolute right-4 top-[1.1rem] text-gray-400 hover:text-ojk transition-colors focus:outline-none p-1" title="Lihat Sandi">
+                <svg id="iconEyeClosed" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0l-3.29-3.29"></path>
+                </svg>
+                <svg id="iconEyeOpen" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <div id="errorMessage" class="hidden flex items-start gap-3 p-4 rounded-xl bg-red-50 border border-red-100 text-red-700 text-sm font-medium transition-all">
+            <svg class="w-5 h-5 flex-shrink-0 text-red-500 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"></path></svg>
+            <span>Kredensial tidak valid. Silakan periksa kembali.</span>
+          </div>
+
+          <div class="pt-2 opacity-0 animate-slide-up delay-300">
+            <button type="submit" id="btnSubmit" class="group relative w-full flex justify-center items-center gap-2 py-4 px-4 border border-transparent rounded-xl text-sm font-bold text-white bg-ojk hover:bg-ojk-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-ojk transition-all duration-300 shadow-lg shadow-ojk/25 hover:shadow-xl hover:shadow-ojk/40 hover:-translate-y-0.5 overflow-hidden">
+              <svg id="loadingSpinner" class="hidden animate-spin -ml-1 mr-2 h-4 w-4 text-white" fill="none" viewBox="0 0 24 24">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+              </svg>
+              <span id="btnText">Masuk ke Portal</span>
+              <svg id="btnIcon" class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+            </button>
+          </div>
+        </form>
+        
+        <div class="mt-10 pt-6 border-t border-gray-100 flex flex-wrap justify-between items-center gap-4 text-[11px] text-gray-500 font-semibold uppercase tracking-wider opacity-0 animate-fade-in delay-300">
+          <div class="flex gap-4">
+            <a href="#" class="hover:text-ojk transition-colors">Bantuan</a>
+            <a href="#" class="hover:text-ojk transition-colors">Privasi</a>
+          </div>
+          <div class="flex gap-4">
+            <a href="https://tr.ee/IcAJhdxjdx" target="_blank" rel="noopener noreferrer" class="hover:text-ojk transition-colors">P2P Lending</a>
+            <a href="https://www.instagram.com/ojk_jogja/" target="_blank" rel="noopener noreferrer" class="hover:text-ojk transition-colors">IG OJK</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
   <script>
+    // --- FITUR TOGGLE PASSWORD ---
+    const togglePassword = document.getElementById('togglePassword');
+    const passwordInput = document.getElementById('password');
+    const iconEyeClosed = document.getElementById('iconEyeClosed');
+    const iconEyeOpen = document.getElementById('iconEyeOpen');
 
-    // --- PERINGATAN KEAMANAN (Script Anda tetap sama) ---
+    togglePassword.addEventListener('click', function (e) {
+      // Toggle type input antara password dan text
+      const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+      passwordInput.setAttribute('type', type);
+      
+      // Toggle ikon SVG
+      if (type === 'text') {
+        iconEyeClosed.classList.add('hidden');
+        iconEyeOpen.classList.remove('hidden');
+      } else {
+        iconEyeClosed.classList.remove('hidden');
+        iconEyeOpen.classList.add('hidden');
+      }
+    });
 
-    // Kode login di bawah ini TIDAK AMAN untuk produksi.
-
-    // Pengecekan `if (user === ...)` HARUS dilakukan di SISI SERVER (Backend),
-
-    // bukan di JavaScript (Frontend) seperti ini.
-
-    // --------------------------------
+    // --- LOGIKA OTENTIKASI (SIMULASI CLIENT-SIDE) ---
     document.getElementById('loginForm').addEventListener('submit', function(e) {
-      // Mencegah form terkirim
       e.preventDefault(); 
 
       const userEl = document.getElementById('username');
       const passEl = document.getElementById('password');
       const errorEl = document.getElementById('errorMessage');
+      const btnSubmit = document.getElementById('btnSubmit');
+      const btnText = document.getElementById('btnText');
+      const btnIcon = document.getElementById('btnIcon');
+      const spinner = document.getElementById('loadingSpinner');
+      
       const user = userEl.value;
-
       const pass = passEl.value;
-      // Pengecekan username dan password (HANYA SIMULASI)
 
-      if (user === 'LMSt' && pass === 'LMS1234') {
+      errorEl.classList.add('hidden');
+      
+      // Mengubah State Tombol menjadi Loading
+      btnSubmit.disabled = true;
+      btnSubmit.classList.add('cursor-not-allowed', 'opacity-90');
+      btnText.textContent = 'Memvalidasi...';
+      btnIcon.classList.add('hidden');
+      spinner.classList.remove('hidden');
 
-        // SUKSES
+      // Simulasi delay asinkron (mirip eksekusi google.script.run)
+      setTimeout(() => {
+        if (user === 'LMSt' && pass === 'LMS1234') {
+          btnSubmit.classList.replace('bg-ojk', 'bg-emerald-600');
+          btnSubmit.classList.replace('hover:bg-ojk-900', 'hover:bg-emerald-700');
+          btnSubmit.classList.replace('shadow-ojk/25', 'shadow-emerald-600/30');
+          btnText.textContent = 'Akses Diberikan';
+          spinner.classList.add('hidden');
+          
+          localStorage.setItem('isLoggedInLMSt', 'true');
+          
+          // Transisi keluar
+          document.body.style.opacity = '0';
+          document.body.style.transition = 'opacity 0.5s ease';
+          
+          setTimeout(() => {
+            window.location.href = 'db_0a9b1c02-8f9d-4e9a-9b1e-7f0c1b9d4e1a.html'; 
+          }, 500);
 
-        errorEl.classList.add('hidden');
-
-        // Simpan status login di browser
-
-        localStorage.setItem('isLoggedInLMSt', 'true');
-
-        // Arahkan ke halaman dashboard utama Anda
-
-        window.location.href = 'db_0a9b1c02-8f9d-4e9a-9b1e-7f0c1b9d4e1a.html'; 
-
-      } else {
-
-        // GAGAL
-
-        errorEl.classList.remove('hidden');
-
-        userEl.focus();
-
-      }
-
+        } else {
+          errorEl.classList.remove('hidden');
+          
+          // Reset Button
+          btnSubmit.disabled = false;
+          btnSubmit.classList.remove('cursor-not-allowed', 'opacity-90');
+          btnText.textContent = 'Masuk ke Portal';
+          btnIcon.classList.remove('hidden');
+          spinner.classList.add('hidden');
+          
+          // Kembalikan fokus ke password agar cepat diperbaiki
+          passEl.focus();
+          
+          // Animasi Shake (Goncangan) saat gagal
+          const formArea = document.querySelector('.w-full.max-w-sm');
+          formArea.animate([
+            { transform: 'translateX(0)' },
+            { transform: 'translateX(-6px)' },
+            { transform: 'translateX(6px)' },
+            { transform: 'translateX(-6px)' },
+            { transform: 'translateX(6px)' },
+            { transform: 'translateX(0)' }
+          ], { duration: 400, easing: 'ease-in-out' });
+        }
+      }, 1000); 
     });
-
   </script>
-
-  </body>
-
+</body>
 </html>
