@@ -231,8 +231,7 @@
             @page { margin: 15mm; }
         }
     </style>
-</head>
-<script>
+    <script>
     if (localStorage.getItem('isLoggedInLMSt') !== 'true') {
       // Jika belum login, tendang ke login.html
       // Ganti 'NAMA-REPOSITORI-ANDA' dengan nama repo Anda
@@ -367,50 +366,37 @@
         <div class="max-w-7xl mx-auto px-6">
             <div class="section-card rounded-[2rem] p-5 lg:p-7 overflow-hidden relative">
                 <div class="absolute inset-0 bg-gradient-to-r from-primary-50/60 via-transparent to-blue-50/50 dark:from-primary-900/10 dark:to-blue-900/10 pointer-events-none"></div>
-                <div class="relative z-10 grid lg:grid-cols-[1.2fr_.8fr] gap-6 items-start">
-                    <div>
+                <div class="relative z-10 grid lg:grid-cols-2 gap-6 items-start">
+                    
+                    <div class="lg:col-span-2 mb-2">
                         <div class="inline-flex items-center gap-2 clean-chip text-[11px] font-bold uppercase tracking-[0.18em] text-primary-700 dark:text-primary-300 mb-4">
                             <span class="w-2 h-2 rounded-full bg-primary-600 animate-pulse"></span> Dashboard Ringkas
                         </div>
-                        <h2 class="font-heading text-2xl lg:text-3xl font-bold text-slate-900 dark:text-white mb-2">Agenda Terdekat</h2>
-                        <p class="text-slate-600 dark:text-slate-400 max-w-3xl">Panel ini otomatis memonitor kegiatan yang masih aktif, menyorot agenda yang sedang berlangsung saat ini, serta menyiapkan notifikasi untuk kegiatan berikutnya.</p>
-                        <div class="hero-mini-grid mt-6">
-                            <div class="metric-box premium-card-hover">
+                        <h2 class="font-heading text-2xl lg:text-3xl font-bold text-slate-900 dark:text-white mb-2">Agenda Terdekat & Live Status</h2>
+                        <p class="text-slate-600 dark:text-slate-400 max-w-3xl">Panel ini terfokus pada kegiatan yang sedang berjalan dan yang akan datang dalam waktu dekat. Untuk metrik bulanan dan filter, silakan lihat area Kalender di bawah.</p>
+                    </div>
+                    
+                    <div class="section-card rounded-2xl p-5 premium-card-hover h-full flex flex-col">
+                        <div class="flex items-center justify-between gap-3 mb-4 border-b border-slate-100 dark:border-slate-800 pb-3">
+                            <div>
                                 <div class="text-xs uppercase tracking-wider text-slate-500">Sedang Berlangsung</div>
-                                <div id="metricOngoingCount" class="text-2xl font-bold text-slate-900 dark:text-white mt-2">0</div>
+                                <div class="font-bold text-slate-900 dark:text-white mt-1">Sorotan Kegiatan</div>
                             </div>
-                            <div class="metric-box premium-card-hover">
-                                <div class="text-xs uppercase tracking-wider text-slate-500">Agenda Hari Ini</div>
-                                <div id="metricTodayCount" class="text-2xl font-bold text-slate-900 dark:text-white mt-2">0</div>
-                            </div>
-                            <div class="metric-box premium-card-hover">
-                                <div class="text-xs uppercase tracking-wider text-slate-500">Disetujui</div>
-                                <div id="metricApprovedCount" class="text-2xl font-bold text-slate-900 dark:text-white mt-2">0</div>
-                            </div>
-                            <div class="metric-box premium-card-hover">
-                                <div class="text-xs uppercase tracking-wider text-slate-500">Pending</div>
-                                <div id="metricPendingCount" class="text-2xl font-bold text-slate-900 dark:text-white mt-2">0</div>
-                            </div>
+                            <button id="requestNotifyBtn" class="px-3 py-2 rounded-xl bg-primary-600 text-white text-xs font-bold hover:bg-primary-700 transition">Notifikasi</button>
+                        </div>
+                        <div id="ongoingPanel" class="space-y-3 text-sm text-slate-600 dark:text-slate-300 flex-1">
+                            <div class="italic text-slate-400">Belum ada kegiatan yang sedang berlangsung.</div>
                         </div>
                     </div>
-                    <div class="grid gap-4">
-                        <div class="section-card rounded-2xl p-5 premium-card-hover">
-                            <div class="flex items-center justify-between gap-3 mb-3">
-                                <div>
-                                    <div class="text-xs uppercase tracking-wider text-slate-500">Sedang Berlangsung</div>
-                                    <div class="font-bold text-slate-900 dark:text-white">Sorotan otomatis real-time</div>
-                                </div>
-                                <button id="requestNotifyBtn" class="px-3 py-2 rounded-xl bg-primary-600 text-white text-xs font-bold hover:bg-primary-700 transition">Aktifkan Notifikasi</button>
-                            </div>
-                            <div id="ongoingPanel" class="space-y-3 text-sm text-slate-600 dark:text-slate-300">
-                                <div class="italic text-slate-400">Belum ada kegiatan yang sedang berlangsung.</div>
-                            </div>
+                    
+                    <div class="section-card rounded-2xl p-5 premium-card-hover h-full flex flex-col">
+                        <div class="border-b border-slate-100 dark:border-slate-800 pb-3 mb-4">
+                            <div class="text-xs uppercase tracking-wider text-slate-500">Persiapan</div>
+                            <div class="font-bold text-slate-900 dark:text-white mt-1">Agenda Berikutnya</div>
                         </div>
-                        <div class="section-card rounded-2xl p-5 premium-card-hover">
-                            <div class="text-xs uppercase tracking-wider text-slate-500 mb-2">Agenda Berikutnya</div>
-                            <div id="nextEventReminder" class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">Sedang memeriksa kegiatan berikutnya...</div>
-                        </div>
+                        <div id="nextEventReminder" class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed flex-1">Sedang memeriksa kegiatan berikutnya...</div>
                     </div>
+                    
                 </div>
             </div>
         </div>
@@ -433,7 +419,9 @@
                         <button onclick="goToToday()" class="px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 hover:border-primary-600 hover:text-primary-600 text-sm font-semibold transition">Hari Ini</button>
                     </div>
                     <div class="grid md:grid-cols-3 gap-4">
-                        <div class="metric-box"><div class="text-xs uppercase tracking-wider text-slate-500 mb-2">Agenda Bulan Ini</div><div id="calendarMonthCount" class="text-2xl font-bold text-slate-900 dark:text-white">0</div></div>
+                        <div class="metric-box"><div class="text-xs uppercase tracking-wider text-slate-500 mb-2">Total Agenda</div><div id="calendarMonthCount" class="text-2xl font-bold text-slate-900 dark:text-white">0</div></div>
+                        <div class="metric-box"><div class="text-xs uppercase tracking-wider text-slate-500 mb-2">Disetujui</div><div id="calendarApprovedMonthCount" class="text-2xl font-bold text-green-600 dark:text-green-400">0</div></div>
+                        <div class="metric-box"><div class="text-xs uppercase tracking-wider text-slate-500 mb-2">Pending</div><div id="calendarPendingMonthCount" class="text-2xl font-bold text-yellow-600 dark:text-yellow-400">0</div></div>
                     </div>
                 </div>
                 <div class="section-card rounded-3xl p-5 lg:p-6 premium-card-hover">
@@ -550,7 +538,7 @@
                         <option value="all">Semua data</option>
                     </select>
                     
-                    <div class="flex bg-slate-100 dark:bg-slate-800 p-1 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm">
+                    <div class="hidden md:flex bg-slate-100 dark:bg-slate-800 p-1 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm">
                         <button onclick="setAgendaView('card')" id="btnViewCard" class="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all text-primary-600 bg-white shadow-sm dark:bg-slate-700 dark:text-white">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/></svg> Card
                         </button>
@@ -572,7 +560,7 @@
             
             <div class="grid sm:grid-cols-2 xl:grid-cols-4 gap-4 mb-6 no-print">
                 <div class="metric-box premium-card-hover"><div class="text-xs uppercase tracking-wider text-slate-500">Total Terfilter</div><div id="agendaMetricTotal" class="text-2xl font-bold text-slate-900 dark:text-white mt-2">0</div></div>
-                <div class="metric-box premium-card-hover"><div class="text-xs uppercase tracking-wider text-slate-500">Approved</div><div id="agendaMetricApproved" class="text-2xl font-bold text-slate-900 dark:text-white mt-2">0</div></div>
+                <div class="metric-box premium-card-hover"><div class="text-xs uppercase tracking-wider text-slate-500">Terjadwal</div><div id="agendaMetricApproved" class="text-2xl font-bold text-slate-900 dark:text-white mt-2">0</div></div>
                 <div class="metric-box premium-card-hover"><div class="text-xs uppercase tracking-wider text-slate-500">Pending</div><div id="agendaMetricPending" class="text-2xl font-bold text-slate-900 dark:text-white mt-2">0</div></div>
                 <div class="metric-box premium-card-hover"><div class="text-xs uppercase tracking-wider text-slate-500">Ruangan Terpakai</div><div id="agendaMetricRooms" class="text-2xl font-bold text-slate-900 dark:text-white mt-2">0</div></div>
             </div>
@@ -1200,6 +1188,9 @@
         document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('year').textContent = new Date().getFullYear();
             
+            // UI/UX Improvement 2: Mobile check on load
+            checkMobileView();
+
             // Intersection Observer (Scroll Reveal)
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
@@ -1239,7 +1230,17 @@
             setInterval(() => {
                 loadCSV(true);
             }, 60000); 
+
+            // UI/UX Improvement 2: Listen for resize
+            window.addEventListener('resize', checkMobileView);
         });
+
+        // --- UI/UX IMPROVEMENT 2 FUNCTION ---
+        function checkMobileView() {
+            if (window.innerWidth < 768) {
+                setAgendaView('card');
+            }
+        }
 
         // --- LANGUAGE SYSTEM ---
         function setLang(lang) {
@@ -1891,6 +1892,8 @@
         }
         
         function renderOperationalOverview() {
+            // UI/UX Improvement 1: Removed redundant top metrics setting logic
+            
             const now = new Date();
             const today = new Date(now); today.setHours(0,0,0,0);
             const todayEnd = new Date(now); todayEnd.setHours(23,59,59,999);
@@ -1904,10 +1907,6 @@
             const pending = GLOBAL_AGENDA_DATA.filter(ev => !ev.status || ev.status.toLowerCase() === 'pending').length;
             
             const setText = (id, value) => { const el = document.getElementById(id); if(el) el.textContent = value; };
-            setText('metricOngoingCount', ongoingEvents.length);
-            setText('metricTodayCount', todayEvents.length);
-            setText('metricApprovedCount', approved);
-            setText('metricPendingCount', pending);
             
             if(FILTERED_AGENDA) {
                 setText('agendaMetricTotal', FILTERED_AGENDA.length);
