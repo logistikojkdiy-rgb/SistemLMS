@@ -73,6 +73,8 @@
     </script>
 
     <style>
+        /* DIRECT HOME MODE: langsung masuk Beranda */
+        #premiumLoader { display:none !important; opacity:0 !important; pointer-events:none !important; }
         /* Custom Scrollbar */
         ::-webkit-scrollbar { width: 8px; height: 8px; }
         ::-webkit-scrollbar-track { background: transparent; }
@@ -230,17 +232,48 @@
             
             @page { margin: 15mm; }
         }
+    
+        /* === EVENT MODAL PREMIUM === */
+        .event-modal-card { border-radius: 2rem; overflow: hidden; background: white; box-shadow: 0 35px 90px rgba(2,6,23,.35); }
+        .dark .event-modal-card { background: #161F32; }
+        .event-hero { background: linear-gradient(135deg, rgba(139,30,36,.98), rgba(69,10,10,.96)); color: white; position: relative; overflow: hidden; }
+        .event-hero:after { content:""; position:absolute; width:280px; height:280px; right:-90px; top:-120px; border-radius:999px; background: rgba(255,255,255,.12); filter: blur(2px); }
+        .event-chip { display:inline-flex; align-items:center; gap:.45rem; padding:.42rem .7rem; border-radius:999px; font-size:.72rem; font-weight:800; background: rgba(255,255,255,.14); border:1px solid rgba(255,255,255,.18); }
+        .event-detail-card { border:1px solid rgba(226,232,240,.9); border-radius: 1.25rem; background: rgba(255,255,255,.86); padding: 1rem; }
+        .dark .event-detail-card { background: rgba(15,23,42,.55); border-color: rgba(51,65,85,.8); }
+        .event-info-row { display:grid; grid-template-columns: 150px 1fr; gap:1rem; padding:.8rem 0; border-bottom:1px solid rgba(226,232,240,.72); }
+        .event-info-row:last-child { border-bottom:0; }
+        .event-info-label { font-weight:800; color:#0f172a; font-size:.86rem; }
+        .dark .event-info-label { color:#f8fafc; }
+        .event-info-value { color:#334155; font-size:.9rem; line-height:1.45; }
+        .dark .event-info-value { color:#cbd5e1; }
+        @media (max-width:640px){ .event-info-row{grid-template-columns:1fr; gap:.25rem;} }
+        /* === PROFESSIONAL FRONTEND REPORT PRINT === */
+        #printReportContainer { display: none; }
+        @media print {
+            body > *:not(#printReportContainer) { display: none !important; }
+            #printReportContainer { display: block !important; background: white !important; color: #111827 !important; font-family: 'Inter', Arial, sans-serif !important; }
+            #printReportContainer * { color: #111827 !important; box-shadow: none !important; text-shadow: none !important; }
+            .report-header { display:flex; justify-content:space-between; align-items:center; border-bottom:3px solid #8B1E24; padding-bottom:14px; margin-bottom:18px; }
+            .report-brand { display:flex; gap:14px; align-items:center; } .report-brand img{width:58px;height:58px;object-fit:contain;}
+            .report-title{font-size:20px;font-weight:900;margin:0;} .report-subtitle{font-size:11px;color:#475569!important;margin-top:4px;}
+            .report-meta{text-align:right;font-size:10px;color:#475569!important;line-height:1.55;}
+            .report-summary{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:16px 0 18px;}
+            .report-metric{border:1px solid #e2e8f0;border-radius:12px;padding:10px 12px;background:#f8fafc!important;}
+            .report-metric-label{font-size:9px;text-transform:uppercase;letter-spacing:.12em;color:#64748b!important;font-weight:800;}
+            .report-metric-value{font-size:22px;font-weight:900;margin-top:4px;color:#8B1E24!important;}
+            .report-filter-box{border:1px solid #e2e8f0;border-radius:12px;padding:10px 12px;margin-bottom:16px;font-size:10.5px;line-height:1.6;}
+            .report-table{width:100%;border-collapse:collapse;font-size:9.5px;table-layout:fixed;}
+            .report-table th{background:#8B1E24!important;color:#fff!important;padding:8px 7px;border:1px solid #8B1E24;text-transform:uppercase;font-size:8.5px;letter-spacing:.06em;}
+            .report-table td{padding:7px;border:1px solid #e2e8f0;vertical-align:top;word-wrap:break-word;}
+            .report-table tr:nth-child(even) td{background:#f8fafc!important;}
+            .report-status-approved{font-weight:900;color:#047857!important;} .report-status-pending{font-weight:900;color:#b45309!important;}
+            .report-footer{margin-top:16px;padding-top:10px;border-top:1px solid #e2e8f0;font-size:9px;color:#64748b!important;display:flex;justify-content:space-between;}
+        }
+
     </style>
     <script>
-    if (localStorage.getItem('isLoggedInLMSt') !== 'true') {
-      // Jika belum login, tendang ke login.html
-      // Ganti 'NAMA-REPOSITORI-ANDA' dengan nama repo Anda
-      // Contoh: '/platform-ojk/'
-      // Jika ini halaman utama (username.github.io), cukup '/login.html'
-
-      // Cara aman: Gunakan path relatif
-      window.location.href = 'Index.html'; 
-    }
+    localStorage.setItem('isLoggedInLMSt', 'true');
   </script>
 </head>
 <body class="bg-slate-50 text-slate-800 dark:bg-dark-bg dark:text-slate-200 transition-colors duration-300 selection:bg-primary-600 selection:text-white font-sans antialiased">
@@ -340,7 +373,7 @@
                             <span data-i18n="btn_reserve">Reservasi Ruangan</span>
                             <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
                         </a>
-                        <button onclick="openFormModal('mobil')" class="px-8 py-3.5 rounded-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-primary-600 dark:hover:border-primary-500 text-slate-700 dark:text-slate-200 font-semibold transition-all hover:bg-slate-50 dark:hover:bg-slate-700">
+                        <button onclick="openCarSheetPreview()" class="px-8 py-3.5 rounded-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-primary-600 dark:hover:border-primary-500 text-slate-700 dark:text-slate-200 font-semibold transition-all hover:bg-slate-50 dark:hover:bg-slate-700">
                             <span data-i18n="btn_car">Pinjam Kendaraan</span>
                         </button>
                     </div>
@@ -514,7 +547,7 @@
                         <svg class="w-4 h-4 absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
                     </div>
                     
-                    <select id="agendaRoomFilter" class="px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm text-slate-700 dark:text-slate-200 outline-none transition">
+                    <select id="agendaRoomFilter" class="px-4 py-3 rounded-2xl border border-slate-200 dark:border-slate-700 bg-white/90 dark:bg-slate-800 text-sm font-semibold text-slate-700 dark:text-slate-200 outline-none transition shadow-sm hover:border-primary-600 focus:ring-4 focus:ring-primary-600/10">
                         <option value="all" data-i18n="filter_all_rooms">Semua Ruangan</option>
                         <option value="Bima">Ruang Bima</option>
                         <option value="Arjuna">Ruang Arjuna</option>
@@ -525,12 +558,12 @@
                         <option value="Ballroom">Ballroom Indraprasta</option>
                     </select>
 
-                    <select id="agendaStatusFilter" class="px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm text-slate-700 dark:text-slate-200 outline-none transition">
+                    <select id="agendaStatusFilter" class="px-4 py-3 rounded-2xl border border-slate-200 dark:border-slate-700 bg-white/90 dark:bg-slate-800 text-sm font-semibold text-slate-700 dark:text-slate-200 outline-none transition shadow-sm hover:border-primary-600 focus:ring-4 focus:ring-primary-600/10">
                         <option value="all">Semua status</option>
                         <option value="approved">Disetujui</option>
                         <option value="pending">Pending</option>
                     </select>
-                    <select id="agendaRangeFilter" class="px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm text-slate-700 dark:text-slate-200 outline-none transition">
+                    <select id="agendaRangeFilter" class="px-4 py-3 rounded-2xl border border-slate-200 dark:border-slate-700 bg-white/90 dark:bg-slate-800 text-sm font-semibold text-slate-700 dark:text-slate-200 outline-none transition shadow-sm hover:border-primary-600 focus:ring-4 focus:ring-primary-600/10">
                         <option value="upcoming">Hari ini ke depan</option>
                         <option value="today">Hari ini</option>
                         <option value="week">7 hari ke depan</option>
@@ -615,10 +648,10 @@
             <div class="grid lg:grid-cols-2 gap-16 items-center">
                 <div>
                     <div class="inline-block px-3 py-1 bg-yellow-500/20 text-yellow-400 rounded-full text-xs font-bold uppercase mb-4" data-i18n="cars_tag">Armada Operasional</div>
-                    <h2 class="font-heading text-4xl lg:text-5xl font-bold text-white mb-6 leading-tight" data-i18n="cars_title">Layanan Peminjaman <br>Kendaraan Dinas (Maintenance)</h2>
+                    <h2 class="font-heading text-4xl lg:text-5xl font-bold text-white mb-6 leading-tight" data-i18n="cars_title">Layanan Peminjaman <br>Kendaraan Dinas</h2>
                     <p class="text-slate-300 text-lg mb-8 leading-relaxed max-w-md" data-i18n="cars_desc">Fasilitas kendaraan operasional dengan pengemudi profesional.</p>
                     <div class="flex flex-wrap gap-4">
-                        <button onclick="openFormModal('mobil')" class="px-8 py-3.5 bg-white text-slate-900 rounded-full font-bold hover:bg-slate-100 transition shadow-lg flex items-center gap-2">
+                        <button onclick="openCarSheetPreview()" class="px-8 py-3.5 bg-white text-slate-900 rounded-full font-bold hover:bg-slate-100 transition shadow-lg flex items-center gap-2">
                             <span data-i18n="btn_req_car">Ajukan Peminjaman</span>
                             <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
                         </button>
@@ -766,119 +799,63 @@
         </div>
     </section>
 
-    <footer class="bg-slate-900 text-slate-300 py-16 border-t border-slate-800 no-print">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="grid md:grid-cols-4 gap-12">
-                <div class="col-span-1">
-                    <div class="flex items-center gap-3 mb-6">
-                        <img src="https://ik.imagekit.io/logojkdiy/Layanan%20Terintegrasi%20-%20OJK%20DIY.png?updatedAt=." alt="Logo" class="w-10 h-10 bg-white rounded-lg p-1">
-                        <span class="font-heading font-bold text-white text-lg">LMSt-OJK D.I.Y</span>
-                    </div>
-                    <p class="text-sm text-slate-400 leading-relaxed" data-i18n="footer_desc">Platform terintegrasi untuk mendukung operasional dan produktivitas pegawai OJK Daerah Istimewa Yogyakarta.</p>
+    <footer class="relative overflow-hidden bg-slate-950 text-slate-300 no-print">
+        <div class="absolute inset-0 pointer-events-none"><div class="absolute -top-28 -right-24 w-96 h-96 rounded-full bg-primary-600/20 blur-3xl"></div><div class="absolute bottom-0 left-0 w-[520px] h-[520px] rounded-full bg-blue-500/10 blur-3xl"></div></div>
+        <div class="relative max-w-7xl mx-auto px-6 pt-16 pb-8">
+            <div class="grid lg:grid-cols-[1.25fr_.75fr_.75fr_.9fr] gap-8 lg:gap-10">
+                <div class="rounded-[2rem] border border-white/10 bg-white/[0.04] backdrop-blur-xl p-6 shadow-2xl shadow-black/20">
+                    <div class="flex items-center gap-4 mb-5"><div class="w-14 h-14 rounded-2xl bg-white shadow-lg p-2 flex items-center justify-center"><img src="https://ik.imagekit.io/logojkdiy/Layanan%20Terintegrasi%20-%20OJK%20DIY.png?updatedAt=." alt="Logo LMSt OJK DIY" class="w-full h-full object-contain"></div><div><div class="font-heading font-extrabold text-white text-xl tracking-tight">LMSt-OJK D.I.Y</div><div class="text-[10px] uppercase tracking-[0.22em] text-primary-300 font-bold mt-1">Logistic Management Service</div></div></div>
+                    <p class="text-sm leading-relaxed text-slate-400 max-w-md">Platform satu pintu untuk pemantauan agenda, peminjaman ruang rapat, akses layanan kendaraan dinas, vendor operasional, dan dukungan teknis Kantor OJK D.I. Yogyakarta.</p>
+                    <div class="grid grid-cols-3 gap-3 mt-6"><a href="#custom-calendar-section" class="rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-3 hover:bg-white/[0.07] transition"><div class="text-[10px] uppercase tracking-wider text-slate-500 font-bold">Agenda</div><div class="text-sm font-bold text-white mt-1">Kalender</div></a><a href="#ruang-rapat" class="rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-3 hover:bg-white/[0.07] transition"><div class="text-[10px] uppercase tracking-wider text-slate-500 font-bold">Fasilitas</div><div class="text-sm font-bold text-white mt-1">Ruangan</div></a><a href="#mobil-dinas" class="rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-3 hover:bg-white/[0.07] transition"><div class="text-[10px] uppercase tracking-wider text-slate-500 font-bold">Armada</div><div class="text-sm font-bold text-white mt-1">Mobil</div></a></div>
                 </div>
-                <div>
-                    <h4 class="font-bold text-white mb-4 text-sm uppercase tracking-wide" data-i18n="footer_serv">Layanan</h4>
-                    <ul class="space-y-3 text-sm text-slate-400">
-                        <li><a href="#ruang-rapat" class="hover:text-primary-400 transition" data-i18n="nav_rooms">Peminjaman Ruang</a></li>
-                        <li><a href="#mobil-dinas" class="hover:text-primary-400 transition" data-i18n="nav_cars">Kendaraan Dinas</a></li>
-                        <li><a href="#hotel-partner" class="hover:text-primary-400 transition" data-i18n="nav_hotels">Hotel Partner</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="font-bold text-white mb-4 text-sm uppercase tracking-wide" data-i18n="footer_contact">Kontak</h4>
-                    <ul class="space-y-3 text-sm text-slate-400">
-                        <li>Jl. Jend. Sudirman No.22, Yogyakarta</li>
-                        <li>(0274) 460 5790</li>
-                        <li>konsumen@ojk.go.id</li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="font-bold text-white mb-4 text-sm uppercase tracking-wide" data-i18n="nav_help">Bantuan</h4>
-                    <ul class="space-y-3 text-sm">
-                         <li><button onclick="downloadGuide()" class="flex items-center gap-2 hover:text-primary-400 transition text-slate-400 hover:text-white"><svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg> <span data-i18n="btn_dl_guide">Unduh Panduan</span></button></li>
-                        <li><a href="#" class="text-slate-400 hover:text-white transition">FAQ</a></li>
-                    </ul>
-                </div>
+                <div class="pt-2"><h4 class="text-white font-heading font-bold mb-5 flex items-center gap-2"><span class="w-1.5 h-5 rounded-full bg-primary-500"></span>Layanan Utama</h4><ul class="space-y-3 text-sm"><li><a href="#custom-calendar-section" class="group flex items-center justify-between text-slate-400 hover:text-white transition"><span>Kalender Kegiatan</span><span class="opacity-0 group-hover:opacity-100">→</span></a></li><li><a href="#agenda-csv" class="group flex items-center justify-between text-slate-400 hover:text-white transition"><span>Daftar Agenda</span><span class="opacity-0 group-hover:opacity-100">→</span></a></li><li><a href="#ruang-rapat" class="group flex items-center justify-between text-slate-400 hover:text-white transition"><span>Peminjaman Ruang Rapat</span><span class="opacity-0 group-hover:opacity-100">→</span></a></li><li><a href="#mobil-dinas" class="group flex items-center justify-between text-slate-400 hover:text-white transition"><span>Peminjaman Kendaraan Dinas</span><span class="opacity-0 group-hover:opacity-100">→</span></a></li></ul></div>
+                <div class="pt-2"><h4 class="text-white font-heading font-bold mb-5 flex items-center gap-2"><span class="w-1.5 h-5 rounded-full bg-yellow-400"></span>Dukungan</h4><ul class="space-y-3 text-sm"><li><a href="#bantuan-teknis" class="group flex items-center justify-between text-slate-400 hover:text-white transition"><span>Bantuan Teknis</span><span class="opacity-0 group-hover:opacity-100">→</span></a></li><li><a href="#vendor-ref" class="group flex items-center justify-between text-slate-400 hover:text-white transition"><span>Vendor Konsumsi</span><span class="opacity-0 group-hover:opacity-100">→</span></a></li><li><button onclick="downloadGuide()" class="w-full group flex items-center justify-between text-slate-400 hover:text-white transition text-left"><span>Unduh Panduan</span><span class="opacity-0 group-hover:opacity-100">↓</span></button></li></ul></div>
+                <div class="rounded-[2rem] border border-white/10 bg-gradient-to-br from-white/[0.06] to-white/[0.02] p-6"><div class="inline-flex items-center gap-2 rounded-full border border-primary-400/20 bg-primary-500/10 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.18em] text-primary-200 mb-4"><span class="w-2 h-2 rounded-full bg-primary-400 animate-pulse"></span>Operasional</div><h4 class="font-heading font-bold text-white text-lg">Kantor OJK D.I. Yogyakarta</h4><div class="mt-4 space-y-3 text-sm text-slate-400 leading-relaxed"><div>Jl. Jend. Sudirman No.22, Yogyakarta</div><div>(0274) 460 5790</div><div>konsumen@ojk.go.id</div></div><div class="mt-6 rounded-2xl bg-slate-900/70 border border-white/10 p-4"><div class="text-[10px] uppercase tracking-wider text-slate-500 font-bold">Status Sistem</div><div class="flex items-center justify-between mt-2"><div class="text-sm font-semibold text-white">Frontend LMSt Aktif</div><span class="inline-flex items-center gap-1.5 text-[10px] font-bold text-green-300"><span class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>LIVE</span></div></div></div>
             </div>
-            <div class="border-t border-slate-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-slate-500">
-                <p>&copy; <span id="year"></span> Logistik OJK D.I.Y. Hak Cipta Dilindungi.</p>
-                <div class="flex gap-6 mt-4 md:mt-0"><span>Kebijakan Privasi</span><span>Syarat & Ketentuan</span></div>
-            </div>
+            <div class="mt-10 pt-6 border-t border-white/10 flex flex-col md:flex-row justify-between gap-4 text-xs text-slate-500"><p>&copy; <span id="year"></span> LMSt-OJK D.I.Y. Seluruh hak cipta dilindungi.</p><div class="flex flex-wrap gap-x-6 gap-y-2"><span>Privasi & Keamanan Data</span><span>Ketentuan Layanan Internal</span><span>Dikelola oleh Tim LMS OJK DIY</span></div></div>
         </div>
     </footer>
 
-    <div id="eventDetailModal" class="fixed inset-0 z-[80] hidden items-center justify-center p-4">
-        <div class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm transition-opacity" onclick="closeEventModal()"></div>
-        <div class="relative w-full max-w-xl bg-white dark:bg-dark-card rounded-xl shadow-2xl overflow-hidden animate-pop-in flex flex-col max-h-[90vh]">
-            
-            <div class="bg-white dark:bg-slate-800 px-6 pt-6 pb-4 border-b border-slate-100 dark:border-slate-700">
-                <div class="flex justify-between items-start">
-                    <div class="flex-1 pr-4">
-                         <h3 id="modalHeaderTitle" class="font-heading font-bold text-xl text-slate-800 dark:text-white leading-tight mb-1">Judul Kegiatan</h3>
-                         <p id="modalHeaderTime" class="text-sm text-slate-500 dark:text-slate-400 font-medium">Selasa, 10 Februari • 07:00 - 20:00</p>
+    <div id="eventDetailModal" class="fixed inset-0 z-[80] hidden items-center justify-center p-3 sm:p-5">
+        <div class="absolute inset-0 bg-slate-950/70 backdrop-blur-md transition-opacity" onclick="closeEventModal()"></div>
+        <div class="event-modal-card relative w-full max-w-3xl max-h-[92vh] flex flex-col animate-pop-in">
+            <div class="event-hero px-6 sm:px-7 py-6">
+                <div class="relative z-10 flex justify-between items-start gap-4">
+                    <div class="min-w-0">
+                        <div class="event-chip mb-3"><span class="w-2 h-2 rounded-full bg-emerald-300"></span><span id="modalHeaderStatus">Agenda Kegiatan</span></div>
+                        <h3 id="modalHeaderTitle" class="font-heading font-extrabold text-2xl sm:text-3xl leading-tight tracking-tight text-white">Judul Kegiatan</h3>
+                        <p id="modalHeaderTime" class="text-sm text-white/80 font-medium mt-2">Selasa, 10 Februari • 07:00 - 20:00</p>
                     </div>
-                    <button onclick="closeEventModal()" class="text-slate-400 hover:text-red-500 transition p-1"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg></button>
+                    <button onclick="closeEventModal()" class="shrink-0 w-10 h-10 rounded-full bg-white/12 hover:bg-white/20 text-white transition flex items-center justify-center" aria-label="Tutup detail agenda"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg></button>
                 </div>
             </div>
-
-            <div class="p-6 overflow-y-auto bg-slate-50 dark:bg-dark-card custom-scrollbar">
-                
-                <div class="mb-6">
-                    <h4 class="text-[11px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-3">[DETAIL KEGIATAN]</h4>
-                    <div class="bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700 p-4 text-sm text-slate-700 dark:text-slate-300 space-y-3">
-                        <div class="grid grid-cols-[140px_1fr] border-b border-slate-100 dark:border-slate-700/50 pb-2 last:border-0 last:pb-0">
-                            <span class="font-bold text-slate-900 dark:text-white">Kegiatan:</span>
-                            <span id="modalBodyTitle" class="leading-snug">Nama Kegiatan...</span>
-                        </div>
-                        <div class="grid grid-cols-[140px_1fr] border-b border-slate-100 dark:border-slate-700/50 pb-2 last:border-0 last:pb-0">
-                            <span class="font-bold text-slate-900 dark:text-white">PIC:</span>
-                            <span id="modalBodyPIC">Nama PIC</span>
-                        </div>
-                        <div class="grid grid-cols-[140px_1fr] border-b border-slate-100 dark:border-slate-700/50 pb-2 last:border-0 last:pb-0">
-                            <span class="font-bold text-slate-900 dark:text-white">Departemen:</span>
-                            <span id="modalBodyDept">DPVR</span>
-                        </div>
-                        <div class="grid grid-cols-[140px_1fr] border-b border-slate-100 dark:border-slate-700/50 pb-2 last:border-0 last:pb-0">
-                            <span class="font-bold text-slate-900 dark:text-white">Kontak PIC:</span>
-                            <span id="modalBodyContact" class="text-green-600 font-medium cursor-pointer hover:underline flex items-center gap-1">812345678</span>
-                        </div>
-                    </div>
+            <div class="p-5 sm:p-6 overflow-y-auto bg-slate-50 dark:bg-dark-card custom-scrollbar">
+                <div class="grid md:grid-cols-3 gap-3 mb-5">
+                    <div class="event-detail-card"><div class="text-[10px] uppercase tracking-wider text-slate-500 font-bold">Ruangan</div><div id="modalQuickRoom" class="font-bold text-slate-900 dark:text-white mt-1">-</div></div>
+                    <div class="event-detail-card"><div class="text-[10px] uppercase tracking-wider text-slate-500 font-bold">PIC</div><div id="modalQuickPIC" class="font-bold text-slate-900 dark:text-white mt-1">-</div></div>
+                    <div class="event-detail-card"><div class="text-[10px] uppercase tracking-wider text-slate-500 font-bold">Unit</div><div id="modalQuickDept" class="font-bold text-slate-900 dark:text-white mt-1">-</div></div>
                 </div>
-
-                <div class="mb-6">
-                    <h4 class="text-[11px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-3">[DETAIL RUANGAN & SETUP]</h4>
-                    <div class="bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700 p-4 text-sm text-slate-700 dark:text-slate-300 space-y-3">
-                        <div class="grid grid-cols-[140px_1fr] border-b border-slate-100 dark:border-slate-700/50 pb-2 last:border-0 last:pb-0">
-                            <span class="font-bold text-slate-900 dark:text-white">Ruangan:</span>
-                            <span id="modalBodyRoom">Ballroom</span>
-                        </div>
-                        <div class="grid grid-cols-[140px_1fr] border-b border-slate-100 dark:border-slate-700/50 pb-2 last:border-0 last:pb-0">
-                            <span class="font-bold text-slate-900 dark:text-white">Penataan (Layout):</span>
-                            <span id="modalBodyLayout">Classical</span>
-                        </div>
-                        <div class="grid grid-cols-[140px_1fr] border-b border-slate-100 dark:border-slate-700/50 pb-2 last:border-0 last:pb-0">
-                            <span class="font-bold text-slate-900 dark:text-white">Kelengkapan:</span>
-                            <span id="modalBodyEquip">Mic, Sound...</span>
-                        </div>
-                        <div class="grid grid-cols-[140px_1fr] border-b border-slate-100 dark:border-slate-700/50 pb-2 last:border-0 last:pb-0">
-                            <span class="font-bold text-slate-900 dark:text-white">Catatan Tambahan:</span>
-                            <span id="modalBodyNotes" class="italic text-slate-500">-</span>
-                        </div>
-                    </div>
+                <div class="event-detail-card mb-5">
+                    <h4 class="text-[11px] font-extrabold text-primary-700 dark:text-primary-300 uppercase tracking-[0.18em] mb-2">Detail Kegiatan</h4>
+                    <div class="event-info-row"><div class="event-info-label">Nama Kegiatan</div><div id="modalBodyTitle" class="event-info-value font-semibold">Nama Kegiatan...</div></div>
+                    <div class="event-info-row"><div class="event-info-label">PIC</div><div id="modalBodyPIC" class="event-info-value">Nama PIC</div></div>
+                    <div class="event-info-row"><div class="event-info-label">Departemen</div><div id="modalBodyDept" class="event-info-value">-</div></div>
+                    <div class="event-info-row"><div class="event-info-label">Kontak PIC</div><div id="modalBodyContact" class="event-info-value text-green-600 font-semibold cursor-pointer hover:underline">-</div></div>
                 </div>
-
-                <div class="mt-8 pt-6 border-t border-slate-200 dark:border-slate-700 border-dashed text-center">
-                    <p class="text-xs text-slate-400 mb-1">--------------------------------------------------</p>
-                    <p class="text-xs text-slate-500 font-medium">Dibuat otomatis oleh Sistem Peminjaman Ruangan (SPRR) OJK DIY</p>
+                <div class="event-detail-card">
+                    <h4 class="text-[11px] font-extrabold text-primary-700 dark:text-primary-300 uppercase tracking-[0.18em] mb-2">Detail Ruangan & Setup</h4>
+                    <div class="event-info-row"><div class="event-info-label">Ruangan</div><div id="modalBodyRoom" class="event-info-value">-</div></div>
+                    <div class="event-info-row"><div class="event-info-label">Penataan</div><div id="modalBodyLayout" class="event-info-value">-</div></div>
+                    <div class="event-info-row"><div class="event-info-label">Kelengkapan</div><div id="modalBodyEquip" class="event-info-value">-</div></div>
+                    <div class="event-info-row"><div class="event-info-label">Catatan</div><div id="modalBodyNotes" class="event-info-value italic text-slate-500">-</div></div>
                 </div>
-
+                <div class="mt-5 text-center text-xs text-slate-500">Dibuat otomatis oleh Sistem Peminjaman Ruangan (SPRR) OJK DIY</div>
             </div>
         </div>
     </div>
-
     <div id="roomScheduleModal" class="fixed inset-0 z-[65] hidden items-center justify-center p-4">
         <div class="absolute inset-0 bg-slate-900/80 backdrop-blur-sm transition-opacity" onclick="closeRoomSchedule()"></div>
-        <div class="relative w-full max-w-4xl bg-white dark:bg-dark-card rounded-2xl shadow-2xl overflow-hidden max-h-[85vh] flex flex-col animate-pop-in">
+        <div class="relative w-[98vw] max-w-[1400px] bg-white dark:bg-dark-card rounded-[1.75rem] shadow-2xl overflow-hidden max-h-[94vh] flex flex-col animate-pop-in">
             <div class="p-6 border-b border-slate-100 dark:border-dark-border flex justify-between items-start bg-slate-50 dark:bg-slate-800/50">
                 <div>
                     <span class="text-xs font-bold text-primary-600 uppercase tracking-widest mb-1 block">Detail Jadwal Ruangan</span>
@@ -940,9 +917,9 @@
         </div>
     </div>
 
-    <div id="formModal" class="fixed inset-0 z-[70] hidden items-center justify-center p-4">
-        <div class="absolute inset-0 bg-slate-900/90 backdrop-blur-sm" onclick="closeFormModal()"></div>
-        <div class="relative w-full max-w-6xl h-[90vh] bg-white dark:bg-dark-card rounded-2xl shadow-2xl overflow-hidden flex flex-col animate-pop-in">
+    <div id="formModal" class="fixed inset-0 z-[70] hidden items-center justify-center p-2 sm:p-3">
+        <div class="absolute inset-0 bg-slate-950/80 backdrop-blur-md" onclick="closeFormModal()"></div>
+        <div class="relative w-[99vw] max-w-[1800px] h-[98vh] bg-white dark:bg-dark-card rounded-[1.75rem] shadow-2xl overflow-hidden flex flex-col animate-pop-in ring-1 ring-white/20">
             <div class="p-4 bg-slate-50 dark:bg-dark-card border-b border-slate-200 dark:border-dark-border flex justify-between items-center">
                 <h3 id="formTitle" class="font-heading font-bold text-lg text-slate-800 dark:text-white">Formulir</h3>
                 <button onclick="closeFormModal()" class="text-slate-500 hover:text-red-500"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg></button>
@@ -952,11 +929,18 @@
                     <div class="animate-spin rounded-full h-10 w-10 border-b-2 border-primary-600 mb-3"></div>
                     <p class="text-slate-500">Memuat formulir...</p>
                 </div>
-                <iframe id="form-iframe" class="w-full h-full" frameborder="0"></iframe>
+                <iframe id="form-iframe" class="w-full h-full min-w-[1280px]" frameborder="0" allowfullscreen></iframe>
             </div>
         </div>
     </div>
 
+    <div id="carSheetModal" class="fixed inset-0 z-[72] hidden items-center justify-center p-2 sm:p-3">
+        <div class="absolute inset-0 bg-slate-950/80 backdrop-blur-md" onclick="closeCarSheetPreview()"></div>
+        <div class="relative w-[99vw] max-w-[1800px] h-[97vh] bg-white dark:bg-dark-card rounded-[1.75rem] shadow-2xl overflow-hidden flex flex-col animate-pop-in ring-1 ring-white/20">
+            <div class="px-5 py-4 border-b border-slate-100 dark:border-dark-border bg-white/90 dark:bg-dark-card/90 backdrop-blur flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3"><div><h3 class="font-heading font-bold text-lg text-slate-900 dark:text-white">Preview Spreadsheet Peminjaman Mobil Dinas</h3><p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Data peminjaman kendaraan dinas diarahkan langsung ke spreadsheet.</p></div><div class="flex gap-2"><button onclick="openCarSheetPage()" class="px-4 py-2 rounded-xl bg-primary-600 text-white text-sm font-bold hover:bg-primary-700 transition">Buka Spreadsheet</button><button onclick="closeCarSheetPreview()" class="w-10 h-10 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 hover:text-red-500 transition flex items-center justify-center">×</button></div></div>
+            <div class="relative flex-1 bg-slate-50"><div id="carSheetLoading" class="absolute inset-0 flex flex-col items-center justify-center bg-white z-10"><div class="animate-spin rounded-full h-10 w-10 border-b-2 border-primary-600 mb-3"></div><p class="text-slate-500">Memuat preview spreadsheet...</p></div><iframe id="carSheetIframe" class="w-full h-full min-w-[1280px] bg-white" frameborder="0" allowfullscreen></iframe></div>
+        </div>
+    </div>
     <div id="galleryModal" class="fixed inset-0 z-[60] hidden items-center justify-center p-4">
         <div class="absolute inset-0 bg-slate-900/90 backdrop-blur-sm transition-opacity" onclick="closeGallery()"></div>
         <div class="relative bg-white dark:bg-dark-card w-full max-w-5xl rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh] animate-pop-in">
@@ -1035,7 +1019,7 @@
                 csv_title: "Daftar Agenda Lengkap", csv_desc: "Informasi real-time dari database kegiatan (Filter otomatis: Hari ini ke depan).",
                 th_date: "Tanggal", th_time: "Waktu", th_event: "Kegiatan", th_loc: "Ruangan",
                 rooms_tag: "Fasilitas Kantor", rooms_title: "Katalog Ruang Rapat", rooms_desc: "Klik tombol 'Cek Jadwal' untuk melihat detail penggunaan dan saran waktu booking.",
-                cars_tag: "Armada Operasional", cars_title: "Layanan Peminjaman <br>Kendaraan Dinas (Maintenance)", cars_desc: "Fasilitas kendaraan operasional dengan pengemudi profesional. Cek jadwal ketersediaan armada sebelum mengajukan permohonan.",
+                cars_tag: "Armada Operasional", cars_title: "Layanan Peminjaman <br>Kendaraan Dinas", cars_desc: "Fasilitas kendaraan operasional dengan pengemudi profesional. Cek jadwal ketersediaan armada sebelum mengajukan permohonan.",
                 btn_req_car: "Ajukan Peminjaman", btn_contact_protokol: "Hubungi Protokol", car_cal_title: "Kalender Ketersediaan",
                 hotels_title: "Hotel Rekanan", hotels_desc: "Akomodasi bintang 4 & 5 terbaik di Yogyakarta",
                 help_title: "Bantuan Teknis", help_pc: "Perangkat Komputer", help_net: "Jaringan Internet", help_doc: "Dokumentasi", help_pres: "Presentasi",
@@ -1056,7 +1040,7 @@
                 csv_title: "Full Schedule List", csv_desc: "Real-time data from Logistics Database.",
                 th_date: "Date", th_time: "Time", th_event: "Event", th_loc: "Room",
                 rooms_tag: "Office Facilities", rooms_title: "Meeting Room Catalog", rooms_desc: "Click 'Check Schedule' to see specific room usage details.",
-                cars_tag: "Operational Fleet", cars_title: "Official Vehicle <br>Service", cars_desc: "Operational vehicle facility with professional drivers. Check fleet availability schedule before applying.",
+                cars_tag: "Operational Fleet", cars_title: "Official Vehicle <br>Booking Service", cars_desc: "Operational vehicle facility with professional drivers. Check fleet availability schedule before applying.",
                 btn_req_car: "Request Booking", btn_contact_protokol: "Contact Protocol", car_cal_title: "Availability Calendar",
                 hotels_title: "Partner Hotels", hotels_desc: "Best 4 & 5-star accommodation in Yogyakarta",
                 help_title: "Technical Support", help_pc: "Computer Hardware", help_net: "Internet Network", help_doc: "Documentation", help_pres: "Presentation",
@@ -1162,8 +1146,11 @@
         };
 
         const PROTOKOL_NUMBERS = { PROTOKOL_I: '628123456789', PROTOKOL_II: '628123456789', PROTOKOL_III: '628123456789' };
-        const FORM_URLS = { ruang: "https://script.google.com/macros/s/AKfycbwnQtCEU71OGkPjNoyNHs3cs5UrcoDLsCCPlQm_VJ0Jz4sdI30-IQcEmsWu9AQPUfA/exec", mobil: "https://script.google.com/macros/s/AKfycbx-WYVjSqKFYADRDGnzxrY5WnbkSHWwsec8peUJL2sCqttHJlXI4HVW5HvLDx6Z0ALg/exec" };
+        const FORM_URLS = { ruang: "https://script.google.com/macros/s/AKfycbwnQtCEU71OGkPjNoyNHs3cs5UrcoDLsCCPlQm_VJ0Jz4sdI30-IQcEmsWu9AQPUfA/exec" };
+        const CAR_SHEET_URL = "https://docs.google.com/spreadsheets/d/1SL5-0eVSnVMVk88vBFHsgQ8FvV1-Jc9uaBs5aZmP4fE/edit?gid=2089723021#gid=2089723021";
+        const CAR_SHEET_PREVIEW_URL = "https://docs.google.com/spreadsheets/d/1SL5-0eVSnVMVk88vBFHsgQ8FvV1-Jc9uaBs5aZmP4fE/preview?gid=2089723021";
         const CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRVJMsmHkI7xfqrK-7tglJw8CJJhMdQBwvMC9uB4q_T153g2gZ8qL4Kgk-qc3-GZJ3v_Z_R0VeP_iHU/pub?gid=0&single=true&output=csv";
+        const GVIZ_JSONP_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRVJMsmHkI7xfqrK-7tglJw8CJJhMdQBwvMC9uB4q_T153g2gZ8qL4Kgk-qc3-GZJ3v_Z_R0VeP_iHU/gviz/tq?tqx=out:json&gid=0";
         
         let GLOBAL_AGENDA_DATA = [];
         let CALENDAR_DATE = new Date(); 
@@ -1222,9 +1209,7 @@
             const notifyBtn = document.getElementById('requestNotifyBtn');
             if(notifyBtn) notifyBtn.addEventListener('click', requestBrowserNotification);
             
-            if(localStorage.getItem('lmsWelcomeDismissed') !== 'true' && localStorage.getItem('lmsWelcomeShownOnce') !== 'true') {
-                setTimeout(openWelcomeModal, 500);
-            }
+            localStorage.setItem('lmsWelcomeShownOnce', 'true');
             
             // Auto-Refresh
             setInterval(() => {
@@ -1265,24 +1250,26 @@
 
         // --- EXPORT PDF ENGINE ---
         window.exportToPDF = function(layout) {
+            buildProfessionalReport(layout);
             const styleId = 'dynamic-print-layout';
             let existingStyle = document.getElementById(styleId);
             if (existingStyle) existingStyle.remove();
-
             const style = document.createElement('style');
             style.id = styleId;
-            style.innerHTML = `@page { size: A4 ${layout}; margin: 15mm; }`;
+            style.innerHTML = `@page { size: A4 ${layout}; margin: 12mm; }`;
             document.head.appendChild(style);
-
-            // Paksa mode List sebelum Print
-            setAgendaView('list');
-            
-            setTimeout(() => {
-                window.print();
-                setTimeout(() => style.remove(), 1000);
-            }, 300);
+            setTimeout(() => { window.print(); setTimeout(() => { style.remove(); const report=document.getElementById('printReportContainer'); if(report) report.innerHTML=''; }, 800); }, 250);
         };
-
+        function getFilterLabel(selectId){ const el=document.getElementById(selectId); if(!el) return '-'; const opt=el.options&&el.selectedIndex>=0?el.options[el.selectedIndex]:null; return opt?opt.textContent.trim():(el.value||'-'); }
+        function escapeHTML(value){ return String(value ?? '').replace(/[&<>"]/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[ch])); }
+        function buildProfessionalReport(layout){
+            if(!FILTERED_AGENDA || FILTERED_AGENDA.length===0) renderAgenda();
+            const total=(FILTERED_AGENDA||[]).length, approvedCount=(FILTERED_AGENDA||[]).filter(ev=>ev.status&&ev.status.toLowerCase().includes('setuju')).length, pendingCount=(FILTERED_AGENDA||[]).filter(ev=>!ev.status||ev.status.toLowerCase()==='pending').length, roomCount=new Set((FILTERED_AGENDA||[]).map(ev=>ev.ruangan).filter(Boolean)).size;
+            const rows=(FILTERED_AGENDA||[]).map((item,idx)=>{ const approved=item.status&&item.status.toLowerCase().includes('setuju'); const dateText=item.isMultiDay?`${item.tglMulai} - ${item.tglSelesai}`:item.tglMulai; return `<tr><td style="width:4%;text-align:center;">${idx+1}</td><td style="width:13%;">${escapeHTML(dateText)}</td><td style="width:11%;">${escapeHTML(item.jamMulai)} - ${escapeHTML(item.jamSelesai)}</td><td style="width:25%;font-weight:700;">${escapeHTML(item.kegiatan)}</td><td style="width:14%;">${escapeHTML(item.pic||'-')}<br><span style="font-size:8.5px;color:#64748b!important;">${escapeHTML(item.dept||'')}</span></td><td style="width:15%;">${escapeHTML(item.ruangan||'-')}</td><td style="width:10%;" class="${approved?'report-status-approved':'report-status-pending'}">${escapeHTML(item.status||'Pending')}</td><td style="width:8%;">${escapeHTML(item.layout||'-')}</td></tr>`; }).join('') || `<tr><td colspan="8" style="text-align:center;padding:18px;">Tidak ada agenda sesuai filter.</td></tr>`;
+            const printedAt=new Date().toLocaleString('id-ID',{dateStyle:'full',timeStyle:'short'}), searchValue=document.getElementById('agendaSearch')?.value||'-';
+            const report=document.getElementById('printReportContainer'); if(!report) return;
+            report.innerHTML=`<div><div class="report-header"><div class="report-brand"><img src="https://ik.imagekit.io/logojkdiy/Layanan%20Terintegrasi%20-%20OJK%20DIY.png?updatedAt=." alt="Logo OJK"><div><h1 class="report-title">LAPORAN AGENDA KEGIATAN OJK D.I. YOGYAKARTA</h1><div class="report-subtitle">Dicetak dari Frontend LMSt-OJK D.I.Y • Sistem Peminjaman Ruang Rapat</div></div></div><div class="report-meta">Tanggal Cetak:<br><strong>${printedAt}</strong><br>Orientasi: ${layout==='landscape'?'Landscape':'Portrait'}</div></div><div class="report-summary"><div class="report-metric"><div class="report-metric-label">Total Agenda</div><div class="report-metric-value">${total}</div></div><div class="report-metric"><div class="report-metric-label">Disetujui</div><div class="report-metric-value">${approvedCount}</div></div><div class="report-metric"><div class="report-metric-label">Pending</div><div class="report-metric-value">${pendingCount}</div></div><div class="report-metric"><div class="report-metric-label">Ruangan</div><div class="report-metric-value">${roomCount}</div></div></div><div class="report-filter-box"><strong>Filter aktif:</strong> Pencarian: ${escapeHTML(searchValue||'-')} • Ruangan: ${escapeHTML(getFilterLabel('agendaRoomFilter'))} • Status: ${escapeHTML(getFilterLabel('agendaStatusFilter'))} • Rentang: ${escapeHTML(getFilterLabel('agendaRangeFilter'))}</div><table class="report-table"><thead><tr><th>No</th><th>Tanggal</th><th>Waktu</th><th>Kegiatan</th><th>PIC/Departemen</th><th>Ruangan</th><th>Status</th><th>Layout</th></tr></thead><tbody>${rows}</tbody></table><div class="report-footer"><span>Dokumen ini dihasilkan otomatis oleh LMSt-OJK D.I.Y.</span><span>Halaman dicetak melalui browser pengguna.</span></div></div>`;
+        }
         // --- THEME TOGGLE ---
         const themeToggleBtn = document.getElementById('themeToggle');
         const sunIcon = document.getElementById('sunIcon');
@@ -1339,64 +1326,179 @@
 
         function parseDate(dateStr) {
             if(!dateStr) return null;
-            const parts = dateStr.split('/');
-            if(parts.length === 3) {
-                return new Date(parts[2], parts[1] - 1, parts[0]);
-            }
-            return new Date(dateStr); 
+            if(dateStr instanceof Date) return dateStr;
+            const clean = String(dateStr).trim();
+            if(!clean) return null;
+            const dm = clean.match(/^(\d{1,2})[\/\-.](\d{1,2})[\/\-.](\d{4})/);
+            if(dm) return new Date(parseInt(dm[3],10), parseInt(dm[2],10)-1, parseInt(dm[1],10));
+            const ym = clean.match(/^(\d{4})[\/\-.](\d{1,2})[\/\-.](\d{1,2})/);
+            if(ym) return new Date(parseInt(ym[1],10), parseInt(ym[2],10)-1, parseInt(ym[3],10));
+            const parsed = new Date(clean);
+            return isNaN(parsed.getTime()) ? null : parsed;
         }
-
+        function normalizeCsvUrl(url){ return String(url || '').replace(/&amp;/g, '&'); }
+        function normalizeHeader(value){ return String(value || '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim(); }
+        function looksLikeHeader(row){
+            const joined = (row || []).join(' ').toLowerCase();
+            return /(waktu pengajuan|nama pic acara|tanggal mulai acara|keterangan kegiatan|nomor telepon|status kegiatan)/i.test(joined);
+        }
+        function findHeaderIndex(headers, aliases, fallbackIndex){
+            const normalized = (headers || []).map(normalizeHeader);
+            for(const alias of aliases){
+                const target = normalizeHeader(alias);
+                const exact = normalized.findIndex(h => h === target);
+                if(exact >= 0) return exact;
+            }
+            for(const alias of aliases){
+                const target = normalizeHeader(alias);
+                const partial = normalized.findIndex(h => h.includes(target) || target.includes(h));
+                if(partial >= 0) return partial;
+            }
+            return fallbackIndex;
+        }
+        function cell(row, index, fallback=''){
+            return index >= 0 && index < row.length && row[index] !== undefined && row[index] !== null && String(row[index]).trim() !== '' ? row[index] : fallback;
+        }
+        function loadGvizAsRows(){
+            return new Promise((resolve, reject) => {
+                const previousGoogle = window.google;
+                const script = document.createElement('script');
+                const cleanup = () => {
+                    if(script.parentNode) script.remove();
+                    if(previousGoogle === undefined) delete window.google;
+                    else window.google = previousGoogle;
+                };
+                window.google = window.google || {};
+                window.google.visualization = window.google.visualization || {};
+                window.google.visualization.Query = window.google.visualization.Query || {};
+                window.google.visualization.Query.setResponse = (response) => {
+                    try{
+                        const table = response && response.table;
+                        if(!table || !table.rows) throw new Error('Format GViz kosong');
+                        const headers = (table.cols || []).map((col, i) => col.label || col.id || `Kolom ${i+1}`);
+                        const rows = table.rows.map(r => (r.c || []).map(c => c ? (c.f ?? c.v ?? '') : ''));
+                        cleanup();
+                        resolve([headers, ...rows]);
+                    }catch(err){ cleanup(); reject(err); }
+                };
+                script.onerror = () => { cleanup(); reject(new Error('Gagal memuat GViz JSONP')); };
+                script.src = `${GVIZ_JSONP_URL}&_=${Date.now()}`;
+                document.head.appendChild(script);
+                setTimeout(() => { if(document.head.contains(script)){ cleanup(); reject(new Error('Timeout memuat GViz JSONP')); } }, 15000);
+            });
+        }
+        async function fetchCsvRows(){
+            try{
+                const response = await fetch(`${normalizeCsvUrl(CSV_URL)}&cacheBust=${Date.now()}`, { cache:'no-store', redirect:'follow' });
+                if(!response.ok) throw new Error(`HTTP ${response.status}`);
+                const text = await response.text();
+                return parseCSV(text);
+            }catch(fetchErr){
+                console.warn('Direct CSV fetch gagal, memakai fallback GViz JSONP:', fetchErr);
+                return await loadGvizAsRows();
+            }
+        }
         async function loadCSV(silent = false) {
             try {
-                const response = await fetch(CSV_URL);
-                const text = await response.text();
-                const rawData = parseCSV(text);
+                let rawData = await fetchCsvRows();
+                if(!rawData || rawData.length === 0) throw new Error('Data CSV kosong');
+                let headers = rawData[0] || [];
+                let dataRows = rawData.slice(1);
+                if(!looksLikeHeader(headers)) { headers = []; dataRows = rawData; }
+                // Mapping resmi spreadsheet SPRR berdasarkan header yang dikirim:
+                // Waktu Pengajuan | Nama PIC Acara | Departemen | Tanggal Mulai/Selesai | Jam Mulai/Selesai | Keterangan Kegiatan | dst.
+                const idx = {
+                    waktuPengajuan: findHeaderIndex(headers, ['Waktu Pengajuan'], 0),
+                    pic: findHeaderIndex(headers, ['Nama PIC Acara'], 1),
+                    dept: findHeaderIndex(headers, ['Departemen'], 2),
+                    tglMulai: findHeaderIndex(headers, ['Tanggal Mulai Acara'], 3),
+                    tglSelesai: findHeaderIndex(headers, ['Tanggal Selesai Acara'], 4),
+                    jamMulai: findHeaderIndex(headers, ['Jam Mulai Peminjaman'], 5),
+                    jamSelesai: findHeaderIndex(headers, ['Jam Selesai Peminjaman'], 6),
+                    kegiatan: findHeaderIndex(headers, ['Keterangan Kegiatan'], 7),
+                    notes: findHeaderIndex(headers, ['Catatan Kegiatan'], 8),
+                    contact: findHeaderIndex(headers, ['Nomor Telepon'], 9),
+                    email: findHeaderIndex(headers, ['Email Peminjam'], 10),
+                    ruangan: findHeaderIndex(headers, ['Ruangan'], 11),
+                    layout: findHeaderIndex(headers, ['Pilihan Model Penataan Ruang'], 12),
+                    equipment: findHeaderIndex(headers, ['Kelengkapan Penunjang'], 13),
+                    status: findHeaderIndex(headers, ['Status Kegiatan'], 14),
+                    statusNote: findHeaderIndex(headers, ['Keterangan Status Kegiatan'], 15),
+                    approvedFlag: findHeaderIndex(headers, ['Kegiatan Disetujui'], 16),
+                    rejectedFlag: findHeaderIndex(headers, ['Kegiatan Ditolak'], 17),
+                    calendarUpdate: findHeaderIndex(headers, ['Status Kalender Update'], 18),
+                    waMessage: findHeaderIndex(headers, ['Pesan Link Whatsapp'], 19),
+                    emailStatus: findHeaderIndex(headers, ['Status Email'], 20)
+                };
                 GLOBAL_AGENDA_DATA = [];
-
-                for(let i=1; i<rawData.length; i++) {
-                    const row = rawData[i];
-                    if(!row || row.length < 10) continue;
-
-                    const status = row[14] || 'Pending';
-                    if(status && (status.toLowerCase().includes('tolak') || status.toLowerCase().includes('reject'))) continue;
-
-                    const tglMulai = row[3];
-                    const tglSelesai = row[4] || row[3];
-                    const jamMulai = row[5] || '00:00';
-                    const jamSelesai = row[6] || '23:59';
-                    const kegiatan = row[7];
-                    const pic = row[1];
-                    const dept = row[2];
-                    const ruangan = row[11];
-                    const contact = row[10] || '-';
-                    const notes = row[8] || '-';
-                    const layout = row[12] || '-';
-                    const equipment = row[13] || '-';
-
+                for(let i=0; i<dataRows.length; i++){
+                    const row = dataRows[i];
+                    if(!row || row.length < 8) continue;
+                    const statusRaw = cell(row, idx.status, 'Pending');
+                    const rejectedFlag = cell(row, idx.rejectedFlag, '');
+                    if(String(statusRaw).toLowerCase().includes('tolak') || String(statusRaw).toLowerCase().includes('reject') || String(rejectedFlag).toLowerCase().includes('ya')) continue;
+                    const tglMulai = cell(row, idx.tglMulai);
+                    const tglSelesai = cell(row, idx.tglSelesai, tglMulai);
+                    const jamMulai = cell(row, idx.jamMulai, '00:00');
+                    const jamSelesai = cell(row, idx.jamSelesai, '23:59');
+                    const kegiatan = cell(row, idx.kegiatan, '-');
+                    const pic = cell(row, idx.pic, '-');
+                    const dept = cell(row, idx.dept, '-');
+                    const ruangan = cell(row, idx.ruangan, '-');
+                    const contact = cell(row, idx.contact, '-');
+                    const email = cell(row, idx.email, '-');
+                    const notes = cell(row, idx.notes, '-');
+                    const layout = cell(row, idx.layout, '-');
+                    const equipment = cell(row, idx.equipment, '-');
+                    const statusNote = cell(row, idx.statusNote, '-');
                     const startDate = parseDate(tglMulai);
                     const endDate = parseDate(tglSelesai || tglMulai);
-                    if(startDate) {
+                    if(startDate && kegiatan && kegiatan !== '-'){
                         GLOBAL_AGENDA_DATA.push({
-                            id: i,
-                            tglMulai, tglSelesai: tglSelesai || tglMulai, jamMulai, jamSelesai, kegiatan, ruangan, status, pic, dept,
-                            contact, layout, equipment, notes,
+                            id: i + 1,
+                            tglMulai,
+                            tglSelesai: tglSelesai || tglMulai,
+                            jamMulai,
+                            jamSelesai,
+                            kegiatan,
+                            ruangan,
+                            status: statusRaw || 'Pending',
+                            pic,
+                            dept,
+                            contact,
+                            email,
+                            layout,
+                            equipment,
+                            notes,
+                            statusNote,
                             rawDate: startDate,
                             rawEndDate: endDate || startDate,
                             isMultiDay: !!(endDate && endDate.getTime() !== startDate.getTime())
                         });
                     }
                 }
-
                 GLOBAL_AGENDA_DATA.sort((a,b) => getEventStartDateTime(a) - getEventStartDateTime(b));
+                refreshRoomFilterOptions();
                 renderAgenda();
                 renderCalendar();
                 renderTicker();
                 renderOperationalOverview();
                 autoCheckAndNotify(silent);
             } catch (err) {
-                console.error("Error CSV:", err);
-                document.getElementById('csv-table-body').innerHTML = '<tr><td colspan="6" class="px-6 py-6 text-center text-red-500">Gagal memuat jadwal.</td></tr>';
+                console.error('Error CSV:', err);
+                const tbody = document.getElementById('csv-table-body');
+                if(tbody) tbody.innerHTML = '<tr><td colspan="6" class="px-6 py-6 text-center text-red-500">Gagal memuat jadwal. Pastikan spreadsheet sudah Publish to web dan header sesuai format SPRR.</td></tr>';
             }
+        }
+        function refreshRoomFilterOptions(){
+            const roomFilterEl = document.getElementById('agendaRoomFilter');
+            if(!roomFilterEl) return;
+            const current = roomFilterEl.value || 'all';
+            const baseRooms = ROOMS_DATA.map(r => r.name);
+            const dataRooms = GLOBAL_AGENDA_DATA.map(ev => ev.ruangan).filter(Boolean);
+            const rooms = [...new Set([...baseRooms, ...dataRooms])].sort((a,b) => a.localeCompare(b, 'id-ID'));
+            roomFilterEl.innerHTML = '<option value="all">Semua Ruangan</option>' + rooms.map(room => `<option value="${escapeHTML(room)}">${escapeHTML(room)}</option>`).join('');
+            roomFilterEl.value = rooms.includes(current) ? current : 'all';
         }
 
         // --- AGENDA & LIVE STATUS ENGINE ---
@@ -1453,7 +1555,7 @@
                 else if(rangeFilter === 'week') matchRange = item.rawEndDate >= today && item.rawDate <= endWeek;
                 else if(rangeFilter === 'month') matchRange = item.rawDate <= endMonth && item.rawEndDate >= today;
 
-                const matchRoom = roomFilter === 'all' ? true : item.ruangan.toLowerCase().includes(roomFilter.toLowerCase());
+                const matchRoom = roomFilter === 'all' ? true : String(item.ruangan || '').toLowerCase().includes(roomFilter.toLowerCase());
 
                 return matchSearch && matchStatus && matchRange && matchRoom;
             });
@@ -1517,7 +1619,7 @@
                 const roomGroups = {};
                 ROOMS_DATA.forEach(r => { roomGroups[r.name] = []; });
                 FILTERED_AGENDA.forEach(item => {
-                    const matchedRoom = ROOMS_DATA.find(r => item.ruangan.toLowerCase().includes(r.name.toLowerCase()) || r.name.toLowerCase().includes(item.ruangan.toLowerCase()) || (r.name.includes('Nakula') && item.ruangan.includes('Nakula')) || (r.name.includes('Sadewa') && item.ruangan.includes('Sadewa')) || (r.name.includes('Bima') && item.ruangan.includes('Bima')) || (r.name.includes('Arjuna') && item.ruangan.includes('Arjuna')));
+                    const matchedRoom = ROOMS_DATA.find(r => String(item.ruangan || '').toLowerCase().includes(r.name.toLowerCase()) || r.name.toLowerCase().includes(String(item.ruangan || '').toLowerCase()) || (r.name.includes('Nakula') && String(item.ruangan || '').includes('Nakula')) || (r.name.includes('Sadewa') && String(item.ruangan || '').includes('Sadewa')) || (r.name.includes('Bima') && String(item.ruangan || '').includes('Bima')) || (r.name.includes('Arjuna') && String(item.ruangan || '').includes('Arjuna')));
                     if(matchedRoom) roomGroups[matchedRoom.name].push(item);
                     else {
                         if(!roomGroups[item.ruangan]) roomGroups[item.ruangan] = [];
@@ -1560,7 +1662,7 @@
                                     <span class="text-[10px] font-bold text-slate-400 uppercase">${ev.isMultiDay ? ev.tglMulai.substring(0,5) + '→' + ev.tglSelesai.substring(0,5) : ev.tglMulai.substring(0,5)}</span>
                                     <span class="text-[10px] font-bold uppercase ${liveStatusClass}">${statusTextCard}</span>
                                 </div>
-                                <h5 class="font-bold text-slate-800 dark:text-slate-200 text-sm mt-0.5 line-clamp-1">${ev.kegiatan}</h5>
+                                <h5 class="font-bold text-slate-800 dark:text-slate-200 text-sm mt-0.5 line-clamp-1" title="${ev.kegiatan}">${ev.kegiatan}</h5>
                                 <div class="flex items-center gap-2 text-xs text-slate-500 mt-1 font-mono">${ev.jamMulai} - ${ev.jamSelesai}</div>
                             </div>`;
                         });
@@ -1606,14 +1708,14 @@
 
                 let eventHtml = '';
                 dayEvents.forEach(ev => {
-                    let shortRoom = ev.ruangan.replace('Ruang Rapat ', '').replace('Ballroom ', '');
+                    let shortRoom = String(ev.ruangan || '-').replace('Ruang Rapat ', '').replace('Ballroom ', '');
                     const multiDay = ev.isMultiDay ? `<span class="inline-flex mt-1 multi-day-badge text-[9px] font-bold px-1.5 py-0.5 rounded-full">${ev.tglMulai === ev.tglSelesai ? '' : 'Multi-hari'}</span>` : '';
                     const timeLabel = ev.isMultiDay ? (isSameDay(ev.rawDate, currentDayDate) ? `${ev.jamMulai} • mulai` : isSameDay(ev.rawEndDate, currentDayDate) ? `${ev.jamSelesai} • selesai` : 'Seharian') : ev.jamMulai;
                     eventHtml += `
                     <div onclick="event.stopPropagation(); openEventModal(${ev.id})" class="group text-[10px] leading-tight ${ev.isMultiDay ? 'bg-blue-100 text-blue-800 dark:bg-blue-900/40 dark:text-blue-100 border-blue-500' : 'bg-green-100 text-green-800 dark:bg-green-900/40 dark:text-green-200 border-green-500'} px-1.5 py-1 rounded mb-1 cursor-pointer hover:brightness-95 border-l-2 transition shadow-sm">
                         <div class="font-mono font-bold opacity-80 mb-0.5">${timeLabel}</div>
                         <div class="font-bold truncate">${shortRoom}</div>
-                        <div class="truncate opacity-90">${ev.kegiatan}</div>
+                        <div class="truncate opacity-90" title="${ev.kegiatan}">${ev.kegiatan}</div>
                         ${multiDay}
                     </div>`;
                 });
@@ -1660,6 +1762,7 @@
             if(!ev) return;
             
             document.getElementById('modalHeaderTitle').textContent = ev.kegiatan;
+            const statusEl = document.getElementById('modalHeaderStatus'); if(statusEl) statusEl.textContent = ev.status || 'Agenda Kegiatan';
             const options = { weekday: 'long', day: 'numeric', month: 'long' };
             const dateStr = ev.rawDate.toLocaleDateString('id-ID', options);
             const headerDateText = ev.isMultiDay ? `${ev.tglMulai} - ${ev.tglSelesai}` : dateStr;
@@ -1667,7 +1770,9 @@
             
             document.getElementById('modalBodyTitle').textContent = ev.kegiatan;
             document.getElementById('modalBodyPIC').textContent = ev.pic || '-';
+            if(document.getElementById('modalQuickPIC')) document.getElementById('modalQuickPIC').textContent = ev.pic || '-';
             document.getElementById('modalBodyDept').textContent = ev.dept || '-';
+            if(document.getElementById('modalQuickDept')) document.getElementById('modalQuickDept').textContent = ev.dept || '-';
             
             const contactEl = document.getElementById('modalBodyContact');
             contactEl.textContent = ev.contact || '-';
@@ -1680,6 +1785,7 @@
             }
 
             document.getElementById('modalBodyRoom').textContent = ev.ruangan + (ev.isMultiDay ? ` • ${ev.tglMulai} - ${ev.tglSelesai}` : '');
+            if(document.getElementById('modalQuickRoom')) document.getElementById('modalQuickRoom').textContent = ev.ruangan || '-';
             document.getElementById('modalBodyLayout').textContent = ev.layout || 'Sesuai Request'; 
             document.getElementById('modalBodyEquip').textContent = ev.equipment || 'Standar Meeting (Proyektor, Sound, Mic)';
             document.getElementById('modalBodyNotes').textContent = ev.notes || '-';
@@ -1727,7 +1833,7 @@
         // --- ROOM SCHEDULE LOGIC ---
         function openRoomSchedule(roomName) {
             document.getElementById('scheduleRoomName').textContent = roomName;
-            const roomEvents = GLOBAL_AGENDA_DATA.filter(item => item.ruangan.toLowerCase().includes(roomName.toLowerCase()) || roomName.toLowerCase().includes(item.ruangan.toLowerCase()) || (roomName.includes('Nakula') && item.ruangan.includes('Nakula')) || (roomName.includes('Sadewa') && item.ruangan.includes('Sadewa')) || (roomName.includes('Bima') && item.ruangan.includes('Bima')) || (roomName.includes('Arjuna') && item.ruangan.includes('Arjuna')));
+            const roomEvents = GLOBAL_AGENDA_DATA.filter(item => String(item.ruangan || '').toLowerCase().includes(roomName.toLowerCase()) || roomName.toLowerCase().includes(String(item.ruangan || '').toLowerCase()) || (roomName.includes('Nakula') && String(item.ruangan || '').includes('Nakula')) || (roomName.includes('Sadewa') && String(item.ruangan || '').includes('Sadewa')) || (roomName.includes('Bima') && String(item.ruangan || '').includes('Bima')) || (roomName.includes('Arjuna') && String(item.ruangan || '').includes('Arjuna')));
 
             const today = new Date(); today.setHours(0,0,0,0);
             const tomorrow = new Date(today); tomorrow.setDate(today.getDate() + 1);
@@ -1805,13 +1911,17 @@
         const formIframe = document.getElementById('form-iframe');
         const formLoading = document.getElementById('formLoading');
         function openFormModal(type) {
-            document.getElementById('formTitle').textContent = type === 'mobil' ? 'Peminjaman Mobil Dinas' : 'Peminjaman Ruang Rapat';
+            if(type === 'mobil') { openCarSheetPreview(); return; }
+            document.getElementById('formTitle').textContent = 'Peminjaman Ruang Rapat';
             formLoading.style.display = 'flex'; formIframe.style.opacity = '0';
-            formIframe.src = FORM_URLS[type];
+            formIframe.src = FORM_URLS.ruang;
             formIframe.onload = () => { formLoading.style.display = 'none'; formIframe.style.opacity = '1'; };
-            formModal.classList.remove('hidden'); formModal.classList.add('flex');
+            formModal.classList.remove('hidden'); formModal.classList.add('flex'); document.body.classList.add('overflow-hidden');
         }
-        function closeFormModal() { formModal.classList.add('hidden'); formModal.classList.remove('flex'); formIframe.src = ''; }
+        function closeFormModal() { formModal.classList.add('hidden'); formModal.classList.remove('flex'); formIframe.src = ''; document.body.classList.remove('overflow-hidden'); }
+        function openCarSheetPreview() { const modal=document.getElementById('carSheetModal'); const iframe=document.getElementById('carSheetIframe'); const loading=document.getElementById('carSheetLoading'); if(!modal||!iframe){openCarSheetPage();return;} if(loading) loading.style.display='flex'; iframe.style.opacity='0'; iframe.src=CAR_SHEET_PREVIEW_URL; iframe.onload=()=>{ if(loading) loading.style.display='none'; iframe.style.opacity='1'; }; modal.classList.remove('hidden'); modal.classList.add('flex'); document.body.classList.add('overflow-hidden'); }
+        function closeCarSheetPreview() { const modal=document.getElementById('carSheetModal'); const iframe=document.getElementById('carSheetIframe'); if(modal){modal.classList.add('hidden'); modal.classList.remove('flex');} if(iframe) iframe.src=''; document.body.classList.remove('overflow-hidden'); }
+        function openCarSheetPage() { window.open(CAR_SHEET_URL, '_blank', 'noopener'); }
 
         const hotelModal = document.getElementById('hotelModal');
         function openHotelDetail(id) {
@@ -2132,5 +2242,6 @@
     </div>
     
     <div id="toastStack" class="toast-stack z-[9999]"></div>
+    <div id="printReportContainer"></div>
 </body>
 </html>
